@@ -1,7 +1,7 @@
 import path from 'path';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+// import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import type { Configuration } from 'webpack';
 
 type ConfigurationFactory = (
@@ -38,13 +38,13 @@ const configuration: ConfigurationFactory = (env) => ({
     contentBase: './dist',
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        mode: 'write-references',
-        configOverwrite: { include: ['./src'] },
-      },
-      eslint: { files: 'src/**/*.{ts,tsx,js,jsx}' },
-    }),
+    // new ForkTsCheckerWebpackPlugin({
+    //   typescript: {
+    //     mode: 'write-references',
+    //     configOverwrite: { include: ['./src'] },
+    //   },
+    //   eslint: { files: 'src/**/*.{ts,tsx,js,jsx}' },
+    // }),
     new HtmlWebpackPlugin({
       title: 'app',
       template: fromRoot('src/index.html'),

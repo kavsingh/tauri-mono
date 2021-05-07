@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import tauriApi from '@tauri-apps/api';
+import { tauri } from '@tauri-apps/api';
 import styled from '@emotion/styled';
 import { ThemeProvider } from '@emotion/react';
 
@@ -17,7 +17,7 @@ const App: FCWithoutChildren = () => {
     setError(undefined);
     setLoading(true);
 
-    tauriApi.tauri
+    tauri
       .invoke<CustomResponse>('my_custom_command', { number: 58 })
       .then(setResponse)
       .catch(setError)

@@ -10,8 +10,7 @@ fn main() {
     .expect("error while running tauri application");
 }
 
-// #[derive(serde::Serialize, ts_rs::TS)]
-#[derive(serde::Serialize)]
+#[derive(serde::Serialize, ts_rs::TS)]
 #[serde(rename_all = "camelCase")]
 struct CustomResponse {
   message: String,
@@ -27,6 +26,6 @@ fn my_custom_command(number: usize) -> CustomResponse {
   }
 }
 
-// ts_rs::export! {
-//   CustomResponse => "CustomResponse.ts"
-// }
+ts_rs::export! {
+  CustomResponse => "CustomResponse.ts"
+}
