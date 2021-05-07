@@ -6,7 +6,7 @@ import { ThemeProvider } from '@emotion/react';
 import GlobalStyle from './style/global-style';
 import { defaultTheme } from './style/theme';
 import type { FCWithoutChildren } from './typings/component';
-import type { CustomResponse } from './typings/tauri';
+import type { CustomResponse } from './typings/tauri/custom-response';
 
 const App: FCWithoutChildren = () => {
   const [loading, setLoading] = useState(false);

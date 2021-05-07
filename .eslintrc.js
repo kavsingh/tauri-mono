@@ -90,6 +90,13 @@ module.exports = {
       },
     },
     {
+      files: ['src/typings/tauri/**/*'],
+      env: { node: false, browser: true },
+      rules: {
+        'prettier/prettier': 'off';
+      },
+    },
+    {
       files: ['**/*.test.*'],
       env: { 'node': true, 'jest/globals': true },
       plugins: ['jest'],
