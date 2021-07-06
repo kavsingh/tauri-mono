@@ -93,9 +93,7 @@ module.exports = {
     {
       files: ['src/typings/tauri/**/*'],
       env: { node: false, browser: true },
-      rules: {
-        'prettier/prettier': 'off';
-      },
+      rules: { 'prettier/prettier': 'off' },
     },
     {
       files: ['**/*.test.*'],

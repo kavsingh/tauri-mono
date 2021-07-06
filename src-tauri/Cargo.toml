@@ -19,7 +19,7 @@ ts-rs = "3.0"
 
   [dependencies.tauri]
   version = "1.0.0-beta"
-features = []
+features = ["api-all"]
 
 [features]
 default = [ "custom-protocol" ]

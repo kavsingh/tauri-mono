@@ -3,12 +3,25 @@
   windows_subsystem = "windows"
 )]
 
+use tauri::Manager;
+
 fn main() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![
-      my_custom_command,
-      another_custom_command
-    ])
+    .setup(|app| {
+      let main_window = app.get_window("main").unwrap();
+
+      main_window
+        .emit(
+          "custom-event",
+          CustomEvent {
+            message: "This is an event message".into(),
+          },
+        )
+        .unwrap();
+
+      Ok(())
+    })
+    .invoke_handler(tauri::generate_handler![my_custom_command])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
@@ -22,8 +35,8 @@ struct CustomResponse {
 
 #[derive(serde::Serialize, ts_rs::TS)]
 #[serde(rename_all = "camelCase")]
-struct AnotherCustomResponse {
-  numero: usize,
+struct CustomEvent {
+  message: String,
 }
 
 // https://tauri.studio/en/docs/usage/howtos/command#complete-example
@@ -35,14 +48,7 @@ fn my_custom_command(number: usize) -> CustomResponse {
   }
 }
 
-#[tauri::command]
-fn another_custom_command(number: usize) -> AnotherCustomResponse {
-  AnotherCustomResponse {
-    numero: number % 42,
-  }
-}
-
 ts_rs::export! {
   CustomResponse => "../src/typings/tauri/custom-response.ts",
-  AnotherCustomResponse => "../src/typings/tauri/another-custom-response.ts"
+  CustomEvent => "../src/typings/tauri/custom-event.ts",
 }
