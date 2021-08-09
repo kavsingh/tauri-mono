@@ -35,6 +35,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/consistent-type-imports': ['error'],
+    '@typescript-eslint/member-ordering': ['warn'],
     '@typescript-eslint/no-shadow': [
       'error',
       {
