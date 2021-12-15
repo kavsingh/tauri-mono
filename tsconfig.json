@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -25,7 +24,7 @@
     "plugins": [
       {
         "name": "typescript-styled-plugin",
-        "validate": false
+        "validate": true
       }
     ],
     "skipLibCheck": true,
