@@ -2,8 +2,8 @@ import { tauri } from '@tauri-apps/api';
 import { listen, once } from '@tauri-apps/api/event';
 
 import type { EventCallback } from '@tauri-apps/api/event';
-import type { CustomResponse } from './typings/tauri/custom-response';
-import type { CustomEvent } from './typings/tauri/custom-event';
+import type { CustomCommandResponse } from './__generated__/custom-command-response';
+import type { CustomEvent } from './__generated__/custom-event';
 
 export const invoke = <K extends keyof InvokeMap>(
   command: K,
@@ -36,10 +36,10 @@ export const subscribeOnce = <K extends keyof SubscribeMap>(
   };
 };
 
-export type { CustomEvent, CustomResponse };
+export type { CustomEvent, CustomCommandResponse };
 
 interface InvokeMap {
-  my_custom_command: (args: { number: number }) => CustomResponse;
+  my_custom_command: (args: { number: number }) => CustomCommandResponse;
 }
 
 interface SubscribeMap {

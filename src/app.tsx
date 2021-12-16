@@ -6,13 +6,13 @@ import { uiRootStyle } from './app.css';
 import './style/global-style.css';
 
 import type { VoidFunctionComponent } from 'react';
-import type { CustomResponse, CustomEvent } from './bridge';
+import type { CustomCommandResponse, CustomEvent } from './bridge';
 
 const AppContent: VoidFunctionComponent = () => {
   const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>();
-  const [response, setResponse] = useState<CustomResponse | undefined>();
+  const [response, setResponse] = useState<CustomCommandResponse | undefined>();
   const [eventPayload, setEventPayload] = useState<CustomEvent | undefined>();
 
   useEffect(() => {
@@ -40,11 +40,17 @@ const AppContent: VoidFunctionComponent = () => {
       {error ? `${error.message}` : null}
       {response ? (
         <div>
+          <div>Command Response</div>
           <div>{response.message}</div>
           <div>{response.otherVal}</div>
         </div>
       ) : null}
-      {eventPayload ? <div>{eventPayload.message}</div> : null}
+      {eventPayload ? (
+        <div>
+          <div>Event Payload</div>
+          <div>{eventPayload.message}</div>
+        </div>
+      ) : null}
     </div>
   );
 };
