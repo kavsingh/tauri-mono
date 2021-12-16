@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import { keyframes, ThemeProvider } from '@emotion/react';
+import { useEffect, useState, useContext } from 'react';
 
+import { ThemeContext, ThemeProvider } from './style/theme-context';
 import { invoke, subscribe } from './bridge';
-import GlobalStyle from './style/global-style';
-import { defaultTheme } from './style/theme';
+import { uiRootStyle } from './app.css';
+import './style/global-style.css';
 
-import type { FCWithoutChildren } from './typings/component';
+import type { VoidFunctionComponent, FC } from 'react';
 import type { CustomResponse, CustomEvent } from './bridge';
 
-const App: FCWithoutChildren = () => {
+const AppContent: VoidFunctionComponent = () => {
+  const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>();
   const [response, setResponse] = useState<CustomResponse | undefined>();
@@ -32,41 +32,25 @@ const App: FCWithoutChildren = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <GlobalStyle />
-      <UIRoot>
-        <h1>Heyo</h1>
-        {loading ? <>Loading...</> : null}
-        {error ? `${error}` : null}
-        {response ? (
-          <div>
-            <div>{response.message}</div>
-            <div>{response.otherVal}</div>
-          </div>
-        ) : null}
-        {eventPayload ? (
-          <Payload key={Math.random()}>{eventPayload.message}</Payload>
-        ) : null}
-      </UIRoot>
-    </ThemeProvider>
+    <div className={`${theme} ${uiRootStyle}`}>
+      <h1>Heyo</h1>
+      {loading ? <>Loading...</> : null}
+      {error ? `${error}` : null}
+      {response ? (
+        <div>
+          <div>{response.message}</div>
+          <div>{response.otherVal}</div>
+        </div>
+      ) : null}
+      {eventPayload ? <div>{eventPayload.message}</div> : null}
+    </div>
   );
 };
 
+const App: VoidFunctionComponent = () => (
+  <ThemeProvider>
+    <AppContent />
+  </ThemeProvider>
+);
+
 export default App;
-
-const fadeIn = keyframes`
-  from { opacity: 0 }
-  to { opacity: 1 }
-`;
-
-const UIRoot = styled.div`
-  min-height: 100%;
-  padding: 1em;
-  color: ${({ theme }) => theme.colors.bodyText};
-  font-family: ${({ theme }) => theme.fonts.bodyText};
-  background-color: ${({ theme }) => theme.colors.background};
-`;
-
-const Payload = styled.div`
-  animation: ${fadeIn} 0.4s ease-out;
-`;
