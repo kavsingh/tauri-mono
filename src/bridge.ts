@@ -17,7 +17,7 @@ export const subscribe = <K extends keyof SubscribeMap>(
   const unlistenPromise = listen<SubscribeMap[K]>(eventName, handler);
 
   return () => {
-    unlistenPromise.then((unlisten) => {
+    void unlistenPromise.then((unlisten) => {
       unlisten();
     });
   };
@@ -30,7 +30,7 @@ export const subscribeOnce = <K extends keyof SubscribeMap>(
   const unlistenPromise = once<SubscribeMap[K]>(eventName, handler);
 
   return () => {
-    unlistenPromise.then((unlisten) => {
+    void unlistenPromise.then((unlisten) => {
       unlisten();
     });
   };

@@ -5,13 +5,13 @@ import { invoke, subscribe } from './bridge';
 import { uiRootStyle } from './app.css';
 import './style/global-style.css';
 
-import type { VoidFunctionComponent, FC } from 'react';
+import type { VoidFunctionComponent } from 'react';
 import type { CustomResponse, CustomEvent } from './bridge';
 
 const AppContent: VoidFunctionComponent = () => {
   const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<unknown>();
+  const [error, setError] = useState<Error | undefined>();
   const [response, setResponse] = useState<CustomResponse | undefined>();
   const [eventPayload, setEventPayload] = useState<CustomEvent | undefined>();
 
@@ -25,7 +25,9 @@ const AppContent: VoidFunctionComponent = () => {
 
     invoke('my_custom_command', { number: 58 })
       .then(setResponse)
-      .catch(setError)
+      .catch((err) =>
+        setError(err instanceof Error ? err : new Error(String(err))),
+      )
       .finally(() => setLoading(false));
 
     return unsubscribe;
@@ -35,7 +37,7 @@ const AppContent: VoidFunctionComponent = () => {
     <div className={`${theme} ${uiRootStyle}`}>
       <h1>Heyo</h1>
       {loading ? <>Loading...</> : null}
-      {error ? `${error}` : null}
+      {error ? `${error.message}` : null}
       {response ? (
         <div>
           <div>{response.message}</div>
