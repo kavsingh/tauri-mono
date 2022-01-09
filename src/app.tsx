@@ -1,7 +1,7 @@
 import { useState, useContext, useCallback } from 'react';
 
 import { ThemeContext, ThemeProvider } from './style/theme-context';
-import { invoke } from './bridge';
+import { invoker } from './bridge';
 import { uiRootStyle } from './app.css';
 import './style/global-style.css';
 
@@ -21,9 +21,9 @@ const AppContent: VoidFunctionComponent = () => {
   const [error, setError] = useState<Error | undefined>();
   const [response, setResponse] = useState<SelectFilesResponse | undefined>();
 
-  const loadFiles = useCallback(async () => {
+  const selectFiles = useCallback(async () => {
     try {
-      setResponse(await invoke('select_files')());
+      setResponse(await invokeSelectFiles());
     } catch (e) {
       setError(e instanceof Error ? e : new Error(String(e)));
     }
@@ -31,12 +31,14 @@ const AppContent: VoidFunctionComponent = () => {
 
   return (
     <div className={`${theme} ${uiRootStyle}`}>
-      <h1>Heyo</h1>
+      <h1>Hello</h1>
       {error ? `${error.message}` : null}
       <div>
         <div>{response?.files.join(', ')}</div>
       </div>
-      <button onClick={loadFiles}>Load</button>
+      <button onClick={selectFiles}>Select</button>
     </div>
   );
 };
+
+const invokeSelectFiles = invoker('select_files');

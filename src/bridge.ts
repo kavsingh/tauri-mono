@@ -4,7 +4,7 @@ import { listen, once } from '@tauri-apps/api/event';
 import type { EventCallback } from '@tauri-apps/api/event';
 import type { SelectFilesResponse } from './__generated__/select-files-response';
 
-export const invoke =
+export const invoker =
   <K extends keyof InvokeMap>(command: K) =>
   (
     args: Parameters<InvokeMap[K]>[0] extends never
