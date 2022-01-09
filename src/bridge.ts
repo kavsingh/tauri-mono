@@ -2,7 +2,7 @@ import { tauri } from '@tauri-apps/api';
 import { listen, once } from '@tauri-apps/api/event';
 
 import type { EventCallback } from '@tauri-apps/api/event';
-import type { CustomCommandResponse } from './__generated__/custom-command-response';
+import type { LoadFilesResponse } from './__generated__/load-files-response';
 import type { CustomEvent } from './__generated__/custom-event';
 
 export const invoke = <K extends keyof InvokeMap>(
@@ -36,10 +36,10 @@ export const subscribeOnce = <K extends keyof SubscribeMap>(
   };
 };
 
-export type { CustomEvent, CustomCommandResponse };
+export type { CustomEvent, LoadFilesResponse };
 
 interface InvokeMap {
-  my_custom_command: (args: { number: number }) => CustomCommandResponse;
+  load_files: (args: { maybe_initial_path: string }) => LoadFilesResponse;
 }
 
 interface SubscribeMap {
