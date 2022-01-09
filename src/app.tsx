@@ -1,12 +1,11 @@
 import { useState, useContext, useCallback } from 'react';
 
 import { ThemeContext, ThemeProvider } from './style/theme-context';
-import { invoker } from './bridge';
+import { selectFiles } from './bridge';
 import { uiRootStyle } from './app.css';
 import './style/global-style.css';
 
 import type { VoidFunctionComponent } from 'react';
-import type { SelectFilesResponse } from './bridge';
 
 const App: VoidFunctionComponent = () => (
   <ThemeProvider>
@@ -19,11 +18,13 @@ export default App;
 const AppContent: VoidFunctionComponent = () => {
   const { theme } = useContext(ThemeContext);
   const [error, setError] = useState<Error | undefined>();
-  const [response, setResponse] = useState<SelectFilesResponse | undefined>();
+  const [response, setResponse] = useState<
+    Awaited<ReturnType<typeof selectFiles>> | undefined
+  >();
 
-  const selectFiles = useCallback(async () => {
+  const selectAudioFiles = useCallback(async () => {
     try {
-      setResponse(await invokeSelectFiles());
+      setResponse(await selectFiles());
     } catch (e) {
       setError(e instanceof Error ? e : new Error(String(e)));
     }
@@ -36,9 +37,7 @@ const AppContent: VoidFunctionComponent = () => {
       <div>
         <div>{response?.files.join(', ')}</div>
       </div>
-      <button onClick={selectFiles}>Select</button>
+      <button onClick={selectAudioFiles}>Select</button>
     </div>
   );
 };
-
-const invokeSelectFiles = invoker('select_files');
