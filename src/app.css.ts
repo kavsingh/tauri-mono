@@ -9,3 +9,8 @@ export const uiRootStyle = style({
   fontFamily: vars.fonts.bodyText,
   backgroundColor: vars.colors.background,
 });
+
+export const dragDropStyle = style({
+  height: '200px',
+  border: `1px solid ${vars.colors.keyline}`,
+});
