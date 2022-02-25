@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import path from 'path';
 
 import { defineConfig } from 'vite';
@@ -11,4 +13,8 @@ export default defineConfig({
   build: { sourcemap: !isTest },
   plugins: [legacyPlugin(), reactPlugin(), vanillaExtractPlugin()],
   resolve: { alias: { '~': path.resolve(__dirname, './src') } },
+  test: {
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    environment: 'jsdom',
+  },
 });

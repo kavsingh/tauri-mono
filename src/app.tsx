@@ -37,9 +37,7 @@ const AppContent: VoidFunctionComponent = () => {
   return (
     <div className={`${theme} ${uiRootStyle}`}>
       {error ? `${error.message}` : null}
-      <div>
-        <div>{response?.files.join(', ')}</div>
-      </div>
+      <div>{response?.files.join(', ')}</div>
       <button onClick={selectAudioFiles}>Select</button>
       <div onDrop={handleDrop} className={dragDropStyle} />
       <div>{String(dropFiles)}</div>

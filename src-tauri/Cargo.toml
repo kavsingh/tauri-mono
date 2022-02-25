@@ -10,7 +10,7 @@ edition = "2021"
 build = "src/build.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-beta" }
+tauri-build = { version = "1.0.0-beta", features = [] }
 
 [dependencies]
 nfd = "0.0.4"
