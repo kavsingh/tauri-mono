@@ -5,9 +5,9 @@ import { selectFiles } from './bridge';
 import { uiRootStyle, dragDropStyle } from './app.css';
 import './style/global-style.css';
 
-import type { VoidFunctionComponent, DragEventHandler } from 'react';
+import type { FC, DragEventHandler } from 'react';
 
-const App: VoidFunctionComponent = () => (
+const App: FC = () => (
   <ThemeProvider>
     <AppContent />
   </ThemeProvider>
@@ -15,19 +15,19 @@ const App: VoidFunctionComponent = () => (
 
 export default App;
 
-const AppContent: VoidFunctionComponent = () => {
+const AppContent: FC = () => {
   const { theme } = useContext(ThemeContext);
   const [error, setError] = useState<Error>();
   const [response, setResponse] =
     useState<Awaited<ReturnType<typeof selectFiles>>>();
   const [dropFiles, setDropFiles] = useState<unknown>();
 
-  const selectAudioFiles = useCallback(async () => {
-    try {
-      setResponse(await selectFiles());
-    } catch (e) {
-      setError(e instanceof Error ? e : new Error(String(e)));
-    }
+  const selectAudioFiles = useCallback(() => {
+    selectFiles()
+      .then(setResponse)
+      .catch((reason) =>
+        setError(reason instanceof Error ? reason : new Error(String(reason))),
+      );
   }, []);
 
   const handleDrop = useCallback<DragEventHandler<HTMLDivElement>>((event) => {
@@ -40,7 +40,7 @@ const AppContent: VoidFunctionComponent = () => {
       <div>{response?.files.join(', ')}</div>
       <button onClick={selectAudioFiles}>Select</button>
       <div onDrop={handleDrop} className={dragDropStyle} />
-      <div>{String(dropFiles)}</div>
+      {dropFiles ? <div>{String(dropFiles)}</div> : null}
     </div>
   );
 };

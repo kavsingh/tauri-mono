@@ -15,6 +15,6 @@ describe('invoke', () => {
   it('provides a typed wrapper around invoke', async () => {
     void (await invoker('select_files')());
 
-    expect(tauri.invoke).toHaveBeenCalledWith('select_files', {});
+    expect(tauri.invoke).toHaveBeenCalledWith('select_files');
   });
 });

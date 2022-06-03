@@ -2,14 +2,14 @@ import { createContext, useEffect, useState } from 'react';
 
 import { defaultTheme, themes } from './theme';
 
-import type { FC, Dispatch, SetStateAction } from 'react';
+import type { FC, Dispatch, SetStateAction, ReactNode } from 'react';
 
 export const ThemeContext = createContext<ThemeContextValue>({
   theme: defaultTheme,
   setTheme: () => undefined,
 });
 
-export const ThemeProvider: FC = ({ children }) => {
+export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState(
     prefersDarkQuery
       ? getPreferredTheme(prefersDarkQuery.matches)

@@ -24,7 +24,7 @@ struct SelectFilesResponse {
 
 // https://tauri.studio/en/docs/usage/howtos/command#complete-example
 #[command]
-fn select_files(_initial_path: Option<String>) -> SelectFilesResponse {
+fn select_files(_maybe_inital_path: Option<String>) -> SelectFilesResponse {
   // let initial_path = maybe_initial_path.unwrap_or("~".into());
 
   let result = nfd::open_file_dialog(None, None).unwrap_or_else(|e| {

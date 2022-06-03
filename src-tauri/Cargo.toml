@@ -10,16 +10,16 @@ edition = "2021"
 build = "src/build.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-beta", features = [] }
+tauri-build = { version = "1.0.0-rc.12", features = [] }
 
 [dependencies]
 nfd = "0.0.4"
-serde_json = "1.0"
-serde = { version = "1.0", features = [ "derive" ] }
-ts-rs = "6.1"
+serde_json = "1.0.81"
+serde = { version = "1.0.137", features = [ "derive" ] }
+ts-rs = "6.2.0"
 
   [dependencies.tauri]
-  version = "1.0.0-beta.8"
+  version = "1.0.0-rc.14"
   features = []
 
 [features]

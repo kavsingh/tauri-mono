@@ -1,6 +1,8 @@
 {
   "recommendations": [
+    "rust-lang.rust",
+    "tauri-apps.tauri-vscode",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "esbenp.prettier-vscode"
   ]
 }
