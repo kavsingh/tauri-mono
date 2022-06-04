@@ -1,4 +1,4 @@
-import { createThemeContract } from '@vanilla-extract/css';
+import { createThemeContract } from "@vanilla-extract/css";
 
 export const vars = createThemeContract({
   fonts: {

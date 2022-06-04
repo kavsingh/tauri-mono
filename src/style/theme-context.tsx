@@ -1,8 +1,8 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from "react";
 
-import { defaultTheme, themes } from './theme';
+import { defaultTheme, themes } from "./theme";
 
-import type { FC, Dispatch, SetStateAction, ReactNode } from 'react';
+import type { FC, Dispatch, SetStateAction, ReactNode } from "react";
 
 export const ThemeContext = createContext<ThemeContextValue>({
   theme: defaultTheme,
@@ -13,7 +13,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState(
     prefersDarkQuery
       ? getPreferredTheme(prefersDarkQuery.matches)
-      : defaultTheme,
+      : defaultTheme
   );
 
   useEffect(() => {
@@ -21,14 +21,14 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
       setTheme((current) =>
         autoSwitchableThemes.includes(current)
           ? getPreferredTheme(matches)
-          : current,
+          : current
       );
     };
 
-    prefersDarkQuery?.addEventListener('change', handlePrefersDark);
+    prefersDarkQuery?.addEventListener("change", handlePrefersDark);
 
     return () => {
-      prefersDarkQuery?.removeEventListener('change', handlePrefersDark);
+      prefersDarkQuery?.removeEventListener("change", handlePrefersDark);
     };
   }, []);
 
@@ -45,8 +45,8 @@ const getPreferredTheme = (isDark: boolean) =>
   isDark ? themes.dark : themes.light;
 
 const prefersDarkQuery =
-  typeof window !== 'undefined'
-    ? window.matchMedia('(prefers-color-scheme: dark)')
+  typeof window !== "undefined"
+    ? window.matchMedia("(prefers-color-scheme: dark)")
     : null;
 
 interface ThemeContextValue {

@@ -1,3 +1,3 @@
-import { invoker } from './invoke';
+import { invoker } from "./invoke";
 
-export const selectFiles = invoker('select_files');
+export const selectFiles = invoker("select_files");

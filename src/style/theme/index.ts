@@ -1,6 +1,6 @@
-import { vars } from './vars.css';
-import { light } from './light.css';
-import { dark } from './dark.css';
+import { dark } from "./dark.css";
+import { light } from "./light.css";
+import { vars } from "./vars.css";
 
 export { vars };
 

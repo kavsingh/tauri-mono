@@ -1,10 +1,10 @@
-import { listen, once } from '@tauri-apps/api/event';
+import { listen, once } from "@tauri-apps/api/event";
 
-import type { EventCallback } from '@tauri-apps/api/event';
+import type { EventCallback } from "@tauri-apps/api/event";
 
 export const subscribe = <K extends keyof SubscribeMap>(
   eventName: K,
-  handler: EventCallback<SubscribeMap[K]>,
+  handler: EventCallback<SubscribeMap[K]>
 ): (() => void) => {
   const unlistenPromise = listen<SubscribeMap[K]>(eventName, handler);
 
@@ -17,7 +17,7 @@ export const subscribe = <K extends keyof SubscribeMap>(
 
 export const subscribeOnce = <K extends keyof SubscribeMap>(
   eventName: K,
-  handler: EventCallback<SubscribeMap[K]>,
+  handler: EventCallback<SubscribeMap[K]>
 ): (() => void) => {
   const unlistenPromise = once<SubscribeMap[K]>(eventName, handler);
 
