@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
     "allowUnreachableCode": false,
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -16,20 +14,13 @@
     "noImplicitReturns": true,
     "noUncheckedIndexedAccess": true,
     "paths": {
-      "~/*": [
-        "./src/*"
-      ]
+      "~/*": ["*"]
     },
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "esnext"
   },
-  "exclude": [
-    "**/node_modules"
-  ],
-  "include": [
-    "./src",
-    "./*.ts",
-  ]
+  "exclude": ["**/node_modules"],
+  "include": ["./src", "./*.ts"]
 }
