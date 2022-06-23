@@ -1,14 +1,9 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { render } from "solid-js/web";
 
 import App from "./app";
 
-const rootElement = document.getElementById("app-root");
+const appRoot = document.getElementById("app-root");
 
-if (!rootElement) throw new Error("Root element #app-root not found");
+if (!appRoot) throw new Error("#app-root not found");
 
-createRoot(rootElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+render(() => <App />, appRoot);

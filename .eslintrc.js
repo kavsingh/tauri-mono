@@ -102,18 +102,9 @@ module.exports = {
     {
       files: ["src/**/*"],
       env: { node: false, browser: true },
-      settings: { react: { version: "detect" } },
-      extends: ["plugin:react/recommended", "plugin:react-hooks/recommended"],
       rules: {
         "no-console": "error",
         "import/no-extraneous-dependencies": ["error", srcDependencies],
-        "react/jsx-filename-extension": [
-          "error",
-          { extensions: [".tsx", ".jsx"] },
-        ],
-        "react/jsx-uses-react": "off",
-        "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off",
       },
     },
     {
@@ -127,7 +118,7 @@ module.exports = {
     },
     {
       files: testFilePatterns("[jt]sx"),
-      extends: ["plugin:testing-library/react"],
+      extends: ["plugin:testing-library/dom"],
     },
     {
       files: testFilePatterns("ts?(x)"),

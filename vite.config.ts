@@ -4,9 +4,9 @@ import path from "path";
 
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import legacyPlugin from "@vitejs/plugin-legacy";
-import reactPlugin from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import checkerPlugin from "vite-plugin-checker";
+import solidPlugin from "vite-plugin-solid";
 
 const checker = checkerPlugin({
   overlay: { initialIsOpen: false },
@@ -19,11 +19,11 @@ const checker = checkerPlugin({
 
 export default defineConfig({
   build: { sourcemap: true },
-  plugins: [vanillaExtractPlugin(), checker, reactPlugin(), legacyPlugin()],
+  plugins: [vanillaExtractPlugin(), checker, solidPlugin(), legacyPlugin()],
   resolve: { alias: { "~": path.resolve(__dirname, "./src") } },
   test: {
     include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     environment: "jsdom",
-    deps: { fallbackCJS: true },
+    deps: { fallbackCJS: true, inline: [/solid-js/] },
   },
 });
