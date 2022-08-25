@@ -1,27 +1,16 @@
 {
-  "compilerOptions": {
-    "allowUnreachableCode": false,
-    "baseUrl": "./src",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "lib": ["esnext", "dom"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true,
-    "paths": {
-      "~/*": ["*"]
-    },
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "esnext"
-  },
-  "exclude": ["**/node_modules"],
-  "include": ["./src", "./*.ts"]
+	"extends": "@tsconfig/node18-strictest/tsconfig.json",
+	"compilerOptions": {
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
+		"lib": ["esnext", "dom"],
+		"module": "esnext",
+		"noEmit": true,
+		"paths": { "~/*": ["./src/*"] },
+		"sourceMap": true,
+		"target": "esnext"
+	},
+	"exclude": ["**/node_modules"],
+	"include": ["./src", "./*.ts"]
 }

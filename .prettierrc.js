@@ -1,3 +1,4 @@
 module.exports = {
-  quoteProps: 'consistent',
+	quoteProps: 'consistent',
+	useTabs: true
 };
