@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@solidjs/router': 0.5.1
   '@tauri-apps/api': 1.2.0
   '@tauri-apps/cli': 1.2.1
   '@testing-library/dom': 8.19.0
@@ -35,6 +36,7 @@ specifiers:
   vitest: 0.25.3
 
 dependencies:
+  '@solidjs/router': 0.5.1_solid-js@1.6.2
   '@tauri-apps/api': 1.2.0
   '@vanilla-extract/css': 1.9.2
   solid-js: 1.6.2
@@ -732,6 +734,14 @@ packages:
       tiny-glob: 0.2.9
       tslib: 2.4.0
     dev: true
+
+  /@solidjs/router/0.5.1_solid-js@1.6.2:
+    resolution: {integrity: sha512-igyrwUqm/9T26Lb6l7oXwpc4lLUVqbhbN92wOL3NgLoLVmkQlUNTZciuAe+Su8XeJXlrWjl6oxDJDLt+6pws/g==}
+    peerDependencies:
+      solid-js: ^1.5.3
+    dependencies:
+      solid-js: 1.6.2
+    dev: false
 
   /@tauri-apps/api/1.2.0:
     resolution: {integrity: sha512-lsI54KI6HGf7VImuf/T9pnoejfgkNoXveP14pVV7XarrQ46rOejIVJLFqHI9sRReJMGdh2YuCoI3cc/yCWCsrw==}

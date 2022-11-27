@@ -13,8 +13,8 @@ describe("invoke", () => {
 	});
 
 	it("provides a typed wrapper around invoke", async () => {
-		void (await invoker("select_files")());
+		void (await invoker("get_sys_info")());
 
-		expect(tauri.invoke).toHaveBeenCalledWith("select_files", undefined);
+		expect(tauri.invoke).toHaveBeenCalledWith("get_sys_info", undefined);
 	});
 });

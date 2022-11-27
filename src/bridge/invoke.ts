@@ -1,6 +1,6 @@
 import { tauri } from "@tauri-apps/api";
 
-import type { SelectFilesResponse } from "../__generated__/select-files-response";
+import type { SysInfoResponse } from "./__generated__/sys-info-response";
 import type { InvokeArgs } from "@tauri-apps/api/tauri";
 
 export const invoker =
@@ -13,5 +13,5 @@ export const invoker =
 		tauri.invoke(command, args[0] as unknown as InvokeArgs);
 
 interface InvokeMap {
-	select_files: () => SelectFilesResponse;
+	get_sys_info: () => SysInfoResponse;
 }

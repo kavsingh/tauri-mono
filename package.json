@@ -20,6 +20,7 @@
 		"build": "pnpm build:front && pnpm build:back"
 	},
 	"dependencies": {
+		"@solidjs/router": "0.5.1",
 		"@tauri-apps/api": "1.2.0",
 		"@vanilla-extract/css": "1.9.2",
 		"solid-js": "1.6.2"
