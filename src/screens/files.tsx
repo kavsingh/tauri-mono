@@ -3,7 +3,7 @@ import { createEffect, createSignal, For } from "solid-js";
 import { useFileDrop } from "~/hooks/file";
 import { selectFilesWithDialog } from "~/services/files";
 
-import { dragDropStyle, dragDropActiveStyle } from "./file-select.css";
+import { dragDropStyle, dragDropActiveStyle } from "./files.css";
 
 import type { Component } from "solid-js";
 
