@@ -17,7 +17,7 @@ const testFilePatterns = (extensions = "*") =>
 
 module.exports = {
 	root: true,
-	env: { es6: true, node: true, browser: false },
+	env: { es2022: true, node: true, browser: false },
 	settings: {
 		"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
 		"import/resolver": {
@@ -61,6 +61,10 @@ module.exports = {
 		"prettier/prettier": "warn",
 	},
 	overrides: [
+		{
+			files: ["*.mjs"],
+			parserOptions: { sourceType: "module", ecmaVersion: "latest" },
+		},
 		{
 			files: ["*.ts?(x)"],
 			parser: "@typescript-eslint/parser",

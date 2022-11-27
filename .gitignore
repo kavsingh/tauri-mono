@@ -9,4 +9,5 @@ node_modules/
 !/.vscode/settings.json
 
 /dist
+/dist-isolation
 /coverage
