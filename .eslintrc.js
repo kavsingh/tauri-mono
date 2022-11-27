@@ -113,6 +113,10 @@ module.exports = {
 			},
 		},
 		{
+			files: ["src/**/*.ts?(x)"],
+			extends: ["plugin:solid/typescript"],
+		},
+		{
 			files: testFilePatterns(),
 			env: { node: true },
 			rules: {

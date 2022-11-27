@@ -1,4 +1,4 @@
-import { createResource, Show } from "solid-js";
+import { createResource, Show, For } from "solid-js";
 
 import { fetchSysInfo } from "~/services/sys-info";
 
@@ -12,12 +12,14 @@ const SysInfo: Component = () => {
 			<Show when={sysInfo()} fallback={<>Loading...</>} keyed>
 				{(info) => (
 					<dl>
-						{Object.entries(info).map(([key, val]) => (
-							<>
-								<dt>{key}</dt>
-								<dd>{val}</dd>
-							</>
-						))}
+						<For each={Object.entries(info)}>
+							{([key, val]) => (
+								<>
+									<dt>{key}</dt>
+									<dd>{val}</dd>
+								</>
+							)}
+						</For>
 					</dl>
 				)}
 			</Show>

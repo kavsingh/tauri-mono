@@ -3,7 +3,7 @@ import "./style/global-style.css";
 import { Router, hashIntegration, Route, Routes, A } from "@solidjs/router";
 
 import { uiRootStyle } from "./app.css";
-import FileSelect from "./screens/file-select";
+import Files from "./screens/files";
 import SysInfo from "./screens/sys-info";
 import themeStore from "./style/theme-store";
 
@@ -18,7 +18,7 @@ const App: Component = () => (
 			</nav>
 			<Routes>
 				<Route path="/" component={SysInfo} />
-				<Route path="/files" component={FileSelect} />
+				<Route path="/files" component={Files} />
 			</Routes>
 		</div>
 	</Router>
