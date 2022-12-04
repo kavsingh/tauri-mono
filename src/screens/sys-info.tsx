@@ -5,7 +5,7 @@ import { fetchSysInfo } from "~/services/sys-info";
 import type { Component } from "solid-js";
 
 const SysInfo: Component = () => {
-	const [sysInfo] = createResource(true, fetchSysInfo);
+	const [sysInfo] = createResource(fetchSysInfo);
 
 	return (
 		<div>
