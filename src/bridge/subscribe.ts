@@ -28,5 +28,4 @@ export const subscribeOnce = <K extends keyof SubscribeMap>(
 	};
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface SubscribeMap {}
+type SubscribeMap = Record<never, never>;

@@ -12,6 +12,6 @@ export const invoker =
 	): Promise<ReturnType<InvokeMap[K]>> =>
 		tauri.invoke(command, args[0] as unknown as InvokeArgs);
 
-interface InvokeMap {
+type InvokeMap = {
 	get_sys_info: () => SysInfoResponse;
-}
+};

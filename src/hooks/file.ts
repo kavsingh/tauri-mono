@@ -46,8 +46,8 @@ export const useFileDrop = () => {
 	} as const;
 };
 
-export interface DroppedFile {
+export type DroppedFile = {
 	isDirectory: FileSystemEntry["isDirectory"] | undefined;
 	isFile: FileSystemEntry["isFile"] | undefined;
 	file: File;
-}
+};

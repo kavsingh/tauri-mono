@@ -34,6 +34,10 @@ module.exports = {
 	rules: {
 		"curly": ["warn", "multi-line", "consistent"],
 		"no-console": "off",
+		"no-restricted-syntax": [
+			"error",
+			{ selector: "TSEnumDeclaration", message: "Avoid using enums" },
+		],
 		"no-throw-literal": "error",
 		"filenames/match-regex": ["error", "^[a-z0-9-.]+$", true],
 		"filenames/match-exported": ["error", "kebab"],
@@ -79,6 +83,7 @@ module.exports = {
 				"no-shadow": "off",
 				"no-throw-literal": "off",
 				"no-unused-vars": "off",
+				"@typescript-eslint/consistent-type-definitions": ["error", "type"],
 				"@typescript-eslint/consistent-type-imports": [
 					"error",
 					{ disallowTypeAnnotations: false },

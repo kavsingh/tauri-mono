@@ -1,6 +1,7 @@
 import { createEffect, createSignal, For } from "solid-js";
 
 import { useFileDrop } from "~/hooks/file";
+import isErrorLike from "~/lib/util/is-error-like";
 import { selectFilesWithDialog } from "~/services/files";
 
 import { dragDropStyle, dragDropActiveStyle } from "./files.css";
@@ -28,20 +29,20 @@ export default Files;
 const DialogFileSelect: Component<{
 	onSelect: (selected: string[]) => void;
 }> = (props) => {
-	const [error, setError] = createSignal<Error>();
+	const [errorMessage, setErrorMessage] = createSignal<string>();
 
 	const selectFiles = () => {
 		void selectFilesWithDialog()
 			.then(props.onSelect)
 			.catch((reason) => {
-				setError(reason instanceof Error ? reason : new Error(String(reason)));
+				setErrorMessage(isErrorLike(reason) ? reason.message : String(reason));
 			});
 	};
 
 	return (
 		<>
 			<button onClick={selectFiles}>Select files</button>
-			{error()?.message ?? null}
+			{errorMessage() ?? null}
 		</>
 	);
 };
