@@ -8,22 +8,20 @@ const SysInfo: Component = () => {
 	const [sysInfo] = createResource(fetchSysInfo);
 
 	return (
-		<div>
+		<dl>
 			<Show when={sysInfo()} fallback={<>Loading...</>} keyed>
 				{(info) => (
-					<dl>
-						<For each={Object.entries(info)}>
-							{([key, val]) => (
-								<>
-									<dt>{key}</dt>
-									<dd>{val}</dd>
-								</>
-							)}
-						</For>
-					</dl>
+					<For each={Object.entries(info)}>
+						{([key, val]) => (
+							<>
+								<dt>{key}</dt>
+								<dd>{val}</dd>
+							</>
+						)}
+					</For>
 				)}
 			</Show>
-		</div>
+		</dl>
 	);
 };
 
