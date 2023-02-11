@@ -30,7 +30,7 @@ const App: Component = () => {
 export default App;
 
 async function showAppWindow() {
-	const appWindow = (await import("@tauri-apps/api/window")).appWindow;
+	const { appWindow } = await import("@tauri-apps/api/window");
 
 	void appWindow.show();
 }
