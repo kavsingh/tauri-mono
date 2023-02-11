@@ -1,6 +1,6 @@
 import { createEffect, createSignal, For } from "solid-js";
 
-import { useFileDrop } from "~/hooks/file";
+import useFileDrop from "~/hooks/use-file-drop";
 import isErrorLike from "~/lib/util/is-error-like";
 import { selectFilesWithDialog } from "~/services/files";
 
@@ -8,8 +8,10 @@ import type { Component } from "solid-js";
 
 const Files: Component = () => {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
-	const handleFileSelect = (selected: string[]) =>
+
+	function handleFileSelect(selected: string[]) {
 		setSelectedFiles((current) => current.concat(selected));
+	}
 
 	return (
 		<div>
@@ -29,13 +31,13 @@ const DialogFileSelect: Component<{
 }> = (props) => {
 	const [errorMessage, setErrorMessage] = createSignal<string>();
 
-	const selectFiles = () => {
+	function selectFiles() {
 		void selectFilesWithDialog()
 			.then(props.onSelect)
 			.catch((reason) => {
 				setErrorMessage(isErrorLike(reason) ? reason.message : String(reason));
 			});
-	};
+	}
 
 	return (
 		<>
