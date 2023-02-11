@@ -4,22 +4,20 @@ export default function useFileDrop() {
 	const [droppedFiles, setDroppedFiles] = createSignal<DroppedFile[]>();
 	const [isActive, setIsActive] = createSignal(false);
 
-	const onDragOver = (event: DragEvent) => {
-		// needed for drop handler
+	function onDragOver(event: DragEvent) {
 		event.preventDefault();
-	};
+	}
 
-	const onDragEnter = (event: DragEvent) => {
-		// needed for drop handler
+	function onDragEnter(event: DragEvent) {
 		event.preventDefault();
 		setIsActive(true);
-	};
+	}
 
-	const onDragLeave = () => {
+	function onDragLeave() {
 		setIsActive(false);
-	};
+	}
 
-	const onDrop = (event: DragEvent) => {
+	function onDrop(event: DragEvent) {
 		event.preventDefault();
 
 		const { items, files } = event.dataTransfer ?? {};
@@ -37,7 +35,7 @@ export default function useFileDrop() {
 
 		setIsActive(false);
 		setDroppedFiles(dropped);
-	};
+	}
 
 	return {
 		isActive,
