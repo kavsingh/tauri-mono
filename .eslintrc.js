@@ -104,6 +104,10 @@ module.exports = {
 			},
 		},
 		{
+			files: ["./src/**/*.tsx"],
+			extends: ["plugin:tailwindcss/recommended"],
+		},
+		{
 			files: ["./*"],
 			rules: {
 				"filenames/match-exported": "off",

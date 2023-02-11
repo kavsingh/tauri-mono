@@ -1,17 +1,13 @@
-import "./style/global-style.css";
-
 import { Router, hashIntegration, Route, Routes, A } from "@solidjs/router";
 
-import { uiRootStyle } from "./app.css";
 import Files from "./screens/files";
 import SysInfo from "./screens/sys-info";
-import themeStore from "./style/theme-store";
 
 import type { Component } from "solid-js";
 
 const App: Component = () => (
 	<Router source={hashIntegration()}>
-		<div classList={{ [themeStore.theme()]: true, [uiRootStyle]: true }}>
+		<div class="bg-primary p-4 text-primary min-bs-full">
 			<nav>
 				<A href="/">Sys info</A>
 				<A href="/files">File select</A>

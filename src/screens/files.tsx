@@ -4,8 +4,6 @@ import { useFileDrop } from "~/hooks/file";
 import isErrorLike from "~/lib/util/is-error-like";
 import { selectFilesWithDialog } from "~/services/files";
 
-import { dragDropStyle, dragDropActiveStyle } from "./files.css";
-
 import type { Component } from "solid-js";
 
 const Files: Component = () => {
@@ -59,7 +57,8 @@ const DragFileSelect: Component<{
 	return (
 		<div
 			{...elementHandles}
-			classList={{ [dragDropStyle]: true, [dragDropActiveStyle]: isActive() }}
+			class="border-current/60 bs-[200px]"
+			classList={{ "border-current/100": isActive() }}
 		/>
 	);
 };

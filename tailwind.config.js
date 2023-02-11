@@ -1,8 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: [],
+	content: ["./index.html", "./src/**/*.tsx"],
+	darkMode: "media",
 	theme: {
-		extend: {},
+		extend: {
+			textColor: {
+				primary: "var(--color-text-primary)",
+			},
+			backgroundColor: {
+				primary: "var(--color-background-primary)",
+			},
+		},
 	},
-	plugins: [],
+	plugins: [
+		require("@tailwindcss/container-queries"),
+		require("tailwindcss-logical"),
+	],
 };

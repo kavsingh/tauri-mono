@@ -1,4 +1,5 @@
 module.exports = {
 	quoteProps: 'consistent',
-	useTabs: true
+	useTabs: true,
+	plugins: [require('prettier-plugin-tailwindcss')],
 };
