@@ -18,9 +18,8 @@
 		},
 		"allowlist": {
 			"all": false,
-			"dialog": {
-				"open": true
-			}
+			"dialog": { "open": true },
+			"window": { "show": true }
 		},
 		"bundle": {
 			"active": true,
@@ -64,7 +63,8 @@
 				"width": 800,
 				"height": 600,
 				"resizable": true,
-				"fullscreen": false
+				"fullscreen": false,
+				"visible": false
 			}
 		],
 		"security": {
