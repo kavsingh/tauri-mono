@@ -1,3 +1,5 @@
+const tsconfig = require("./tsconfig.json");
+
 const srcDependencies = {
 	devDependencies: false,
 	optionalDependencies: false,
@@ -14,6 +16,8 @@ const testFilePatterns = (extensions = "*") =>
 	["**/*.test", "**/*.mock", "**/__test__/**/*", "**/__mocks__/**/*"].map(
 		(pattern) => `${pattern}.${extensions}`
 	);
+
+const tsconfigPathPatterns = Object.keys(tsconfig.compilerOptions.paths);
 
 module.exports = {
 	root: true,
@@ -56,7 +60,12 @@ module.exports = {
 					["parent", "sibling", "index"],
 					"type",
 				],
-				"pathGroups": [{ pattern: "~/**", group: "internal" }],
+				"pathGroups": [
+					...tsconfigPathPatterns.map((pattern) => ({
+						pattern,
+						group: "internal",
+					})),
+				],
 				"pathGroupsExcludedImportTypes": ["type"],
 				"alphabetize": { order: "asc" },
 				"newlines-between": "always",
