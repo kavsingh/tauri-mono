@@ -1,23 +1,25 @@
 import { createSignal } from "solid-js";
 
+import type { JSX } from "solid-js";
+
 export default function useFileDrop() {
 	const [droppedFiles, setDroppedFiles] = createSignal<DroppedFile[]>();
 	const [isActive, setIsActive] = createSignal(false);
 
-	function onDragOver(event: DragEvent) {
+	const onDragOver: DragEventHandler = (event) => {
 		event.preventDefault();
-	}
+	};
 
-	function onDragEnter(event: DragEvent) {
+	const onDragEnter: DragEventHandler = (event) => {
 		event.preventDefault();
 		setIsActive(true);
-	}
+	};
 
-	function onDragLeave() {
+	const onDragLeave: DragEventHandler = () => {
 		setIsActive(false);
-	}
+	};
 
-	function onDrop(event: DragEvent) {
+	const onDrop: DragEventHandler = (event) => {
 		event.preventDefault();
 
 		const { items, files } = event.dataTransfer ?? {};
@@ -35,13 +37,12 @@ export default function useFileDrop() {
 
 		setIsActive(false);
 		setDroppedFiles(dropped);
-	}
+	};
 
-	return {
-		isActive,
-		files: droppedFiles,
-		elementHandles: { onDragOver, onDragEnter, onDragLeave, onDrop },
-	} as const;
+	return [
+		{ isActive, files: droppedFiles },
+		{ onDragOver, onDragEnter, onDragLeave, onDrop },
+	] as const;
 }
 
 export type DroppedFile = {
@@ -49,3 +50,5 @@ export type DroppedFile = {
 	isFile: FileSystemEntry["isFile"] | undefined;
 	file: File;
 };
+
+type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;

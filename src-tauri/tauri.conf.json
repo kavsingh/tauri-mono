@@ -19,7 +19,7 @@
 		"allowlist": {
 			"all": false,
 			"dialog": { "open": true },
-			"window": { "show": true }
+			"window": { "show": true, "startDragging": true }
 		},
 		"bundle": {
 			"active": true,
@@ -64,6 +64,8 @@
 				"height": 600,
 				"resizable": true,
 				"fullscreen": false,
+				"titleBarStyle": "Overlay",
+				"hiddenTitle": true,
 				"visible": false
 			}
 		],

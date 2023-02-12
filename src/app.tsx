@@ -1,36 +1,23 @@
-import { Router, hashIntegration, Route, Routes, A } from "@solidjs/router";
-import { onMount } from "solid-js";
+import { Router, hashIntegration, Route, Routes } from "@solidjs/router";
 
-import Files from "./screens/files";
-import SysInfo from "./screens/sys-info";
+import Masthead from "./components/masthead";
+import WindowDragRegion from "./components/window-drag-region";
+import Files from "./pages/files";
+import SystemInfo from "./pages/system-info";
 
 import type { Component } from "solid-js";
 
-const App: Component = () => {
-	// workaround white flash on start.
-	// see: https://github.com/tauri-apps/tauri/issues/5170
-	onMount(() => void showAppWindow());
-
-	return (
-		<Router source={hashIntegration()}>
-			<div class="bg-primary p-4 text-primary min-bs-full">
-				<nav>
-					<A href="/">Sys info</A>
-					<A href="/files">File select</A>
-				</nav>
-				<Routes>
-					<Route path="/" component={SysInfo} />
-					<Route path="/files" component={Files} />
-				</Routes>
-			</div>
-		</Router>
-	);
-};
+const App: Component = () => (
+	<Router source={hashIntegration()}>
+		<div class="bg-0 text-400 min-bs-full plb-8 pli-4">
+			<WindowDragRegion />
+			<Masthead />
+			<Routes>
+				<Route path="/" element={<SystemInfo />} />
+				<Route path="/files" element={<Files />} />
+			</Routes>
+		</div>
+	</Router>
+);
 
 export default App;
-
-async function showAppWindow() {
-	const { appWindow } = await import("@tauri-apps/api/window");
-
-	void appWindow.show();
-}

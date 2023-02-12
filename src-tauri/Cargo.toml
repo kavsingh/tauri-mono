@@ -20,7 +20,7 @@ ts-rs = "6.2.1"
 
 [dependencies.tauri]
 version = "1.2.4"
-features = [ "window-show","isolation", "dialog-open"]
+features = [ "window-start-dragging", "window-show","isolation", "dialog-open"]
 
 [features]
 default = ["custom-protocol"]

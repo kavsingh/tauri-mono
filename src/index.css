@@ -1,11 +1,12 @@
-@import url("./style/theme.css");
+@import url("./style/colors.css");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
-	background-color: var(--color-background-primary);
+	color: var(--color-text-400);
+	background-color: var(--color-bg-0);
 }
 
 #app-root {
