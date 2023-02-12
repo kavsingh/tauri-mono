@@ -1,5 +1,6 @@
 import { createEffect, createSignal, For } from "solid-js";
 
+import Button from "~/components/button";
 import PageHeader from "~/components/page-header";
 import useFileDrop from "~/hooks/use-file-drop";
 import isErrorLike from "~/lib/util/is-error-like";
@@ -43,7 +44,7 @@ const DialogFileSelect: Component<{
 
 	return (
 		<>
-			<button onClick={selectFiles}>Select files</button>
+			<Button onClick={selectFiles}>Select files</Button>
 			{errorMessage() ?? null}
 		</>
 	);
@@ -52,17 +53,15 @@ const DialogFileSelect: Component<{
 const DragFileSelect: Component<{
 	onSelect: (selected: string[]) => void;
 }> = (props) => {
-	const [{ files, isActive }, elementHandles] = useFileDrop();
+	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
 
-	createEffect(() =>
-		props.onSelect(files()?.map(({ file }) => file.name) ?? [])
-	);
+	createEffect(() => props.onSelect(files()));
 
 	return (
 		<div
 			class="border border-100 bs-[200px]"
 			classList={{ "border-current": isActive() }}
-			{...elementHandles}
+			{...dragDropHandlers}
 		/>
 	);
 };

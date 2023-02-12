@@ -1,54 +1,45 @@
-import { createSignal } from "solid-js";
+import { listen } from "@tauri-apps/api/event";
+import { createSignal, onCleanup } from "solid-js";
 
+import type { FileDropEvent } from "@tauri-apps/api/window";
 import type { JSX } from "solid-js";
 
 export default function useFileDrop() {
-	const [droppedFiles, setDroppedFiles] = createSignal<DroppedFile[]>();
+	const [droppedFiles, setDroppedFiles] = createSignal<string[]>([]);
 	const [isActive, setIsActive] = createSignal(false);
+	// Not ideal to track this twice. TODO: File drop handler react to
+	// isActive directly
+	let isOverElement = false;
 
-	const onDragOver: DragEventHandler = (event) => {
-		event.preventDefault();
-	};
+	const unlistenPromise = listen<FileDropEvent>(
+		"tauri://file-drop",
+		(event) => {
+			if (!isOverElement) return;
+			// typings seem to be incorrect
+			setDroppedFiles(event.payload as unknown as string[]);
+		}
+	);
 
 	const onDragEnter: DragEventHandler = (event) => {
 		event.preventDefault();
-		setIsActive(true);
+		isOverElement = true;
+		setIsActive(isOverElement);
 	};
 
-	const onDragLeave: DragEventHandler = () => {
-		setIsActive(false);
-	};
-
-	const onDrop: DragEventHandler = (event) => {
+	const onDragLeave: DragEventHandler = (event) => {
 		event.preventDefault();
-
-		const { items, files } = event.dataTransfer ?? {};
-		const entries = items
-			? Array.from(items).map((item) => item.webkitGetAsEntry())
-			: [];
-		const dropped = files
-			? Array.from(files).map((file) => {
-					const { isDirectory, isFile } =
-						entries.find((e) => e?.name === file.name) ?? {};
-
-					return { file, isDirectory, isFile };
-			  })
-			: [];
-
-		setIsActive(false);
-		setDroppedFiles(dropped);
+		isOverElement = false;
+		setIsActive(isOverElement);
 	};
+
+	onCleanup(() => {
+		void unlistenPromise.then((unlisten) => unlisten());
+	});
 
 	return [
 		{ isActive, files: droppedFiles },
-		{ onDragOver, onDragEnter, onDragLeave, onDrop },
+		{ onDragEnter, onDragLeave, onDrop: onDragLeave },
 	] as const;
 }
-
-export type DroppedFile = {
-	isDirectory: FileSystemEntry["isDirectory"] | undefined;
-	isFile: FileSystemEntry["isFile"] | undefined;
-	file: File;
-};
 
 type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;

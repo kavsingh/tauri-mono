@@ -21,6 +21,18 @@
 			"dialog": { "open": true },
 			"window": { "show": true, "startDragging": true }
 		},
+		"windows": [
+			{
+				"title": "SomeTauriApp",
+				"width": 800,
+				"height": 600,
+				"resizable": true,
+				"fullscreen": false,
+				"titleBarStyle": "Overlay",
+				"hiddenTitle": true,
+				"visible": false
+			}
+		],
 		"bundle": {
 			"active": true,
 			"targets": "all",
@@ -57,18 +69,6 @@
 		"updater": {
 			"active": false
 		},
-		"windows": [
-			{
-				"title": "SomeTauriApp",
-				"width": 800,
-				"height": 600,
-				"resizable": true,
-				"fullscreen": false,
-				"titleBarStyle": "Overlay",
-				"hiddenTitle": true,
-				"visible": false
-			}
-		],
 		"security": {
 			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
 		}
