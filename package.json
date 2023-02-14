@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@solidjs/router": "0.7.0",
 		"@tauri-apps/api": "1.2.0",
-		"solid-js": "1.6.10"
+		"solid-js": "1.6.11"
 	},
 	"devDependencies": {
 		"@rollup/plugin-html": "1.0.2",
@@ -33,11 +33,11 @@
 		"@testing-library/user-event": "14.4.3",
 		"@tsconfig/node18-strictest": "1.0.0",
 		"@types/node": "18.13.0",
-		"@typescript-eslint/eslint-plugin": "5.51.0",
-		"@typescript-eslint/parser": "5.51.0",
+		"@typescript-eslint/eslint-plugin": "5.52.0",
+		"@typescript-eslint/parser": "5.52.0",
 		"@vitejs/plugin-legacy": "4.0.1",
 		"autoprefixer": "10.4.13",
-		"caniuse-lite": "1.0.30001451",
+		"caniuse-lite": "1.0.30001452",
 		"eslint": "8.34.0",
 		"eslint-config-prettier": "8.6.0",
 		"eslint-import-resolver-typescript": "3.5.3",
@@ -65,6 +65,6 @@
 		"vite-plugin-solid": "2.5.0",
 		"vite-plugin-tailwind": "0.0.4",
 		"vite-tsconfig-paths": "4.0.5",
-		"vitest": "0.28.4"
+		"vitest": "0.28.5"
 	}
 }
