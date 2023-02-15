@@ -12,7 +12,6 @@ export default {
 	output: {
 		dir: fromRoot("./dist-isolation"),
 		entryFileNames: "[name]-[hash].js",
-		sourcemap: true,
 	},
 	plugins: [typescript(), html({ title: "Tauri isolation host" })],
 };
