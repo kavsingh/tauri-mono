@@ -6,7 +6,7 @@
 use serde::Serialize;
 use std::option::Option;
 use sysinfo::{System, SystemExt};
-use tauri::{command, generate_context, generate_handler, Builder};
+use tauri::{command, generate_context, generate_handler, Builder, Manager};
 use ts_rs::TS;
 
 fn main() {
