@@ -11,7 +11,6 @@ use ts_rs::TS;
 
 fn main() {
 	Builder::default()
-		.invoke_handler(generate_handler![get_sys_info])
 		.setup(|app| {
 			#[cfg(debug_assertions)] // only include this code on debug builds
 			{
@@ -22,6 +21,7 @@ fn main() {
 
 			Ok(())
 		})
+		.invoke_handler(generate_handler![get_sys_info])
 		.run(generate_context!())
 		.expect("error while running tauri application");
 }

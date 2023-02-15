@@ -25,3 +25,11 @@ features = [ "window-start-dragging", "window-show","isolation", "dialog-open"]
 [features]
 default = ["custom-protocol"]
 custom-protocol = ["tauri/custom-protocol"]
+
+# Make --release build a binary that is small (opt-level = "s") and fast (lto = true).
+[profile.release]
+incremental = false
+codegen-units = 1
+panic = "abort"
+opt-level = "s"
+lto = true
