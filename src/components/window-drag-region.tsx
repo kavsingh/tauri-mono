@@ -1,11 +1,9 @@
 import { appWindow } from "@tauri-apps/api/window";
 
-import type { Component, JSX } from "solid-js";
-
-const WindowDragRegion: Component = () => {
-	const handleMouseDown: MouseEventHandler = () => {
+export default function WindowDragRegion() {
+	function handleMouseDown() {
 		void appWindow.startDragging();
-	};
+	}
 
 	return (
 		<div
@@ -13,8 +11,4 @@ const WindowDragRegion: Component = () => {
 			onMouseDown={handleMouseDown}
 		/>
 	);
-};
-
-export default WindowDragRegion;
-
-type MouseEventHandler = JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>;
+}

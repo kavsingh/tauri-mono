@@ -9,4 +9,4 @@ declare type Immutable<T> =
 
 type UnwrapArrayLike<T> = T extends ArrayLike<infer U> ? U : T;
 
-type AsyncResult<T> = Immutable<Awaited<ReturnType<T>>>;
+type AsyncReturn<T> = Immutable<Awaited<ReturnType<T>>>;

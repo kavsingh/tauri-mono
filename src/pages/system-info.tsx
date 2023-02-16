@@ -3,9 +3,7 @@ import { createResource, Show, For } from "solid-js";
 import PageHeader from "~/components/page-header";
 import { fetchSysInfo } from "~/services/sys-info";
 
-import type { Component } from "solid-js";
-
-const SystemInfo: Component = () => {
+export default function SystemInfo() {
 	const [sysInfo] = createResource(fetchSysInfo);
 
 	return (
@@ -27,6 +25,4 @@ const SystemInfo: Component = () => {
 			</ul>
 		</>
 	);
-};
-
-export default SystemInfo;
+}

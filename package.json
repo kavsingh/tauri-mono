@@ -20,7 +20,8 @@
 	"dependencies": {
 		"@solidjs/router": "0.7.0",
 		"@tauri-apps/api": "1.2.0",
-		"solid-js": "1.6.11"
+		"solid-js": "1.6.11",
+		"tailwind-merge": "1.9.1"
 	},
 	"devDependencies": {
 		"@rollup/plugin-html": "1.0.2",

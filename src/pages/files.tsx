@@ -6,9 +6,7 @@ import useFileDrop from "~/hooks/use-file-drop";
 import isErrorLike from "~/lib/util/is-error-like";
 import { selectFilesWithDialog } from "~/services/files";
 
-import type { Component } from "solid-js";
-
-const Files: Component = () => {
+export default function Files() {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
 
 	function handleFileSelect(selected: string[]) {
@@ -25,13 +23,9 @@ const Files: Component = () => {
 			</ul>
 		</>
 	);
-};
+}
 
-export default Files;
-
-const DialogFileSelect: Component<{
-	onSelect: (selected: string[]) => void;
-}> = (props) => {
+function DialogFileSelect(props: SelectProps) {
 	const [errorMessage, setErrorMessage] = createSignal<string>();
 
 	function selectFiles() {
@@ -48,11 +42,9 @@ const DialogFileSelect: Component<{
 			{errorMessage() ?? null}
 		</>
 	);
-};
+}
 
-const DragFileSelect: Component<{
-	onSelect: (selected: string[]) => void;
-}> = (props) => {
+function DragFileSelect(props: SelectProps) {
 	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
 
 	createEffect(() => props.onSelect(files()));
@@ -64,4 +56,6 @@ const DragFileSelect: Component<{
 			{...dragDropHandlers}
 		/>
 	);
-};
+}
+
+type SelectProps = { onSelect: (selected: string[]) => void };

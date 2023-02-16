@@ -11,14 +11,16 @@ export default function useFileDrop() {
 	// isActive directly
 	let isOverElement = false;
 
-	const unlistenPromise = listen<FileDropEvent>(
-		"tauri://file-drop",
-		(event) => {
-			if (!isOverElement) return;
-			// typings seem to be incorrect
-			setDroppedFiles(event.payload as unknown as string[]);
-		}
-	);
+	const unlistenPromise = listen<
+		// FileDropEvent is declared { type: "drop" | ..., paths: string[] }
+		// received event is { ..., payload: string[] }
+		// TODO: surely this is not how it's meant to be typed
+		Extract<FileDropEvent, { type: "drop" }>["paths"]
+	>("tauri://file-drop", (event) => {
+		if (!isOverElement) return;
+
+		setDroppedFiles(event.payload);
+	});
 
 	const onDragEnter: DragEventHandler = (event) => {
 		event.preventDefault();

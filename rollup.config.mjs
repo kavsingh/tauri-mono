@@ -8,7 +8,7 @@ const fromRoot = (/** @type {string} */ relPath) =>
 
 /** @type {import("rollup").RollupOptions} */
 export default {
-	input: fromRoot("./src/isolation/index.ts"),
+	input: fromRoot("./src-isolation/index.ts"),
 	output: {
 		dir: fromRoot("./dist-isolation"),
 		entryFileNames: "[name]-[hash].js",
