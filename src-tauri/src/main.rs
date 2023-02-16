@@ -3,11 +3,32 @@
 	windows_subsystem = "windows"
 )]
 
-use serde::Serialize;
+use serde;
 use std::option::Option;
 use sysinfo::{System, SystemExt};
-use tauri::{command, generate_context, generate_handler, Builder, Manager};
-use ts_rs::TS;
+use tauri::{Builder, Manager};
+use ts_rs;
+
+#[derive(serde::Serialize, ts_rs::TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export, export_to = "../src/bridge/__generated__/sys-info-response.ts")]
+struct SysInfoResponse {
+	name: Option<String>,
+	os_version: Option<String>,
+	host_name: Option<String>,
+}
+
+// https://tauri.studio/en/docs/usage/howtos/command#complete-example
+#[tauri::command]
+fn get_sys_info() -> SysInfoResponse {
+	let sys = System::new();
+
+	SysInfoResponse {
+		name: sys.name(),
+		os_version: sys.os_version(),
+		host_name: sys.host_name(),
+	}
+}
 
 fn main() {
 	Builder::default()
@@ -21,28 +42,7 @@ fn main() {
 
 			Ok(())
 		})
-		.invoke_handler(generate_handler![get_sys_info])
-		.run(generate_context!())
+		.invoke_handler(tauri::generate_handler![get_sys_info])
+		.run(tauri::generate_context!())
 		.expect("error while running tauri application");
-}
-
-#[derive(Serialize, TS)]
-#[serde(rename_all = "camelCase")]
-#[ts(export, export_to = "../src/bridge/__generated__/sys-info-response.ts")]
-struct SysInfoResponse {
-	name: Option<String>,
-	os_version: Option<String>,
-	host_name: Option<String>,
-}
-
-// https://tauri.studio/en/docs/usage/howtos/command#complete-example
-#[command]
-fn get_sys_info() -> SysInfoResponse {
-	let sys = System::new();
-
-	SysInfoResponse {
-		name: sys.name(),
-		os_version: sys.os_version(),
-		host_name: sys.host_name(),
-	}
 }
