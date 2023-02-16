@@ -15,7 +15,7 @@ specifiers:
   '@typescript-eslint/parser': 5.52.0
   '@vitejs/plugin-legacy': 4.0.1
   autoprefixer: 10.4.13
-  caniuse-lite: 1.0.30001452
+  caniuse-lite: 1.0.30001454
   eslint: 8.34.0
   eslint-config-prettier: 8.6.0
   eslint-import-resolver-typescript: 3.5.3
@@ -34,7 +34,7 @@ specifiers:
   rollup: 3.15.0
   solid-js: 1.6.11
   solid-testing-library: 0.5.0
-  tailwindcss: 3.2.6
+  tailwindcss: 3.2.7
   tailwindcss-logical: 3.0.0
   terser: 5.16.3
   ts-node: 10.9.1
@@ -54,7 +54,7 @@ dependencies:
 devDependencies:
   '@rollup/plugin-html': 1.0.2_rollup@3.15.0
   '@rollup/plugin-typescript': 11.0.0_xswiuafr57fmdlvfpvse52fe3e
-  '@tailwindcss/container-queries': 0.1.0_tailwindcss@3.2.6
+  '@tailwindcss/container-queries': 0.1.0_tailwindcss@3.2.7
   '@tauri-apps/cli': 1.2.3
   '@testing-library/dom': 8.20.0
   '@testing-library/user-event': 14.4.3_yxlyej73nftwmh2fiao7paxmlm
@@ -64,7 +64,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.52.0_7kw3g6rralp5ps6mg3uyzz6azm
   '@vitejs/plugin-legacy': 4.0.1_terser@5.16.3+vite@4.1.1
   autoprefixer: 10.4.13_postcss@8.4.21
-  caniuse-lite: 1.0.30001452
+  caniuse-lite: 1.0.30001454
   eslint: 8.34.0
   eslint-config-prettier: 8.6.0_eslint@8.34.0
   eslint-import-resolver-typescript: 3.5.3_mvgyw3chnqkp6sgfmmtihyjpnm
@@ -72,7 +72,7 @@ devDependencies:
   eslint-plugin-import: 2.27.5_gndiqgw2wrzfeqy4ccfxbmtnsi
   eslint-plugin-prettier: 4.2.1_u5wnrdwibbfomslmnramz52buy
   eslint-plugin-solid: 0.9.4_7kw3g6rralp5ps6mg3uyzz6azm
-  eslint-plugin-tailwindcss: 3.8.3_tailwindcss@3.2.6
+  eslint-plugin-tailwindcss: 3.8.3_tailwindcss@3.2.7
   eslint-plugin-testing-library: 5.10.2_7kw3g6rralp5ps6mg3uyzz6azm
   jsdom: 21.1.0
   postcss: 8.4.21
@@ -82,7 +82,7 @@ devDependencies:
   rimraf: 4.1.2
   rollup: 3.15.0
   solid-testing-library: 0.5.0_solid-js@1.6.11
-  tailwindcss: 3.2.6_aesdjsunmf4wiehhujt67my7tu
+  tailwindcss: 3.2.7_aesdjsunmf4wiehhujt67my7tu
   tailwindcss-logical: 3.0.0_by5iqycgvtroytm54ytclj4zzi
   terser: 5.16.3
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
@@ -1763,12 +1763,12 @@ packages:
       solid-js: 1.6.11
     dev: false
 
-  /@tailwindcss/container-queries/0.1.0_tailwindcss@3.2.6:
+  /@tailwindcss/container-queries/0.1.0_tailwindcss@3.2.7:
     resolution: {integrity: sha512-t1GeJ9P8ual160BvKy6Y1sG7bjChArMaK6iRXm3ZYjZGN2FTzmqb5ztsTDb9AsTSJD4NMHtsnaI2ielrXEk+hw==}
     peerDependencies:
       tailwindcss: '>=3.2.0'
     dependencies:
-      tailwindcss: 3.2.6_aesdjsunmf4wiehhujt67my7tu
+      tailwindcss: 3.2.7_aesdjsunmf4wiehhujt67my7tu
     dev: true
 
   /@tailwindcss/jit/0.1.18_o2hhf4othczi7hfbslkvtgos4i:
@@ -2445,7 +2445,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001452
+      caniuse-lite: 1.0.30001454
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2539,7 +2539,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001452
+      caniuse-lite: 1.0.30001454
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
       update-browserslist-db: 1.0.10_browserslist@4.21.4
@@ -2584,8 +2584,8 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /caniuse-lite/1.0.30001452:
-    resolution: {integrity: sha512-Lkp0vFjMkBB3GTpLR8zk4NwW5EdRdnitwYJHDOOKIU85x4ckYCPQ+9WlVvSVClHxVReefkUMtWZH2l9KGlD51w==}
+  /caniuse-lite/1.0.30001454:
+    resolution: {integrity: sha512-4E63M5TBbgDoA9dQoFRdjL6iAmzTrz3rwYWoKDlvnvyvBxjCZ0rrUoX3THhEMie0/RYuTCeMbeTYLGAWgnLwEg==}
     dev: true
 
   /chai/4.3.7:
@@ -3480,7 +3480,7 @@ packages:
       - typescript
     dev: true
 
-  /eslint-plugin-tailwindcss/3.8.3_tailwindcss@3.2.6:
+  /eslint-plugin-tailwindcss/3.8.3_tailwindcss@3.2.7:
     resolution: {integrity: sha512-wfzfCmc9yONNW+TqfR+QWZ+syFPQ8zMOrIGx500lS4XITEm0HJYGyKh1sC1tQ9+Wmt58bnHzW3Yc31vy5RlJww==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -3488,7 +3488,7 @@ packages:
     dependencies:
       fast-glob: 3.2.12
       postcss: 8.4.21
-      tailwindcss: 3.2.6_aesdjsunmf4wiehhujt67my7tu
+      tailwindcss: 3.2.7_aesdjsunmf4wiehhujt67my7tu
     dev: true
 
   /eslint-plugin-testing-library/5.10.2_7kw3g6rralp5ps6mg3uyzz6azm:
@@ -5730,8 +5730,8 @@ packages:
       - ts-node
     dev: true
 
-  /tailwindcss/3.2.6_aesdjsunmf4wiehhujt67my7tu:
-    resolution: {integrity: sha512-BfgQWZrtqowOQMC2bwaSNe7xcIjdDEgixWGYOd6AL0CbKHJlvhfdbINeAW76l1sO+1ov/MJ93ODJ9yluRituIw==}
+  /tailwindcss/3.2.7_aesdjsunmf4wiehhujt67my7tu:
+    resolution: {integrity: sha512-B6DLqJzc21x7wntlH/GsZwEXTBttVSl1FtCzC8WP4oBc/NKef7kaax5jeihkkCEWc831/5NDJ9gRNDK6NEioQQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
