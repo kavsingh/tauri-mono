@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router";
 import { createSignal, onCleanup } from "solid-js";
 
-import { subscribeWindow } from "~/bridge/subscribe";
+import { subscribeToHeartBeat } from "~/services/heartbeat";
 
 import Pulse from "./pulse";
 import StatusBadge from "./status-badge";
@@ -9,7 +9,7 @@ import StatusBadge from "./status-badge";
 export default function Masthead() {
 	const [message, setMessage] = createSignal("");
 	const [timestamp, setTimestamp] = createSignal("");
-	const unsubscribe = subscribeWindow("heartbeat", ({ payload }) => {
+	const unsubscribe = subscribeToHeartBeat(({ payload }) => {
 		setMessage(payload.message);
 		setTimestamp(payload.timestamp.toString());
 	});
