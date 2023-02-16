@@ -1,8 +1,10 @@
-import { listen, once } from "@tauri-apps/api/event";
+import { listen } from "@tauri-apps/api/event";
+import { appWindow } from "@tauri-apps/api/window";
 
+import type { HeartbeatEvent } from "./__generated__/heartbeat-event";
 import type { EventCallback } from "@tauri-apps/api/event";
 
-export function subscribe<K extends keyof SubscribeMap>(
+export function subscribeGlobal<K extends keyof SubscribeMap>(
 	eventName: K,
 	handler: EventCallback<SubscribeMap[K]>
 ): () => void {
@@ -15,11 +17,11 @@ export function subscribe<K extends keyof SubscribeMap>(
 	};
 }
 
-export function subscribeOnce<K extends keyof SubscribeMap>(
+export function subscribeWindow<K extends keyof SubscribeMap>(
 	eventName: K,
 	handler: EventCallback<SubscribeMap[K]>
 ): () => void {
-	const unlistenPromise = once<SubscribeMap[K]>(eventName, handler);
+	const unlistenPromise = appWindow.listen<SubscribeMap[K]>(eventName, handler);
 
 	return function unsubscribe() {
 		void unlistenPromise.then((unlisten) => {
@@ -28,4 +30,6 @@ export function subscribeOnce<K extends keyof SubscribeMap>(
 	};
 }
 
-type SubscribeMap = Record<never, never>;
+type SubscribeMap = {
+	heartbeat: HeartbeatEvent;
+};

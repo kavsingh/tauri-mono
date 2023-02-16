@@ -15,4 +15,5 @@ export function invoker<K extends keyof InvokeMap>(command: K) {
 
 type InvokeMap = {
 	get_sys_info: () => SysInfoResponse;
+	init_heartbeat: () => void;
 };
