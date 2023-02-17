@@ -6,10 +6,7 @@ use ts_rs;
 
 #[derive(Clone, serde::Serialize, ts_rs::TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(
-	export,
-	export_to = "../../src/bridge/__generated__/heartbeat-event.ts"
-)]
+#[ts(export, export_to = "bindings/heartbeat-event.ts")]
 pub struct HeartbeatEvent {
 	message: String,
 	timestamp: u128,

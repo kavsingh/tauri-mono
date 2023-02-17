@@ -7,12 +7,21 @@
 		"lib": ["esnext", "dom"],
 		"module": "esnext",
 		"noEmit": true,
-		"paths": { "~/*": ["./src/*"] },
+		"paths": {
+			"~/*": ["./src/*"],
+			"~bindings/*": ["./src-tauri/bindings/*"]
+		},
 		"sourceMap": true,
 		"target": "esnext"
 	},
 	"exclude": ["**/node_modules"],
-	"include": ["./src", "./src-isolation", "./*.ts", "./*.mjs"],
+	"include": [
+		"./src",
+		"./src-isolation",
+		"./src-tauri/bindings",
+		"./*.ts",
+		"./*.mjs"
+	],
 	"ts-node": {
 		"transpileOnly": true,
 		"compilerOptions": {

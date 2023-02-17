@@ -5,10 +5,7 @@ use ts_rs;
 
 #[derive(serde::Serialize, ts_rs::TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(
-	export,
-	export_to = "../../src/bridge/__generated__/sys-info-response.ts"
-)]
+#[ts(export, export_to = "bindings/sys-info-response.ts")]
 pub struct SysInfoResponse {
 	name: option::Option<String>,
 	os_version: option::Option<String>,

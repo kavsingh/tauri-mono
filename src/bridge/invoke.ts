@@ -1,7 +1,7 @@
 import { tauri } from "@tauri-apps/api";
 
-import type { SysInfoResponse } from "./__generated__/sys-info-response";
 import type { InvokeArgs } from "@tauri-apps/api/tauri";
+import type { SysInfoResponse } from "~bindings/sys-info-response";
 
 export function invoker<K extends keyof InvokeMap>(command: K) {
 	return function invoke(
