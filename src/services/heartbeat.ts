@@ -1,5 +1,5 @@
-import { invoker } from "~/bridge/invoke";
-import { subscribeWindow } from "~/bridge/subscribe";
+import { invoker } from "ui:bridge/invoke";
+import { subscribeWindow } from "ui:bridge/subscribe";
 
 export const initHeartbeat = invoker("init_heartbeat");
 

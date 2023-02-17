@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router";
 import { createSignal, onCleanup } from "solid-js";
 
-import { subscribeToHeartBeat } from "~/services/heartbeat";
+import { subscribeToHeartBeat } from "ui:services/heartbeat";
 
 import Pulse from "./pulse";
 import StatusBadge from "./status-badge";

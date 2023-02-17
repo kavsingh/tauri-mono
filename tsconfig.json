@@ -8,8 +8,8 @@
 		"module": "esnext",
 		"noEmit": true,
 		"paths": {
-			"~/*": ["./src/*"],
-			"~bindings/*": ["./src-tauri/bindings/*"]
+			"ui:*": ["./src/*"],
+			"tauri:*": ["./src-tauri/*"]
 		},
 		"sourceMap": true,
 		"target": "esnext"
