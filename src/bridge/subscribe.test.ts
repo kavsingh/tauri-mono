@@ -44,7 +44,7 @@ describe("invoke", () => {
 	});
 
 	describe("subscribeWindow", () => {
-		it("provides a typed subscription to window events", async () => {
+		it("provides a typed subscription to window events", () => {
 			const accum: HeartbeatEvent[] = [];
 
 			subscribeWindow("heartbeat", (event) => {
