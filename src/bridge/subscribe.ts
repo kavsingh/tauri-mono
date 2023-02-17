@@ -10,8 +10,8 @@ export function subscribeGlobal<K extends keyof SubscribeMap>(
 ) {
 	const unlistenPromise = listen<SubscribeMap[K]>(eventName, handler);
 
-	return function unsubscribe() {
-		void unlistenPromise.then((unlisten) => {
+	return async function unsubscribe() {
+		return unlistenPromise.then((unlisten) => {
 			unlisten();
 		});
 	};
@@ -23,8 +23,8 @@ export function subscribeWindow<K extends keyof SubscribeMap>(
 ) {
 	const unlistenPromise = appWindow.listen<SubscribeMap[K]>(eventName, handler);
 
-	return function unsubscribe() {
-		void unlistenPromise.then((unlisten) => {
+	return async function unsubscribe() {
+		return unlistenPromise.then((unlisten) => {
 			unlisten();
 		});
 	};

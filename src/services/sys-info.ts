@@ -1,3 +1,3 @@
-import { invoker } from "ui:bridge/invoke";
+import { createInvoker } from "ui:bridge/invoke";
 
-export const fetchSysInfo = invoker("get_sys_info");
+export const fetchSysInfo = createInvoker("get_sys_info");
