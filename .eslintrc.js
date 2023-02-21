@@ -1,4 +1,5 @@
-const tsconfig = require("./tsconfig.json");
+const requireJSON5 = require("require-json5");
+const tsconfig = requireJSON5("./tsconfig.json");
 
 const srcDependencies = {
 	devDependencies: false,
@@ -12,10 +13,14 @@ const devDependencies = {
 	peerDependencies: false,
 };
 
-const testFilePatterns = (extensions = "*") =>
-	["**/*.test", "**/*.mock", "**/__test__/**/*", "**/__mocks__/**/*"].map(
-		(pattern) => `${pattern}.${extensions}`
-	);
+function testFilePatterns(extensions = "*") {
+	return [
+		"**/*.test",
+		"**/*.mock",
+		"**/__test__/**/*",
+		"**/__mocks__/**/*",
+	].map((pattern) => `${pattern}.${extensions}`);
+}
 
 const tsconfigPathPatterns = Object.keys(tsconfig.compilerOptions.paths);
 
@@ -44,6 +49,7 @@ module.exports = {
 			{ selector: "TSEnumDeclaration", message: "Avoid using enums" },
 		],
 		"no-throw-literal": "error",
+		"no-unreachable": "error",
 		"filenames/match-regex": ["error", "^[a-z0-9-.]+$", true],
 		"filenames/match-exported": ["error", "kebab"],
 		"import/no-cycle": "error",
