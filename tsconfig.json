@@ -12,7 +12,13 @@
 			"tauri:*": ["./src-tauri/*"]
 		},
 		"sourceMap": true,
-		"target": "esnext"
+		"target": "esnext",
+		// leave the following to eslint
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		// leave to eslint: some extensions delete
+		// unreachable code detected via ts too eagerly
+		"allowUnreachableCode": true
 	},
 	"exclude": ["**/node_modules"],
 	"include": [
