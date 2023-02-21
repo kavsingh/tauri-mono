@@ -21,6 +21,7 @@ const tsconfigPathPatterns = Object.keys(tsconfig.compilerOptions.paths);
 
 module.exports = {
 	root: true,
+	reportUnusedDisableDirectives: true,
 	env: { es2022: true, node: true, browser: false },
 	settings: {
 		"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
