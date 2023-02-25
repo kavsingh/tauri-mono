@@ -22,6 +22,7 @@ export default defineConfig({
 	test: {
 		include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
 		environment: "jsdom",
+		setupFiles: ["./vitest.setup.ts"],
 		deps: { fallbackCJS: true, inline: [/solid-js/] },
 	},
 });

@@ -12,7 +12,7 @@ export default function App() {
 
 	return (
 		<Router source={hashIntegration()}>
-			<div class="bg-0 text-400 min-bs-full plb-8 pli-4">
+			<div class="min-bs-full plb-8 pli-4">
 				<WindowDragRegion />
 				<Masthead />
 				<Routes>

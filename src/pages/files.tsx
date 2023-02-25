@@ -51,7 +51,7 @@ function DragFileSelect(props: SelectProps) {
 
 	return (
 		<div
-			class="border border-100 bs-[200px]"
+			class="border border-accent100 bs-[200px]"
 			classList={{ "border-current": isActive() }}
 			{...dragDropHandlers}
 		/>

@@ -4,18 +4,12 @@ module.exports = {
 	darkMode: "media",
 	theme: {
 		extend: {
-			textColor: {
-				"100": "var(--color-text-100)",
-				"400": "var(--color-text-400)",
-				"inverse-0": "var(--color-bg-0)",
-			},
-			backgroundColor: {
-				"0": "var(--color-bg-0)",
-				"inverse-400": "var(--color-text-400)",
-			},
-			borderColor: {
-				100: "var(--color-border-100)",
-				400: "var(--color-border-400)",
+			colors: {
+				bg0: "var(--color-bg0)",
+				text100: "var(--color-text100)",
+				text400: "var(--color-text400)",
+				accent100: "var(--color-accent100)",
+				accent400: "var(--color-accent400)",
 			},
 			keyframes: {
 				"pulse-out": {

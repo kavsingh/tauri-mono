@@ -1,4 +1,5 @@
 const requireJSON5 = require("require-json5");
+
 const tsconfig = requireJSON5("./tsconfig.json");
 
 const srcDependencies = {
@@ -13,16 +14,18 @@ const devDependencies = {
 	peerDependencies: false,
 };
 
+const tsconfigPathPatterns = Object.keys(tsconfig.compilerOptions.paths);
+
 function testFilePatterns(extensions = "*") {
 	return [
 		"**/*.test",
+		"**/*.spec",
 		"**/*.mock",
 		"**/__test__/**/*",
+		"**/__test-*__/**/*",
 		"**/__mocks__/**/*",
 	].map((pattern) => `${pattern}.${extensions}`);
 }
-
-const tsconfigPathPatterns = Object.keys(tsconfig.compilerOptions.paths);
 
 module.exports = {
 	root: true,
@@ -44,10 +47,6 @@ module.exports = {
 	rules: {
 		"curly": ["warn", "multi-line", "consistent"],
 		"no-console": "off",
-		"no-restricted-syntax": [
-			"error",
-			{ selector: "TSEnumDeclaration", message: "Avoid using enums" },
-		],
 		"no-throw-literal": "error",
 		"no-unreachable": "error",
 		"filenames/match-regex": ["error", "^[a-z0-9-.]+$", true],
@@ -93,13 +92,19 @@ module.exports = {
 				"plugin:@typescript-eslint/recommended",
 				"plugin:@typescript-eslint/recommended-requiring-type-checking",
 				"plugin:@typescript-eslint/strict",
+				"plugin:solid/typescript",
 			],
+			plugins: ["deprecation"],
 			rules: {
 				"camelcase": "off",
+				"no-restricted-syntax": [
+					"warn",
+					{ selector: "TSEnumDeclaration", message: "Avoid using enums" },
+				],
 				"no-shadow": "off",
 				"no-throw-literal": "off",
 				"no-unused-vars": "off",
-				"@typescript-eslint/consistent-type-definitions": ["error", "type"],
+				"@typescript-eslint/consistent-type-definitions": ["warn", "type"],
 				"@typescript-eslint/consistent-type-imports": [
 					"error",
 					{ disallowTypeAnnotations: false },
@@ -117,12 +122,8 @@ module.exports = {
 					"error",
 					{ argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
 				],
+				"deprecation/deprecation": "warn",
 			},
-		},
-		{
-			files: ["./src/**/*.tsx"],
-			settings: { tailwindcss: { callees: ["twMerge", "twJoin"] } },
-			extends: ["plugin:tailwindcss/recommended"],
 		},
 		{
 			files: ["./*"],
@@ -133,36 +134,33 @@ module.exports = {
 		{
 			files: ["src/**/*"],
 			env: { node: false, browser: true },
+			settings: { tailwindcss: { callees: ["twMerge", "twJoin"] } },
+			extends: ["plugin:tailwindcss/recommended"],
 			rules: {
 				"no-console": "error",
 				"import/no-extraneous-dependencies": ["error", srcDependencies],
 			},
 		},
 		{
-			files: ["src/**/*.ts?(x)"],
-			extends: ["plugin:solid/typescript"],
-		},
-		{
 			files: testFilePatterns(),
 			env: { node: true },
+			extends: ["plugin:testing-library/dom", "plugin:jest-dom/recommended"],
 			rules: {
 				"no-console": "off",
 				"import/no-extraneous-dependencies": ["error", devDependencies],
-				"filenames/match-exported": ["error", "kebab", "\\.test$"],
+				"filenames/match-exported": ["error", "kebab", "\\.(test|spec|mock)$"],
 			},
-		},
-		{
-			files: testFilePatterns("[jt]sx"),
-			extends: ["plugin:testing-library/dom"],
 		},
 		{
 			files: testFilePatterns("ts?(x)"),
 			rules: {
 				"@typescript-eslint/no-explicit-any": "off",
 				"@typescript-eslint/no-non-null-assertion": "off",
+				"@typescript-eslint/no-unsafe-argument": "off",
 				"@typescript-eslint/no-unsafe-assignment": "off",
 				"@typescript-eslint/no-unsafe-call": "off",
 				"@typescript-eslint/no-unsafe-member-access": "off",
+				"@typescript-eslint/no-unsafe-return": "off",
 				"@typescript-eslint/unbound-method": "off",
 			},
 		},
