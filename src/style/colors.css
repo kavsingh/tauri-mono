@@ -1,17 +1,17 @@
 :root {
-	--color-bg0: #222;
-	--color-text100: #434343;
-	--color-text400: #fefefe;
-	--color-accent100: #434343;
-	--color-accent400: #fefefe;
+	--color-bg-0: #222;
+	--color-text-100: #434343;
+	--color-text-400: #fefefe;
+	--color-accent-100: #434343;
+	--color-accent-400: #fefefe;
 }
 
 @media (prefers-color-scheme: light) {
 	:root {
-		--color-bg0: #fefefe;
-		--color-text100: #dedede;
-		--color-text400: #222;
-		--color-accent100: #dedede;
-		--color-accent400: #222;
+		--color-bg-0: #fefefe;
+		--color-text-100: #dedede;
+		--color-text-400: #222;
+		--color-accent-100: #dedede;
+		--color-accent-400: #222;
 	}
 }

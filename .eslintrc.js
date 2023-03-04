@@ -1,3 +1,5 @@
+const path = require("path");
+
 const requireJSON5 = require("require-json5");
 
 const tsconfig = requireJSON5("./tsconfig.json");
@@ -15,18 +17,17 @@ const devDependencies = {
 };
 
 const tsconfigPathPatterns = Object.keys(tsconfig.compilerOptions.paths);
+const testFileSuffixes = ["test", "spec", "mock"];
 
-function testFilePatterns(extensions = "*") {
+function testFilePatterns({ root = "", extensions = "*" } = {}) {
 	return [
-		"**/*.test",
-		"**/*.spec",
-		"**/*.mock",
-		"**/__test__/**/*",
-		"**/__test-*__/**/*",
-		"**/__mocks__/**/*",
-	].map((pattern) => `${pattern}.${extensions}`);
+		`*.{${testFileSuffixes.join(",")}}`,
+		"__{test,tests,mocks,fixtures}__/**/*",
+		"__{test,mock,fixture}-*__/**/*",
+	].map((pattern) => path.join(root, `**/${pattern}.${extensions}`));
 }
 
+/** @type {import('eslint').ESLint.ConfigData} */
 module.exports = {
 	root: true,
 	reportUnusedDisableDirectives: true,
@@ -148,11 +149,15 @@ module.exports = {
 			rules: {
 				"no-console": "off",
 				"import/no-extraneous-dependencies": ["error", devDependencies],
-				"filenames/match-exported": ["error", "kebab", "\\.(test|spec|mock)$"],
+				"filenames/match-exported": [
+					"error",
+					"kebab",
+					`\\.(${testFileSuffixes.join("|")})$`,
+				],
 			},
 		},
 		{
-			files: testFilePatterns("ts?(x)"),
+			files: testFilePatterns({ extensions: "ts?(x)" }),
 			rules: {
 				"@typescript-eslint/no-explicit-any": "off",
 				"@typescript-eslint/no-non-null-assertion": "off",
