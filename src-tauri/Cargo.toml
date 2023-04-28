@@ -13,8 +13,8 @@ edition = "2021"
 tauri-build = { version = "1.2.1", features = ["isolation"] }
 
 [dependencies]
-serde_json = "1.0.94"
-serde = { version = "1.0.158", features = ["derive"] }
+serde_json = "1.0.96"
+serde = { version = "1.0.160", features = ["derive"] }
 sysinfo = "0.28.4"
 ts-rs = "6.2.1"
 
