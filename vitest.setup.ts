@@ -13,9 +13,9 @@ afterEach(() => {
 declare global {
 	// eslint-disable-next-line @typescript-eslint/no-namespace
 	namespace Vi {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/consistent-type-definitions
-		interface JestAssertion<T = any>
-			extends jest.Matchers<void, T>,
-				TestingLibraryMatchers<T, void> {}
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-empty-interface
+		interface JestAssertion<T = any> extends Matchers<T> {}
 	}
 }
+
+type Matchers<T> = jest.Matchers<void, T> & TestingLibraryMatchers<T, void>;
