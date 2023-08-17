@@ -35,7 +35,9 @@ export default function useFileDrop() {
 	};
 
 	onCleanup(() => {
-		void unlistenPromise.then((unlisten) => unlisten());
+		void unlistenPromise.then((unlisten) => {
+			unlisten();
+		});
 	});
 
 	return [

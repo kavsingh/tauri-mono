@@ -4,6 +4,7 @@
 		"tauri-apps.tauri-vscode",
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
-		"bradlc.vscode-tailwindcss"
+		"bradlc.vscode-tailwindcss",
+		"tamasfe.even-better-toml"
 	]
 }

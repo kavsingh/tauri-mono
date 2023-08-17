@@ -6,23 +6,34 @@ import checkerPlugin from "vite-plugin-checker";
 import solidPlugin from "vite-plugin-solid";
 import tsconfigPathsPlugin from "vite-tsconfig-paths";
 
-const checker = checkerPlugin({
-	overlay: { initialIsOpen: false },
-	typescript: true,
-	eslint: {
-		lintCommand: 'eslint "./src/**/*.+(ts|tsx)"',
-		dev: { logLevel: ["error"] },
-	},
-});
-
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	server: { port: 3000 },
 	build: { sourcemap: true },
-	plugins: [tsconfigPathsPlugin(), checker, solidPlugin(), legacyPlugin()],
+	plugins: [
+		tsconfigPathsPlugin(),
+		solidPlugin(),
+		legacyPlugin(),
+		checker(mode),
+	],
 	test: {
-		include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+		include: ["src/**/*.{test,spec}.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"],
 		environment: "jsdom",
 		setupFiles: ["./vitest.setup.ts"],
-		deps: { fallbackCJS: true, inline: [/solid-js/] },
+		clearMocks: true,
+		server: { deps: { inline: [/solid-js/] } },
+		deps: { optimizer: { web: { include: ["solid-js"] } } },
 	},
-});
+}));
+
+function checker(mode: string) {
+	if (mode !== "development") return undefined;
+
+	return checkerPlugin({
+		overlay: { initialIsOpen: false },
+		typescript: true,
+		eslint: {
+			lintCommand: 'eslint "./src/**/*.+(ts|tsx)"',
+			dev: { logLevel: ["error"] },
+		},
+	});
+}

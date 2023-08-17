@@ -1,4 +1,5 @@
 import { createEffect, createSignal, mergeProps, onCleanup } from "solid-js";
+import { twMerge } from "tailwind-merge";
 
 import type { Accessor, JSX, ParentProps } from "solid-js";
 
@@ -24,11 +25,11 @@ export default function Pulse(_props: ParentProps<Props>) {
 		<div
 			{...props}
 			style={{ "animation-duration": `${props.durationMs}ms` }}
-			class="opacity-0"
-			classList={{
-				...props.classList,
-				"animate-[pulse-out_ease-out_forwards]": isActive(),
-			}}
+			class={twMerge(
+				"opacity-0",
+				isActive() && "animate-[pulse-out_ease-out_forwards]",
+				props.class,
+			)}
 		>
 			{props.children}
 		</div>
@@ -38,4 +39,4 @@ export default function Pulse(_props: ParentProps<Props>) {
 type Props = {
 	durationMs?: number;
 	trigger?: Accessor<unknown>;
-} & JSX.CustomAttributes<HTMLDivElement>;
+} & Omit<JSX.HTMLAttributes<HTMLDivElement>, "classList">;

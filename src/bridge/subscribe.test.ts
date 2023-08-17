@@ -34,10 +34,7 @@ describe("invoke", () => {
 			handler({ payload: { message: "two", timestamp: 2 } });
 
 			expect(accum).toHaveLength(2);
-			expect(accum.at(-1)).toEqual({
-				message: "two",
-				timestamp: 2,
-			});
+			expect(accum.at(-1)).toStrictEqual({ message: "two", timestamp: 2 });
 		});
 
 		it.todo("test unsubscribe somehow");
@@ -57,10 +54,7 @@ describe("invoke", () => {
 			handler({ payload: { message: "two", timestamp: 2 } });
 
 			expect(accum).toHaveLength(2);
-			expect(accum.at(-1)).toEqual({
-				message: "two",
-				timestamp: 2,
-			});
+			expect(accum.at(-1)).toStrictEqual({ message: "two", timestamp: 2 });
 		});
 
 		it.todo("test unsubscribe somehow");

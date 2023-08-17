@@ -47,6 +47,6 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[toml]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "tamasfe.even-better-toml"
 	}
 }

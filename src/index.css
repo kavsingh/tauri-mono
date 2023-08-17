@@ -4,9 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-	color: theme("colors.text400");
-	background-color: theme("colors.bg0");
+:root {
+	color: theme(colors.text400);
+	background-color: theme(colors.bg0);
 }
 
 #app-root {

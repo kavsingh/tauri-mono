@@ -7,7 +7,7 @@ export default function WindowDragRegion() {
 
 	return (
 		<div
-			class="fixed z-[1] cursor-pointer bs-8 inset-inline-0 block-start-0"
+			class="fixed inset-x-0 top-0 z-[1] h-8 cursor-pointer"
 			onMouseDown={handleMouseDown}
 		/>
 	);

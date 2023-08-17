@@ -1,4 +1,4 @@
-import { Router, hashIntegration, Route, Routes } from "@solidjs/router";
+import { Router, memoryIntegration, Route, Routes } from "@solidjs/router";
 import { onMount } from "solid-js";
 
 import Masthead from "./components/masthead";
@@ -11,8 +11,8 @@ export default function App() {
 	onMount(() => void initHeartbeat());
 
 	return (
-		<Router source={hashIntegration()}>
-			<div class="min-bs-full plb-8 pli-4">
+		<Router source={memoryIntegration()}>
+			<div class="min-h-full px-4 py-8">
 				<WindowDragRegion />
 				<Masthead />
 				<Routes>

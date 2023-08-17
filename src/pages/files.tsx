@@ -47,11 +47,13 @@ function DialogFileSelect(props: SelectProps) {
 function DragFileSelect(props: SelectProps) {
 	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
 
-	createEffect(() => props.onSelect(files()));
+	createEffect(() => {
+		props.onSelect(files());
+	});
 
 	return (
 		<div
-			class="border border-accent100 bs-[200px]"
+			class="h-[200px] border border-accent100"
 			classList={{ "border-current": isActive() }}
 			{...dragDropHandlers}
 		/>
