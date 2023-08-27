@@ -6,8 +6,8 @@ import type { HeartbeatEvent } from "tauri:bindings/heartbeat-event";
 
 export function subscribeGlobal<K extends keyof SubscribeMap>(
 	eventName: K,
-	handler: EventCallback<SubscribeMap[K]>,
-) {
+	handler: TauriEventHandler<K>,
+): () => Promise<void> {
 	const unlistenPromise = listen<SubscribeMap[K]>(eventName, handler);
 
 	return async function unsubscribe() {
@@ -19,8 +19,8 @@ export function subscribeGlobal<K extends keyof SubscribeMap>(
 
 export function subscribeWindow<K extends keyof SubscribeMap>(
 	eventName: K,
-	handler: EventCallback<SubscribeMap[K]>,
-) {
+	handler: TauriEventHandler<K>,
+): () => Promise<void> {
 	const unlistenPromise = appWindow.listen<SubscribeMap[K]>(eventName, handler);
 
 	return async function unsubscribe() {
@@ -29,6 +29,10 @@ export function subscribeWindow<K extends keyof SubscribeMap>(
 		});
 	};
 }
+
+export type TauriEventHandler<K extends keyof SubscribeMap> = EventCallback<
+	SubscribeMap[K]
+>;
 
 type SubscribeMap = {
 	heartbeat: HeartbeatEvent;

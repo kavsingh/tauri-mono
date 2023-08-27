@@ -1,12 +1,17 @@
-@import url("./style/colors.css");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-	color: theme(colors.text400);
-	background-color: theme(colors.bg0);
+	color: theme(colors.neutral.950);
+	background-color: theme(colors.neutral.50);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color: theme(colors.neutral.100);
+		background-color: theme(colors.neutral.950);
+	}
 }
 
 #app-root {

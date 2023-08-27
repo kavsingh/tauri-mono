@@ -14,7 +14,7 @@ export default function SystemInfo() {
 					{(info) => (
 						<For each={Object.entries(info)}>
 							{([key, val]) => (
-								<li class="flex gap-1 border-b border-b-accent100 pb-2 last:border-b-0 last:pb-0">
+								<li class="flex gap-1 border-b border-b-neutral-400 pb-2 last:border-b-0 last:pb-0 dark:border-b-neutral-700">
 									<span class="after:content-[':']">{key}</span>
 									<span>{val}</span>
 								</li>

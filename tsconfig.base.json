@@ -1,0 +1,12 @@
+{
+	"extends": "@tsconfig/strictest/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		// leave the following to eslint
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"allowUnreachableCode": true
+	},
+	"exclude": ["**/node_modules"]
+}

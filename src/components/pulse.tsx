@@ -1,20 +1,31 @@
-import { createEffect, createSignal, mergeProps, onCleanup } from "solid-js";
+import {
+	createEffect,
+	createMemo,
+	createSignal,
+	onCleanup,
+	splitProps,
+} from "solid-js";
 import { twMerge } from "tailwind-merge";
 
 import type { Accessor, JSX, ParentProps } from "solid-js";
 
 export default function Pulse(_props: ParentProps<Props>) {
-	const props = mergeProps({ durationMs: 1200 }, _props);
 	const [isActive, setIsActive] = createSignal(false);
+	const [localProps, passProps] = splitProps(_props, [
+		"class",
+		"durationMs",
+		"trigger",
+	]);
+	const duration = createMemo(() => localProps.durationMs ?? 1200);
 	let fadeTimeout: NodeJS.Timeout;
 
 	const triggerPulse = () => {
 		setIsActive(true);
-		fadeTimeout = setTimeout(() => setIsActive(false), props.durationMs);
+		fadeTimeout = setTimeout(() => setIsActive(false), duration());
 	};
 
 	createEffect(() => {
-		if (props.trigger?.()) triggerPulse();
+		if (localProps.trigger?.()) triggerPulse();
 	});
 
 	onCleanup(() => {
@@ -23,16 +34,14 @@ export default function Pulse(_props: ParentProps<Props>) {
 
 	return (
 		<div
-			{...props}
-			style={{ "animation-duration": `${props.durationMs}ms` }}
+			{...passProps}
+			style={{ "animation-duration": `${duration()}ms` }}
 			class={twMerge(
 				"opacity-0",
 				isActive() && "animate-[pulse-out_ease-out_forwards]",
-				props.class,
+				localProps.class,
 			)}
-		>
-			{props.children}
-		</div>
+		/>
 	);
 }
 

@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		tsconfigPathsPlugin(),
 		solidPlugin(),
+		// @ts-expect-error interop
 		legacyPlugin(),
 		checker(mode),
 	],

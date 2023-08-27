@@ -1,0 +1,5 @@
+{
+	"extends": ["./tsconfig.base.json", "@tsconfig/node20/tsconfig.json"],
+	"compilerOptions": { "composite": true },
+	"include": ["./*.ts", "./*.js", "./*.cjs", "./.*.cjs"]
+}

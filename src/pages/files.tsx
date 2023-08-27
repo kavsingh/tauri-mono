@@ -1,4 +1,5 @@
 import { createEffect, createSignal, For } from "solid-js";
+import { twMerge } from "tailwind-merge";
 
 import Button from "ui:components/button";
 import PageHeader from "ui:components/page-header";
@@ -53,8 +54,10 @@ function DragFileSelect(props: SelectProps) {
 
 	return (
 		<div
-			class="h-[200px] border border-accent100"
-			classList={{ "border-current": isActive() }}
+			class={twMerge(
+				"h-[200px] border border-neutral-500",
+				isActive() && "border-current",
+			)}
 			{...dragDropHandlers}
 		/>
 	);

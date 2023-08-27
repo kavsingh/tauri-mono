@@ -10,7 +10,7 @@ export default function Button(
 		<button
 			{...props}
 			class={twMerge(
-				"rounded border border-accent100 px-2 py-1 hover:border-accent400 focus-visible:border-accent400 active:border-accent400",
+				"rounded border border-neutral-500 px-2 py-1 transition-colors hover:border-neutral-950 dark:hover:border-neutral-50",
 				local.class,
 			)}
 		/>

@@ -1,5 +1,5 @@
 /** @type {import("path")} */
-const path = require("path");
+const path = require("node:path");
 
 /** @type {import("typescript")} */
 const ts = require("typescript");
@@ -24,11 +24,11 @@ module.exports = {
 	reportUnusedDisableDirectives: true,
 	env: { es2022: true, node: true, browser: false },
 	parser: "@typescript-eslint/parser",
-	parserOptions: { project: "./tsconfig.json" },
+	parserOptions: { project: "./tsconfig.node.json" },
 	settings: {
 		"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
 		"import/resolver": {
-			"eslint-import-resolver-typescript": { project: "./tsconfig.json" },
+			"eslint-import-resolver-typescript": { project: "./tsconfig.node.json" },
 		},
 	},
 	plugins: ["filenames", "deprecation"],
@@ -77,27 +77,7 @@ module.exports = {
 		"import/no-unused-modules": "error",
 		"import/no-useless-path-segments": "error",
 		"import/no-extraneous-dependencies": ["error", devDependencies],
-		"import/order": [
-			"warn",
-			{
-				"alphabetize": { order: "asc" },
-				"groups": [
-					"builtin",
-					"external",
-					"internal",
-					["parent", "sibling", "index"],
-					"type",
-				],
-				"pathGroups": [
-					...getTsConfigPathAliases().map((pattern) => ({
-						pattern,
-						group: "internal",
-					})),
-				],
-				"pathGroupsExcludedImportTypes": ["type"],
-				"newlines-between": "always",
-			},
-		],
+		"import/order": importOrderConfig("tsconfig.node.json"),
 		"deprecation/deprecation": "warn",
 		"prettier/prettier": "warn",
 	},
@@ -121,25 +101,32 @@ module.exports = {
 			},
 		},
 		{
-			files: ["src/**/*"],
+			files: ["src-isolation/**/*", "src/**/*"],
 			env: { node: false, browser: true },
+			parserOptions: { project: "./tsconfig.web.json" },
 			settings: {
-				tailwindcss: { callees: ["twMerge", "twJoin"] },
+				"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
+				"import/resolver": {
+					"eslint-import-resolver-typescript": {
+						project: "./tsconfig.web.json",
+					},
+				},
 			},
+		},
+		{
+			files: ["src/**/*"],
+			settings: { tailwindcss: { callees: ["twMerge", "twJoin"] } },
 			extends: ["plugin:tailwindcss/recommended", "plugin:solid/typescript"],
 			rules: {
 				"no-console": "error",
 				"import/no-extraneous-dependencies": ["error", srcDependencies],
+				"import/order": importOrderConfig("tsconfig.web.json"),
 			},
 		},
 		{
 			files: testFilePatterns(),
 			env: { node: true },
-			extends: [
-				"plugin:vitest/all",
-				"plugin:testing-library/dom",
-				"plugin:jest-dom/recommended",
-			],
+			extends: ["plugin:vitest/all"],
 			rules: {
 				"no-console": "off",
 				"import/no-extraneous-dependencies": ["error", devDependencies],
@@ -159,6 +146,10 @@ module.exports = {
 				"@typescript-eslint/unbound-method": "off",
 			},
 		},
+		{
+			files: testFilePatterns({ root: "./src", extensions: "[jt]sx" }),
+			extends: ["plugin:testing-library/dom", "plugin:jest-dom/recommended"],
+		},
 	],
 };
 
@@ -170,18 +161,40 @@ function testFilePatterns({ root = "", extensions = "*" } = {}) {
 	].map((pattern) => path.join(root, `**/${pattern}.${extensions}`));
 }
 
-function getTsConfigPathAliases() {
-	return Object.keys(getTsConfig()?.config?.compilerOptions?.paths ?? {});
-}
-
-function getTsConfig() {
+/**
+ * @typedef {import("eslint").Linter.RuleLevel} RuleLevel
+ * @param {string} tsconfigName
+ * @param {(config: Record<string, unknown>) => Record<string, unknown>} customizer
+ *
+ * @returns {[RuleLevel, Record<string, unknown>]}
+ **/
+function importOrderConfig(tsconfigName, customizer = (config) => config) {
 	const tsconfigFile = ts.findConfigFile(
 		__dirname,
 		ts.sys.fileExists,
-		"tsconfig.json",
+		tsconfigName,
 	);
 
-	return tsconfigFile
+	const config = tsconfigFile
 		? ts.readConfigFile(tsconfigFile, ts.sys.readFile)
 		: undefined;
+
+	const aliases = Object.keys(config?.config?.compilerOptions?.paths ?? {});
+
+	return [
+		"warn",
+		customizer({
+			"alphabetize": { order: "asc" },
+			"groups": [
+				"builtin",
+				"external",
+				"internal",
+				["parent", "sibling", "index"],
+				"type",
+			],
+			"pathGroups": aliases.map((pattern) => ({ pattern, group: "internal" })),
+			"pathGroupsExcludedImportTypes": ["type"],
+			"newlines-between": "always",
+		}),
+	];
 }

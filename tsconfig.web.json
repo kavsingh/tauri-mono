@@ -1,0 +1,12 @@
+{
+	"extends": ["./tsconfig.base.json", "@tsconfig/vite-react/tsconfig.json"],
+	"compilerOptions": {
+		"composite": true,
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
+		"noEmit": false,
+		"paths": { "ui:*": ["./src/*"], "tauri:*": ["./src-tauri/*"] },
+		"sourceMap": true
+	},
+	"include": ["./src", "./src-isolation", "./src-tauri/bindings"]
+}
