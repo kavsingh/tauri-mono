@@ -8,16 +8,6 @@ mod app_commands;
 use tauri::{generate_context, generate_handler, Builder, Manager};
 
 fn main() {
-	#[cfg(debug_assertions)]
-	tauri_specta::ts::export(
-		specta::collect_types![
-			app_commands::sys_info::get_sys_info,
-			app_commands::heartbeat::init_heartbeat
-		],
-		"../src/__generated__/bindings/commands.ts",
-	)
-	.unwrap();
-
 	Builder::default()
 		.setup(|app| {
 			#[cfg(debug_assertions)]
@@ -35,4 +25,19 @@ fn main() {
 		])
 		.run(generate_context!())
 		.expect("error while running tauri application");
+}
+
+#[cfg(test)]
+mod export_bindings {
+	#[test]
+	fn specta() {
+		tauri_specta::ts::export(
+			specta::collect_types![
+				crate::app_commands::sys_info::get_sys_info,
+				crate::app_commands::heartbeat::init_heartbeat
+			],
+			"../src/__generated__/bindings/commands.ts",
+		)
+		.unwrap();
+	}
 }
