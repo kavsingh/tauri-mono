@@ -8,5 +8,5 @@
 		"paths": { "ui:*": ["./src/*"], "tauri:*": ["./src-tauri/*"] },
 		"sourceMap": true
 	},
-	"include": ["./src", "./src-isolation", "./src-tauri/bindings"]
+	"include": ["./src", "./src-isolation"]
 }

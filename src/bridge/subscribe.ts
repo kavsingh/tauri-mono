@@ -2,7 +2,7 @@ import { listen } from "@tauri-apps/api/event";
 import { appWindow } from "@tauri-apps/api/window";
 
 import type { EventCallback } from "@tauri-apps/api/event";
-import type { HeartbeatEvent } from "tauri:bindings/heartbeat-event";
+import type { HeartbeatEvent } from "ui:__generated__/bindings/heartbeat-event";
 
 export function subscribeGlobal<K extends keyof SubscribeMap>(
 	eventName: K,

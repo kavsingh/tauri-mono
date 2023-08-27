@@ -5,5 +5,4 @@
 /dist-isolation
 /coverage
 /src-tauri
-/src-tauri/bindings
 **/__generated__/

@@ -4,7 +4,7 @@ import { describe, afterEach, it, expect, vi } from "vitest";
 
 import { subscribeGlobal, subscribeWindow } from "./subscribe";
 
-import type { HeartbeatEvent } from "tauri:bindings/heartbeat-event";
+import type { HeartbeatEvent } from "ui:__generated__/bindings/heartbeat-event";
 import type { Mock } from "vitest";
 
 vi.mock("@tauri-apps/api/event", () => ({

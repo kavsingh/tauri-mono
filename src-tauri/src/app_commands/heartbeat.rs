@@ -6,7 +6,7 @@ use ts_rs;
 
 #[derive(Clone, serde::Serialize, ts_rs::TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export, export_to = "bindings/heartbeat-event.ts")]
+#[ts(export, export_to = "../src/__generated__/bindings/heartbeat-event.ts")]
 pub struct HeartbeatEvent {
 	message: String,
 	timestamp: u128,
@@ -14,6 +14,7 @@ pub struct HeartbeatEvent {
 
 // init a background process on the command, and emit periodic events only to the window that used the command
 #[tauri::command]
+#[specta::specta]
 pub fn init_heartbeat(window: Window) -> Result<(), String> {
 	let interval = Duration::new(3, 0);
 

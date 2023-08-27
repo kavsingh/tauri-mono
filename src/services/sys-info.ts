@@ -1,3 +1,1 @@
-import { createInvoker } from "ui:bridge/invoke";
-
-export const fetchSysInfo = createInvoker("get_sys_info");
+export { getSysInfo as fetchSysInfo } from "ui:__generated__/bindings/commands";

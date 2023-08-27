@@ -1,11 +1,8 @@
-use serde;
 use std::option;
 use sysinfo::{System, SystemExt};
-use ts_rs;
 
-#[derive(serde::Serialize, ts_rs::TS)]
+#[derive(serde::Serialize, specta::Type)]
 #[serde(rename_all = "camelCase")]
-#[ts(export, export_to = "bindings/sys-info-response.ts")]
 pub struct SysInfoResponse {
 	name: option::Option<String>,
 	os_version: option::Option<String>,
@@ -14,6 +11,7 @@ pub struct SysInfoResponse {
 
 // https://tauri.studio/en/docs/usage/howtos/command#complete-example
 #[tauri::command]
+#[specta::specta]
 pub fn get_sys_info() -> SysInfoResponse {
 	let sys = System::new();
 

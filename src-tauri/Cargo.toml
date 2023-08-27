@@ -17,6 +17,8 @@ serde_json = "1.0.105"
 serde = { version = "1.0.188", features = ["derive"] }
 sysinfo = "0.29.8"
 ts-rs = "6.2.1"
+specta = "1.0.5"
+tauri-specta = { version = "1.0.2", features = ["javascript", "typescript"] }
 
 [dependencies.tauri]
 version = "1.4.1"
@@ -36,4 +38,5 @@ codegen-units = 1
 opt-level = "s"
 lto = "fat"
 incremental = false
-panic = "abort" # https://users.rust-lang.org/t/panic-unwind-vs-abort/9928/4
+# https://users.rust-lang.org/t/panic-unwind-vs-abort/9928/4
+panic = "abort"

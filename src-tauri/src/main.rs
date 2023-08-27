@@ -5,12 +5,22 @@
 
 mod app_commands;
 
-use tauri::{Builder, Manager};
+use tauri::{generate_context, generate_handler, Builder, Manager};
 
 fn main() {
+	#[cfg(debug_assertions)]
+	tauri_specta::ts::export(
+		specta::collect_types![
+			app_commands::sys_info::get_sys_info,
+			app_commands::heartbeat::init_heartbeat
+		],
+		"../src/__generated__/bindings/commands.ts",
+	)
+	.unwrap();
+
 	Builder::default()
 		.setup(|app| {
-			#[cfg(debug_assertions)] // only include this code on debug builds
+			#[cfg(debug_assertions)]
 			{
 				let window = app.get_window("main").unwrap();
 				window.open_devtools();
@@ -19,10 +29,10 @@ fn main() {
 
 			Ok(())
 		})
-		.invoke_handler(tauri::generate_handler![
+		.invoke_handler(generate_handler![
 			app_commands::sys_info::get_sys_info,
 			app_commands::heartbeat::init_heartbeat
 		])
-		.run(tauri::generate_context!())
+		.run(generate_context!())
 		.expect("error while running tauri application");
 }
