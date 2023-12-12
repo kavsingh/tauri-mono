@@ -12,7 +12,6 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		tsconfigPathsPlugin(),
 		solidPlugin(),
-		// @ts-expect-error interop
 		legacyPlugin(),
 		checker(mode),
 	],
@@ -21,8 +20,8 @@ export default defineConfig(({ mode }) => ({
 		environment: "jsdom",
 		setupFiles: ["./vitest.setup.ts"],
 		clearMocks: true,
-		server: { deps: { inline: [/solid-js/] } },
-		deps: { optimizer: { web: { include: ["solid-js"] } } },
+		testTransformMode: { web: ["/.[jt]sx?$/"] },
+		server: { deps: { inline: [/@solidjs/] } },
 	},
 }));
 

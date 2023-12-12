@@ -19,10 +19,10 @@ export default function Pulse(_props: ParentProps<Props>) {
 	const duration = createMemo(() => localProps.durationMs ?? 1200);
 	let fadeTimeout: NodeJS.Timeout;
 
-	const triggerPulse = () => {
+	function triggerPulse() {
 		setIsActive(true);
 		fadeTimeout = setTimeout(() => setIsActive(false), duration());
-	};
+	}
 
 	createEffect(() => {
 		if (localProps.trigger?.()) triggerPulse();

@@ -1,4 +1,4 @@
-import { Router, memoryIntegration, Route, Routes } from "@solidjs/router";
+import { Route, HashRouter } from "@solidjs/router";
 import { onMount } from "solid-js";
 
 import { initHeartbeat } from "ui:services/heartbeat";
@@ -8,19 +8,27 @@ import WindowDragRegion from "./components/window-drag-region";
 import Files from "./pages/files";
 import SystemInfo from "./pages/system-info";
 
+import type { ParentProps } from "solid-js";
+
 export default function App() {
 	onMount(() => void initHeartbeat());
 
 	return (
-		<Router source={memoryIntegration()}>
-			<div class="min-h-full px-4 py-8">
-				<WindowDragRegion />
-				<Masthead />
-				<Routes>
-					<Route path="/" element={<SystemInfo />} />
-					<Route path="/files" element={<Files />} />
-				</Routes>
-			</div>
-		</Router>
+		<HashRouter>
+			<Route component={Root}>
+				<Route path="/" component={SystemInfo} />
+				<Route path="/files" component={Files} />
+			</Route>
+		</HashRouter>
+	);
+}
+
+function Root(props: ParentProps) {
+	return (
+		<div class="min-h-full px-4 py-8">
+			<WindowDragRegion />
+			<Masthead />
+			{props.children}
+		</div>
 	);
 }
