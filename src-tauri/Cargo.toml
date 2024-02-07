@@ -13,8 +13,8 @@ edition = "2021"
 tauri-build = { version = "1.5.1", features = ["isolation"] }
 
 [dependencies]
-serde_json = "1.0.108"
-serde = { version = "1.0.193", features = ["derive"] }
+serde_json = "1.0.113"
+serde = { version = "1.0.196", features = ["derive"] }
 specta = "1.0.5"
 sysinfo = "0.29.11"
 tauri-specta = { version = "1.0.2", features = ["javascript", "typescript"] }

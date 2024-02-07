@@ -19,6 +19,7 @@
 	},
 	"tailwindCSS.validate": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
+	"rust-analyzer.check.command": "clippy",
 	"[javascript]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
