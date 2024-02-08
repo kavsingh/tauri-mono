@@ -24,11 +24,11 @@ module.exports = {
 	reportUnusedDisableDirectives: true,
 	env: { es2022: true, node: true, browser: false },
 	parser: "@typescript-eslint/parser",
-	parserOptions: { project: "./tsconfig.node.json" },
+	parserOptions: { project: "./tsconfig.bun.json" },
 	settings: {
 		"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
 		"import/resolver": {
-			"eslint-import-resolver-typescript": { project: "./tsconfig.node.json" },
+			"eslint-import-resolver-typescript": { project: "./tsconfig.bun.json" },
 		},
 	},
 	plugins: ["filenames", "deprecation"],
@@ -77,7 +77,7 @@ module.exports = {
 		"import/no-unused-modules": "error",
 		"import/no-useless-path-segments": "error",
 		"import/no-extraneous-dependencies": ["error", devDependencies],
-		"import/order": importOrderConfig("tsconfig.node.json"),
+		"import/order": importOrderConfig("tsconfig.bun.json"),
 		"deprecation/deprecation": "warn",
 		"prettier/prettier": "warn",
 	},

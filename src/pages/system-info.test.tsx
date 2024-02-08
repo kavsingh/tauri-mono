@@ -19,6 +19,8 @@ vitest.mock("ui:services/sys-info", () => {
 
 describe("<SystemInfo />", () => {
 	it("should render system info", async () => {
+		expect.assertions(4);
+
 		render(() => <SystemInfo />);
 
 		expect(screen.getByText("Loading..."))
