@@ -1,7 +1,7 @@
 import { createResource, Show, For } from "solid-js";
 
-import PageHeader from "ui:components/page-header";
-import { fetchSysInfo } from "ui:services/sys-info";
+import PageHeader from "#components/page-header";
+import { fetchSysInfo } from "#services/sys-info";
 
 export default function SystemInfo() {
 	const [sysInfo] = createResource(fetchSysInfo);

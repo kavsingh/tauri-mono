@@ -1,22 +1,4 @@
-/** @type {import("path")} */
-const path = require("node:path");
-
-/** @type {import("typescript")} */
-const ts = require("typescript");
-
-const srcDependencies = {
-	devDependencies: false,
-	optionalDependencies: false,
-	peerDependencies: false,
-};
-
-const devDependencies = {
-	devDependencies: true,
-	optionalDependencies: false,
-	peerDependencies: false,
-};
-
-const testFileSuffixes = ["test", "spec", "mock"];
+const { importOrderConfig } = require("./.eslint.helpers.cjs");
 
 /** @type {import("eslint").ESLint.ConfigData} */
 module.exports = {
@@ -24,11 +6,11 @@ module.exports = {
 	reportUnusedDisableDirectives: true,
 	env: { es2022: true, node: true, browser: false },
 	parser: "@typescript-eslint/parser",
-	parserOptions: { project: "./tsconfig.bun.json" },
+	parserOptions: { project: "./tsconfig.json" },
 	settings: {
 		"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
 		"import/resolver": {
-			"eslint-import-resolver-typescript": { project: "./tsconfig.bun.json" },
+			"eslint-import-resolver-typescript": { project: "./tsconfig.json" },
 		},
 	},
 	plugins: ["filenames", "deprecation"],
@@ -76,8 +58,7 @@ module.exports = {
 		"import/no-self-import": "error",
 		"import/no-unused-modules": "error",
 		"import/no-useless-path-segments": "error",
-		"import/no-extraneous-dependencies": ["error", devDependencies],
-		"import/order": importOrderConfig("tsconfig.bun.json"),
+		"import/order": importOrderConfig("tsconfig.json"),
 		"deprecation/deprecation": "warn",
 		"prettier/prettier": "warn",
 	},
@@ -100,102 +81,5 @@ module.exports = {
 				"filenames/match-exported": "off",
 			},
 		},
-		{
-			files: ["src-isolation/**/*", "src/**/*"],
-			env: { node: false, browser: true },
-			parserOptions: { project: "./tsconfig.web.json" },
-			settings: {
-				"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
-				"import/resolver": {
-					"eslint-import-resolver-typescript": {
-						project: "./tsconfig.web.json",
-					},
-				},
-			},
-		},
-		{
-			files: ["src/**/*"],
-			settings: { tailwindcss: { callees: ["twMerge", "twJoin"] } },
-			extends: ["plugin:tailwindcss/recommended", "plugin:solid/typescript"],
-			rules: {
-				"no-console": "error",
-				"import/no-extraneous-dependencies": ["error", srcDependencies],
-				"import/order": importOrderConfig("tsconfig.web.json"),
-			},
-		},
-		{
-			files: testFilePatterns(),
-			env: { node: true },
-			extends: ["plugin:vitest/all"],
-			rules: {
-				"no-console": "off",
-				"import/no-extraneous-dependencies": ["error", devDependencies],
-				"filenames/match-exported": [
-					"error",
-					"kebab",
-					`\\.(${testFileSuffixes.join("|")})$`,
-				],
-				"vitest/no-hooks": "off",
-				"@typescript-eslint/no-explicit-any": "off",
-				"@typescript-eslint/no-non-null-assertion": "off",
-				"@typescript-eslint/no-unsafe-argument": "off",
-				"@typescript-eslint/no-unsafe-assignment": "off",
-				"@typescript-eslint/no-unsafe-call": "off",
-				"@typescript-eslint/no-unsafe-member-access": "off",
-				"@typescript-eslint/no-unsafe-return": "off",
-				"@typescript-eslint/unbound-method": "off",
-			},
-		},
-		{
-			files: testFilePatterns({ root: "./src", extensions: "[jt]sx" }),
-			extends: ["plugin:testing-library/dom", "plugin:jest-dom/recommended"],
-		},
 	],
 };
-
-function testFilePatterns({ root = "", extensions = "*" } = {}) {
-	return [
-		`*.{${testFileSuffixes.join(",")}}`,
-		"__{test,tests,mocks,fixtures}__/**/*",
-		"__{test,mock,fixture}-*__/**/*",
-	].map((pattern) => path.join(root, `**/${pattern}.${extensions}`));
-}
-
-/**
- * @typedef {import("eslint").Linter.RuleLevel} RuleLevel
- * @param {string} tsconfigName
- * @param {(config: Record<string, unknown>) => Record<string, unknown>} customizer
- *
- * @returns {[RuleLevel, Record<string, unknown>]}
- **/
-function importOrderConfig(tsconfigName, customizer = (config) => config) {
-	const tsconfigFile = ts.findConfigFile(
-		__dirname,
-		ts.sys.fileExists,
-		tsconfigName,
-	);
-
-	const config = tsconfigFile
-		? ts.readConfigFile(tsconfigFile, ts.sys.readFile)
-		: undefined;
-
-	const aliases = Object.keys(config?.config?.compilerOptions?.paths ?? {});
-
-	return [
-		"warn",
-		customizer({
-			"alphabetize": { order: "asc" },
-			"groups": [
-				"builtin",
-				"external",
-				"internal",
-				"parent",
-				["sibling", "index"],
-				"type",
-			],
-			"pathGroups": aliases.map((pattern) => ({ pattern, group: "internal" })),
-			"pathGroupsExcludedImportTypes": ["type"],
-			"newlines-between": "always",
-		}),
-	];
-}

@@ -1,0 +1,61 @@
+{
+	"name": "tauriplay",
+	"version": "0.0.0",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:kavsingh/tauri-play"
+	},
+	"type": "module",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"tdd:ui": "vitest",
+		"test": "pnpm test:tauri && pnpm test:ui",
+		"test:ui": "vitest run",
+		"test:tauri": "cd src-tauri && cargo test",
+		"typecheck": "tsc",
+		"lint": "eslint .",
+		"before:dev": "pnpm build:isolation && vite dev",
+		"before:build": "pnpm build:isolation && rimraf ./dist && vite build",
+		"dev": "tauri dev",
+		"build:mac": "tauri build --target universal-apple-darwin",
+		"build:win": "tauri build",
+		"build:isolation": "rimraf ./dist-isolation && rollup -c",
+		"testscript": "node --import=tsx scripts/testscript.ts"
+	},
+	"dependencies": {
+		"@solidjs/router": "0.13.1",
+		"@tauri-apps/api": "1.5.3",
+		"solid-js": "1.8.15",
+		"tailwind-merge": "2.2.2"
+	},
+	"devDependencies": {
+		"@rollup/plugin-html": "1.0.3",
+		"@rollup/plugin-typescript": "11.1.6",
+		"@solidjs/testing-library": "0.8.6",
+		"@tauri-apps/cli": "1.5.11",
+		"@testing-library/dom": "9.3.4",
+		"@testing-library/jest-dom": "6.4.2",
+		"@testing-library/user-event": "14.5.2",
+		"@tsconfig/vite-react": "3.0.1",
+		"@vitejs/plugin-legacy": "5.3.2",
+		"@vitest/coverage-v8": "1.4.0",
+		"autoprefixer": "10.4.18",
+		"caniuse-lite": "1.0.30001599",
+		"eslint-plugin-jest-dom": "5.1.0",
+		"eslint-plugin-solid": "0.13.1",
+		"eslint-plugin-tailwindcss": "3.15.1",
+		"eslint-plugin-testing-library": "6.2.0",
+		"eslint-plugin-vitest": "0.3.26",
+		"jsdom": "24.0.0",
+		"postcss": "8.4.37",
+		"rollup": "4.13.0",
+		"tailwindcss": "3.4.1",
+		"terser": "5.29.2",
+		"vite": "5.1.6",
+		"vite-plugin-checker": "0.6.4",
+		"vite-plugin-solid": "2.10.2",
+		"vite-tsconfig-paths": "4.3.2",
+		"vitest": "1.4.0"
+	}
+}

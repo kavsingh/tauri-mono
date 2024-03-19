@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router";
 import { createSignal, onCleanup } from "solid-js";
 
-import { subscribeWindow } from "ui:bridge/subscribe";
+import { subscribeWindow } from "#bridge/subscribe";
 
 import Pulse from "./pulse";
 import StatusBadge from "./status-badge";

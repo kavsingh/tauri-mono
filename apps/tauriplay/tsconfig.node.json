@@ -1,0 +1,10 @@
+{
+	"extends": ["../../tsconfig.base.json", "@tsconfig/node20/tsconfig.json"],
+	"compilerOptions": {
+		"lib": ["esnext"],
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"composite": true
+	},
+	"include": ["./scripts", "./*.ts", "./*.js", "./*.cjs", "./.*.cjs"]
+}

@@ -35,7 +35,7 @@ export default function Pulse(_props: ParentProps<Props>) {
 	return (
 		<div
 			{...passProps}
-			style={{ "animation-duration": `${duration()}ms` }}
+			style={{ "animation-duration": `${String(duration())}ms` }}
 			class={twMerge(
 				"opacity-0",
 				isActive() && "animate-[pulse-out_ease-out_forwards]",

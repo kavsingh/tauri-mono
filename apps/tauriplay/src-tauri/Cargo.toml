@@ -1,5 +1,5 @@
 [package]
-name = "some-tauri-app"
+name = "tauriplay"
 version = "0.0.0"
 description = "A Tauri App"
 authors = ["you"]
@@ -21,7 +21,7 @@ tauri-specta = { version = "1.0.2", features = ["javascript", "typescript"] }
 ts-rs = "6.2.1"
 
 [dependencies.tauri]
-version = "1.6.0"
+version = "1.6.1"
 features = ["window-start-dragging", "window-show", "isolation", "dialog-open"]
 
 [features]

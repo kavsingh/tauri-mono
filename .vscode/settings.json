@@ -11,15 +11,18 @@
 	},
 	"files.watcherExclude": {
 		"**/node_modules": true,
-		"**/dist/": true
+		"**/dist": true,
+		"**/target": true
 	},
 	"search.exclude": {
 		"**/node_modules": true,
-		"**/dist/": true
+		"**/dist": true,
+		"**/target": true
 	},
 	"tailwindCSS.validate": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"rust-analyzer.check.command": "clippy",
+	"rust-analyzer.linkedProjects": ["../apps/tauriplay/src-tauri"],
 	"[javascript]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},

@@ -1,7 +1,7 @@
 import { Route, HashRouter } from "@solidjs/router";
 import { onMount } from "solid-js";
 
-import { initHeartbeat } from "ui:services/heartbeat";
+import { initHeartbeat } from "#services/heartbeat";
 
 import Masthead from "./components/masthead";
 import WindowDragRegion from "./components/window-drag-region";

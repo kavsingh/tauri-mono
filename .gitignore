@@ -1,15 +1,13 @@
 .DS_Store
 
-node_modules/
-*.log
-*.log.*
+**/node_modules
+**/target
+**/.rollup.cache
+**/*.log
+**/*.log.*
 
 /.vscode/**/*
 !/.vscode/extensions.json
 !/.vscode/settings.json
-
-/dist
-/dist-isolation
-/coverage
-
-**/.rollup.cache
+!/.vscode/launch.json
+!/.vscode/tasks.json

@@ -1,11 +1,11 @@
 import { createEffect, createSignal, For } from "solid-js";
 import { twMerge } from "tailwind-merge";
 
-import Button from "ui:components/button";
-import PageHeader from "ui:components/page-header";
-import useFileDrop from "ui:hooks/use-file-drop";
-import isErrorLike from "ui:lib/util/is-error-like";
-import { selectFilesWithDialog } from "ui:services/files";
+import Button from "#components/button";
+import PageHeader from "#components/page-header";
+import useFileDrop from "#hooks/use-file-drop";
+import isErrorLike from "#lib/util/is-error-like";
+import { selectFilesWithDialog } from "#services/files";
 
 export default function Files() {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
@@ -32,7 +32,7 @@ function DialogFileSelect(props: SelectProps) {
 	function selectFiles() {
 		void selectFilesWithDialog()
 			.then(props.onSelect)
-			.catch((reason) => {
+			.catch((reason: unknown) => {
 				setErrorMessage(isErrorLike(reason) ? reason.message : String(reason));
 			});
 	}

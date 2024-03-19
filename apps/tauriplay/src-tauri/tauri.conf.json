@@ -1,13 +1,13 @@
 {
 	"package": {
-		"productName": "SomeTauriApp",
-		"version": "0.1.0"
+		"productName": "Tauriplay",
+		"version": "0.1.0-alpha.0"
 	},
 	"build": {
 		"distDir": "../dist",
 		"devPath": "http://localhost:3000",
-		"beforeDevCommand": "bun before:dev",
-		"beforeBuildCommand": "bun before:build"
+		"beforeDevCommand": "pnpm before:dev",
+		"beforeBuildCommand": "pnpm before:build"
 	},
 	"tauri": {
 		"pattern": {
@@ -23,7 +23,7 @@
 		},
 		"windows": [
 			{
-				"title": "SomeTauriApp",
+				"title": "Tauriplay",
 				"width": 800,
 				"height": 600,
 				"resizable": true,
@@ -36,7 +36,7 @@
 		"bundle": {
 			"active": true,
 			"targets": "all",
-			"identifier": "com.sometauriapp.dev",
+			"identifier": "com.tauriplay.dev",
 			"icon": [
 				"icons/32x32.png",
 				"icons/128x128.png",

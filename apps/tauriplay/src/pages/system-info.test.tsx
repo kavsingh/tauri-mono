@@ -3,9 +3,9 @@ import { describe, it, expect, vitest } from "vitest";
 
 import SystemInfo from "./system-info";
 
-import type { SysInfoResponse } from "ui:__generated__/bindings/commands";
+import type { SysInfoResponse } from "#__generated__/bindings/commands";
 
-vitest.mock("ui:services/sys-info", () => {
+vitest.mock("#services/sys-info", () => {
 	return {
 		fetchSysInfo() {
 			return Promise.resolve({
