@@ -66,7 +66,7 @@ importers:
         specifier: 5.4.2
         version: 5.4.2
 
-  apps/tauriplay:
+  apps/app:
     dependencies:
       '@solidjs/router':
         specifier: 0.13.1

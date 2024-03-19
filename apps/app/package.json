@@ -1,12 +1,7 @@
 {
-	"name": "tauriplay",
+	"name": "app",
 	"version": "0.0.0",
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:kavsingh/tauri-play"
-	},
 	"type": "module",
-	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
 		"tdd:ui": "vitest",

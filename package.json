@@ -1,9 +1,9 @@
 {
-	"name": "tauriplay-mono",
+	"name": "tauri-mono",
 	"version": "0.0.0",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:kavsingh/tauri-play"
+		"url": "git@github.com:kavsingh/tauri-mono"
 	},
 	"type": "module",
 	"license": "MIT",
