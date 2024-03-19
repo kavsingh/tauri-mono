@@ -9,4 +9,4 @@ pnpm i
 
 todo:
 
-- [] bun when windows support: https://isbunwindowsyet.com/
+- [ ] bun when windows support: https://isbunwindowsyet.com/
