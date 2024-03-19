@@ -1,0 +1,12 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		// "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"]
+	},
+	"include": ["./specs", "./*.ts", "./*.js", "./*.cjs"],
+	"ts-node": {
+		"esm": true,
+		"files": true,
+		"transpileOnly": true
+	}
+}

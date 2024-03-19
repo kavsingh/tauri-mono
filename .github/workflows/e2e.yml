@@ -3,9 +3,25 @@ name: E2E
 on:
   workflow_dispatch:
 
+# https://tauri.app/v1/guides/testing/webdriver/ci
 jobs:
   e2e:
     name: E2E
     runs-on: ubuntu-latest
     steps:
-      - run: echo "WIP"
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+        with:
+          os: ubuntu-latest
+
+      - run: pnpm build:linux
+
+      # install the latest version of `tauri-driver`.
+      # note: the tauri-driver version is independent of any other Tauri versions
+      - run: cargo install tauri-driver
+
+      # run the WebdriverIO test suite.
+      # we run it through `xvfb-run` (the dependency we installed earlier) to have a fake
+      # display server which allows our application to run headless without any changes to the code
+      - run: xvfb-run pnpm turbo run test --filter=e2e
