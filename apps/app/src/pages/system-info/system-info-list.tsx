@@ -14,7 +14,7 @@ export default function SystemInfoList() {
 					<InfoEntry>
 						<InfoEntryLabel>os</InfoEntryLabel>
 						<span>
-							{info.name} ({info.osVersion}) {info.hostName}
+							{info.osFullname} | {info.osArch}
 						</span>
 					</InfoEntry>
 					<InfoEntry>

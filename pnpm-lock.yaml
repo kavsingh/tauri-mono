@@ -11,9 +11,6 @@ importers:
 
   .:
     devDependencies:
-      '@tsconfig/node20':
-        specifier: 20.1.2
-        version: 20.1.2
       '@tsconfig/strictest':
         specifier: 2.0.3
         version: 2.0.3
@@ -2291,10 +2288,6 @@ packages:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@testing-library/dom': 9.3.4
-    dev: true
-
-  /@tsconfig/node20@20.1.2:
-    resolution: {integrity: sha512-madaWq2k+LYMEhmcp0fs+OGaLFk0OenpHa4gmI4VEmCKX4PJntQ6fnnGADVFrVkBj0wIdAlQnK/MrlYTHsa1gQ==}
     dev: true
 
   /@tsconfig/strictest@2.0.3:

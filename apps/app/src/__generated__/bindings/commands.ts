@@ -10,12 +10,12 @@ declare global {
 // Function avoids 'window not defined' in SSR
 const invoke = () => window.__TAURI_INVOKE__;
 
-export function getSysInfo() {
-    return invoke()<SysInfoResponse>("get_sys_info")
+export function getSystemInfo() {
+    return invoke()<SystemInfoResponse>("get_system_info")
 }
 
 export function initHeartbeat() {
     return invoke()<null>("init_heartbeat")
 }
 
-export type SysInfoResponse = { name: string | null; osVersion: string | null; hostName: string | null }
+export type SystemInfoResponse = { osFullname: string | null; osVersion: string | null; osArch: string | null; memTotal: string | null; memAvailable: string | null }

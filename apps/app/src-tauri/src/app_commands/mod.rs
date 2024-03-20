@@ -1,2 +1,2 @@
 pub mod heartbeat;
-pub mod sys_info;
+pub mod system_info;

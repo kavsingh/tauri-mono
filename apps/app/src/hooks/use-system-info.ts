@@ -1,22 +1,15 @@
 import { createQuery } from "@tanstack/solid-query";
 
-import type { SysInfoResponse } from "#__generated__/bindings/commands";
+import { getSystemInfo } from "#__generated__/bindings/commands";
 
-export { getSysInfo } from "#__generated__/bindings/commands";
+import type { SystemInfoResponse } from "#__generated__/bindings/commands";
 
 export default function useSystemInfo() {
 	// const queryClient = useQueryClient();
 
-	const query = createQuery<SysInfoResponse>(() => ({
+	const query = createQuery<SystemInfoResponse>(() => ({
 		queryKey: ["systemInfo"],
-		// queryFn: () => getSysInfo(),
-		queryFn: () => {
-			return Promise.resolve({
-				name: "name",
-				osVersion: "version",
-				hostName: "host",
-			});
-		},
+		queryFn: getSystemInfo,
 	}));
 
 	// const subscription = client.systemInfoEvent.subscribe(undefined, {

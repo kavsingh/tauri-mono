@@ -22,7 +22,7 @@
 	"tailwindCSS.validate": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"rust-analyzer.check.command": "clippy",
-	"rust-analyzer.linkedProjects": ["../apps/app/src-tauri"],
+	"rust-analyzer.linkedProjects": ["apps/app/src-tauri/Cargo.toml"],
 	"[javascript]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},

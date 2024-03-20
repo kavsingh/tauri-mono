@@ -1,5 +1,5 @@
 {
-	"extends": ["./tsconfig.base.json", "@tsconfig/node20/tsconfig.json"],
-	"files": ["./*.ts", "./*.cjs", "./.*.cjs"],
-	"compilerOptions": { "noEmit": true }
+	"extends": "./tsconfig.base.json",
+	"exclude": ["**/node_modules"],
+	"include": ["./*.ts", "./*.cjs", "./*.*.cjs"]
 }

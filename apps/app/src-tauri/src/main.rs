@@ -33,7 +33,7 @@ fn main() {
 			Ok(())
 		})
 		.invoke_handler(generate_handler![
-			app_commands::sys_info::get_sys_info,
+			app_commands::system_info::get_system_info,
 			app_commands::heartbeat::init_heartbeat
 		])
 		.run(generate_context!())
@@ -46,7 +46,7 @@ mod export_bindings {
 	fn specta() {
 		tauri_specta::ts::export(
 			specta::collect_types![
-				crate::app_commands::sys_info::get_sys_info,
+				crate::app_commands::system_info::get_system_info,
 				crate::app_commands::heartbeat::init_heartbeat
 			],
 			"../src/__generated__/bindings/commands.ts",
