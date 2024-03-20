@@ -12,10 +12,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: ./.github/actions/setup
+        id: setup
         with:
           os: ubuntu-latest
 
-      - run: pnpm build:linux
+      - run: pnpm build:linux --cache-dir=${{ steps.setup.outputs.turbo_cache_dir }}
 
       # install the latest version of `tauri-driver`.
       # note: the tauri-driver version is independent of any other Tauri versions
