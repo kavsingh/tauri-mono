@@ -9,17 +9,17 @@ const testFileSuffixes = ["test", "spec", "mock"];
 /** @type {import("eslint").ESLint.ConfigData} */
 module.exports = {
 	root: true,
-	parserOptions: { project: path.resolve(__dirname, "./tsconfig.node.json") },
+	parserOptions: { project: path.resolve(__dirname, "./tsconfig.json") },
 	settings: {
 		"import/resolver": {
 			"eslint-import-resolver-typescript": {
-				project: path.resolve(__dirname, "./tsconfig.node.json"),
+				project: path.resolve(__dirname, "./tsconfig.json"),
 			},
 		},
 	},
 	extends: [require.resolve("../../.eslintrc.cjs")],
 	rules: {
-		"import/order": importOrderConfig("tsconfig.node.json"),
+		"import/order": importOrderConfig("tsconfig.json"),
 	},
 	overrides: [
 		{
@@ -31,20 +31,11 @@ module.exports = {
 		{
 			files: ["src-isolation/**/*", "src/**/*"],
 			env: { node: false, browser: true },
-			parserOptions: {
-				project: path.resolve(__dirname, "./tsconfig.web.json"),
-			},
 			settings: {
 				"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
-				"import/resolver": {
-					"eslint-import-resolver-typescript": {
-						project: path.resolve(__dirname, "./tsconfig.web.json"),
-					},
-				},
 			},
 			rules: {
 				"no-console": "error",
-				"import/order": importOrderConfig("tsconfig.web.json"),
 			},
 		},
 		{

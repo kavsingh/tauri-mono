@@ -71,6 +71,9 @@ importers:
       '@solidjs/router':
         specifier: 0.13.1
         version: 0.13.1(solid-js@1.8.16)
+      '@tanstack/solid-query':
+        specifier: 5.28.5
+        version: 5.28.5(solid-js@1.8.16)
       '@tauri-apps/api':
         specifier: 1.5.3
         version: 1.5.3
@@ -2109,6 +2112,19 @@ packages:
       '@testing-library/dom': 9.3.4
       solid-js: 1.8.16
     dev: true
+
+  /@tanstack/query-core@5.28.4:
+    resolution: {integrity: sha512-uQZqOFqLWUvXNIQZ63XdKzg22NtHzgCBUfDmjDHi3BoF+nUYeBNvMi/xFPtFrMhqRzG2Ir4mYaGsWZzmiEjXpA==}
+    dev: false
+
+  /@tanstack/solid-query@5.28.5(solid-js@1.8.16):
+    resolution: {integrity: sha512-qQrs3lVOPi7Jj+ud7WtaGsWwv/2GGnIbqzlQZ49xTvkCfBM20OynRh90j1WB+EoNq5tr0ozCZP/lvnCy2w4lZQ==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      '@tanstack/query-core': 5.28.4
+      solid-js: 1.8.16
+    dev: false
 
   /@tauri-apps/api@1.5.3:
     resolution: {integrity: sha512-zxnDjHHKjOsrIzZm6nO5Xapb/BxqUq1tc7cGkFXsFkGTsSWgCPH1D8mm0XS9weJY2OaR73I3k3S+b7eSzJDfqA==}

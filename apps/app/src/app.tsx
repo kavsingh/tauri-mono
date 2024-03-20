@@ -1,34 +1,27 @@
 import { Route, HashRouter } from "@solidjs/router";
-import { onMount } from "solid-js";
+import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
+import { createEffect } from "solid-js";
 
-import { initHeartbeat } from "#services/heartbeat";
-
-import Masthead from "./components/masthead";
-import WindowDragRegion from "./components/window-drag-region";
+import useTheme from "./hooks/use-theme";
+import AppLayout from "./layouts/app";
 import Files from "./pages/files";
+import Preferences from "./pages/preferences";
 import SystemInfo from "./pages/system-info";
 
-import type { ParentProps } from "solid-js";
-
 export default function App() {
-	onMount(() => void initHeartbeat());
+	const theme = useTheme();
+
+	createEffect(() => {
+		document.documentElement.classList.toggle("dark", theme() === "dark");
+	});
 
 	return (
-		<HashRouter>
-			<Route component={Root}>
+		<QueryClientProvider client={new QueryClient()}>
+			<HashRouter root={AppLayout}>
 				<Route path="/" component={SystemInfo} />
 				<Route path="/files" component={Files} />
-			</Route>
-		</HashRouter>
-	);
-}
-
-function Root(props: ParentProps) {
-	return (
-		<div class="min-h-full px-4 py-8">
-			<WindowDragRegion />
-			<Masthead />
-			{props.children}
-		</div>
+				<Route path="/preferences" component={Preferences} />
+			</HashRouter>
+		</QueryClientProvider>
 	);
 }

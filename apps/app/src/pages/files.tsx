@@ -2,10 +2,9 @@ import { createEffect, createSignal, For } from "solid-js";
 import { twMerge } from "tailwind-merge";
 
 import Button from "#components/button";
-import PageHeader from "#components/page-header";
 import useFileDrop from "#hooks/use-file-drop";
-import isErrorLike from "#lib/util/is-error-like";
-import { selectFilesWithDialog } from "#services/files";
+import useFileSelectDialog from "#hooks/use-file-select-dialog";
+import Page from "#layouts/page";
 
 export default function Files() {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
@@ -16,36 +15,35 @@ export default function Files() {
 
 	return (
 		<>
-			<PageHeader>Files</PageHeader>
-			<DialogFileSelect onSelect={handleFileSelect} />
-			<DragFileSelect onSelect={handleFileSelect} />
-			<ul>
-				<For each={selectedFiles()}>{(file) => <li>{file}</li>}</For>
-			</ul>
+			<Page.Header>Files</Page.Header>
+			<Page.Content>
+				<DialogFileSelect onSelect={handleFileSelect} />
+				<DragFileSelect onSelect={handleFileSelect} />
+				<ul class="flex flex-col gap-1">
+					<For each={selectedFiles()}>
+						{(file) => (
+							<li class="flex gap-2 border-b border-b-neutral-200 pb-2 text-neutral-700 last:border-b-0 last:pb-0 dark:border-b-neutral-700 dark:text-neutral-400">
+								{file}
+							</li>
+						)}
+					</For>
+				</ul>
+			</Page.Content>
 		</>
 	);
 }
 
-function DialogFileSelect(props: SelectProps) {
-	const [errorMessage, setErrorMessage] = createSignal<string>();
+function DialogFileSelect(props: { onSelect: (selected: string[]) => void }) {
+	const [files, selectFiles] = useFileSelectDialog();
 
-	function selectFiles() {
-		void selectFilesWithDialog()
-			.then(props.onSelect)
-			.catch((reason: unknown) => {
-				setErrorMessage(isErrorLike(reason) ? reason.message : String(reason));
-			});
-	}
+	createEffect(() => {
+		props.onSelect(files());
+	});
 
-	return (
-		<>
-			<Button onClick={selectFiles}>Select files</Button>
-			{errorMessage() ?? null}
-		</>
-	);
+	return <Button onClick={() => void selectFiles()}>Select files</Button>;
 }
 
-function DragFileSelect(props: SelectProps) {
+function DragFileSelect(props: { onSelect: (selected: string[]) => void }) {
 	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
 
 	createEffect(() => {
@@ -55,12 +53,13 @@ function DragFileSelect(props: SelectProps) {
 	return (
 		<div
 			class={twMerge(
-				"h-[200px] border border-neutral-500",
-				isActive() && "border-current",
+				"my-3 grid h-[200px] place-items-center rounded-lg border border-neutral-300 text-neutral-600 transition-colors dark:border-neutral-700 dark:text-neutral-400",
+				isActive() &&
+					"border-black bg-black/10 text-black dark:border-white dark:bg-white/10 dark:text-white",
 			)}
 			{...dragDropHandlers}
-		/>
+		>
+			Drop files
+		</div>
 	);
 }
-
-type SelectProps = { onSelect: (selected: string[]) => void };
