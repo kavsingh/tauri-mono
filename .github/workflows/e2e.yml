@@ -15,7 +15,7 @@ jobs:
         with:
           os: ubuntu-latest
 
-      - run: pnpm build:linux
+      - run: pnpm build:linux --cache-dir=.turbo
 
       # install the latest version of `tauri-driver`.
       # note: the tauri-driver version is independent of any other Tauri versions
