@@ -19,10 +19,17 @@ specta = "1.0.5"
 sysinfo = "0.29.11"
 tauri-specta = { version = "1.0.2", features = ["javascript", "typescript"] }
 ts-rs = "6.2.1"
+window-vibrancy = "0.4.3"
 
 [dependencies.tauri]
 version = "1.6.1"
-features = ["window-start-dragging", "window-show", "isolation", "dialog-open"]
+features = [
+    "macos-private-api",
+    "window-start-dragging",
+    "window-show",
+    "isolation",
+    "dialog-open",
+]
 
 [features]
 # by default Tauri runs in production mode

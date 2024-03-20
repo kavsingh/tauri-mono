@@ -9,6 +9,7 @@ export default function useSystemInfo() {
 
 	const query = createQuery<SysInfoResponse>(() => ({
 		queryKey: ["systemInfo"],
+		// queryFn: () => getSysInfo(),
 		queryFn: () => {
 			return Promise.resolve({
 				name: "name",

@@ -21,6 +21,7 @@
 			"dialog": { "open": true },
 			"window": { "show": true, "startDragging": true }
 		},
+		"macOSPrivateApi": true,
 		"windows": [
 			{
 				"title": "App",
@@ -30,6 +31,7 @@
 				"fullscreen": false,
 				"titleBarStyle": "Overlay",
 				"hiddenTitle": true,
+				"transparent": true,
 				"visible": false
 			}
 		],
