@@ -7,7 +7,6 @@ import type { Options } from "@wdio/types";
 
 const dirname = fileURLToPath(new URL(".", import.meta.url));
 const repoRoot = path.resolve(dirname, "../../");
-const appRoot = path.resolve(repoRoot, "apps/app");
 
 let tauriDriver: ReturnType<typeof spawnTauriDriver> | undefined;
 
@@ -28,10 +27,7 @@ export const config: Options.Testrunner = {
 			"wdio:maxInstances": 1,
 			"tauri:options": {
 				// @ts-expect-error custom tauri business
-				application: path.resolve(
-					appRoot,
-					"src-tauri/target/release/hello-tauri-webdriver",
-				),
+				application: path.resolve(repoRoot, "target/release/app"),
 			},
 		},
 	],
@@ -41,7 +37,7 @@ export const config: Options.Testrunner = {
 
 	// ensure the rust project is built since we expect this binary to exist for the webdriver sessions
 	onPrepare() {
-		spawnSync("pnpm", ["build:linux"], { cwd: repoRoot, stdio: "inherit" });
+		spawnSync("pnpm", ["build"], { cwd: repoRoot, stdio: "inherit" });
 	},
 
 	// ensure we are running `tauri-driver` before the session starts so that we can proxy the webdriver requests
