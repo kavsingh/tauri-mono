@@ -33,7 +33,7 @@
 		"rimraf": "5.0.5",
 		"tsx": "4.7.1",
 		"turbo": "1.12.5",
-		"typescript": "5.4.2"
+		"typescript": "5.4.3"
 	},
 	"resolutions": {
 		"tsconfig-paths": ">=4.0.0"
