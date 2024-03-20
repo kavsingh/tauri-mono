@@ -8,14 +8,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: corepack enable pnpm
-      shell: bash
-
-    - uses: actions/setup-node@v4
-      with:
-        node-version-file: .nvmrc
-        cache: pnpm
-
     - if: startsWith(inputs.os, 'ubuntu')
       run: >-
         sudo apt-get update &&
@@ -25,6 +17,17 @@ runs:
         libwebkit2gtk-4.0-dev
         webkit2gtk-driver
         xvfb
+      shell: bash
+
+    - run: corepack enable pnpm
+      shell: bash
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+
+    - run: rustup toolchain install stable --profile minimal --no-self-update
       shell: bash
 
     - if: startsWith(inputs.os, 'macos')
