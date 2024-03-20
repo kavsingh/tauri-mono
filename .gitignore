@@ -6,6 +6,8 @@
 **/*.log
 **/*.log.*
 
+/.turbo/**/*
+
 /.vscode/**/*
 !/.vscode/extensions.json
 !/.vscode/settings.json
