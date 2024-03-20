@@ -19,11 +19,11 @@ export default function SystemInfoList() {
 					</InfoEntry>
 					<InfoEntry>
 						<InfoEntryLabel>total memory</InfoEntryLabel>
-						<span>{formatMem("10000000")}</span>
+						<span>{formatMem(info.memTotal ?? "")}</span>
 					</InfoEntry>
 					<InfoEntry>
 						<InfoEntryLabel>available memory</InfoEntryLabel>
-						<span>{formatMem("20000000")}</span>
+						<span>{formatMem(info.memAvailable ?? "")}</span>
 					</InfoEntry>
 				</ul>
 			)}
