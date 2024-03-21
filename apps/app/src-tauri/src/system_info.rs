@@ -1,12 +1,12 @@
 use std::option;
-use sysinfo::{System, SystemExt};
+use sysinfo::System;
 use tauri::async_runtime::{channel, spawn, Receiver};
 
 #[derive(Clone, Debug, serde::Serialize, specta::Type, ts_rs::TS)]
 #[serde(rename_all = "camelCase")]
 #[ts(
 	export,
-	export_to = "../src/__generated__/bindings/system-info-event.ts"
+	export_to = "../../src/__generated__/bindings/system-info-event.ts"
 )]
 pub struct SystemInfo {
 	os_fullname: option::Option<String>,
@@ -41,11 +41,11 @@ pub fn subscribe_system_info_events() -> Receiver<SystemInfo> {
 fn create_system_info() -> SystemInfo {
 	let mut sys = System::new();
 
-	sys.refresh_all();
+	sys.refresh_memory();
 
 	SystemInfo {
-		os_fullname: sys.long_os_version(),
-		os_version: sys.os_version(),
+		os_fullname: System::long_os_version(),
+		os_version: System::os_version(),
 		// TODO: get the actual runtime arch somehow
 		os_arch: Some(std::env::consts::ARCH.to_string()),
 		mem_total: Some(sys.total_memory().to_string()),
