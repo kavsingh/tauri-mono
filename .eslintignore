@@ -1,4 +1,4 @@
-/.vscode
-/.turbo
+.vscode
+**/.turbo
 **/node_modules
 **/__generated__
