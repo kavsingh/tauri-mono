@@ -11,11 +11,7 @@ declare global {
 const invoke = () => window.__TAURI_INVOKE__;
 
 export function getSystemInfo() {
-    return invoke()<SystemInfoResponse>("get_system_info")
+    return invoke()<SystemInfo>("get_system_info")
 }
 
-export function initHeartbeat() {
-    return invoke()<null>("init_heartbeat")
-}
-
-export type SystemInfoResponse = { osFullname: string | null; osVersion: string | null; osArch: string | null; memTotal: string | null; memAvailable: string | null }
+export type SystemInfo = { osFullname: string | null; osVersion: string | null; osArch: string | null; memTotal: string | null; memAvailable: string | null }

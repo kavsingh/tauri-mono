@@ -3,9 +3,11 @@
 	windows_subsystem = "windows"
 )]
 
-mod app_commands;
+mod system_info;
 
 use tauri::{generate_context, generate_handler, Builder, Manager};
+
+const EVENT_SYSTEM_INFO: &str = "system-info-event";
 
 fn main() {
 	Builder::default()
@@ -30,12 +32,18 @@ fn main() {
 			window_vibrancy::apply_acrylic(&main_window, None)
 				.expect("Unsupported platform! 'apply_acrylic' is only supported on Windows");
 
+			let handle = app.handle();
+			tauri::async_runtime::spawn(async move {
+				let mut receiver = system_info::subscribe_system_info_events();
+
+				while let Some(message) = receiver.recv().await {
+					handle.emit_all(EVENT_SYSTEM_INFO, message).unwrap_or(());
+				}
+			});
+
 			Ok(())
 		})
-		.invoke_handler(generate_handler![
-			app_commands::system_info::get_system_info,
-			app_commands::heartbeat::init_heartbeat
-		])
+		.invoke_handler(generate_handler![system_info::get_system_info,])
 		.run(generate_context!())
 		.expect("error while running tauri application");
 }
@@ -45,10 +53,7 @@ mod export_bindings {
 	#[test]
 	fn specta() {
 		tauri_specta::ts::export(
-			specta::collect_types![
-				crate::app_commands::system_info::get_system_info,
-				crate::app_commands::heartbeat::init_heartbeat
-			],
+			specta::collect_types![crate::system_info::get_system_info,],
 			"../src/__generated__/bindings/commands.ts",
 		)
 		.unwrap();

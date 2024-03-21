@@ -4,7 +4,6 @@ import { describe, afterEach, it, expect, vi } from "vitest";
 
 import { subscribeGlobal, subscribeWindow } from "./subscribe";
 
-import type { HeartbeatEvent } from "#__generated__/bindings/heartbeat-event";
 import type { Mock } from "vitest";
 
 vi.mock("@tauri-apps/api/event", () => ({
@@ -24,9 +23,9 @@ describe("invoke", () => {
 		it("provides a typed subscription to global events", () => {
 			expect.assertions(2);
 
-			const accum: HeartbeatEvent[] = [];
+			const accum: unknown[] = [];
 
-			subscribeGlobal("heartbeat", (event) => {
+			subscribeGlobal("system-info-event", (event) => {
 				accum.push(event.payload);
 			});
 
@@ -46,9 +45,9 @@ describe("invoke", () => {
 		it("provides a typed subscription to window events", () => {
 			expect.assertions(2);
 
-			const accum: HeartbeatEvent[] = [];
+			const accum: unknown[] = [];
 
-			subscribeWindow("heartbeat", (event) => {
+			subscribeWindow("system-info-event", (event) => {
 				accum.push(event.payload);
 			});
 
