@@ -10,7 +10,7 @@ export default function SystemInfoList() {
 	return (
 		<Show when={infoQuery.data} fallback={<>Loading...</>} keyed>
 			{(info) => (
-				<ul class="m-0 flex list-none flex-col gap-2 p-0">
+				<ul class="m-0 flex select-text list-none flex-col gap-2 p-0">
 					<InfoEntry>
 						<InfoEntryLabel>os</InfoEntryLabel>
 						<span>

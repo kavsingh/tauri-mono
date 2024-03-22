@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 :root {
-	@apply text-neutral-950;
+	@apply text-neutral-950 select-none cursor-default;
+}
+
+*,
+*::before,
+*::after {
+	user-select: inherit;
 }
 
 .dark {
