@@ -5,12 +5,24 @@
 
 mod system_info;
 
+use system_info::{get_system_info, receive_system_info_events, SystemInfoEvent};
 use tauri::{generate_context, generate_handler, Builder, Manager};
-
-const EVENT_SYSTEM_INFO: &str = "system-info-event";
+use tauri_specta::Event;
 
 fn main() {
+	let specta_builder = {
+		let specta_builder = tauri_specta::ts::builder()
+			.events(tauri_specta::collect_events![SystemInfoEvent])
+			.commands(tauri_specta::collect_commands![get_system_info]);
+
+		#[cfg(debug_assertions)]
+		let specta_builder = specta_builder.path("../src/__generated__/bindings.ts");
+
+		specta_builder.into_plugin()
+	};
+
 	Builder::default()
+		.plugin(specta_builder)
 		.setup(|app| {
 			let main_window = app.get_window("main").unwrap();
 
@@ -34,28 +46,16 @@ fn main() {
 
 			let handle = app.handle();
 			tauri::async_runtime::spawn(async move {
-				let mut receiver = system_info::subscribe_system_info_events();
+				let mut receiver = receive_system_info_events();
 
-				while let Some(message) = receiver.recv().await {
-					handle.emit_all(EVENT_SYSTEM_INFO, message).unwrap_or(());
+				while let Some(event) = receiver.recv().await {
+					event.emit_all(&handle).unwrap_or(());
 				}
 			});
 
 			Ok(())
 		})
-		.invoke_handler(generate_handler![system_info::get_system_info,])
+		.invoke_handler(generate_handler![get_system_info])
 		.run(generate_context!())
 		.expect("error while running tauri application");
-}
-
-#[cfg(test)]
-mod export_bindings {
-	#[test]
-	fn specta() {
-		tauri_specta::ts::export(
-			specta::collect_types![crate::system_info::get_system_info,],
-			"../src/__generated__/bindings/commands.ts",
-		)
-		.unwrap();
-	}
 }

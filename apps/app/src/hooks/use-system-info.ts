@@ -1,22 +1,23 @@
 import { createQuery, useQueryClient } from "@tanstack/solid-query";
 import { onCleanup } from "solid-js";
 
-import { getSystemInfo } from "#__generated__/bindings/commands";
-import { subscribeGlobal } from "#bridge/subscribe";
+import { commands, events } from "#__generated__/bindings";
 
 export default function useSystemInfo() {
 	const queryClient = useQueryClient();
 	const query = createQuery(() => ({
 		queryKey: ["systemInfo"],
-		queryFn: getSystemInfo,
+		queryFn: () => commands.getSystemInfo(),
 	}));
 
-	const unsubscribe = subscribeGlobal("system-info-event", (event) => {
+	const unsubscribePromise = events.systemInfoEvent.listen((event) => {
 		queryClient.setQueryData(["systemInfo"], () => event.payload);
 	});
 
 	onCleanup(() => {
-		void unsubscribe();
+		void unsubscribePromise.then((unsubscribe) => {
+			unsubscribe();
+		});
 	});
 
 	return query;

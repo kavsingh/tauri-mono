@@ -44,5 +44,18 @@ function InfoEntryLabel(props: ParentProps) {
 }
 
 function formatMem(mem: string) {
-	return `${(Number(mem) / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+	const num = Number(mem);
+
+	for (const [threshold, unit] of thresholds) {
+		if (num >= threshold) return `${(num / threshold).toFixed(2)} ${unit}`;
+	}
+
+	return "-";
 }
+
+const thresholds = [
+	[1024 * 1024 * 1024, "GB"],
+	[1024 * 1024, "MB"],
+	[1024, "KB"],
+	[0, "B"],
+] as const;
