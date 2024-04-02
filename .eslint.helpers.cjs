@@ -1,28 +1,47 @@
+/** @type {import("node:path")} */
+const path = require("node:path");
+
 /** @type {import("typescript")} */
 const ts = require("typescript");
+/** @type {import("zod")} */
+const { z } = require("zod");
+
+/** @typedef {import("zod").infer<typeof tsConfigSchema>} TsConfig */
+
+const tsConfigSchema = z.object({
+	compilerOptions: z.object({
+		paths: z.record(z.array(z.string())).optional(),
+	}).optional(),
+});
+
+/**
+ * @param {string} configPath
+ *
+ * @returns {TsConfig | undefined}
+ **/
+function readTsConfig(configPath) {
+	const contents = ts.findConfigFile(
+		path.isAbsolute(configPath) ? path.dirname(configPath) : __dirname,
+		ts.sys.fileExists,
+		configPath,
+	);
+
+	return contents
+		? tsConfigSchema.parse(ts.readConfigFile(contents, ts.sys.readFile).config)
+		: undefined;
+}
 
 /**
  * @typedef {import("eslint").Linter.RuleLevel} RuleLevel
- * @param {string} tsconfigName
- * @param {(config: Record<string, unknown>) => Record<string, unknown>} customizer
+ * 
+ * @param {string} tsConfigPath
+ * @param {(config: Record<string, unknown>, tsconfig: TsConfig | undefined) => Record<string, unknown>} customizer
  *
  * @returns {[RuleLevel, Record<string, unknown>]}
  **/
-function importOrderConfig(
-	tsconfigName,
-	customizer = (config) => config,
-) {
-	const tsconfigFile = ts.findConfigFile(
-		__dirname,
-		ts.sys.fileExists,
-		tsconfigName,
-	);
-
-	const config = tsconfigFile
-		? ts.readConfigFile(tsconfigFile, ts.sys.readFile)
-		: undefined;
-
-	const aliases = Object.keys(config?.config?.compilerOptions?.paths ?? {});
+function importOrderConfig(tsConfigPath, customizer = (config) => config) {
+	const tsConfig = readTsConfig(tsConfigPath);
+	const aliases = Object.keys(tsConfig?.compilerOptions?.paths ?? {});
 
 	return [
 		"warn",
@@ -36,11 +55,13 @@ function importOrderConfig(
 				["sibling", "index"],
 				"type",
 			],
-			"pathGroups": aliases.map((pattern) => ({ pattern, group: "internal" })),
+			"pathGroups": aliases.map((pattern) => {
+				return { pattern, group: "internal" };
+			}),
 			"pathGroupsExcludedImportTypes": ["type"],
 			"newlines-between": "always",
-		}),
+		}, tsConfig),
 	];
 }
 
-module.exports = { importOrderConfig };
+module.exports = { readTsConfig, importOrderConfig };
