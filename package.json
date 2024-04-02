@@ -7,7 +7,7 @@
 	},
 	"type": "module",
 	"license": "MIT",
-	"packageManager": "pnpm@8.15.5",
+	"packageManager": "pnpm@8.15.6+sha256.01c01eeb990e379b31ef19c03e9d06a14afa5250b82e81303f88721c99ff2e6f",
 	"scripts": {
 		"dev": "pnpm turbo dev",
 		"build:mac": "pnpm turbo build:mac",
@@ -16,11 +16,11 @@
 		"lint": "pnpm turbo lint"
 	},
 	"devDependencies": {
-		"@tsconfig/strictest": "2.0.4",
-		"@types/eslint": "8.56.6",
-		"@types/node": "20.11.30",
-		"@typescript-eslint/eslint-plugin": "7.3.1",
-		"@typescript-eslint/parser": "7.3.1",
+		"@tsconfig/strictest": "2.0.5",
+		"@types/eslint": "8.56.7",
+		"@types/node": "20.12.3",
+		"@typescript-eslint/eslint-plugin": "7.5.0",
+		"@typescript-eslint/parser": "7.5.0",
 		"eslint": "8.57.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-import-resolver-typescript": "3.6.1",
@@ -31,7 +31,7 @@
 		"prettier": "3.2.5",
 		"rimraf": "5.0.5",
 		"tsx": "4.7.1",
-		"turbo": "1.13.0",
+		"turbo": "1.13.2",
 		"typescript": "5.4.3"
 	},
 	"resolutions": {
