@@ -114,7 +114,6 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-specta",
- "ts-rs",
  "window-vibrancy",
 ]
 
@@ -2507,9 +2506,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.114"
+version = "1.0.115"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0"
+checksum = "12dc5c46daa8e9fdf4f5e71b6cf9a53f2487da0e86e55808e2d35539666497dd"
 dependencies = [
  "indexmap 2.2.5",
  "itoa 1.0.10",
@@ -2777,9 +2776,9 @@ dependencies = [
 
 [[package]]
 name = "sysinfo"
-version = "0.30.7"
+version = "0.30.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c385888ef380a852a16209afc8cfad22795dd8873d69c9a14d2e2088f118d18"
+checksum = "4b1a378e48fb3ce3a5cf04359c456c9c98ff689bcf1c1bc6e6a31f247686f275"
 dependencies = [
  "cfg-if",
  "core-foundation-sys",
@@ -3133,15 +3132,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "termcolor"
-version = "1.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06794f8f6c5c898b3275aebefa6b8a1cb24cd2c6c79397ab15774837a0bc5755"
-dependencies = [
- "winapi-util",
-]
-
-[[package]]
 name = "thin-slice"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3371,29 +3361,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4d127780145176e2b5d16611cc25a900150e86e9fd79d3bde6ff3a37359c9cb5"
 dependencies = [
  "serde_json",
-]
-
-[[package]]
-name = "ts-rs"
-version = "8.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ceb8fe78a9de6544a6c5a027900e38e12d769e3cb6206543a0d6ee66685c9caa"
-dependencies = [
- "thiserror",
- "ts-rs-macros",
-]
-
-[[package]]
-name = "ts-rs-macros"
-version = "8.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c5f502d23d0afc51313c02c2d2ca75d90fb421478d27b8eaa37b518a67b8d77"
-dependencies = [
- "Inflector",
- "proc-macro2",
- "quote",
- "syn 2.0.53",
- "termcolor",
 ]
 
 [[package]]
