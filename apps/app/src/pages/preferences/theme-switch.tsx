@@ -1,11 +1,13 @@
-import { For, Match, Switch } from "solid-js";
+import { For, Match, Switch, createMemo } from "solid-js";
 
-import useTheme from "#hooks/use-theme";
+import useSystemTheme from "#hooks/use-system-theme";
+import { SYSTEM_THEMES } from "#services/theme";
 
-const THEMES = ["dark", "light"] as const;
+import type { SystemTheme } from "#services/theme";
 
 export default function ThemeSwitch() {
-	const theme = useTheme();
+	const [query, { mutate: setTheme }] = useSystemTheme();
+	const theme = createMemo<SystemTheme>(() => query.data ?? "auto");
 
 	return (
 		<form
@@ -16,7 +18,7 @@ export default function ThemeSwitch() {
 			<fieldset>
 				<legend class="mb-2 font-semibold">Theme</legend>
 				<ul class="flex gap-3">
-					<For each={THEMES}>
+					<For each={Object.values(SYSTEM_THEMES)}>
 						{(option) => (
 							<li class="flex items-center gap-1">
 								<input
@@ -25,7 +27,11 @@ export default function ThemeSwitch() {
 									name={option}
 									value={option}
 									checked={theme() === option}
-									class="peer size-4 cursor-pointer"
+									onChange={() => {
+										setTheme(option);
+									}}
+									class="peer cursor-pointer"
+									disabled={query.isLoading}
 								/>
 								<label
 									class="cursor-pointer text-neutral-500 transition-colors peer-checked:text-black dark:peer-checked:text-white"
@@ -42,9 +48,12 @@ export default function ThemeSwitch() {
 	);
 }
 
-function LabelText(props: { theme: "dark" | "light" }) {
+function LabelText(props: { theme: SystemTheme }) {
 	return (
 		<Switch>
+			<Match when={props.theme === "auto"}>
+				<>System</>
+			</Match>
 			<Match when={props.theme === "light"}>
 				<>Light</>
 			</Match>

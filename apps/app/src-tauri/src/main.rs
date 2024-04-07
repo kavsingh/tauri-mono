@@ -6,10 +6,12 @@
 mod system_info;
 
 use system_info::{get_system_info, receive_system_info_events, SystemInfoEvent};
-use tauri::{generate_context, generate_handler, Builder, Manager};
+use tauri::{generate_handler, Builder, Manager};
+use tauri_plugin_theme::ThemePlugin;
 use tauri_specta::Event;
 
 fn main() {
+	let mut ctx = tauri::generate_context!();
 	let specta_builder = {
 		let specta_builder = tauri_specta::ts::builder()
 			.events(tauri_specta::collect_events![SystemInfoEvent])
@@ -23,6 +25,7 @@ fn main() {
 
 	Builder::default()
 		.plugin(specta_builder)
+		.plugin(ThemePlugin::init(ctx.config_mut()))
 		.setup(|app| {
 			let main_window = app.get_window("main").unwrap();
 
@@ -56,6 +59,6 @@ fn main() {
 			Ok(())
 		})
 		.invoke_handler(generate_handler![get_system_info])
-		.run(generate_context!())
+		.run(ctx)
 		.expect("error while running tauri application");
 }

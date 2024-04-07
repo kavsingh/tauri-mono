@@ -1,17 +1,15 @@
 import { createSignal, onCleanup } from "solid-js";
 
-export default function useTheme() {
+export default function useUiTheme() {
 	const [theme, setTheme] = createSignal<UiTheme>(getQueryTheme());
 
 	function handleQuery() {
 		setTheme(getQueryTheme());
 	}
 
-	lightSchemeQuery.addEventListener("change", handleQuery);
 	darkSchemeQuery.addEventListener("change", handleQuery);
 
 	onCleanup(() => {
-		lightSchemeQuery.removeEventListener("change", handleQuery);
 		darkSchemeQuery.removeEventListener("change", handleQuery);
 	});
 
@@ -21,10 +19,7 @@ export default function useTheme() {
 export type UiTheme = "dark" | "light";
 
 function getQueryTheme(): UiTheme {
-	if (darkSchemeQuery.matches) return "dark";
-
-	return "light";
+	return darkSchemeQuery.matches ? "dark" : "light";
 }
 
 const darkSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-const lightSchemeQuery = window.matchMedia("(prefers-color-scheme: light)");
