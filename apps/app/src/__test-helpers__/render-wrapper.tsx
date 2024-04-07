@@ -1,4 +1,4 @@
-import { Router } from "@solidjs/router";
+import { Route, Router } from "@solidjs/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { userEvent } from "@testing-library/user-event";
 
@@ -11,7 +11,9 @@ export function setupRenderWrapper() {
 	function Wrapper(props: ParentProps) {
 		return (
 			<QueryClientProvider client={queryClient}>
-				<Router>{props.children}</Router>
+				<Router>
+					<Route path="/" component={() => props.children} />
+				</Router>
 			</QueryClientProvider>
 		);
 	}
