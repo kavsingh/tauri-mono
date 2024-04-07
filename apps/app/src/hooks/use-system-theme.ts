@@ -4,7 +4,7 @@ import {
 	useQueryClient,
 } from "@tanstack/solid-query";
 
-import { getSystemTheme, setSystemTheme } from "#services/theme";
+import { getSystemTheme, setSystemTheme } from "#services/system-theme";
 
 export default function useSystemTheme() {
 	const queryClient = useQueryClient();

@@ -1,9 +1,9 @@
 import { For, Match, Switch, createMemo } from "solid-js";
 
 import useSystemTheme from "#hooks/use-system-theme";
-import { SYSTEM_THEMES } from "#services/theme";
+import { SYSTEM_THEMES } from "#services/system-theme";
 
-import type { SystemTheme } from "#services/theme";
+import type { SystemTheme } from "#services/system-theme";
 
 export default function ThemeSwitch() {
 	const [query, { mutate: setTheme }] = useSystemTheme();

@@ -9,8 +9,8 @@ export async function getSystemTheme() {
 	return isSystemTheme(theme) ? theme : "auto";
 }
 
-export function setSystemTheme(theme: SystemTheme): Promise<void> {
-	return invoke("plugin:theme|set_theme", { theme });
+export function setSystemTheme(theme: SystemTheme) {
+	return invoke<null>("plugin:theme|set_theme", { theme });
 }
 
 export function isSystemTheme(value: unknown): value is SystemTheme {
