@@ -6,6 +6,7 @@
 	"scripts": {
 		"tdd:ui": "vitest",
 		"test": "pnpm test:tauri && pnpm test:ui",
+		"test:ci": "pnpm test:ui --silent --coverage",
 		"test:ui": "vitest run",
 		"test:tauri": "cd src-tauri && cargo test",
 		"typecheck": "tsc",

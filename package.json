@@ -12,6 +12,7 @@
 		"dev": "pnpm turbo dev",
 		"build:mac": "pnpm turbo build:mac",
 		"test": "pnpm turbo test",
+		"test:ci": "pnpm turbo test:ci",
 		"typecheck": "pnpm turbo typecheck",
 		"lint": "pnpm turbo lint"
 	},

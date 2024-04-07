@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => ({
 		clearMocks: true,
 		testTransformMode: { web: ["/.[jt]sx?$/"] },
 		server: { deps: { inline: [/@solidjs/] } },
+		coverage: { include: ["src/**/*.{js,jsx,ts,tsx}"] },
 	},
 }));
 
