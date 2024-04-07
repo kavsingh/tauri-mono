@@ -6,8 +6,8 @@
 	"build": {
 		"distDir": "../dist",
 		"devPath": "http://localhost:3000",
-		"beforeDevCommand": "pnpm before:dev",
-		"beforeBuildCommand": "pnpm before:build"
+		"beforeDevCommand": "bun run before:dev",
+		"beforeBuildCommand": "bun run before:build"
 	},
 	"tauri": {
 		"pattern": {

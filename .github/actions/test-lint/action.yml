@@ -4,11 +4,11 @@ description: Run linters and unit / integration tests
 runs:
   using: composite
   steps:
-    - run: pnpm test:ci
+    - run: bun test:ci
       shell: bash
 
-    - run: pnpm typecheck
+    - run: bun typecheck
       shell: bash
 
-    - run: pnpm lint
+    - run: bun lint
       shell: bash

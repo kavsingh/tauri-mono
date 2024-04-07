@@ -5,19 +5,19 @@
 	"license": "MIT",
 	"scripts": {
 		"tdd:ui": "vitest",
-		"test": "pnpm test:tauri && pnpm test:ui",
-		"test:ci": "pnpm test:ui --silent --coverage",
+		"test": "bun run test:tauri && bun run test:ui",
+		"test:ci": "bun run test:ui --silent --coverage",
 		"test:ui": "vitest run",
 		"test:tauri": "cd src-tauri && cargo test",
 		"typecheck": "tsc",
 		"lint": "eslint .",
-		"before:dev": "pnpm build:isolation && vite dev",
-		"before:build": "pnpm build:isolation && rimraf ./dist && vite build",
+		"before:dev": "bun run build:isolation && vite dev",
+		"before:build": "bun run build:isolation && rimraf ./dist && vite build",
 		"dev": "tauri dev",
 		"build:mac": "tauri build --target universal-apple-darwin",
 		"build:win": "tauri build --target x86_64-pc-windows-msvc",
 		"build:isolation": "rimraf ./dist-isolation && vite -c vite.isolation.config.ts build",
-		"testscript": "node --import=tsx scripts/testscript.ts"
+		"testscript": "bun scripts/testscript.ts"
 	},
 	"dependencies": {
 		"@solidjs/router": "0.13.1",

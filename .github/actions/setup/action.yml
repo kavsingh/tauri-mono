@@ -8,13 +8,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: corepack enable pnpm
-      shell: bash
-
-    - uses: actions/setup-node@v4
-      with:
-        node-version-file: .nvmrc
-        cache: pnpm
+    - uses: oven-sh/setup-bun@v1
 
     - if: startsWith(inputs.os, 'macos')
       run: |
@@ -26,5 +20,5 @@ runs:
       run: rustup target add x86_64-pc-windows-msvc
       shell: bash
 
-    - run: pnpm install --frozen-lockfile
+    - run: bun install
       shell: bash
