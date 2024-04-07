@@ -5,6 +5,7 @@ on:
 
 jobs:
   test-lint:
+    name: Test and lint
     uses: ./.github/workflows/test-lint.yml
     secrets: inherit
 
