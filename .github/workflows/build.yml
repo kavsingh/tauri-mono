@@ -22,10 +22,32 @@ jobs:
         with:
           os: ${{ matrix.os }}
 
+      - name: Read version
+        id: read-version
+        shell: bash
+        # https://gist.github.com/DarrenN/8c6a5b969481725a4413?permalink_comment_id=4167453#gistcomment-4167453
+        run: |
+          PACKAGE_VERSION=$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' apps/app/package.json)
+          echo "result=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
+
       - name: (macOS) Build
         if: matrix.os == 'macos-latest'
         run: pnpm build:mac
 
+      - name: (macOS) Upload artifact
+        if: ${{ success() && matrix.os == 'macos-latest' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-dmg
+          path: apps/app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/App_${{ steps.read-version.outputs.result }}_universal.dmg
+
       - name: (Windows) Build
         if: matrix.os == 'windows-latest'
         run: pnpm build:win
+
+      - name: (Windows) Upload artifact
+        if: ${{ success() && matrix.os == 'windows-latest' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: apps\app\src-tauri\target\x86_64-pc-windows-msvc\release\bundle\nsis\App_${{ steps.read-version.outputs.result }}_x64-setup.exe
