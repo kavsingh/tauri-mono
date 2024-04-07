@@ -10,17 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: corepack enable pnpm
+      - uses: ./.github/actions/setup
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-
-      - run: pnpm test:ci
-
-      - run: pnpm typecheck
-
-      - run: pnpm lint
+      - uses: ./.github/actions/verify
