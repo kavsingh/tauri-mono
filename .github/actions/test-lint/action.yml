@@ -1,4 +1,4 @@
-name: Verify
+name: Test and lint
 description: Run linters and unit / integration tests
 
 runs:
