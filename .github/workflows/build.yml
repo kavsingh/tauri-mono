@@ -23,13 +23,14 @@ jobs:
         with:
           os: ${{ matrix.os }}
 
-      - name: Read version
-        id: read-version
-        shell: bash
-        # https://gist.github.com/DarrenN/8c6a5b969481725a4413?permalink_comment_id=4167453#gistcomment-4167453
+      - uses: ./.github/actions/read-tauri-config
+        id: read-config
+        with:
+          app_path: apps/app
+
+      - id: prefix
         run: |
-          PACKAGE_VERSION=$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' apps/app/package.json)
-          echo "result=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
+          echo "result=${{ steps.read-config.outputs.product_name }}-${{ steps.read-config.outputs.version }}" >> $GITHUB_OUTPUT
 
       - name: (macOS) Build
         if: matrix.os == 'macos-latest'
@@ -39,8 +40,10 @@ jobs:
         if: ${{ success() && matrix.os == 'macos-latest' }}
         uses: actions/upload-artifact@v4
         with:
-          name: macos-dmg
-          path: apps/app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/App_${{ steps.read-version.outputs.result }}_universal.dmg
+          name: ${{ steps.prefix.outputs.result }}-mac
+          path: apps/app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
+          if-no-files-found: error
+          overwrite: true
 
       - name: (Windows) Build
         if: matrix.os == 'windows-latest'
@@ -50,5 +53,7 @@ jobs:
         if: ${{ success() && matrix.os == 'windows-latest' }}
         uses: actions/upload-artifact@v4
         with:
-          name: windows-installer
-          path: apps\app\src-tauri\target\x86_64-pc-windows-msvc\release\bundle\nsis\App_${{ steps.read-version.outputs.result }}_x64-setup.exe
+          name: ${{ steps.prefix.outputs.result }}-windows
+          path: apps\app\src-tauri\target\x86_64-pc-windows-msvc\release\bundle\nsis\*.exe
+          if-no-files-found: error
+          overwrite: true
