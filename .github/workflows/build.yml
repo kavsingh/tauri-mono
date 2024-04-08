@@ -37,7 +37,7 @@ jobs:
 
       - name: (macOS) Build
         if: matrix.os == 'macos-latest'
-        run: pnpm build:mac
+        run: pnpm build:mac --cache-dir=.turbo
 
       - name: (macOS) Upload artifact
         if: ${{ success() && matrix.os == 'macos-latest' }}
@@ -50,7 +50,7 @@ jobs:
 
       - name: (Windows) Build
         if: matrix.os == 'windows-latest'
-        run: pnpm build:win
+        run: pnpm build:win --cache-dir=.turbo
 
       - name: (Windows) Upload artifact
         if: ${{ success() && matrix.os == 'windows-latest' }}
