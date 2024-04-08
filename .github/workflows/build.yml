@@ -12,6 +12,9 @@ jobs:
   build:
     name: Build
     needs: test-lint
+    defaults:
+      run:
+        shell: bash
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
@@ -30,7 +33,7 @@ jobs:
 
       - id: prefix
         run: |
-          echo "result=${{ steps.read-config.outputs.product_name }}-${{ steps.read-config.outputs.version }}" >> $GITHUB_OUTPUT
+          echo "result=${{ steps.read-config.outputs.product_name }}_${{ steps.read-config.outputs.version }}" >> $GITHUB_OUTPUT
 
       - name: (macOS) Build
         if: matrix.os == 'macos-latest'
@@ -40,7 +43,7 @@ jobs:
         if: ${{ success() && matrix.os == 'macos-latest' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.prefix.outputs.result }}-mac
+          name: ${{ steps.prefix.outputs.result }}-macos
           path: apps/app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
           if-no-files-found: error
           overwrite: true
