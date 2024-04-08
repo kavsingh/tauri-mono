@@ -1,13 +1,17 @@
 name: Setup
 description: Setup and install dependencies
 
-inputs:
-  os:
-    description: Operating system
-
 runs:
   using: composite
   steps:
+    # https://turbo.build/repo/docs/ci/github-actions
+    - uses: actions/cache@v4
+      with:
+        path: .turbo
+        key: ${{ runner.os }}-turbo-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-turbo-
+
     - run: corepack enable pnpm
       shell: bash
 
@@ -16,13 +20,16 @@ runs:
         node-version-file: .nvmrc
         cache: pnpm
 
-    - if: startsWith(inputs.os, 'macos')
+    - run: rustup toolchain install stable --profile minimal --no-self-update
+      shell: bash
+
+    - if: startsWith(runner.os, 'macos')
       run: |
         rustup target add aarch64-apple-darwin
         rustup target add x86_64-apple-darwin
       shell: bash
 
-    - if: startsWith(inputs.os, 'windows')
+    - if: startsWith(runner.os, 'windows')
       run: rustup target add x86_64-pc-windows-msvc
       shell: bash
 
