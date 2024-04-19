@@ -1,24 +1,11 @@
 import { render, waitFor, screen, cleanup } from "@solidjs/testing-library";
 import { describe, it, expect, vi, afterEach } from "vitest";
 
-import { events } from "#__generated__/bindings";
+import { createMockSystemInfo } from "#__test-helpers__/mock-data/create";
 import { setupRenderWrapper } from "#__test-helpers__/render-wrapper";
+import { publishSystemInfoEvent } from "#__test-helpers__/tauri/events";
 
 import SystemInfoPage from "./index";
-
-import type { SystemInfo } from "#__generated__/bindings";
-import type { Mock } from "vitest";
-
-vi.mock("#__generated__/bindings", () => ({
-	commands: {
-		getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
-	},
-	events: {
-		systemInfoEvent: {
-			listen: vi.fn(() => Promise.resolve(() => undefined)),
-		},
-	},
-}));
 
 describe("<SystemInfoPage />", () => {
 	afterEach(() => {
@@ -42,6 +29,8 @@ describe("<SystemInfoPage />", () => {
 		await waitFor(() => {
 			expect(screen.getByText("1.00 GB")).toBeInTheDocument();
 		});
+
+		expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
 	});
 
 	it("should update from system info events", async () => {
@@ -68,21 +57,3 @@ describe("<SystemInfoPage />", () => {
 		expect(screen.queryByText("1.00 MB")).not.toBeInTheDocument();
 	});
 });
-
-function publishSystemInfoEvent(payload: SystemInfo) {
-	const calls = (events.systemInfoEvent.listen as Mock).mock.calls;
-
-	for (const [maybeListener] of calls) {
-		if (typeof maybeListener === "function") maybeListener({ payload });
-	}
-}
-
-function createMockSystemInfo(info: Partial<SystemInfo> = {}): SystemInfo {
-	return {
-		osFullname: "OS Fullname",
-		osArch: "OS Arch",
-		memAvailable: String(1024 * 1024), // 1 MB
-		memTotal: String(1024 * 1024 * 1024), // 1 GB
-		...info,
-	};
-}

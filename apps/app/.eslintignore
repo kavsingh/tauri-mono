@@ -3,4 +3,5 @@
 **/dist-isolation
 **/coverage
 **/src-tauri
-**/__generated__
+**/__generated__/**/*
+!**/__generated__/__mocks__/**/*
