@@ -19,7 +19,7 @@
 	},
 	"devDependencies": {
 		"@tsconfig/strictest": "2.0.5",
-		"@types/eslint": "8.56.9",
+		"@types/eslint": "8.56.10",
 		"@types/node": "20.12.7",
 		"@typescript-eslint/eslint-plugin": "7.7.0",
 		"@typescript-eslint/parser": "7.7.0",
@@ -35,7 +35,7 @@
 		"tsx": "4.7.2",
 		"turbo": "1.13.2",
 		"typescript": "5.4.5",
-		"zod": "3.22.4"
+		"zod": "3.22.5"
 	},
 	"resolutions": {
 		"tsconfig-paths": ">=4.0.0"
