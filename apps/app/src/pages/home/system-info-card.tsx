@@ -20,7 +20,7 @@ export default function SystemInfoCard() {
 							<InfoEntry>
 								<InfoEntryLabel>os</InfoEntryLabel>
 								<span>
-									{info.osFullname} | {info.osArch}
+									{info.osFullname} ({info.osArch})
 								</span>
 							</InfoEntry>
 							<InfoEntry>
