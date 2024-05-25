@@ -5,8 +5,8 @@ import { createEffect } from "solid-js";
 import useUiTheme from "./hooks/use-ui-theme";
 import AppLayout from "./layouts/app";
 import Files from "./pages/files";
+import Home from "./pages/home";
 import Preferences from "./pages/preferences";
-import SystemInfo from "./pages/system-info";
 
 export default function App() {
 	const theme = useUiTheme();
@@ -18,7 +18,7 @@ export default function App() {
 	return (
 		<QueryClientProvider client={new QueryClient()}>
 			<HashRouter root={AppLayout}>
-				<Route path="/" component={SystemInfo} />
+				<Route path="/" component={Home} />
 				<Route path="/files" component={Files} />
 				<Route path="/preferences" component={Preferences} />
 			</HashRouter>

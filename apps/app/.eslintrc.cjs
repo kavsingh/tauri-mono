@@ -43,7 +43,10 @@ module.exports = {
 			files: ["src-isolation/**/*", "src/**/*"],
 			env: { node: false, browser: true },
 			settings: {
-				tailwindcss: { callees: ["twMerge", "twJoin"] },
+				tailwindcss: {
+					callees: ["tv", "classList"],
+					config: path.join(__dirname, "tailwind.config.ts"),
+				},
 			},
 			extends: ["plugin:tailwindcss/recommended", "plugin:solid/typescript"],
 		},

@@ -19,10 +19,14 @@
 		"**/dist": true,
 		"**/target": true
 	},
-	"tailwindCSS.validate": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"rust-analyzer.check.command": "clippy",
 	"rust-analyzer.linkedProjects": ["apps/app/src-tauri/Cargo.toml"],
+	"tailwindCSS.validate": true,
+	"tailwindCSS.classAttributes": ["class", "classList"],
+	"tailwindCSS.experimental.classRegex": [
+		["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+	],
 	"[javascript]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},

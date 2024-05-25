@@ -1,21 +1,14 @@
+@import "./theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-	@apply text-neutral-950 select-none cursor-default;
-}
-
-*,
-*::before,
-*::after {
-	user-select: inherit;
-}
-
-.dark {
-	@apply text-neutral-200;
+	@apply bg-background text-primary;
 }
 
 #app-root {
-	@apply w-screen h-screen;
+	width: 100vw;
+	height: 100vh;
 }
