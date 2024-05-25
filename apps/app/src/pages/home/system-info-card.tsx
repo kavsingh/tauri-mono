@@ -51,19 +51,26 @@ function InfoEntryLabel(props: ParentProps) {
 	return <span class="text-muted-foreground">{props.children}</span>;
 }
 
-function formatMem(mem: string) {
-	const num = Number(mem);
+function formatMem(memString: string) {
+	const mem = BigInt(memString);
 
 	for (const [threshold, unit] of thresholds) {
-		if (num >= threshold) return `${(num / threshold).toFixed(2)} ${unit}`;
+		if (mem >= threshold) {
+			return `${bigintDiv(mem, threshold).toFixed(2)} ${unit}`;
+		}
 	}
 
 	return "-";
 }
 
+// https://stackoverflow.com/a/54409977
+function bigintDiv(dividend: bigint, divisor: bigint, precision = 100n) {
+	return Number((dividend * precision) / divisor) / Number(precision);
+}
+
 const thresholds = [
-	[1024 * 1024 * 1024, "GB"],
-	[1024 * 1024, "MB"],
-	[1024, "KB"],
-	[0, "B"],
+	[BigInt(1024 * 1024 * 1024), "GB"],
+	[BigInt(1024 * 1024), "MB"],
+	[1024n, "KB"],
+	[0n, "B"],
 ] as const;
