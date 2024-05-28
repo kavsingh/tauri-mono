@@ -7,8 +7,8 @@ import type { ComponentProps, ParentProps } from "solid-js";
 export default function App(props: ParentProps) {
 	return (
 		<>
-			<div class="grid size-full grid-cols-[min-content_1fr]">
-				<div class="min-h-full p-4 pe-8 pt-10 text-sm">
+			<div class="grid size-full grid-cols-[max-content_1fr]">
+				<div class="min-h-full bg-gradient-to-l from-background p-4 pe-8 pt-10 text-sm">
 					<nav class="flex flex-col gap-2">
 						<NavLink href="/">Home</NavLink>
 						<NavLink href="/files">Files</NavLink>
