@@ -1,4 +1,7 @@
-use std::{option, time::Duration};
+use std::{
+	option,
+	time::{Duration, SystemTime, UNIX_EPOCH},
+};
 use sysinfo::System;
 use tauri::async_runtime::{channel, spawn, Receiver};
 
@@ -9,6 +12,7 @@ pub struct SystemInfo {
 	os_arch: option::Option<String>,
 	mem_total: option::Option<String>,
 	mem_available: option::Option<String>,
+	sampled_at: String,
 }
 
 #[derive(Clone, serde::Serialize, specta::Type, tauri_specta::Event)]
@@ -41,10 +45,16 @@ fn create_system_info() -> SystemInfo {
 
 	sys.refresh_memory();
 
+	let sampled_at = match SystemTime::now().duration_since(UNIX_EPOCH) {
+		Ok(duration) => duration.as_millis(),
+		Err(_) => 0,
+	};
+
 	SystemInfo {
 		os_fullname: System::long_os_version(),
 		os_arch: System::cpu_arch(),
 		mem_total: Some(sys.total_memory().to_string()),
 		mem_available: Some(sys.available_memory().to_string()),
+		sampled_at: format!("{}", sampled_at),
 	}
 }

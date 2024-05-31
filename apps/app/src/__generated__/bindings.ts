@@ -14,7 +14,7 @@ systemInfoEvent: "plugin:tauri-specta:system-info-event"
 
 /** user-defined types **/
 
-export type SystemInfo = { osFullname: string | null; osArch: string | null; memTotal: string | null; memAvailable: string | null }
+export type SystemInfo = { osFullname: string | null; osArch: string | null; memTotal: string | null; memAvailable: string | null; sampledAt: string }
 export type SystemInfoEvent = SystemInfo
 
 /** tauri-specta globals **/
