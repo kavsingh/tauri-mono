@@ -7,7 +7,7 @@
 	},
 	"type": "module",
 	"license": "MIT",
-	"packageManager": "pnpm@9.1.2+sha256.19c17528f9ca20bd442e4ca42f00f1b9808a9cb419383cd04ba32ef19322aba7",
+	"packageManager": "pnpm@9.1.4+sha256.30a1801ac4e723779efed13a21f4c39f9eb6c9fbb4ced101bce06b422593d7c9",
 	"scripts": {
 		"dev": "turbo dev",
 		"test": "turbo test",
@@ -20,7 +20,7 @@
 	"devDependencies": {
 		"@tsconfig/strictest": "2.0.5",
 		"@types/eslint": "8.56.10",
-		"@types/node": "20.12.12",
+		"@types/node": "20.13.0",
 		"@typescript-eslint/eslint-plugin": "7.11.0",
 		"@typescript-eslint/parser": "7.11.0",
 		"eslint": "8.57.0",
