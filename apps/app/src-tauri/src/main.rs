@@ -5,6 +5,8 @@
 
 mod system_info;
 
+use std::time::Duration;
+
 use system_info::{get_system_info, receive_system_info_events, SystemInfoEvent};
 use tauri::{generate_handler, Builder, Manager};
 use tauri_plugin_theme::ThemePlugin;
@@ -49,7 +51,7 @@ fn main() {
 
 			let handle = app.handle();
 			tauri::async_runtime::spawn(async move {
-				let mut receiver = receive_system_info_events();
+				let mut receiver = receive_system_info_events(Duration::from_secs(1));
 
 				while let Some(event) = receiver.recv().await {
 					event.emit_all(&handle).unwrap_or(());

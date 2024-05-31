@@ -1,4 +1,4 @@
-use std::option;
+use std::{option, time::Duration};
 use sysinfo::System;
 use tauri::async_runtime::{channel, spawn, Receiver};
 
@@ -21,15 +21,15 @@ pub fn get_system_info() -> SystemInfo {
 	create_system_info()
 }
 
-pub fn receive_system_info_events() -> Receiver<SystemInfoEvent> {
+pub fn receive_system_info_events(period: Duration) -> Receiver<SystemInfoEvent> {
 	let (tx, rx) = channel(1);
 
 	spawn(async move {
 		loop {
-			let event = SystemInfoEvent(create_system_info());
-
-			tx.send(event).await.unwrap();
-			std::thread::sleep(std::time::Duration::from_secs(2));
+			tx.send(SystemInfoEvent(create_system_info()))
+				.await
+				.unwrap_or(());
+			std::thread::sleep(period);
 		}
 	});
 
