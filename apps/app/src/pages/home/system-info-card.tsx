@@ -2,6 +2,9 @@ import { Show } from "solid-js";
 
 import Card from "#components/card";
 import useSystemInfo from "#hooks/use-system-info";
+import { formatMem } from "#lib/format";
+
+import MemoryGraph from "./memory-graph";
 
 import type { ParentProps } from "solid-js";
 
@@ -16,24 +19,25 @@ export default function SystemInfoCard() {
 			<Card.Content>
 				<Show when={infoQuery.data} fallback={<>loading...</>} keyed>
 					{(info) => (
-						<ul class="m-0 list-none p-0">
-							<InfoEntry>
-								<InfoEntryLabel>os</InfoEntryLabel>
-								<span>
-									{info.osFullname} ({info.osArch})
-								</span>
-							</InfoEntry>
-							<InfoEntry>
-								<InfoEntryLabel>total memory</InfoEntryLabel>
-								<span>{formatMem(info.memTotal ?? "")}</span>
-							</InfoEntry>
-							<InfoEntry>
-								<InfoEntryLabel>available memory</InfoEntryLabel>
-								<span>{formatMem(info.memAvailable ?? "")}</span>
-							</InfoEntry>
-						</ul>
+						<div class="space-y-6">
+							<ul class="m-0 list-none p-0">
+								<InfoEntry>
+									<InfoEntryLabel>os</InfoEntryLabel>
+									<span>
+										{info.osFullname} ({info.osArch})
+									</span>
+								</InfoEntry>
+								<InfoEntry>
+									<InfoEntryLabel>total memory</InfoEntryLabel>
+									<span>{formatMem(info.memTotal ?? "")}</span>
+								</InfoEntry>
+							</ul>
+						</div>
 					)}
 				</Show>
+				<div class="aspect-[3] w-full max-w-96">
+					<MemoryGraph systemInfo={infoQuery.data} />
+				</div>
 			</Card.Content>
 		</Card.Root>
 	);
@@ -50,27 +54,3 @@ function InfoEntry(props: ParentProps) {
 function InfoEntryLabel(props: ParentProps) {
 	return <span class="text-muted-foreground">{props.children}</span>;
 }
-
-function formatMem(memString: string) {
-	const mem = BigInt(memString);
-
-	for (const [threshold, unit] of thresholds) {
-		if (mem >= threshold) {
-			return `${bigintDiv(mem, threshold).toFixed(2)} ${unit}`;
-		}
-	}
-
-	return "-";
-}
-
-// https://stackoverflow.com/a/54409977
-function bigintDiv(dividend: bigint, divisor: bigint, precision = 100n) {
-	return Number((dividend * precision) / divisor) / Number(precision);
-}
-
-const thresholds = [
-	[BigInt(1024 * 1024 * 1024), "GB"],
-	[BigInt(1024 * 1024), "MB"],
-	[1024n, "KB"],
-	[0n, "B"],
-] as const;
