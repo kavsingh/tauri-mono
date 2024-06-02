@@ -75,7 +75,7 @@ export default function ChronoGraph(
 export type Sample = { value: bigint };
 
 const chronoGraphVariants = tv({
-	base: "size-full bg-muted/30 text-accent-foreground",
+	base: "size-full border-muted/60 bg-muted/30 text-accent-foreground",
 });
 
 function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
@@ -87,19 +87,30 @@ function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	canvas.height = canvas.clientHeight;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+	const bleed = 2;
 	const canvasStyles = getComputedStyle(canvas);
 	const step = canvas.width / Math.max(normalized.length - 1, 1);
+	const getY = (val: number) => (1 - val) * canvas.height;
 
 	ctx.strokeStyle = canvasStyles.color;
+	ctx.fillStyle = canvasStyles.borderColor;
+
+	ctx.beginPath();
+	ctx.moveTo(-bleed, canvas.height + bleed);
+	ctx.lineTo(-bleed, getY(normalized[0] ?? 1));
 
 	for (let i = 0; i < normalized.length; i++) {
-		const y = (1 - (normalized[i] ?? 1)) * canvas.height;
-
-		if (i === 0) ctx.moveTo(0, y);
-		else ctx.lineTo(i * step, y);
+		ctx.lineTo(i * step, getY(normalized[i] ?? 1));
 	}
 
+	ctx.lineTo(canvas.width + bleed, getY(normalized.at(-1) ?? 1));
+	ctx.lineTo(canvas.width + bleed, canvas.height + bleed);
+	ctx.lineTo(canvas.width + bleed, canvas.height + bleed);
+	ctx.moveTo(-bleed, canvas.height + bleed);
+	ctx.closePath();
+
 	ctx.stroke();
+	ctx.fill();
 }
 
 function normalizeValues(
