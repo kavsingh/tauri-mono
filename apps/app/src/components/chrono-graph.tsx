@@ -37,7 +37,7 @@ export default function ChronoGraph(
 		if (sample.value < rollingMin) rollingMin = sample.value;
 		else if (sample.value > rollingMax) rollingMax = sample.value;
 
-		const maxSamples = props.maxSamples ?? 10;
+		const maxSamples = props.maxSamples ?? 20;
 
 		setSamples((current) => {
 			return current
