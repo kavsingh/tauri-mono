@@ -1,7 +1,8 @@
-import { divBigint } from "./math";
+import { tryOr } from "./error";
+import { divBigint } from "./number";
 
-export function formatMem(memString: string) {
-	const mem = BigInt(memString);
+export function formatMem(value: string | number | bigint) {
+	const mem = tryOr(() => BigInt(value), 0n);
 
 	for (const [threshold, unit] of memoryThresholds) {
 		if (mem >= threshold) {

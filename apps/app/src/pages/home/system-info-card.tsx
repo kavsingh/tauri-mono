@@ -35,9 +35,7 @@ export default function SystemInfoCard() {
 						</div>
 					)}
 				</Show>
-				<div class="aspect-[3] w-full max-w-96">
-					<MemoryGraph systemInfo={infoQuery.data} />
-				</div>
+				<MemoryGraph systemInfo={infoQuery.data} />
 			</Card.Content>
 		</Card.Root>
 	);
