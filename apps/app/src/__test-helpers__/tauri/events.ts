@@ -1,10 +1,10 @@
 import { events } from "#__generated__/bindings";
 
-import type { SystemInfo } from "#__generated__/bindings";
+import type { SystemStats } from "#__generated__/bindings";
 import type { Mock } from "vitest";
 
-export function publishSystemInfoEvent(payload: SystemInfo) {
-	const calls: unknown[] = (events.systemInfoEvent.listen as Mock).mock.calls;
+export function publishSystemStatsEvent(payload: SystemStats) {
+	const calls: unknown[] = (events.systemStatsEvent.listen as Mock).mock.calls;
 
 	for (const call of calls) {
 		if (!Array.isArray(call)) continue;

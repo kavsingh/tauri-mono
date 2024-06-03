@@ -10,27 +10,40 @@ use tauri::async_runtime::{channel, spawn, Receiver};
 pub struct SystemInfo {
 	os_fullname: option::Option<String>,
 	os_arch: option::Option<String>,
+}
+
+#[derive(Clone, serde::Serialize, specta::Type)]
+#[serde(rename_all = "camelCase")]
+pub struct SystemStats {
 	mem_total: option::Option<String>,
 	mem_available: option::Option<String>,
 	sampled_at: String,
 }
 
 #[derive(Clone, serde::Serialize, specta::Type, tauri_specta::Event)]
-pub struct SystemInfoEvent(SystemInfo);
+pub struct SystemStatsEvent(SystemStats);
 
-// https://tauri.studio/en/docs/usage/howtos/command#complete-example
 #[tauri::command]
 #[specta::specta]
 pub fn get_system_info() -> SystemInfo {
-	create_system_info()
+	SystemInfo {
+		os_fullname: System::long_os_version(),
+		os_arch: System::cpu_arch(),
+	}
 }
 
-pub fn receive_system_info_events(period: Duration) -> Receiver<SystemInfoEvent> {
+#[tauri::command]
+#[specta::specta]
+pub fn get_system_stats() -> SystemStats {
+	sample_system_stats()
+}
+
+pub fn receive_system_stats_events(period: Duration) -> Receiver<SystemStatsEvent> {
 	let (tx, rx) = channel(1);
 
 	spawn(async move {
 		loop {
-			tx.send(SystemInfoEvent(create_system_info()))
+			tx.send(SystemStatsEvent(sample_system_stats()))
 				.await
 				.unwrap_or(());
 			std::thread::sleep(period);
@@ -40,7 +53,7 @@ pub fn receive_system_info_events(period: Duration) -> Receiver<SystemInfoEvent>
 	rx
 }
 
-fn create_system_info() -> SystemInfo {
+fn sample_system_stats() -> SystemStats {
 	let mut sys = System::new();
 
 	sys.refresh_memory();
@@ -50,9 +63,7 @@ fn create_system_info() -> SystemInfo {
 		Err(_) => 0,
 	};
 
-	SystemInfo {
-		os_fullname: System::long_os_version(),
-		os_arch: System::cpu_arch(),
+	SystemStats {
 		mem_total: Some(sys.total_memory().to_string()),
 		mem_available: Some(sys.available_memory().to_string()),
 		sampled_at: format!("{}", sampled_at),

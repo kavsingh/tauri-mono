@@ -7,7 +7,9 @@ mod system_info;
 
 use std::time::Duration;
 
-use system_info::{get_system_info, receive_system_info_events, SystemInfoEvent};
+use system_info::{
+	get_system_info, get_system_stats, receive_system_stats_events, SystemStatsEvent,
+};
 use tauri::{generate_handler, Builder, Manager};
 use tauri_plugin_theme::ThemePlugin;
 use tauri_specta::Event;
@@ -16,8 +18,11 @@ fn main() {
 	let mut ctx = tauri::generate_context!();
 	let specta_builder = {
 		let specta_builder = tauri_specta::ts::builder()
-			.events(tauri_specta::collect_events![SystemInfoEvent])
-			.commands(tauri_specta::collect_commands![get_system_info]);
+			.events(tauri_specta::collect_events![SystemStatsEvent])
+			.commands(tauri_specta::collect_commands![
+				get_system_info,
+				get_system_stats
+			]);
 
 		#[cfg(debug_assertions)]
 		let specta_builder = specta_builder.path("../src/__generated__/bindings.ts");
@@ -51,7 +56,7 @@ fn main() {
 
 			let handle = app.handle();
 			tauri::async_runtime::spawn(async move {
-				let mut receiver = receive_system_info_events(Duration::from_secs(1));
+				let mut receiver = receive_system_stats_events(Duration::from_secs(1));
 
 				while let Some(event) = receiver.recv().await {
 					event.emit_all(&handle).unwrap_or(());
