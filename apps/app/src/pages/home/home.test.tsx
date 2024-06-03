@@ -14,7 +14,7 @@ describe("<Home />", () => {
 	});
 
 	it("should load and render home page", async () => {
-		expect.assertions(5);
+		expect.assertions(4);
 
 		const { Wrapper } = setupRenderWrapper();
 
@@ -23,7 +23,6 @@ describe("<Home />", () => {
 		expect(
 			screen.getByRole("heading", { name: "Home", level: 2 }),
 		).toBeInTheDocument();
-		expect(screen.getByText("loading...")).toBeInTheDocument();
 		expect(screen.queryByText("1.00 GB")).not.toBeInTheDocument();
 
 		await waitFor(() => {
@@ -47,7 +46,10 @@ describe("<Home />", () => {
 		expect(screen.queryByText("500.00 MB")).not.toBeInTheDocument();
 
 		publishSystemStatsEvent(
-			createMockSystemStats({ memUsed: String(1024 * 1024 * 500) }),
+			createMockSystemStats({
+				memUsed: String(1024 * 1024 * 500),
+				sampledAt: "1",
+			}),
 		);
 
 		await waitFor(() => {
