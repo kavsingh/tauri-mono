@@ -30,10 +30,6 @@ export default function ChronoGraph(
 		);
 	});
 
-	function redraw() {
-		if (canvasEl) drawGraph(canvasEl, normalizedValues());
-	}
-
 	createEffect(() => {
 		const sample = props.sampleSource();
 
@@ -51,19 +47,29 @@ export default function ChronoGraph(
 		});
 	});
 
+	function redraw() {
+		if (canvasEl) drawGraph(canvasEl, normalizedValues());
+	}
+
+	const resizeObserver = new ResizeObserver((entries) => {
+		if (entries.some(({ target }) => target === canvasEl)) redraw();
+	});
+
 	createEffect(redraw);
-	window.addEventListener("resize", redraw);
 	schemeQuery.addEventListener("change", redraw);
 
 	onCleanup(() => {
-		window.removeEventListener("resize", redraw);
+		resizeObserver.disconnect();
 		schemeQuery.removeEventListener("change", redraw);
 	});
 
 	return (
 		<canvas
 			class={chronoGraphVariants({ class: props.class })}
-			ref={(el) => (canvasEl = el)}
+			ref={(el) => {
+				canvasEl = el;
+				resizeObserver.observe(canvasEl);
+			}}
 		/>
 	);
 }
