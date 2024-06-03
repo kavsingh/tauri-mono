@@ -3,8 +3,7 @@ import { Show } from "solid-js";
 
 import { commands } from "#__generated__/bindings";
 import Card from "#components/card";
-
-import InfoList from "../../components/info-list";
+import InfoList from "#components/info-list";
 
 export default function SystemInfoCard() {
 	const infoQuery = createQuery(() => ({
