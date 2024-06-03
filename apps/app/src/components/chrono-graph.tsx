@@ -16,6 +16,7 @@ export default function ChronoGraph(
 		class?: string | undefined;
 	} & VariantProps<typeof chronoGraphVariants>,
 ) {
+	const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 	let canvasEl: HTMLCanvasElement | undefined;
 	let rollingMin = 0n;
 	let rollingMax = 0n;
@@ -28,6 +29,10 @@ export default function ChronoGraph(
 			props.maxValue ?? rollingMax,
 		);
 	});
+
+	function redraw() {
+		if (canvasEl) drawGraph(canvasEl, normalizedValues());
+	}
 
 	createEffect(() => {
 		const sample = props.sampleSource();
@@ -46,16 +51,7 @@ export default function ChronoGraph(
 		});
 	});
 
-	createEffect(() => {
-		if (canvasEl) drawGraph(canvasEl, normalizedValues());
-	});
-
-	function redraw() {
-		if (canvasEl) drawGraph(canvasEl, normalizedValues());
-	}
-
-	const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
+	createEffect(redraw);
 	window.addEventListener("resize", redraw);
 	schemeQuery.addEventListener("change", redraw);
 
@@ -83,30 +79,35 @@ function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 
 	if (!ctx) return;
 
-	canvas.width = canvas.clientWidth;
-	canvas.height = canvas.clientHeight;
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-	const bleed = 2;
+	const width = canvas.clientWidth;
+	const height = canvas.clientHeight;
+	const scale = devicePixelRatio;
 	const canvasStyles = getComputedStyle(canvas);
-	const step = canvas.width / Math.max(normalized.length - 1, 1);
-	const getY = (val: number) => (1 - val) * canvas.height;
+	const step = width / Math.max(normalized.length - 1, 1);
+	const getY = (val: number) => (1 - val) * height;
+	const gutter = 2;
+
+	canvas.width = width * scale;
+	canvas.height = height * scale;
+
+	ctx.scale(scale, scale);
+	ctx.clearRect(0, 0, width, height);
 
 	ctx.strokeStyle = canvasStyles.color;
 	ctx.fillStyle = canvasStyles.borderColor;
 
 	ctx.beginPath();
-	ctx.moveTo(-bleed, canvas.height + bleed);
-	ctx.lineTo(-bleed, getY(normalized[0] ?? 1));
+	ctx.moveTo(-gutter, height + gutter);
+	ctx.lineTo(-gutter, getY(normalized[0] ?? 1));
 
 	for (let i = 0; i < normalized.length; i++) {
-		ctx.lineTo(i * step, getY(normalized[i] ?? 1));
+		ctx.lineTo(i * step, getY(normalized[i] ?? 0.5));
 	}
 
-	ctx.lineTo(canvas.width + bleed, getY(normalized.at(-1) ?? 1));
-	ctx.lineTo(canvas.width + bleed, canvas.height + bleed);
-	ctx.lineTo(canvas.width + bleed, canvas.height + bleed);
-	ctx.moveTo(-bleed, canvas.height + bleed);
+	ctx.lineTo(width + gutter, getY(normalized.at(-1) ?? 0.5));
+	ctx.lineTo(width + gutter, height + gutter);
+	ctx.lineTo(width + gutter, height + gutter);
+	ctx.moveTo(-gutter, height + gutter);
 	ctx.closePath();
 
 	ctx.stroke();
