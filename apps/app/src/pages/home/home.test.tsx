@@ -1,7 +1,7 @@
 import { render, waitFor, screen, cleanup } from "@solidjs/testing-library";
 import { describe, it, expect, vi, afterEach } from "vitest";
 
-import { createMockSystemStats } from "#__test-helpers__/mock-data/create";
+import { createMockSystemStats } from "#__test-helpers__/mock-data/system";
 import { setupRenderWrapper } from "#__test-helpers__/render-wrapper";
 import { publishSystemStatsEvent } from "#__test-helpers__/tauri/events";
 

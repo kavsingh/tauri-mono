@@ -3,7 +3,7 @@ import { vi } from "vitest";
 import {
 	createMockSystemInfo,
 	createMockSystemStats,
-} from "#__test-helpers__/mock-data/create";
+} from "#__test-helpers__/mock-data/system";
 
 import type { WebviewWindowHandle } from "@tauri-apps/api/window";
 import type {
