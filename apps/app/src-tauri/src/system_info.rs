@@ -16,6 +16,7 @@ pub struct SystemInfo {
 #[serde(rename_all = "camelCase")]
 pub struct SystemStats {
 	mem_total: option::Option<String>,
+	mem_used: option::Option<String>,
 	mem_available: option::Option<String>,
 	sampled_at: String,
 }
@@ -65,6 +66,7 @@ fn sample_system_stats() -> SystemStats {
 
 	SystemStats {
 		mem_total: Some(sys.total_memory().to_string()),
+		mem_used: Some(sys.used_memory().to_string()),
 		mem_available: Some(sys.available_memory().to_string()),
 		sampled_at: format!("{}", sampled_at),
 	}

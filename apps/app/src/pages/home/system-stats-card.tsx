@@ -32,9 +32,9 @@ export default function SystemStatsCard() {
 									</InfoList.Value>
 								</InfoList.Entry>
 								<InfoList.Entry>
-									<InfoList.Label>available memory</InfoList.Label>
+									<InfoList.Label>used memory</InfoList.Label>
 									<InfoList.Value>
-										{formatMem(info.memAvailable ?? "")}
+										{formatMem(info.memUsed ?? "")}
 									</InfoList.Value>
 								</InfoList.Entry>
 							</InfoList.Root>
@@ -48,7 +48,7 @@ export default function SystemStatsCard() {
 
 function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {
-		const value = props.systemStats?.memAvailable;
+		const value = props.systemStats?.memUsed;
 
 		return value ? { value: tryOr(() => BigInt(value), 0n) } : undefined;
 	});

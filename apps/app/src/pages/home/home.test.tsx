@@ -41,19 +41,19 @@ describe("<Home />", () => {
 		render(() => <Home />, { wrapper: Wrapper });
 
 		await waitFor(() => {
-			expect(screen.getByText("1.00 MB")).toBeInTheDocument();
+			expect(screen.getByText("600.00 MB")).toBeInTheDocument();
 		});
 
-		expect(screen.queryByText("2.00 MB")).not.toBeInTheDocument();
+		expect(screen.queryByText("500.00 MB")).not.toBeInTheDocument();
 
 		publishSystemStatsEvent(
-			createMockSystemStats({ memAvailable: String(1024 * 1024 * 2) }),
+			createMockSystemStats({ memUsed: String(1024 * 1024 * 500) }),
 		);
 
 		await waitFor(() => {
-			expect(screen.getByText("2.00 MB")).toBeInTheDocument();
+			expect(screen.getByText("500.00 MB")).toBeInTheDocument();
 		});
 
-		expect(screen.queryByText("1.00 MB")).not.toBeInTheDocument();
+		expect(screen.queryByText("600.00 MB")).not.toBeInTheDocument();
 	});
 });

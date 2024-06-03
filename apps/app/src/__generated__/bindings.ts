@@ -18,7 +18,7 @@ systemStatsEvent: "plugin:tauri-specta:system-stats-event"
 /** user-defined types **/
 
 export type SystemInfo = { osFullname: string | null; osArch: string | null }
-export type SystemStats = { memTotal: string | null; memAvailable: string | null; sampledAt: string }
+export type SystemStats = { memTotal: string | null; memUsed: string | null; memAvailable: string | null; sampledAt: string }
 export type SystemStatsEvent = SystemStats
 
 /** tauri-specta globals **/

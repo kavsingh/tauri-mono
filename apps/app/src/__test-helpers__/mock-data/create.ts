@@ -6,8 +6,9 @@ export const createMockSystemInfo = mockDataCreator<SystemInfo>({
 });
 
 export const createMockSystemStats = mockDataCreator<SystemStats>({
-	memAvailable: String(1024 * 1024), // 1 MB
-	memTotal: String(1024 * 1024 * 1024), // 1 GB
+	memTotal: String(1024 * 1024 * 1024),
+	memUsed: String(1024 * 1024 * 600),
+	memAvailable: String(1024 * 1024 * 400),
 	sampledAt: String(new Date("2024-06-01").getTime()),
 });
 
