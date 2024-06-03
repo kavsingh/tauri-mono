@@ -1,6 +1,7 @@
 import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
 import { tv } from "tailwind-variants";
 
+import { useResizeObserver } from "#hooks/use-resize-observer";
 import { tryOr } from "#lib/error";
 import { normalizeBigint } from "#lib/number";
 
@@ -17,6 +18,8 @@ export default function ChronoGraph(
 	} & VariantProps<typeof chronoGraphVariants>,
 ) {
 	const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+	const observeResize = useResizeObserver();
+	let unobserveResize: ReturnType<typeof observeResize> | undefined;
 	let canvasEl: HTMLCanvasElement | undefined;
 	let rollingMin = 0n;
 	let rollingMax = 0n;
@@ -51,15 +54,11 @@ export default function ChronoGraph(
 		if (canvasEl) drawGraph(canvasEl, normalizedValues());
 	}
 
-	const resizeObserver = new ResizeObserver((entries) => {
-		if (entries.some(({ target }) => target === canvasEl)) redraw();
-	});
-
 	createEffect(redraw);
 	schemeQuery.addEventListener("change", redraw);
 
 	onCleanup(() => {
-		resizeObserver.disconnect();
+		unobserveResize?.();
 		schemeQuery.removeEventListener("change", redraw);
 	});
 
@@ -68,7 +67,7 @@ export default function ChronoGraph(
 			class={chronoGraphVariants({ class: props.class })}
 			ref={(el) => {
 				canvasEl = el;
-				resizeObserver.observe(canvasEl);
+				observeResize(canvasEl, redraw);
 			}}
 		/>
 	);
