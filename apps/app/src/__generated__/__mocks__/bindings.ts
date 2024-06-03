@@ -1,8 +1,11 @@
-import { type WebviewWindowHandle } from "@tauri-apps/api/window";
 import { vi } from "vitest";
 
-import { createMockSystemInfo } from "#__test-helpers__/mock-data/create";
+import {
+	createMockSystemInfo,
+	createMockSystemStats,
+} from "#__test-helpers__/mock-data/create";
 
+import type { WebviewWindowHandle } from "@tauri-apps/api/window";
 import type {
 	commands as bindingsCommands,
 	events as bindingsEvents,
@@ -10,13 +13,14 @@ import type {
 
 export const commands: typeof bindingsCommands = {
 	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
+	getSystemStats: vi.fn(() => Promise.resolve(createMockSystemStats())),
 };
 
 export const events: Record<
 	keyof typeof bindingsEvents,
 	ReturnType<typeof mockEventHandles>
 > = {
-	systemInfoEvent: mockEventHandles(),
+	systemStatsEvent: mockEventHandles(),
 };
 
 function mockEventHandles(): {

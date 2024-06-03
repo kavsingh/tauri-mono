@@ -1,11 +1,15 @@
-import type { SystemInfo } from "#__generated__/bindings";
+import type { SystemInfo, SystemStats } from "#__generated__/bindings";
 
 export const createMockSystemInfo = mockDataCreator<SystemInfo>({
 	osFullname: "OS Fullname",
 	osArch: "OS Arch",
-	memAvailable: String(1024 * 1024), // 1 MB
-	memTotal: String(1024 * 1024 * 1024), // 1 GB
-	sampledAt: String(new Date("2024-06-01").getTime()),
+});
+
+export const createMockSystemStats = mockDataCreator<SystemStats>({
+	memTotal: String(1024 * 1024 * 1024),
+	memUsed: String(1024 * 1024 * 600),
+	memAvailable: String(1024 * 1024 * 400),
+	sampledAt: "0",
 });
 
 function mockDataCreator<TData>(defaults: TData) {

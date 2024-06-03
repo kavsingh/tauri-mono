@@ -3,19 +3,23 @@
          export const commands = {
 async getSystemInfo() : Promise<SystemInfo> {
 return await TAURI_INVOKE("plugin:tauri-specta|get_system_info");
+},
+async getSystemStats() : Promise<SystemStats> {
+return await TAURI_INVOKE("plugin:tauri-specta|get_system_stats");
 }
 }
 
 export const events = __makeEvents__<{
-systemInfoEvent: SystemInfoEvent
+systemStatsEvent: SystemStatsEvent
 }>({
-systemInfoEvent: "plugin:tauri-specta:system-info-event"
+systemStatsEvent: "plugin:tauri-specta:system-stats-event"
 })
 
 /** user-defined types **/
 
-export type SystemInfo = { osFullname: string | null; osArch: string | null; memTotal: string | null; memAvailable: string | null; sampledAt: string }
-export type SystemInfoEvent = SystemInfo
+export type SystemInfo = { osFullname: string | null; osArch: string | null }
+export type SystemStats = { memTotal: string | null; memUsed: string | null; memAvailable: string | null; sampledAt: string }
+export type SystemStatsEvent = SystemStats
 
 /** tauri-specta globals **/
 
