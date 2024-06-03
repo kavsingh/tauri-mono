@@ -37,7 +37,7 @@
 		"@vitejs/plugin-legacy": "5.4.1",
 		"@vitest/coverage-v8": "1.6.0",
 		"autoprefixer": "10.4.19",
-		"caniuse-lite": "1.0.30001625",
+		"caniuse-lite": "1.0.30001627",
 		"eslint-plugin-jest-dom": "5.4.0",
 		"eslint-plugin-solid": "0.14.0",
 		"eslint-plugin-tailwindcss": "3.17.0",
