@@ -20,11 +20,13 @@ const tsConfigSchema = z.object({
  * @returns {TsConfig | undefined}
  **/
 function readTsConfig(configPath) {
-	const contents = ts.findConfigFile(
-		path.isAbsolute(configPath) ? path.dirname(configPath) : __dirname,
-		ts.sys.fileExists,
-		configPath,
-	);
+	const { dir, name } = path.parse(
+		path.isAbsolute(configPath)
+			? configPath
+			: path.resolve(__dirname, configPath),
+	)
+
+	const contents = ts.findConfigFile(dir, ts.sys.fileExists, name);
 
 	return contents
 		? tsConfigSchema.parse(ts.readConfigFile(contents, ts.sys.readFile).config)

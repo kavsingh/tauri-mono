@@ -12,7 +12,7 @@ module.exports = {
 	root: true,
 	parserOptions: { project: path.resolve(__dirname, "./tsconfig.json") },
 	settings: {
-		"import/resolver": {
+		"import-x/resolver": {
 			"eslint-import-resolver-typescript": {
 				project: path.resolve(__dirname, "./tsconfig.json"),
 			},
@@ -20,7 +20,9 @@ module.exports = {
 	},
 	extends: [require.resolve("../../.eslintrc.cjs")],
 	rules: {
-		"import/order": importOrderConfig("tsconfig.json"),
+		"import-x/order": importOrderConfig(
+			path.resolve(__dirname, "./tsconfig.json"),
+		),
 	},
 	overrides: [
 		{
@@ -32,9 +34,6 @@ module.exports = {
 		{
 			files: ["src-isolation/**/*", "src/**/*"],
 			env: { node: false, browser: true },
-			settings: {
-				"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
-			},
 			rules: {
 				"no-console": "error",
 			},
