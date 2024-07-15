@@ -1,6 +1,7 @@
 /** @type {import("path")} */
 const path = require("node:path");
 
+/** @type {import("eslint-plugin-vitest")} */
 const vitest = require("eslint-plugin-vitest");
 
 const { importOrderConfig } = require("../../.eslint.helpers.cjs");
