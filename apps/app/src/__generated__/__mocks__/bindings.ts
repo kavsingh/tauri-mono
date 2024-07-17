@@ -5,7 +5,7 @@ import {
 	createMockSystemStats,
 } from "#__test-helpers__/mock-data/system";
 
-import type { WebviewWindowHandle } from "@tauri-apps/api/window";
+import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import type {
 	commands as bindingsCommands,
 	events as bindingsEvents,
@@ -24,9 +24,9 @@ export const events: Record<
 };
 
 function mockEventHandles(): {
-	listen(arg: unknown): ReturnType<WebviewWindowHandle["listen"]>;
-	once(arg: unknown): ReturnType<WebviewWindowHandle["once"]>;
-	emit(arg: unknown): ReturnType<WebviewWindowHandle["emit"]>;
+	listen(arg: unknown): ReturnType<WebviewWindow["listen"]>;
+	once(arg: unknown): ReturnType<WebviewWindow["once"]>;
+	emit(arg: unknown): ReturnType<WebviewWindow["emit"]>;
 } {
 	return {
 		listen: vi.fn(() => Promise.resolve(() => undefined)),

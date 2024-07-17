@@ -1,27 +1,20 @@
 {
-	"package": {
-		"productName": "App",
-		"version": "../package.json"
-	},
-	"build": {
-		"distDir": "../dist",
-		"devPath": "http://localhost:3000",
-		"beforeDevCommand": "pnpm before:dev",
-		"beforeBuildCommand": "pnpm before:build"
-	},
-	"tauri": {
-		"pattern": {
-			"use": "isolation",
-			"options": {
-				"dir": "../dist-isolation"
-			}
-		},
-		"allowlist": {
-			"all": false,
-			"dialog": { "open": true },
-			"window": { "show": true, "startDragging": true }
-		},
+	"$schema": "../node_modules/@tauri-apps/cli/schema.json",
+	"productName": "App",
+	"version": "../package.json",
+	"identifier": "com.app.dev",
+	"app": {
 		"macOSPrivateApi": true,
+		"security": {
+			"assetProtocol": { "enable": false, "scope": [] },
+			"dangerousDisableAssetCspModification": false,
+			"freezePrototype": true,
+			"pattern": {
+				"use": "isolation",
+				"options": { "dir": "../dist-isolation" }
+			},
+			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+		},
 		"windows": [
 			{
 				"title": "App",
@@ -34,45 +27,48 @@
 				"transparent": true,
 				"visible": false
 			}
+		]
+	},
+	"build": {
+		"frontendDist": "../dist",
+		"devUrl": "http://localhost:3000",
+		"beforeDevCommand": "pnpm before:dev",
+		"beforeBuildCommand": "pnpm before:build"
+	},
+	"bundle": {
+		"active": true,
+		"targets": "all",
+		"icon": [
+			"icons/32x32.png",
+			"icons/128x128.png",
+			"icons/128x128@2x.png",
+			"icons/icon.icns",
+			"icons/icon.ico"
 		],
-		"bundle": {
-			"active": true,
-			"targets": "all",
-			"identifier": "com.app.dev",
-			"icon": [
-				"icons/32x32.png",
-				"icons/128x128.png",
-				"icons/128x128@2x.png",
-				"icons/icon.icns",
-				"icons/icon.ico"
-			],
-			"resources": [],
-			"externalBin": [],
-			"copyright": "",
-			"category": "DeveloperTool",
-			"shortDescription": "",
-			"longDescription": "",
-			"deb": {
-				"depends": []
-			},
-			"macOS": {
-				"frameworks": [],
-				"minimumSystemVersion": "",
-				"exceptionDomain": "",
-				"signingIdentity": null,
-				"entitlements": null
-			},
-			"windows": {
-				"certificateThumbprint": null,
-				"digestAlgorithm": "sha256",
-				"timestampUrl": ""
+		"resources": [],
+		"externalBin": [],
+		"copyright": "",
+		"category": "DeveloperTool",
+		"shortDescription": "",
+		"longDescription": "",
+		"linux": {
+			"deb": { "depends": [] },
+			"appimage": {
+				"bundleMediaFramework": false,
+				"files": {}
 			}
 		},
-		"updater": {
-			"active": false
+		"macOS": {
+			"frameworks": [],
+			"minimumSystemVersion": "12.0.0",
+			"exceptionDomain": "",
+			"signingIdentity": null,
+			"entitlements": null
 		},
-		"security": {
-			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+		"windows": {
+			"certificateThumbprint": null,
+			"digestAlgorithm": "sha256",
+			"timestampUrl": ""
 		}
 	}
 }

@@ -1,10 +1,10 @@
-import { appWindow } from "@tauri-apps/api/window";
+import { getCurrent } from "@tauri-apps/api/window";
 
 export default function WindowDragRegion(props: {
 	class?: string | undefined;
 }) {
 	function handleMouseDown() {
-		void appWindow.startDragging();
+		void getCurrent().startDragging();
 	}
 
 	return <div class={props.class} onMouseDown={handleMouseDown} />;

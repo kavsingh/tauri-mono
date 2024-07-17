@@ -1,3 +1,4 @@
+// Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(
 	all(not(debug_assertions), target_os = "windows"),
 	windows_subsystem = "windows"
@@ -5,18 +6,15 @@
 
 mod system_info;
 
-use std::time::Duration;
-
 use system_info::{
 	get_system_info, get_system_stats, receive_system_stats_events, SystemStatsEvent,
 };
-use tauri::{generate_handler, Builder, Manager};
-use tauri_plugin_theme::ThemePlugin;
+use tauri::{Builder, Manager};
 use tauri_specta::Event;
 
 fn main() {
 	let mut ctx = tauri::generate_context!();
-	let specta_builder = {
+	let (invoke_handler, register_events) = {
 		let specta_builder = tauri_specta::ts::builder()
 			.events(tauri_specta::collect_events![SystemStatsEvent])
 			.commands(tauri_specta::collect_commands![
@@ -27,14 +25,17 @@ fn main() {
 		#[cfg(debug_assertions)]
 		let specta_builder = specta_builder.path("../src/__generated__/bindings.ts");
 
-		specta_builder.into_plugin()
+		specta_builder.build().unwrap()
 	};
 
 	Builder::default()
-		.plugin(specta_builder)
-		.plugin(ThemePlugin::init(ctx.config_mut()))
+		.plugin(tauri_plugin_dialog::init())
+		.plugin(tauri_plugin_theme::init(ctx.config_mut()))
+		.invoke_handler(invoke_handler)
 		.setup(|app| {
-			let main_window = app.get_window("main").unwrap();
+			register_events(app);
+
+			let main_window = app.get_webview_window("main").unwrap();
 
 			#[cfg(debug_assertions)]
 			{
@@ -59,13 +60,12 @@ fn main() {
 				let mut receiver = receive_system_stats_events(Duration::from_secs(1));
 
 				while let Some(event) = receiver.recv().await {
-					event.emit_all(&handle).unwrap_or(());
+					event.emit(&handle).unwrap_or(());
 				}
 			});
 
 			Ok(())
 		})
-		.invoke_handler(generate_handler![get_system_info])
 		.run(ctx)
 		.expect("error while running tauri application");
 }
