@@ -34,6 +34,7 @@ module.exports = {
 		"@typescript-eslint/consistent-type-definitions": ["warn", "type"],
 		"@typescript-eslint/consistent-type-imports": "error",
 		"@typescript-eslint/member-ordering": "warn",
+
 		"no-shadow": "off",
 		"@typescript-eslint/no-shadow": [
 			"error",
@@ -42,13 +43,21 @@ module.exports = {
 				ignoreFunctionTypeParameterNameValueShadow: true,
 			},
 		],
-		"no-throw-literal": "off",
-		"@typescript-eslint/no-throw-literal": "error",
+
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": [
 			"error",
-			{ argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+			{
+				args: "all",
+				argsIgnorePattern: "^_",
+				caughtErrors: "all",
+				caughtErrorsIgnorePattern: "^_",
+				destructuredArrayIgnorePattern: "^_",
+				varsIgnorePattern: "^_",
+				ignoreRestSiblings: true,
+			},
 		],
+
 		"filenames/match-regex": ["error", "^[a-z0-9-.]+$", true],
 		"filenames/match-exported": ["error", "kebab"],
 		"import-x/consistent-type-specifier-style": ["error", "prefer-top-level"],
@@ -64,7 +73,10 @@ module.exports = {
 		{
 			files: ["*.c[jt]s?(x)"],
 			parserOptions: { sourceType: "script" },
-			rules: { "@typescript-eslint/no-var-requires": "off" },
+			rules: {
+				"@typescript-eslint/no-require-imports": "off",
+				"@typescript-eslint/no-var-requires": "off",
+			},
 		},
 		{
 			files: ["*.?(c)js?(x)"],
