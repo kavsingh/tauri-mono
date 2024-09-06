@@ -4,12 +4,12 @@
 )]
 
 mod system_info;
+mod system_stats;
 
-use std::time::Duration;
+use std::thread::spawn;
 
-use system_info::{
-	get_system_info, get_system_stats, receive_system_stats_events, SystemStatsEvent,
-};
+use system_info::get_system_info;
+use system_stats::{get_system_stats, ManagedSystemStatsState, SystemStatsEvent};
 use tauri::{generate_handler, Builder, Manager};
 use tauri_plugin_theme::ThemePlugin;
 use tauri_specta::Event;
@@ -31,6 +31,7 @@ fn main() {
 	};
 
 	Builder::default()
+		.manage(ManagedSystemStatsState::default())
 		.plugin(specta_builder)
 		.plugin(ThemePlugin::init(ctx.config_mut()))
 		.setup(|app| {
@@ -54,14 +55,19 @@ fn main() {
 			window_vibrancy::apply_acrylic(&main_window, None)
 				.expect("Unsupported platform! 'apply_acrylic' is only supported on Windows");
 
-			let handle = app.handle();
-			tauri::async_runtime::spawn(async move {
-				let mut receiver = receive_system_stats_events(Duration::from_secs(1));
+			if let Some(stats_state) = app.try_state::<ManagedSystemStatsState>() {
+				let handle = app.handle();
 
-				while let Some(event) = receiver.recv().await {
-					event.emit_all(&handle).unwrap_or(());
+				if let Ok((_, receiver)) = stats_state.subscribe() {
+					spawn(move || {
+						while let Ok(event) = receiver.recv() {
+							event.emit_all(&handle).unwrap_or(());
+						}
+					});
+				} else {
+					eprintln!("could not subscribe to stats events");
 				}
-			});
+			}
 
 			Ok(())
 		})

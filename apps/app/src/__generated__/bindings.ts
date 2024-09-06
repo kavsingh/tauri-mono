@@ -4,8 +4,13 @@
 async getSystemInfo() : Promise<SystemInfo> {
 return await TAURI_INVOKE("plugin:tauri-specta|get_system_info");
 },
-async getSystemStats() : Promise<SystemStats> {
-return await TAURI_INVOKE("plugin:tauri-specta|get_system_stats");
+async getSystemStats() : Promise<__Result__<{ memTotal: string | null; memUsed: string | null; memAvailable: string | null; sampledAt: string }, string>> {
+try {
+    return { status: "ok", data: await TAURI_INVOKE("plugin:tauri-specta|get_system_stats") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
 }
 }
 

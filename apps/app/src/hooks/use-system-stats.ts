@@ -9,11 +9,13 @@ export default function useSystemStats() {
 	const queryClient = useQueryClient();
 	const query = createQuery(() => ({
 		queryKey,
-		queryFn: () => commands.getSystemStats(),
-		reconcile: (oldData, newData) => {
-			return oldData && BigInt(oldData.sampledAt) >= BigInt(newData.sampledAt)
-				? oldData
-				: newData;
+		reconcile,
+		async queryFn() {
+			const result = await commands.getSystemStats();
+
+			return result.status === "ok"
+				? result.data
+				: Promise.reject(new Error(result.error));
 		},
 	}));
 
@@ -38,13 +40,30 @@ const startSubscription = (() => {
 
 		unlisten = await events.systemStatsEvent.listen((event) => {
 			const current = cachedClient.getQueryData<SystemStats>(queryKey);
-			const shouldUpdate = current
-				? BigInt(event.payload.sampledAt) > BigInt(current.sampledAt)
-				: true;
+			const next = reconcile(current, event.payload);
 
-			if (shouldUpdate) {
-				cachedClient.setQueryData(queryKey, () => event.payload);
+			if (next !== current) {
+				cachedClient.setQueryData(queryKey, () => next);
 			}
 		});
 	};
 })();
+
+function reconcile(current: SystemStats | undefined, incoming: SystemStats) {
+	if (!current) {
+		return incoming;
+	}
+
+	const currentDate = new Date(current.sampledAt);
+	const incomingDate = new Date(incoming.sampledAt);
+
+	if (!(isValidDate(currentDate) && isValidDate(incomingDate))) {
+		return incoming;
+	}
+
+	return incomingDate >= currentDate ? incoming : current;
+}
+
+function isValidDate(date: Date) {
+	return !Number.isNaN(date.getTime());
+}
