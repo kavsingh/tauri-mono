@@ -1,9 +1,15 @@
-import { fileURLToPath, pathToFileURL } from "url";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-export function toDirname(importUrl: string) {
-	return fileURLToPath(new URL(".", importUrl));
+export function isRunAsScript(importMetaUrl: string) {
+	return (
+		!!process.argv[1] && pathToFileURL(process.argv[1]).href === importMetaUrl
+	);
 }
 
-export function isCli(importUrl: string) {
-	return !!process.argv[1] && pathToFileURL(process.argv[1]).href === importUrl;
+export function getFileLocation(importMetaUrl: string) {
+	const filename = fileURLToPath(importMetaUrl);
+	const dirname = path.dirname(filename);
+
+	return { filename, dirname } as const;
 }

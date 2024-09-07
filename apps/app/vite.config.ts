@@ -32,9 +32,5 @@ function checker(mode: string) {
 	return checkerPlugin({
 		overlay: { initialIsOpen: false },
 		typescript: true,
-		eslint: {
-			lintCommand: 'eslint "./src/**/*.+(ts|tsx)"',
-			dev: { logLevel: ["error"] },
-		},
 	});
 }

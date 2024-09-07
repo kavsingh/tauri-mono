@@ -1,5 +1,0 @@
-.vscode
-**/.turbo
-**/node_modules
-**/__generated__/**/*
-!**/__generated__/__mocks__/**/*

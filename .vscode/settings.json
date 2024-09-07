@@ -21,6 +21,8 @@
 	},
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"rust-analyzer.check.command": "clippy",
+	"eslint.options": { "flags": ["unstable_ts_config"] },
+	"eslint.workingDirectories": [{ "mode": "auto" }],
 	"tailwindCSS.validate": true,
 	"tailwindCSS.classAttributes": ["class", "classList"],
 	"tailwindCSS.experimental.classRegex": [
