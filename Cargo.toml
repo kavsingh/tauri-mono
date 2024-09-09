@@ -1,2 +1,12 @@
 [workspace]
+resolver = "2"
 members = ["apps/app/src-tauri"]
+
+# https://doc.rust-lang.org/cargo/reference/profiles.html
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+lto = "fat"
+incremental = false
+# https://users.rust-lang.org/t/panic-unwind-vs-abort/9928/4
+panic = "abort"

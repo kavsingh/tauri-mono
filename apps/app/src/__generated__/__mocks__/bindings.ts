@@ -10,7 +10,7 @@ import type {
 	commands as bindingsCommands,
 	events as bindingsEvents,
 } from "#__generated__/bindings";
-import type { WebviewWindowHandle } from "@tauri-apps/api/window";
+import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 export const commands: typeof bindingsCommands = {
 	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
@@ -27,9 +27,9 @@ export const events: Record<
 };
 
 function mockEventHandles(): {
-	listen(arg: unknown): ReturnType<WebviewWindowHandle["listen"]>;
-	once(arg: unknown): ReturnType<WebviewWindowHandle["once"]>;
-	emit(arg: unknown): ReturnType<WebviewWindowHandle["emit"]>;
+	listen(arg: unknown): ReturnType<WebviewWindow["listen"]>;
+	once(arg: unknown): ReturnType<WebviewWindow["once"]>;
+	emit(arg: unknown): ReturnType<WebviewWindow["emit"]>;
 } {
 	return {
 		listen: vi.fn(() => Promise.resolve(() => undefined)),

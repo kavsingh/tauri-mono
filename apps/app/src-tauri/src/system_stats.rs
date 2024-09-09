@@ -9,7 +9,7 @@ use std::{
 
 use sysinfo::System;
 
-#[derive(Clone, serde::Serialize, specta::Type)]
+#[derive(Debug, Clone, Default, serde::Serialize, specta::Type)]
 #[serde(rename_all = "camelCase")]
 pub struct SystemStats {
 	mem_total: Option<String>,
@@ -18,7 +18,7 @@ pub struct SystemStats {
 	sampled_at: String,
 }
 
-#[derive(Clone, serde::Serialize, specta::Type, tauri_specta::Event)]
+#[derive(Debug, Clone, Default, serde::Serialize, specta::Type, tauri_specta::Event)]
 pub struct SystemStatsEvent(SystemStats);
 
 struct CurrentStats {
