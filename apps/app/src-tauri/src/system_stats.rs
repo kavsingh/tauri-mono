@@ -46,7 +46,7 @@ impl EventSubscribers {
 		subs.iter()
 			.for_each(|(id, sub)| match sub.send(stats.clone()) {
 				Ok(_) => (),
-				Err(_) => eprintln!("could not publish event to {}", id),
+				Err(_) => log::error!("could not publish event to {}", id),
 			});
 
 		Ok(())
@@ -91,10 +91,10 @@ impl SystemStatsState {
 
 				match subscribers_handle.publish(SystemStatsEvent(next_stats)) {
 					Ok(_) => (),
-					Err(e) => eprintln!("could not publish stats event: {}", e),
+					Err(e) => log::error!("could not publish stats event: {}", e),
 				};
 			} else {
-				eprintln!("could not get write lock for current stats");
+				log::error!("could not get write lock for current stats");
 			}
 
 			std::thread::sleep(Duration::from_millis(1000));

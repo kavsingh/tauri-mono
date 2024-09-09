@@ -31,9 +31,10 @@ fn main() {
 		.expect("Failed to export typescript bindings");
 
 	Builder::default()
-		.manage(ManagedSystemStatsState::default())
+		.plugin(tauri_plugin_log::Builder::new().build())
 		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_theme::init(ctx.config_mut()))
+		.manage(ManagedSystemStatsState::default())
 		.invoke_handler(specta_builder.invoke_handler())
 		.setup(move |app| {
 			specta_builder.mount_events(app);
@@ -58,6 +59,8 @@ fn main() {
 			window_vibrancy::apply_acrylic(&main_window, None)
 				.expect("Unsupported platform! 'apply_acrylic' is only supported on Windows");
 
+			log::info!("subscribing to stats events");
+
 			if let Some(stats_state) = app.try_state::<ManagedSystemStatsState>() {
 				let handle = app.handle().clone();
 
@@ -67,13 +70,13 @@ fn main() {
 							match event.emit(&handle) {
 								Ok(_) => (),
 								Err(e) => {
-									eprintln!("could not emit stats event: {:?}", e);
+									log::error!("could not emit stats event: {:?}", e);
 								}
 							}
 						}
 					});
 				} else {
-					eprintln!("could not subscribe to stats events");
+					log::error!("could not subscribe to stats events");
 				}
 			}
 
