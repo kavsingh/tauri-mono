@@ -17,6 +17,7 @@
 		"dev": "tauri dev",
 		"build:mac": "tauri build --target universal-apple-darwin",
 		"build:win": "tauri build --target x86_64-pc-windows-msvc",
+		"build:linux": "tauri build",
 		"build:isolation": "rimraf ./dist-isolation && vite -c vite.isolation.config.ts build",
 		"testscript": "node --import=tsx scripts/testscript.ts"
 	},
