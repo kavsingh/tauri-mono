@@ -50,19 +50,19 @@ function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {
 		const value = props.systemStats?.memUsed;
 
-		return value ? { value: tryOr(() => BigInt(value), 0n) } : undefined;
+		return value ? { value: tryOr(() => BigInt(value), BigInt(0)) } : undefined;
 	});
 
 	const maxValue = createMemo<bigint>(() => {
 		const value = props.systemStats?.memTotal;
 
-		return value ? tryOr(() => BigInt(value), 0n) : 0n;
+		return value ? tryOr(() => BigInt(value), BigInt(0)) : BigInt(0);
 	});
 
 	return (
 		<ChronoGraph
 			sampleSource={sample}
-			minValue={0n}
+			minValue={BigInt(0)}
 			maxValue={maxValue()}
 			class="h-24 w-full rounded-lg"
 		/>

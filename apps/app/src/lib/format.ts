@@ -2,7 +2,7 @@ import { tryOr } from "./error";
 import { divBigint } from "./number";
 
 export function formatMem(value: string | number | bigint) {
-	const mem = tryOr(() => BigInt(value), 0n);
+	const mem = tryOr(() => BigInt(value), BigInt(0));
 
 	for (const [threshold, unit] of memoryThresholds) {
 		if (mem >= threshold) {
@@ -16,6 +16,6 @@ export function formatMem(value: string | number | bigint) {
 const memoryThresholds = [
 	[BigInt(1024 * 1024 * 1024), "GB"],
 	[BigInt(1024 * 1024), "MB"],
-	[1024n, "KB"],
-	[0n, "B"],
+	[BigInt(1024), "KB"],
+	[BigInt(0), "B"],
 ] as const;

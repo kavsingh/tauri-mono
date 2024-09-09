@@ -21,8 +21,8 @@ export default function ChronoGraph(
 	const observeResize = useResizeObserver();
 	let unobserveResize: ReturnType<typeof observeResize> | undefined;
 	let canvasEl: HTMLCanvasElement | undefined;
-	let rollingMin = 0n;
-	let rollingMax = 0n;
+	let rollingMin = BigInt(0);
+	let rollingMax = BigInt(0);
 
 	const [samples, setSamples] = createSignal<Sample[]>([]);
 	const normalizedValues = createMemo(() => {
