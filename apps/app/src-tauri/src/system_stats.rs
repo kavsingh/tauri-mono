@@ -130,7 +130,7 @@ impl Default for SystemStatsState {
 }
 
 #[derive(Default)]
-pub struct ManagedSystemStatsState(Arc<Mutex<SystemStatsState>>);
+pub struct ManagedSystemStatsState(Mutex<SystemStatsState>);
 
 impl ManagedSystemStatsState {
 	pub fn get_current(&self) -> Result<SystemStats, String> {
@@ -152,7 +152,7 @@ impl ManagedSystemStatsState {
 #[tauri::command]
 #[specta::specta]
 pub fn get_system_stats(
-	state: tauri::State<'_, ManagedSystemStatsState>,
+	state: tauri::State<ManagedSystemStatsState>,
 ) -> Result<SystemStats, String> {
 	state.get_current()
 }
