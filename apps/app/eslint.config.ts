@@ -50,7 +50,7 @@ export default tsEslintPlugin.config(
 		settings: {
 			tailwindcss: {
 				config: path.join(dirname, "tailwind.config.ts"),
-				callees: ["twMerge", "twJoin"],
+				callees: ["tv", "classList"],
 			},
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
