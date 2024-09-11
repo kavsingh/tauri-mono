@@ -7,7 +7,14 @@ import * as tsEslintPlugin from "typescript-eslint";
 
 export default tsEslintPlugin.config(
 	{
-		ignores: [".vscode/*", ".turbo/*", ".temp/*", "target/*"],
+		ignores: [
+			".vscode/*",
+			".turbo/*",
+			".temp/*",
+			"target/*",
+			"apps/*",
+			"packages/*",
+		],
 	},
 
 	{
@@ -112,4 +119,10 @@ export default tsEslintPlugin.config(
 	},
 
 	eslintPluginPrettierRecommended,
+
+	{
+		rules: {
+			"prettier/prettier": "warn",
+		},
+	},
 );

@@ -19,18 +19,18 @@ import { getFileLocation } from "./scripts/lib";
 const { dirname } = getFileLocation(import.meta.url);
 
 export default tsEslintPlugin.config(
+	...baseConfig,
+
 	{
 		ignores: [
-			"**/src-tauri/*",
-			"**/dist/*",
-			"**/dist-isolation/*",
-			"**/coverage/*",
+			"src-tauri/*",
+			"dist/*",
+			"dist-isolation/*",
+			"coverage/*",
 			"**/__generated__/*",
 			"!**/__generated__/__mocks__/",
 		],
 	},
-
-	...baseConfig,
 
 	{
 		settings: {
