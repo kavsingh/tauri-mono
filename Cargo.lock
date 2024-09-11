@@ -4355,15 +4355,14 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-theme"
-version = "0.4.1"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c23856e93f56cd8d1868e7dd8a4b529b836fd5da315cefd7702b252a850cdf5a"
+checksum = "913824becec38058248b785ce6b6035ec914e450eb4c55548a975c225214d2d0"
 dependencies = [
- "cocoa 0.25.0",
+ "cocoa 0.26.0",
  "dirs-next",
  "futures-lite 2.3.0",
  "gtk",
- "once_cell",
  "serde",
  "tauri",
  "tauri-plugin",
