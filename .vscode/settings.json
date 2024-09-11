@@ -19,8 +19,8 @@
 		"**/dist": true,
 		"**/target": true
 	},
-	"typescript.tsdk": "node_modules/typescript/lib",
 	"rust-analyzer.check.command": "clippy",
+	"typescript.tsdk": "node_modules/typescript/lib",
 	"eslint.options": { "flags": ["unstable_ts_config"] },
 	"eslint.workingDirectories": [{ "mode": "auto" }],
 	"tailwindCSS.validate": true,
