@@ -6,7 +6,6 @@
 	"permissions": [
 		"core:window:allow-show",
 		"core:event:allow-listen",
-		"core:event:allow-unlisten",
-		"log:default"
+		"core:event:allow-unlisten"
 	]
 }

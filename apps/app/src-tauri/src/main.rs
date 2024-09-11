@@ -31,7 +31,7 @@ fn main() {
 		.expect("Failed to export typescript bindings");
 
 	Builder::default()
-		.plugin(tauri_plugin_log::Builder::new().build())
+		.plugin(tauri_plugin_log::Builder::default().build())
 		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_theme::init(ctx.config_mut()))
 		.manage(ManagedSystemStatsState::default())

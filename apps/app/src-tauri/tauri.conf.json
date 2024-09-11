@@ -17,6 +17,7 @@
 		},
 		"windows": [
 			{
+				"label": "main",
 				"title": "App",
 				"width": 800,
 				"height": 600,
