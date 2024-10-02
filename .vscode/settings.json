@@ -28,16 +28,19 @@
 	"tailwindCSS.experimental.classRegex": [
 		["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
 	],
-	"[javascript]": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
-	},
-	"[javascriptreact]": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	"[rust]": {
+		"editor.defaultFormatter": "rust-lang.rust-analyzer"
 	},
 	"[typescript]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[typescriptreact]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"[javascriptreact]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[html]": {

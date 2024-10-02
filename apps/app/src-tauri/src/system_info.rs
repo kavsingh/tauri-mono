@@ -1,4 +1,5 @@
 use std::option;
+
 use sysinfo::System;
 
 #[derive(Clone, serde::Serialize, specta::Type)]
