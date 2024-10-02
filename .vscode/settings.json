@@ -26,7 +26,7 @@
 	"tailwindCSS.validate": true,
 	"tailwindCSS.classAttributes": ["class", "classList"],
 	"tailwindCSS.experimental.classRegex": [
-		["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+		["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
 	],
 	"[rust]": {
 		"editor.defaultFormatter": "rust-lang.rust-analyzer"
