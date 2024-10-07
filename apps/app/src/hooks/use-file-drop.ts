@@ -1,4 +1,4 @@
-import { getCurrent } from "@tauri-apps/api/webview";
+import { getCurrentWebview } from "@tauri-apps/api/webview";
 import { createSignal, onCleanup } from "solid-js";
 
 import type { JSX } from "solid-js";
@@ -10,8 +10,8 @@ export default function useFileDrop() {
 	// isActive directly (use store instead of signals)
 	let isOverElement = false;
 
-	const unlistenPromise = getCurrent().onDragDropEvent((event) => {
-		if (isOverElement && event.payload.type === "dropped") {
+	const unlistenPromise = getCurrentWebview().onDragDropEvent((event) => {
+		if (isOverElement && event.payload.type === "drop") {
 			setDroppedFiles(event.payload.paths);
 		}
 	});

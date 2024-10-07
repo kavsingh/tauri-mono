@@ -33,7 +33,7 @@ fn main() {
 		.expect("Failed to export typescript bindings");
 
 	Builder::default()
-		.plugin(tauri_plugin_log::Builder::default().build())
+		.plugin(get_log_builder().build())
 		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_theme::init(ctx.config_mut()))
 		.manage(ManagedSystemStatsState::default())
@@ -86,4 +86,21 @@ fn main() {
 		})
 		.run(ctx)
 		.expect("error while running tauri application");
+}
+
+fn get_log_builder() -> tauri_plugin_log::Builder {
+	let builder = tauri_plugin_log::Builder::default();
+
+	if cfg!(debug_assertions) {
+		builder.level(::log::LevelFilter::Trace).targets([
+			tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Webview),
+			tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout),
+		])
+	} else {
+		builder
+			.level(::log::LevelFilter::Debug)
+			.targets([tauri_plugin_log::Target::new(
+				tauri_plugin_log::TargetKind::LogDir { file_name: None },
+			)])
+	}
 }

@@ -1,17 +1,24 @@
-import { getCurrent } from "@tauri-apps/api/window";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { attachConsole } from "@tauri-apps/plugin-log";
 import { render } from "solid-js/web";
 
 import "./index.css";
 import App from "./app";
 
-// workaround white flash on start.
-// see: https://github.com/tauri-apps/tauri/issues/5170
-void getCurrent().show();
+if (import.meta.env.DEV) {
+	void attachConsole().then(renderAndShow);
+} else {
+	renderAndShow();
+}
 
-const appRoot = document.getElementById("app-root");
+function renderAndShow() {
+	const appRoot = document.getElementById("app-root");
 
-if (!appRoot) throw new Error("#app-root not found");
+	if (!appRoot) throw new Error("#app-root not found");
 
-const dispose = render(() => <App />, appRoot);
+	render(() => <App />, appRoot);
 
-if (import.meta.hot) import.meta.hot.dispose(dispose);
+	// workaround white flash on start.
+	// see: https://github.com/tauri-apps/tauri/issues/5170
+	void getCurrentWindow().show();
+}
