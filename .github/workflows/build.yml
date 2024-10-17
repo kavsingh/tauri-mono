@@ -25,14 +25,14 @@ jobs:
       - uses: ./.github/actions/setup
         id: setup
 
-      - uses: ./.github/actions/read-tauri-config
-        id: read-config
+      - uses: ./.github/actions/get-app-properties
+        id: get-app-properties
         with:
           app_path: apps/app
 
       - id: prefix
         run: |
-          echo "result=${{ steps.read-config.outputs.product_name }}_${{ steps.read-config.outputs.version }}" >> $GITHUB_OUTPUT
+          echo "result=${{ steps.get-app-properties.outputs.product_name }}_${{ steps.get-app-properties.outputs.version }}" >> $GITHUB_OUTPUT
 
       - name: (macOS) Build
         if: matrix.os == 'macos-latest'
@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prefix.outputs.result }}-macos
-          path: apps/app/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
+          path: target/universal-apple-darwin/release/bundle/dmg/*.dmg
           if-no-files-found: error
           overwrite: true
 
@@ -56,6 +56,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prefix.outputs.result }}-windows
-          path: apps\app\src-tauri\target\x86_64-pc-windows-msvc\release\bundle\nsis\*.exe
+          path: target\x86_64-pc-windows-msvc\release\bundle\nsis\*.exe
           if-no-files-found: error
           overwrite: true

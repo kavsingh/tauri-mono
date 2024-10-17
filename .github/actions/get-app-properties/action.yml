@@ -1,5 +1,5 @@
-name: Read Tauri config
-description: Read propertied from Tauri config
+name: Get app properties
+description: Read application properties at path
 
 inputs:
   app_path:
