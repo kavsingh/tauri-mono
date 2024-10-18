@@ -12,6 +12,8 @@ jobs:
   build:
     name: Build
     needs: test-lint
+    permissions:
+      contents: write
     defaults:
       run:
         shell: bash
@@ -26,36 +28,18 @@ jobs:
         id: setup
 
       - uses: ./.github/actions/get-app-properties
-        id: get-app-properties
+        id: properties
         with:
           app_path: apps/app
 
-      - id: prefix
-        run: |
-          echo "result=${{ steps.get-app-properties.outputs.product_name }}_${{ steps.get-app-properties.outputs.version }}" >> $GITHUB_OUTPUT
+      - name: Build
+        run: pnpm build:${{ matrix.os == 'windows-latest' && 'win' || 'mac' }} --cache-dir=${{ steps.setup.outputs.turbo_cache_dir }}
 
-      - name: (macOS) Build
-        if: matrix.os == 'macos-latest'
-        run: pnpm build:mac --cache-dir=${{ steps.setup.outputs.turbo_cache_dir }}
-
-      - name: (macOS) Upload artifact
-        if: ${{ success() && matrix.os == 'macos-latest' }}
+      - name: Upload artifact
+        if: ${{ success() }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.prefix.outputs.result }}-macos
-          path: target/universal-apple-darwin/release/bundle/dmg/*.dmg
-          if-no-files-found: error
-          overwrite: true
-
-      - name: (Windows) Build
-        if: matrix.os == 'windows-latest'
-        run: pnpm build:win --cache-dir=${{ steps.setup.outputs.turbo_cache_dir }}
-
-      - name: (Windows) Upload artifact
-        if: ${{ success() && matrix.os == 'windows-latest' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.prefix.outputs.result }}-windows
-          path: target\x86_64-pc-windows-msvc\release\bundle\nsis\*.exe
+          name: ${{ steps.properties.outputs.product_name }}_${{ steps.properties.outputs.version }}-${{ matrix.os == 'windows-latest' && 'windows' || 'macos' }}
+          path: ${{ matrix.os == 'windows-latest' && 'target\x86_64-pc-windows-msvc\release\bundle\nsis\*.exe' || 'target/universal-apple-darwin/release/bundle/dmg/*.dmg' }}
           if-no-files-found: error
           overwrite: true
