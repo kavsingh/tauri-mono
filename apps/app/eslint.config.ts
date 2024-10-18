@@ -43,7 +43,7 @@ export default tsEslint.config(
 	},
 
 	{
-		files: ["src/**/*.?([mc])[tj]s?(x)"],
+		files: ["src/**/*.?(m|c)[tj]s?(x)"],
 		languageOptions: {
 			globals: { ...globals.browser },
 		},
