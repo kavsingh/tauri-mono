@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
 		checker(mode),
 	],
 	test: {
-		include: ["src/**/*.{test,spec}.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"],
+		include: ["src/**/*.{test,spec}.?(m|c)[jt]s?(x)"],
 		environment: "jsdom",
 		setupFiles: ["./vitest.setup.ts"],
 		clearMocks: true,
@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
 				"!**/__generated__",
 				"!**/__mocks__",
 				"!**/__test*__",
-				"!**/*.test.*",
+				"!**/*.{test,spec}.*",
 			],
 		},
 	},
