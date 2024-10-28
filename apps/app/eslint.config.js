@@ -1,4 +1,5 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { fixupPluginRules } from "@eslint/compat";
 // @ts-expect-error no types available
@@ -11,12 +12,10 @@ import vitest from "eslint-plugin-vitest";
 import globals from "globals";
 import * as tsEslint from "typescript-eslint";
 
-import baseConfig from "../../eslint.config";
-import { testFilePatterns, testFileSuffixes } from "../../eslint.helpers";
+import baseConfig from "../../eslint.config.js";
+import { testFilePatterns, testFileSuffixes } from "../../eslint.helpers.js";
 
-import { getFileLocation } from "./scripts/lib";
-
-const { dirname } = getFileLocation(import.meta.url);
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default tsEslint.config(
 	...baseConfig,

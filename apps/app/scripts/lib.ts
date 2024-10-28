@@ -1,15 +1,12 @@
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-export function isRunAsScript(importMetaUrl: string) {
-	return (
-		!!process.argv[1] && pathToFileURL(process.argv[1]).href === importMetaUrl
-	);
+export function isRunAsScript({ url }: ImportMeta) {
+	return !!process.argv[1] && pathToFileURL(process.argv[1]).href === url;
 }
 
-export function getFileLocation(importMetaUrl: string) {
-	const filename = fileURLToPath(importMetaUrl);
-	const dirname = path.dirname(filename);
+export function getFileLocation({ url }: ImportMeta) {
+	const filename = fileURLToPath(url);
 
-	return { filename, dirname } as const;
+	return { filename, dirname: path.dirname(filename) } as const;
 }

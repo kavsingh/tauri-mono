@@ -1,7 +1,7 @@
-import { isRunAsScript, getFileLocation } from "./lib";
+import { isRunAsScript, getFileLocation } from "./lib.ts";
 
-export function echoDirname() {
-	console.log("__dirname: ", getFileLocation(import.meta.url).dirname);
+export function printFileLocation() {
+	console.log(getFileLocation(import.meta));
 }
 
-if (isRunAsScript(import.meta.url)) echoDirname();
+if (isRunAsScript(import.meta)) printFileLocation();
