@@ -6,7 +6,7 @@ import useUiTheme from "./hooks/use-ui-theme";
 import AppLayout from "./layouts/app";
 import Files from "./pages/files";
 import Home from "./pages/home";
-import Preferences from "./pages/preferences";
+import Settings from "./pages/settings";
 
 export default function App() {
 	const theme = useUiTheme();
@@ -20,7 +20,7 @@ export default function App() {
 			<HashRouter root={AppLayout}>
 				<Route path="/" component={Home} />
 				<Route path="/files" component={Files} />
-				<Route path="/preferences" component={Preferences} />
+				<Route path="/settings" component={Settings} />
 			</HashRouter>
 		</QueryClientProvider>
 	);

@@ -12,7 +12,7 @@ export default function App(props: ParentProps) {
 					<nav class="flex flex-col gap-2">
 						<NavLink href="/">Home</NavLink>
 						<NavLink href="/files">Files</NavLink>
-						<NavLink href="/preferences">Preferences</NavLink>
+						<NavLink href="/settings">Settings</NavLink>
 					</nav>
 				</div>
 				<div class="h-full overflow-y-auto overflow-x-hidden bg-background">
