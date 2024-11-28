@@ -15,23 +15,6 @@ export default defineConfig(({ mode }) => ({
 		legacyPlugin(),
 		checker(mode),
 	],
-	test: {
-		include: ["src/**/*.{test,spec}.?(m|c)[jt]s?(x)"],
-		environment: "jsdom",
-		setupFiles: ["./vitest.setup.ts"],
-		clearMocks: true,
-		testTransformMode: { web: ["/.[jt]sx?$/"] },
-		server: { deps: { inline: [/@solidjs/] } },
-		coverage: {
-			include: [
-				"src",
-				"!**/__generated__",
-				"!**/__mocks__",
-				"!**/__test*__",
-				"!**/*.{test,spec}.*",
-			],
-		},
-	},
 }));
 
 function checker(mode: string) {
@@ -40,5 +23,10 @@ function checker(mode: string) {
 	return checkerPlugin({
 		overlay: { initialIsOpen: false },
 		typescript: true,
+		eslint: {
+			useFlatConfig: true,
+			lintCommand: 'eslint "./src"',
+			dev: { logLevel: ["error"] },
+		},
 	});
 }
