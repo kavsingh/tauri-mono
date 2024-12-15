@@ -14,15 +14,15 @@ version = "2.0.3"
 features = ["isolation"]
 
 [dependencies]
-chrono = "0.4.38"
+chrono = "0.4.39"
 log = "0.4.22"
 serde_json = "1.0.133"
-serde = { version = "1.0.215", features = ["derive"] }
+serde = { version = "1.0.216", features = ["derive"] }
 specta = "2.0.0-rc.20"
 specta-typescript = "0.0.7"
 sysinfo = "0.30.13"
-tauri-plugin-dialog = "2.0.3"
-tauri-plugin-log = "2.0.2"
+tauri-plugin-dialog = "2.2.0"
+tauri-plugin-log = "2.2.0"
 tauri-plugin-theme = "2.1.2"
 uuid = { version = "1.11.0", features = ["v4", "fast-rng"] }
 window-vibrancy = "0.5.2"
