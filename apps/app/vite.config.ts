@@ -1,5 +1,3 @@
-/// <reference types="vitest" />
-
 import legacyPlugin from "@vitejs/plugin-legacy";
 import { defineConfig } from "vite";
 import checkerPlugin from "vite-plugin-checker";
