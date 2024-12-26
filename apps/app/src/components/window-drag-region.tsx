@@ -1,8 +1,10 @@
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
-export default function WindowDragRegion(props: {
-	class?: string | undefined;
-}) {
+import type { ComponentProps } from "solid-js";
+
+export default function WindowDragRegion(
+	props: Pick<ComponentProps<"div">, "class">,
+) {
 	function handleMouseDown() {
 		void getCurrentWindow().startDragging();
 	}
