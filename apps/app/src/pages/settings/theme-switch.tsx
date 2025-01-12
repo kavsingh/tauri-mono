@@ -7,7 +7,7 @@ import { SYSTEM_THEMES } from "#services/system-theme";
 import type { SystemTheme } from "#services/system-theme";
 
 export default function ThemeSwitch() {
-	const [query, { mutate: setTheme }] = useSystemTheme();
+	const [query, mutation] = useSystemTheme();
 	const theme = createMemo<SystemTheme>(() => query.data ?? "auto");
 
 	return (
@@ -35,7 +35,7 @@ export default function ThemeSwitch() {
 											value={option}
 											checked={theme() === option}
 											onChange={() => {
-												setTheme(option);
+												mutation.mutate(option);
 											}}
 											class="peer cursor-pointer"
 											disabled={query.isLoading}

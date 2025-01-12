@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 
 // theme api needs some manual work
-// https://github.com/wyhaya/tauri-plugin-theme/tree/tauri-v1?tab=readme-ov-file#usage
+// https://github.com/wyhaya/tauri-plugin-theme/?tab=readme-ov-file#usage
 
 export async function getSystemTheme() {
 	const theme = await invoke("plugin:theme|get_theme");
