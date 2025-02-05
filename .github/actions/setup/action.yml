@@ -21,13 +21,13 @@ runs:
         restore-keys: |
           ${{ runner.os }}-turbo-
 
-    - run: corepack enable pnpm
-      shell: bash
-
     - uses: actions/setup-node@v4
       with:
         node-version-file: .node-version
         cache: pnpm
+
+    - run: corepack enable pnpm
+      shell: bash
 
     - run: rustup toolchain install stable --profile minimal --no-self-update
       shell: bash
