@@ -1,3 +1,4 @@
+// @ts-expect-error import resolution
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 import type { Config } from "tailwindcss";
@@ -50,6 +51,7 @@ export default {
 				sm: "calc(var(--radius) - 4px)",
 			},
 			fontFamily: {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				sans: [...fontFamily.sans],
 			},
 		},

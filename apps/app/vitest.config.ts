@@ -1,6 +1,6 @@
 import { defineConfig, mergeConfig } from "vitest/config";
 
-import baseConfig from "./vite.config";
+import baseConfig from "./vite.config.ts";
 
 export default mergeConfig(
 	baseConfig({ command: "build", mode: "production" }),
@@ -9,7 +9,7 @@ export default mergeConfig(
 		test: {
 			include: ["src/**/*.{test,spec}.?(m|c)[tj]s?(x)"],
 			environment: "jsdom",
-			setupFiles: ["./vitest.setup.ts"],
+			setupFiles: ["./src/vitest.setup.ts"],
 			clearMocks: true,
 			coverage: {
 				include: [

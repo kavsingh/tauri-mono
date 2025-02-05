@@ -1,19 +1,5 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"compilerOptions": {
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
-		"lib": ["esnext", "dom"],
-		"paths": { "#*": ["./src/*"] },
-		"sourceMap": true
-	},
-	"exclude": ["**/node_modules"],
-	"include": [
-		"./src",
-		"./src-isolation",
-		"./scripts",
-		"./*.ts",
-		"./*.js",
-		"./*.cjs"
-	]
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": ["../../tsconfig.base.json", "@tsconfig/node23/tsconfig.json"],
+	"include": ["./scripts", "./*.ts", "./*.js", "./*.cjs"]
 }

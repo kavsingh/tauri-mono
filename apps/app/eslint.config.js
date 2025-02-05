@@ -44,7 +44,12 @@ export default tsEslint.config(
 			globals: { ...globals.browser },
 		},
 		settings: {
-			tailwindcss: {
+			"import-x/resolver": {
+				"eslint-import-resolver-typescript": {
+					project: path.resolve(dirname, "src/tsconfig.json"),
+				},
+			},
+			"tailwindcss": {
 				config: path.join(dirname, "tailwind.config.ts"),
 				callees: ["tv", "classList"],
 			},
