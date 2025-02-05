@@ -19,10 +19,11 @@
 	"devDependencies": {
 		"@eslint/js": "9.19.0",
 		"@kavsingh/eslint-plugin-filenames": "2.0.0-rc.1",
+		"@tsconfig/node23": "23.0.0",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/eslint": "9.6.1",
 		"@types/eslint__js": "8.42.3",
-		"@types/node": "22.13.0",
+		"@types/node": "22.13.1",
 		"eslint": "9.19.0",
 		"eslint-config-prettier": "10.0.1",
 		"eslint-import-resolver-typescript": "3.7.0",
