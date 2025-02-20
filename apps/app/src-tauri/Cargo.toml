@@ -5,7 +5,7 @@ description = "A Tauri App"
 authors = ["you"]
 license = ""
 repository = ""
-edition = "2021"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -16,16 +16,16 @@ features = ["isolation"]
 [dependencies]
 chrono = "0.4.39"
 log = "0.4.25"
-serde_json = "1.0.138"
-serde = { version = "1.0.217", features = ["derive"] }
+serde_json = "1.0.139"
+serde = { version = "1.0.218", features = ["derive"] }
 specta = "2.0.0-rc.22"
 specta-typescript = "0.0.9"
 sysinfo = "0.30.13"
 tauri-plugin-dialog = "2.2.0"
 tauri-plugin-log = "2.2.1"
 tauri-plugin-theme = "2.1.2"
-uuid = { version = "1.13.1", features = ["v4", "fast-rng"] }
-window-vibrancy = "0.5.2"
+uuid = { version = "1.13.2", features = ["v4", "fast-rng"] }
+window-vibrancy = "0.5.3"
 
 [dependencies.tauri]
 version = "2.2.5"
