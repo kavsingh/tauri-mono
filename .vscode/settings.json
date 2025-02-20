@@ -19,14 +19,18 @@
 		"**/dist": true,
 		"**/target": true
 	},
+
 	"rust-analyzer.check.command": "clippy",
+
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"eslint.workingDirectories": [{ "mode": "auto" }],
+
 	"tailwindCSS.validate": true,
 	"tailwindCSS.classAttributes": ["class", "classList"],
 	"tailwindCSS.experimental.classRegex": [
 		["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
 	],
+
 	"[rust]": {
 		"editor.defaultFormatter": "rust-lang.rust-analyzer"
 	},
