@@ -1,11 +1,7 @@
-use std::{
-	collections::HashMap,
-	sync::{
-		mpsc::{channel, Receiver, Sender},
-		Arc, Mutex, MutexGuard, RwLock,
-	},
-	time::Duration,
-};
+use std::collections::HashMap;
+use std::sync::mpsc::{Receiver, Sender, channel};
+use std::sync::{Arc, Mutex, MutexGuard, RwLock};
+use std::time::Duration;
 
 use sysinfo::System;
 
@@ -83,21 +79,23 @@ impl SystemStatsState {
 		let current_state_handle = current_stats.clone();
 		let subscribers_handle = event_subscribers.clone();
 
-		std::thread::spawn(move || loop {
-			if let Ok(mut current) = current_state_handle.write() {
-				let next_stats = sample_system_stats();
+		std::thread::spawn(move || {
+			loop {
+				if let Ok(mut current) = current_state_handle.write() {
+					let next_stats = sample_system_stats();
 
-				current.stats = next_stats.clone();
+					current.stats = next_stats.clone();
 
-				match subscribers_handle.publish(SystemStatsEvent(next_stats)) {
-					Ok(_) => (),
-					Err(e) => log::error!("could not publish stats event: {}", e),
-				};
-			} else {
-				log::error!("could not get write lock for current stats");
+					match subscribers_handle.publish(SystemStatsEvent(next_stats)) {
+						Ok(_) => (),
+						Err(e) => log::error!("could not publish stats event: {}", e),
+					};
+				} else {
+					log::error!("could not get write lock for current stats");
+				}
+
+				std::thread::sleep(Duration::from_millis(1000));
 			}
-
-			std::thread::sleep(Duration::from_millis(1000));
 		});
 
 		SystemStatsState {

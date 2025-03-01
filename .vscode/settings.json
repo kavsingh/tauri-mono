@@ -1,14 +1,4 @@
 {
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "always"
-	},
-	"editor.quickSuggestions": {
-		"strings": true
-	},
-	"files.associations": {
-		"*.css": "tailwindcss"
-	},
 	"files.watcherExclude": {
 		"**/node_modules": true,
 		"**/dist": true,
@@ -20,11 +10,23 @@
 		"**/target": true
 	},
 
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "always"
+	},
+	"editor.quickSuggestions": {
+		"strings": true
+	},
+
 	"rust-analyzer.check.command": "clippy",
+	"rust-analyzer.diagnostics.styleLints.enable": true,
+	"rust-analyzer.rustfmt.extraArgs": ["+nightly"],
 
 	"typescript.tsdk": "node_modules/typescript/lib",
+
 	"eslint.workingDirectories": [{ "mode": "auto" }],
 
+	"files.associations": { "*.css": "tailwindcss" },
 	"tailwindCSS.validate": true,
 	"tailwindCSS.classAttributes": ["class", "classList"],
 	"tailwindCSS.experimental.classRegex": [

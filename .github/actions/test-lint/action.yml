@@ -4,8 +4,10 @@ description: Run linters and unit / integration tests
 runs:
   using: composite
   steps:
-    - run: pnpm lint
+    - run: pnpm test:ci
       shell: bash
 
-    - run: pnpm test:ci
+    - run: pnpm lint
+      env:
+        RUSTFLAGS: "-Dwarnings"
       shell: bash

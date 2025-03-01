@@ -9,11 +9,10 @@ mod system_stats;
 
 use std::thread::spawn;
 
+use system_info::get_system_info;
+use system_stats::{ManagedSystemStatsState, SystemStatsEvent, get_system_stats};
 use tauri::{Builder, Manager};
 use tauri_specta::Event;
-
-use system_info::get_system_info;
-use system_stats::{get_system_stats, ManagedSystemStatsState, SystemStatsEvent};
 
 fn main() {
 	let mut ctx = tauri::generate_context!();
