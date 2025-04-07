@@ -1,4 +1,4 @@
-import { createQuery, useQueryClient } from "@tanstack/solid-query";
+import { useQuery, useQueryClient } from "@tanstack/solid-query";
 
 import { commands, events } from "#__generated__/bindings";
 
@@ -7,7 +7,7 @@ import type { QueryClient } from "@tanstack/solid-query";
 
 export default function useSystemStats() {
 	const queryClient = useQueryClient();
-	const query = createQuery(() => ({
+	const query = useQuery(() => ({
 		queryKey,
 		reconcile,
 		async queryFn() {
