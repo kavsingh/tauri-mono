@@ -1,8 +1,4 @@
-import {
-	useMutation,
-	useQuery,
-	useQueryClient,
-} from "@tanstack/solid-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/solid-query";
 
 import { getSystemTheme, setSystemTheme } from "#services/system-theme";
 

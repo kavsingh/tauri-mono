@@ -5,8 +5,10 @@
 		"allowImportingTsExtensions": true,
 		"allowJs": true,
 		"checkJs": true,
+		"erasableSyntaxOnly": true,
 		"noEmit": true,
-		// leave the following to eslint
+		"verbatimModuleSyntax": true,
+		// leave the following to linter / formatter
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"allowUnreachableCode": true
