@@ -1,11 +1,11 @@
 import { createEffect, createSignal, For } from "solid-js";
-import { tv } from "tailwind-variants";
 
 import Button from "#components/button";
 import Card from "#components/card";
 import useFileDrop from "#hooks/use-file-drop";
 import useFileSelectDialog from "#hooks/use-file-select-dialog";
 import Page from "#layouts/page";
+import { tv } from "#lib/style";
 
 export default function Files() {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
@@ -28,7 +28,7 @@ export default function Files() {
 						<ul class="flex flex-col gap-1">
 							<For each={selectedFiles()}>
 								{(file) => (
-									<li class="flex gap-2 border-b border-border pb-2 text-sm text-muted-foreground last:border-b-0 last:pb-0">
+									<li class="border-border text-muted-foreground flex gap-2 border-b pb-2 text-sm last:border-b-0 last:pb-0">
 										{file}
 									</li>
 								)}
@@ -69,7 +69,7 @@ function DragFileSelect(props: { onSelect: (selected: string[]) => void }) {
 }
 
 const dragFileSelectVariants = tv({
-	base: "my-3 grid h-[200px] place-items-center rounded-md border border-border text-muted-foreground transition-colors",
+	base: "border-border text-muted-foreground my-3 grid h-[200px] place-items-center rounded-md border transition-colors",
 	variants: {
 		isActive: {
 			true: "border-foreground bg-accent/20 text-foreground",

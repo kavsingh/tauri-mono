@@ -41,7 +41,7 @@ export default function ThemeSwitch() {
 											disabled={query.isLoading}
 										/>
 										<label
-											class="cursor-pointer text-muted-foreground transition-colors peer-checked:text-foreground"
+											class="text-muted-foreground peer-checked:text-foreground cursor-pointer transition-colors"
 											for={option}
 										>
 											<LabelText theme={option} />

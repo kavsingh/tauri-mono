@@ -1,24 +1,31 @@
-import legacyPlugin from "@vitejs/plugin-legacy";
+import tailwindcss from "@tailwindcss/vite";
+import legacy from "@vitejs/plugin-legacy";
 import { defineConfig } from "vite";
-import checkerPlugin from "vite-plugin-checker";
-import solidPlugin from "vite-plugin-solid";
-import tsconfigPathsPlugin from "vite-tsconfig-paths";
+import { checker } from "vite-plugin-checker";
+import solid from "vite-plugin-solid";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig(({ mode }) => ({
-	server: { port: 3000 },
-	build: { sourcemap: true },
-	plugins: [
-		tsconfigPathsPlugin(),
-		solidPlugin(),
-		legacyPlugin(),
-		checker(mode),
-	],
-}));
+export default defineConfig(({ mode }) => {
+	return {
+		server: { port: 3000 },
+		build:
+			mode === "production"
+				? { sourcemap: true, minify: "terser" }
+				: { sourcemap: false, minify: false },
+		plugins: [
+			tsconfigPaths(),
+			solid(),
+			tailwindcss(),
+			legacy(),
+			createChecker(mode),
+		],
+	};
+});
 
-function checker(mode: string) {
+function createChecker(mode: string) {
 	if (mode !== "development") return undefined;
 
-	return checkerPlugin({
+	return checker({
 		overlay: { initialIsOpen: false },
 		typescript: true,
 		eslint: {

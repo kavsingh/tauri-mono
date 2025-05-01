@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 
 import jestDom from "eslint-plugin-jest-dom";
 import solid from "eslint-plugin-solid";
-import tailwind from "eslint-plugin-tailwindcss";
 import testingLibrary from "eslint-plugin-testing-library";
 import vitest from "eslint-plugin-vitest";
 import globals from "globals";
@@ -49,17 +48,26 @@ export default tsEslint.config(
 					project: path.resolve(dirname, "src/tsconfig.json"),
 				},
 			},
-			"tailwindcss": {
-				config: path.join(dirname, "tailwind.config.ts"),
-				callees: ["tv", "classList"],
-			},
 		},
-		extends: [
-			...tailwind.configs["flat/recommended"],
-			solid.configs["flat/recommended"],
-		],
+		extends: [solid.configs["flat/recommended"]],
 		rules: {
 			"no-console": "error",
+			"no-restricted-imports": "off",
+			"@typescript-eslint/no-restricted-imports": [
+				"error",
+				{
+					paths: [
+						{
+							name: "tailwind-merge",
+							message: "please import helpers from #lib/style",
+						},
+						{
+							name: "tailwind-variants",
+							message: "please import helpers from #lib/style",
+						},
+					],
+				},
+			],
 		},
 	},
 

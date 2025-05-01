@@ -1,22 +1,19 @@
 import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
-import { tv } from "tailwind-variants";
 
 import { useResizeObserver } from "#hooks/use-resize-observer";
 import { tryOr } from "#lib/error";
 import { normalizeBigint } from "#lib/number";
+import { tm } from "#lib/style";
 
 import type { Accessor } from "solid-js";
-import type { VariantProps } from "tailwind-variants";
 
-export default function ChronoGraph(
-	props: {
-		sampleSource: Accessor<Sample | undefined>;
-		minValue?: bigint | undefined;
-		maxValue?: bigint | undefined;
-		maxSamples?: number | undefined;
-		class?: string | undefined;
-	} & VariantProps<typeof chronoGraphVariants>,
-) {
+export default function ChronoGraph(props: {
+	sampleSource: Accessor<Sample | undefined>;
+	minValue?: bigint | undefined;
+	maxValue?: bigint | undefined;
+	maxSamples?: number | undefined;
+	class?: string | undefined;
+}) {
 	const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 	const observeResize = useResizeObserver();
 	let unobserveResize: ReturnType<typeof observeResize> | undefined;
@@ -64,7 +61,10 @@ export default function ChronoGraph(
 
 	return (
 		<canvas
-			class={chronoGraphVariants({ class: props.class })}
+			class={tm(
+				"border-muted/60 bg-muted/30 text-accent-foreground size-full",
+				props.class,
+			)}
 			ref={(el) => {
 				canvasEl = el;
 				observeResize(canvasEl, redraw);
@@ -74,10 +74,6 @@ export default function ChronoGraph(
 }
 
 export type Sample = { value: bigint };
-
-const chronoGraphVariants = tv({
-	base: "size-full border-muted/60 bg-muted/30 text-accent-foreground",
-});
 
 function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	const ctx = canvas.getContext("2d");
