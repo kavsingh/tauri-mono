@@ -29,9 +29,15 @@
 	"files.associations": { "*.css": "tailwindcss" },
 	"tailwindCSS.validate": true,
 	"tailwindCSS.classAttributes": ["class", "classList"],
+	"tailwindCSS.classFunctions": ["tj", "tm", "tv"],
 	"tailwindCSS.experimental.classRegex": [
 		["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
 	],
+	"tailwindCSS.experimental.configFile": {
+		"apps/app/src/index.css": "apps/app/src/**/*"
+	},
+
+	"prettier.enable": true,
 
 	"[rust]": {
 		"editor.defaultFormatter": "rust-lang.rust-analyzer"
