@@ -1,6 +1,6 @@
 import js from "@eslint/js";
 import filenames from "@kavsingh/eslint-plugin-filenames";
-import importX from "eslint-plugin-import-x";
+import { importX } from "eslint-plugin-import-x";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 import * as tsEslint from "typescript-eslint";
