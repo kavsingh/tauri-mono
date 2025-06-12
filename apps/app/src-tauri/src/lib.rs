@@ -9,7 +9,6 @@ use tauri::{Builder, Manager};
 use tauri_specta::Event;
 
 pub fn run() {
-	let mut ctx = tauri::generate_context!();
 	let specta_builder = tauri_specta::Builder::<tauri::Wry>::new()
 		.events(tauri_specta::collect_events![SystemStatsEvent])
 		.commands(tauri_specta::collect_commands![
@@ -28,7 +27,6 @@ pub fn run() {
 	Builder::default()
 		.plugin(get_log_builder().build())
 		.plugin(tauri_plugin_dialog::init())
-		.plugin(tauri_plugin_theme::init(ctx.config_mut()))
 		.manage(ManagedSystemStatsState::default())
 		.invoke_handler(specta_builder.invoke_handler())
 		.setup(move |app| {
@@ -77,7 +75,7 @@ pub fn run() {
 
 			Ok(())
 		})
-		.run(ctx)
+		.run(tauri::generate_context!())
 		.expect("error while running tauri application");
 }
 

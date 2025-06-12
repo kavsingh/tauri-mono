@@ -1,14 +1,17 @@
-import { For, Match, Switch, createMemo } from "solid-js";
+import { For, Match, Switch } from "solid-js";
 
 import Card from "#components/card";
-import useSystemTheme from "#hooks/use-system-theme";
-import { SYSTEM_THEMES } from "#services/system-theme";
+import {
+	THEME_PREFERENCES,
+	useSetThemePreferenceMutation,
+	useThemePreferenceQuery,
+} from "#hooks/theme";
 
-import type { SystemTheme } from "#services/system-theme";
+import type { ThemePreference } from "#hooks/theme";
 
 export default function ThemeSwitch() {
-	const [query, mutation] = useSystemTheme();
-	const theme = createMemo<SystemTheme>(() => query.data ?? "auto");
+	const prefQuery = useThemePreferenceQuery();
+	const setPrefMutation = useSetThemePreferenceMutation();
 
 	return (
 		<Card.Root>
@@ -25,20 +28,20 @@ export default function ThemeSwitch() {
 					</Card.Header>
 					<Card.Content>
 						<ul class="flex gap-3">
-							<For each={Object.values(SYSTEM_THEMES)}>
+							<For each={THEME_PREFERENCES}>
 								{(option) => (
 									<li class="flex items-center gap-1">
 										<input
 											type="radio"
 											id={option}
-											name={option}
+											name="theme-preference"
 											value={option}
-											checked={theme() === option}
+											checked={prefQuery.data === option}
 											onChange={() => {
-												mutation.mutate(option);
+												setPrefMutation.mutate(option);
 											}}
 											class="peer cursor-pointer"
-											disabled={query.isLoading}
+											disabled={prefQuery.isLoading}
 										/>
 										<label
 											class="cursor-pointer text-muted-foreground transition-colors peer-checked:text-foreground"
@@ -57,10 +60,10 @@ export default function ThemeSwitch() {
 	);
 }
 
-function LabelText(props: { theme: SystemTheme }) {
+function LabelText(props: { theme: ThemePreference }) {
 	return (
 		<Switch>
-			<Match when={props.theme === "auto"}>
+			<Match when={props.theme === "system"}>
 				<>System</>
 			</Match>
 			<Match when={props.theme === "light"}>

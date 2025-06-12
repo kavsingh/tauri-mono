@@ -5,7 +5,7 @@ import { commands, events } from "#__generated__/bindings";
 import type { SystemStats } from "#__generated__/bindings";
 import type { QueryClient } from "@tanstack/solid-query";
 
-export default function useSystemStats() {
+export function useSystemStats() {
 	const queryClient = useQueryClient();
 	const query = useQuery(() => ({
 		queryKey,

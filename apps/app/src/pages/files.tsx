@@ -2,8 +2,7 @@ import { createEffect, createSignal, For } from "solid-js";
 
 import Button from "#components/button";
 import Card from "#components/card";
-import useFileDrop from "#hooks/use-file-drop";
-import useFileSelectDialog from "#hooks/use-file-select-dialog";
+import { useFileDrop, useFileSelectDialog } from "#hooks/files";
 import Page from "#layouts/page";
 import { tv } from "#lib/style";
 

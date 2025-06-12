@@ -2,7 +2,7 @@ import { Show, createMemo } from "solid-js";
 
 import Card from "#components/card";
 import ChronoGraph from "#components/chrono-graph";
-import useSystemStats from "#hooks/use-system-stats";
+import { useSystemStats } from "#hooks/system-stats";
 import { tryOr } from "#lib/error";
 import { formatMem } from "#lib/format";
 
