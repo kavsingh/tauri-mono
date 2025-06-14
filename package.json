@@ -14,16 +14,19 @@
 		"test:ci": "turbo test:ci",
 		"lint": "turbo lint",
 		"build:mac": "turbo build:mac --filter=app",
-		"build:win": "turbo build:win --filter=app"
+		"build:win": "turbo build:win --filter=app",
+		"clean:turbo": "rm -rf .turbo && pnpm -r exec rm -rf .turbo",
+		"clean:modules": "rm -rf node_modules && pnpm -r exec rm -rf node_modules",
+		"clean:types": "pnpm -r exec rm -f tsconfig.tsbuildinfo && pnpm -r exec rm -f tsconfig.ci.tsbuildinfo"
 	},
 	"devDependencies": {
-		"@eslint/js": "9.28.0",
+		"@eslint/js": "9.29.0",
 		"@kavsingh/eslint-plugin-filenames": "2.0.0-rc.1",
 		"@tsconfig/node24": "24.0.1",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/eslint": "9.6.1",
 		"@types/node": "24.0.1",
-		"eslint": "9.28.0",
+		"eslint": "9.29.0",
 		"eslint-config-prettier": "10.1.5",
 		"eslint-import-resolver-typescript": "4.4.3",
 		"eslint-plugin-import-x": "4.15.2",
