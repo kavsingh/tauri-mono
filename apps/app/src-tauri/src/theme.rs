@@ -15,11 +15,13 @@ impl ThemePreference {
 	}
 }
 
-impl PartialEq<tauri::Theme> for ThemePreference {
-	fn eq(&self, other: &tauri::Theme) -> bool {
+impl PartialEq<Option<tauri::Theme>> for ThemePreference {
+	fn eq(&self, other: &Option<tauri::Theme>) -> bool {
 		matches!(
 			(self, other),
-			(Self::Dark, tauri::Theme::Dark) | (Self::Light, tauri::Theme::Light)
+			(Self::Dark, Some(tauri::Theme::Dark))
+				| (Self::Light, Some(tauri::Theme::Light))
+				| (Self::System, None)
 		)
 	}
 }

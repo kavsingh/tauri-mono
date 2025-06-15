@@ -49,8 +49,7 @@ pub fn set_theme_preference(
 
 	app_handle.set_theme(preference.clone().into());
 
-	match window.theme() {
-		Ok(window_theme) if preference.eq(&window_theme) => (),
-		_ => window.set_theme(preference.into()).unwrap_or(()),
+	if preference.ne(&window.theme().ok()) {
+		window.set_theme(preference.clone().into()).unwrap_or(())
 	}
 }

@@ -44,9 +44,8 @@ pub fn run() {
 
 			app.set_theme(theme.clone().into());
 
-			match main_window.theme() {
-				Ok(window_theme) if theme.eq(&window_theme) => (),
-				_ => main_window.set_theme(theme.clone().into()).unwrap_or(()),
+			if theme.ne(&main_window.theme().ok()) {
+				main_window.set_theme(theme.clone().into()).unwrap_or(())
 			}
 
 			#[cfg(debug_assertions)]
