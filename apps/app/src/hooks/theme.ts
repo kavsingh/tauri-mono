@@ -1,13 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/solid-query";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import { createSignal, onCleanup } from "solid-js";
 
+import { commands } from "#__generated__/bindings";
+
+import type { ThemePreference } from "#__generated__/bindings";
 import type { MutationOptions } from "@tanstack/solid-query";
 
 export function useThemePreferenceQuery() {
 	return useQuery(() => ({
 		queryKey: ["themePreference"],
-		queryFn: getThemePreference,
+		queryFn: () => commands.getThemePreference(),
 	}));
 }
 
@@ -54,16 +56,6 @@ export function usePrefersDark() {
 	return prefersDarkScheme;
 }
 
-export const THEME_PREFERENCES = ["system", "dark", "light"] as const;
-
-export type ThemePreference = (typeof THEME_PREFERENCES)[number];
-
-async function getThemePreference(): Promise<ThemePreference> {
-	const theme = await getCurrentWindow().theme();
-
-	return theme ?? "system";
-}
-
 function setThemePreference(theme: ThemePreference) {
-	return getCurrentWindow().setTheme(theme === "system" ? null : theme);
+	return commands.setThemePreference(theme);
 }

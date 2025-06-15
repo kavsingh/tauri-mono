@@ -15,6 +15,12 @@ async getSystemStats() : Promise<Result<SystemStats, string>> {
     if(e instanceof Error) throw e;
     else return { status: "error", error: e  as any };
 }
+},
+async getThemePreference() : Promise<ThemePreference> {
+    return await TAURI_INVOKE("get_theme_preference");
+},
+async setThemePreference(preference: ThemePreference) : Promise<void> {
+    await TAURI_INVOKE("set_theme_preference", { preference });
 }
 }
 
@@ -36,6 +42,7 @@ systemStatsEvent: "system-stats-event"
 export type SystemInfo = { osFullname: string | null; osArch: string | null }
 export type SystemStats = { memTotal: string | null; memUsed: string | null; memAvailable: string | null; sampledAt: string }
 export type SystemStatsEvent = SystemStats
+export type ThemePreference = "System" | "Dark" | "Light"
 
 /** tauri-specta globals **/
 

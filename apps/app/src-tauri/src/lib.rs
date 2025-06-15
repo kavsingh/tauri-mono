@@ -1,5 +1,7 @@
+mod preferences;
 mod system_info;
 mod system_stats;
+mod theme;
 
 use std::thread::spawn;
 
@@ -8,12 +10,16 @@ use system_stats::{ManagedSystemStatsState, SystemStatsEvent, get_system_stats};
 use tauri::{Builder, Manager};
 use tauri_specta::Event;
 
+use crate::preferences::{get_stored_theme_preference, get_theme_preference, set_theme_preference};
+
 pub fn run() {
 	let specta_builder = tauri_specta::Builder::<tauri::Wry>::new()
 		.events(tauri_specta::collect_events![SystemStatsEvent])
 		.commands(tauri_specta::collect_commands![
 			get_system_info,
-			get_system_stats
+			get_system_stats,
+			get_theme_preference,
+			set_theme_preference
 		]);
 
 	#[cfg(debug_assertions)]
@@ -27,12 +33,21 @@ pub fn run() {
 	Builder::default()
 		.plugin(get_log_builder().build())
 		.plugin(tauri_plugin_dialog::init())
+		.plugin(tauri_plugin_store::Builder::default().build())
 		.manage(ManagedSystemStatsState::default())
 		.invoke_handler(specta_builder.invoke_handler())
 		.setup(move |app| {
 			specta_builder.mount_events(app);
 
 			let main_window = app.get_webview_window("main").unwrap();
+			let theme = get_stored_theme_preference(app.handle());
+
+			app.set_theme(theme.clone().into());
+
+			match main_window.theme() {
+				Ok(window_theme) if theme.eq(&window_theme) => (),
+				_ => main_window.set_theme(theme.clone().into()).unwrap_or(()),
+			}
 
 			#[cfg(debug_assertions)]
 			{
