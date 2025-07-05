@@ -21,6 +21,9 @@
 	"rust-analyzer.check.command": "clippy",
 	"rust-analyzer.diagnostics.styleLints.enable": true,
 	"rust-analyzer.rustfmt.extraArgs": ["+nightly"],
+	// workaround macro expansion error with specta
+	// https://github.com/specta-rs/specta/issues/387
+	"rust-analyzer.diagnostics.disabled": ["macro-error"],
 
 	"typescript.tsdk": "node_modules/typescript/lib",
 

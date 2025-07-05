@@ -42,7 +42,7 @@ impl EventSubscribers {
 		subs.iter()
 			.for_each(|(id, sub)| match sub.send(stats.clone()) {
 				Ok(_) => (),
-				Err(_) => log::error!("could not publish event to {}", id),
+				Err(_) => log::error!("could not publish event to {id}"),
 			});
 
 		Ok(())
@@ -88,7 +88,7 @@ impl SystemStatsState {
 
 					match subscribers_handle.publish(SystemStatsEvent(next_stats)) {
 						Ok(_) => (),
-						Err(e) => log::error!("could not publish stats event: {}", e),
+						Err(e) => log::error!("could not publish stats event: {e}"),
 					};
 				} else {
 					log::error!("could not get write lock for current stats");

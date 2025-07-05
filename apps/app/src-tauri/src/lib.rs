@@ -76,9 +76,7 @@ pub fn run() {
 						while let Ok(event) = receiver.recv() {
 							match event.emit(&handle) {
 								Ok(_) => (),
-								Err(e) => {
-									log::error!("could not emit stats event: {:?}", e);
-								}
+								Err(e) => log::error!("could not emit stats event: {e}"),
 							}
 						}
 					});
