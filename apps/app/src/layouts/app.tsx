@@ -1,7 +1,5 @@
 import { A } from "@solidjs/router";
 
-import WindowDragRegion from "#components/window-drag-region";
-
 import type { ComponentProps, ParentProps } from "solid-js";
 
 export default function App(props: ParentProps) {
@@ -19,7 +17,7 @@ export default function App(props: ParentProps) {
 					{props.children}
 				</div>
 			</div>
-			<WindowDragRegion class="fixed inset-x-0 top-0 z-10 h-8" />
+			<div class="fixed inset-x-0 top-0 z-10 h-8" data-tauri-drag-region />
 		</>
 	);
 }

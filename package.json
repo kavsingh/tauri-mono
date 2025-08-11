@@ -20,13 +20,13 @@
 		"clean:types": "pnpm -r exec rm -f tsconfig.tsbuildinfo && pnpm -r exec rm -f tsconfig.ci.tsbuildinfo"
 	},
 	"devDependencies": {
-		"@eslint/js": "9.32.0",
+		"@eslint/js": "9.33.0",
 		"@kavsingh/eslint-plugin-filenames": "2.0.0-rc.1",
 		"@tsconfig/node24": "24.0.1",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/eslint": "9.6.1",
-		"@types/node": "24.2.0",
-		"eslint": "9.32.0",
+		"@types/node": "24.2.1",
+		"eslint": "9.33.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-import-resolver-typescript": "4.4.4",
 		"eslint-plugin-import-x": "4.16.1",
@@ -36,6 +36,6 @@
 		"rimraf": "6.0.1",
 		"turbo": "2.5.5",
 		"typescript": "5.9.2",
-		"typescript-eslint": "8.39.0"
+		"typescript-eslint": "8.39.1"
 	}
 }
