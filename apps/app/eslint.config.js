@@ -1,10 +1,10 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import vitest from "@vitest/eslint-plugin";
 import jestDom from "eslint-plugin-jest-dom";
 import solid from "eslint-plugin-solid";
 import testingLibrary from "eslint-plugin-testing-library";
-import vitest from "eslint-plugin-vitest";
 import globals from "globals";
 import * as tsEslint from "typescript-eslint";
 
@@ -101,6 +101,9 @@ export default tsEslint.config(
 		languageOptions: {
 			globals: { ...globals.node, ...globals.browser },
 		},
+		settings: {
+			vitest: { typecheck: true },
+		},
 		extends: [
 			vitest.configs.all,
 			testingLibrary.configs["flat/dom"],
@@ -108,6 +111,7 @@ export default tsEslint.config(
 		],
 		rules: {
 			"vitest/no-hooks": "off",
+			"vitest/require-mock-type-parameters": "off",
 		},
 	},
 );

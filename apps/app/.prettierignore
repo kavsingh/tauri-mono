@@ -3,5 +3,3 @@
 /dist
 /dist-isolation
 /coverage
-**/__generated__/**/*
-!**/__generated__/__mocks__/

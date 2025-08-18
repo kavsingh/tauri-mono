@@ -56,7 +56,7 @@ impl EventSubscribers {
 		Ok(())
 	}
 
-	fn get_subscribers(&self) -> Result<MutexGuard<EventSubscribersMap>, String> {
+	fn get_subscribers(&self) -> Result<MutexGuard<'_, EventSubscribersMap>, String> {
 		match self.0.lock() {
 			Ok(subs) => Ok(subs),
 			Err(_) => Err("could not get lock on subscribers".into()),
@@ -139,7 +139,7 @@ impl ManagedSystemStatsState {
 		self.get_state()?.subscribe()
 	}
 
-	fn get_state(&self) -> Result<MutexGuard<SystemStatsState>, String> {
+	fn get_state(&self) -> Result<MutexGuard<'_, SystemStatsState>, String> {
 		match self.0.lock() {
 			Ok(state) => Ok(state),
 			Err(_) => Err("could get lock on stats state".into()),

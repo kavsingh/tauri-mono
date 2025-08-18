@@ -17,6 +17,8 @@ export const commands: typeof bindingsCommands = {
 	getSystemStats: vi.fn(() => {
 		return Promise.resolve(createMockOkResult(createMockSystemStats()));
 	}),
+	getThemePreference: vi.fn(() => Promise.resolve("System" as const)),
+	setThemePreference: vi.fn(() => Promise.resolve()),
 };
 
 export const events: Record<
