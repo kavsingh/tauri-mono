@@ -7,7 +7,7 @@
 	},
 	"type": "module",
 	"license": "MIT",
-	"packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748",
+	"packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b",
 	"scripts": {
 		"dev": "turbo dev",
 		"test": "turbo test",
@@ -20,13 +20,13 @@
 		"clean:types": "pnpm -r exec rm -f tsconfig.tsbuildinfo && pnpm -r exec rm -f tsconfig.ci.tsbuildinfo"
 	},
 	"devDependencies": {
-		"@eslint/js": "9.33.0",
+		"@eslint/js": "9.34.0",
 		"@kavsingh/eslint-plugin-filenames": "2.0.0-rc.1",
 		"@tsconfig/node24": "24.0.1",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/eslint": "9.6.1",
 		"@types/node": "24.3.0",
-		"eslint": "9.33.0",
+		"eslint": "9.34.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-import-resolver-typescript": "4.4.4",
 		"eslint-plugin-import-x": "4.16.1",
