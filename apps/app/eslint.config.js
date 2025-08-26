@@ -2,6 +2,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import vitest from "@vitest/eslint-plugin";
+import tailwindcss from "eslint-plugin-better-tailwindcss";
+import { getDefaultCallees } from "eslint-plugin-better-tailwindcss/api/defaults";
 import jestDom from "eslint-plugin-jest-dom";
 import solid from "eslint-plugin-solid";
 import testingLibrary from "eslint-plugin-testing-library";
@@ -48,7 +50,12 @@ export default tsEslint.config(
 					project: path.resolve(dirname, "src/tsconfig.json"),
 				},
 			},
+			"better-tailwindcss": {
+				entryPoint: "src/index.css",
+				callees: [...getDefaultCallees(), "tj", "tm"],
+			},
 		},
+		plugins: { "better-tailwindcss": tailwindcss },
 		extends: [solid.configs["flat/recommended"]],
 		rules: {
 			"no-console": "error",
@@ -68,6 +75,10 @@ export default tsEslint.config(
 					],
 				},
 			],
+			...tailwindcss.configs["recommended"]?.rules,
+			"better-tailwindcss/enforce-consistent-line-wrapping": "off",
+			"better-tailwindcss/enforce-shorthand-classes": "warn",
+			"better-tailwindcss/no-conflicting-classes": "error",
 		},
 	},
 
