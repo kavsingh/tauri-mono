@@ -17,10 +17,10 @@ version = "2.4.1"
 features = ["isolation"]
 
 [dependencies]
-chrono = "0.4.41"
-log = "0.4.27"
-serde_json = "1.0.143"
-serde = { version = "1.0.219", features = ["derive"] }
+chrono = "0.4.42"
+log = "0.4.28"
+serde_json = "1.0.145"
+serde = { version = "1.0.225", features = ["derive"] }
 specta = "2.0.0-rc.22"
 specta-typescript = "0.0.9"
 sysinfo = "0.35.2"

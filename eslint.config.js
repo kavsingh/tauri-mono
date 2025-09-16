@@ -4,7 +4,7 @@ import { defineConfig } from "eslint/config";
 import { flatConfigs as importX } from "eslint-plugin-import-x";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
-import * as tsEslint from "typescript-eslint";
+import { configs as tsEslint } from "typescript-eslint";
 
 export default defineConfig(
 	{
@@ -27,8 +27,8 @@ export default defineConfig(
 	},
 
 	js.configs.recommended,
-	...tsEslint.configs.strictTypeChecked,
-	...tsEslint.configs.stylisticTypeChecked,
+	...tsEslint.strictTypeChecked,
+	...tsEslint.stylisticTypeChecked,
 	// @ts-expect-error upstream types
 	importX.recommended,
 	importX.typescript,
