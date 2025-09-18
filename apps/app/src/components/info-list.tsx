@@ -4,7 +4,7 @@ import { tm } from "#lib/style";
 
 import type { ComponentProps } from "solid-js";
 
-export function InfoListRoot(props: Omit<ComponentProps<"ul">, "classList">) {
+export function InfoListRoot(props: InfoListRootProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -12,7 +12,11 @@ export function InfoListRoot(props: Omit<ComponentProps<"ul">, "classList">) {
 	);
 }
 
-export function InfoListEntry(props: Omit<ComponentProps<"li">, "classList">) {
+export type InfoListRootProps = Omit<ComponentProps<"ul">, "classList">;
+
+//
+
+export function InfoListEntry(props: InfoListEntryProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -26,9 +30,11 @@ export function InfoListEntry(props: Omit<ComponentProps<"li">, "classList">) {
 	);
 }
 
-export function InfoListLabel(
-	props: Omit<ComponentProps<"span">, "classList">,
-) {
+export type InfoListEntryProps = Omit<ComponentProps<"li">, "classList">;
+
+//
+
+export function InfoListLabel(props: InfoListLabelProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -39,11 +45,17 @@ export function InfoListLabel(
 	);
 }
 
-export function InfoListValue(
-	props: Omit<ComponentProps<"span">, "classList">,
-) {
+export type InfoListLabelProps = Omit<ComponentProps<"span">, "classList">;
+
+//
+
+export function InfoListValue(props: InfoListValueProps) {
 	return <span {...props} />;
 }
+
+export type InfoListValueProps = Omit<ComponentProps<"span">, "classList">;
+
+//
 
 export default {
 	Root: InfoListRoot,

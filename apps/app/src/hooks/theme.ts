@@ -1,9 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/solid-query";
-import { createSignal, onCleanup } from "solid-js";
+import { createEffect, createSignal, onCleanup } from "solid-js";
 
 import { commands } from "#__generated__/bindings";
+import { getStylePropertyValues } from "#lib/style";
 
 import type { ThemePreference } from "#__generated__/bindings";
+import type { StyleProperyValueMap } from "#lib/style";
 import type { MutationOptions } from "@tanstack/solid-query";
 
 export function useThemePreferenceQuery() {
@@ -54,6 +56,20 @@ export function usePrefersDark() {
 	});
 
 	return prefersDarkScheme;
+}
+
+export function useThemePropertyValues<TMap extends StyleProperyValueMap>(
+	valueMap: TMap,
+) {
+	const prefersDark = usePrefersDark();
+	const [values, setValues] = createSignal(getStylePropertyValues(valueMap));
+
+	createEffect(() => {
+		prefersDark();
+		setValues(() => getStylePropertyValues(valueMap));
+	});
+
+	return values;
 }
 
 function setThemePreference(theme: ThemePreference) {

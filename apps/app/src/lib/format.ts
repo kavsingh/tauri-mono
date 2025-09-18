@@ -5,9 +5,9 @@ export function formatMem(value: string | number | bigint) {
 	const mem = tryOr(() => BigInt(value), BigInt(0));
 
 	for (const [threshold, unit] of memoryThresholds) {
-		if (mem >= threshold) {
-			return `${divBigint(mem, threshold).toFixed(2)} ${unit}`;
-		}
+		if (mem < threshold) continue;
+
+		return `${divBigint(mem, threshold).toFixed(2)} ${unit}`;
 	}
 
 	return "-";

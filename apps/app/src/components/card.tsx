@@ -6,7 +6,7 @@ import { tm } from "#lib/style";
 
 import type { ComponentProps } from "solid-js";
 
-export function CardRoot(props: Omit<ComponentProps<"div">, "classList">) {
+export function CardRoot(props: CardRootProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -20,9 +20,11 @@ export function CardRoot(props: Omit<ComponentProps<"div">, "classList">) {
 	);
 }
 
+export type CardRootProps = Omit<ComponentProps<"div">, "classList">;
+
 //
 
-export function CardHeader(props: Omit<ComponentProps<"div">, "classList">) {
+export function CardHeader(props: CardHeaderProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -33,9 +35,11 @@ export function CardHeader(props: Omit<ComponentProps<"div">, "classList">) {
 	);
 }
 
+export type CardHeaderProps = Omit<ComponentProps<"div">, "classList">;
+
 //
 
-export function CardTitle(props: Omit<ComponentProps<"h3">, "classList">) {
+export function CardTitle(props: CardTitleProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -46,9 +50,11 @@ export function CardTitle(props: Omit<ComponentProps<"h3">, "classList">) {
 	);
 }
 
+export type CardTitleProps = Omit<ComponentProps<"h3">, "classList">;
+
 //
 
-export function CardDescription(props: Omit<ComponentProps<"p">, "classList">) {
+export function CardDescription(props: CardDescriptionProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -59,17 +65,21 @@ export function CardDescription(props: Omit<ComponentProps<"p">, "classList">) {
 	);
 }
 
+export type CardDescriptionProps = Omit<ComponentProps<"p">, "classList">;
+
 //
 
-export function CardContent(props: Omit<ComponentProps<"div">, "classList">) {
+export function CardContent(props: CardContentProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return <div {...passProps} class={tm("p-6 pt-0", localProps.class)} />;
 }
 
+export type CardContentProps = Omit<ComponentProps<"div">, "classList">;
+
 //
 
-export function CardFooter(props: Omit<ComponentProps<"div">, "classList">) {
+export function CardFooter(props: CardFooterProps) {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -79,6 +89,8 @@ export function CardFooter(props: Omit<ComponentProps<"div">, "classList">) {
 		/>
 	);
 }
+
+export type CardFooterProps = Omit<ComponentProps<"div">, "classList">;
 
 //
 

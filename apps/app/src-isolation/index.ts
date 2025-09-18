@@ -11,7 +11,6 @@ export {};
 type IsolationPayload = unknown;
 
 declare global {
-	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 	interface Window {
 		__TAURI_ISOLATION_HOOK__: (payload: IsolationPayload) => IsolationPayload;
 	}

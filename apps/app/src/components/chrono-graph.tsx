@@ -7,13 +7,7 @@ import { tm } from "#lib/style";
 
 import type { Accessor } from "solid-js";
 
-export default function ChronoGraph(props: {
-	sampleSource: Accessor<Sample | undefined>;
-	minValue?: bigint | undefined;
-	maxValue?: bigint | undefined;
-	maxSamples?: number | undefined;
-	class?: string | undefined;
-}) {
+export default function ChronoGraph(props: ChronoGraphProps) {
 	const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 	const observeResize = useResizeObserver();
 	let unobserveResize: ReturnType<typeof observeResize> | undefined;
@@ -62,7 +56,7 @@ export default function ChronoGraph(props: {
 	return (
 		<canvas
 			class={tm(
-				"size-full border-muted/60 bg-muted/30 text-accent-foreground",
+				"size-full border-accent-foreground bg-muted/30 text-muted/60",
 				props.class,
 			)}
 			ref={(el) => {
@@ -73,7 +67,17 @@ export default function ChronoGraph(props: {
 	);
 }
 
-export type Sample = { value: bigint };
+export interface ChronoGraphProps {
+	sampleSource: Accessor<Sample | undefined>;
+	minValue?: bigint | undefined;
+	maxValue?: bigint | undefined;
+	maxSamples?: number | undefined;
+	class?: string | undefined;
+}
+
+export interface Sample {
+	value: bigint;
+}
 
 function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	const ctx = canvas.getContext("2d");
@@ -94,8 +98,8 @@ function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	ctx.scale(scale, scale);
 	ctx.clearRect(0, 0, width, height);
 
-	ctx.strokeStyle = canvasStyles.color;
-	ctx.fillStyle = canvasStyles.borderColor;
+	ctx.fillStyle = canvasStyles.color;
+	ctx.strokeStyle = canvasStyles.borderColor;
 
 	ctx.beginPath();
 	ctx.moveTo(-gutter, height + gutter);

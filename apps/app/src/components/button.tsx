@@ -7,10 +7,7 @@ import { tv } from "#lib/style";
 import type { VariantProps } from "#lib/style";
 import type { ComponentProps } from "solid-js";
 
-export default function Button(
-	props: Omit<ComponentProps<"button">, "classList"> &
-		VariantProps<typeof buttonVariants>,
-) {
+export default function Button(props: ButtonProps) {
 	const [localProps, passProps] = splitProps(props, [
 		"class",
 		"type",
@@ -30,6 +27,12 @@ export default function Button(
 		/>
 	);
 }
+
+export interface ButtonProps
+	extends Omit<ComponentProps<"button">, "classList">,
+		ButtonVariantProps {}
+
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = tv({
 	base: "inline-flex items-center justify-center rounded-md text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
