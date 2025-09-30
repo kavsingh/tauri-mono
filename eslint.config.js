@@ -10,7 +10,7 @@ export default defineConfig(
 	{
 		ignores: [
 			".vscode/*",
-			".turbo/*",
+			".nx/*",
 			".temp/*",
 			"target/*",
 			"apps/*",

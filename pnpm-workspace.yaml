@@ -1,9 +1,10 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
 
 onlyBuiltDependencies:
-  - "@tailwindcss/oxide"
-  - "core-js"
-  - "esbuild"
-  - "unrs-resolver"
+  - '@tailwindcss/oxide'
+  - core-js
+  - esbuild
+  - nx
+  - unrs-resolver
