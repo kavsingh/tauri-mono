@@ -1,1 +1,1 @@
-/// <reference types="rolldown-vite/client" />
+/// <reference types="vite/client" />
