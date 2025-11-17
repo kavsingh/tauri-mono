@@ -20,6 +20,11 @@ export default mergeConfig(
 					"!**/*.{test,spec}.*",
 				],
 			},
+			server: {
+				deps: {
+					inline: ["@solidjs/testing-library", "@solidjs/router"],
+				},
+			},
 		},
 	}),
 );

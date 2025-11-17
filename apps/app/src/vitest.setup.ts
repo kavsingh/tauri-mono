@@ -6,7 +6,11 @@ vi.mock("#__generated__/bindings");
 
 vi.stubGlobal(
 	"ResizeObserver",
-	vi.fn(() => ({ observe: vi.fn(), unobserve: vi.fn(), disconnect: vi.fn() })),
+	class MockResizeObserver {
+		observe = vi.fn();
+		unobserve = vi.fn();
+		disconnect = vi.fn();
+	},
 );
 
 vi.stubGlobal(
