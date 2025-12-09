@@ -29,8 +29,7 @@ export default function Button(props: ButtonProps) {
 }
 
 export interface ButtonProps
-	extends Omit<ComponentProps<"button">, "classList">,
-		ButtonVariantProps {}
+	extends Omit<ComponentProps<"button">, "classList">, ButtonVariantProps {}
 
 export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
