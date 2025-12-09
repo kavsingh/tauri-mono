@@ -11,6 +11,7 @@ export default mergeConfig(
 			environment: "jsdom",
 			setupFiles: ["./src/vitest.setup.ts"],
 			clearMocks: true,
+			expect: { requireAssertions: true },
 			coverage: {
 				include: [
 					"src",

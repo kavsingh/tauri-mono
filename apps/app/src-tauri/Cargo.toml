@@ -12,12 +12,12 @@ name = "app_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies.tauri-build]
-version = "2.5.2"
+version = "2.5.3"
 features = ["isolation"]
 
 [dependencies]
 chrono = "0.4.42"
-log = "0.4.28"
+log = "0.4.29"
 serde_json = "1.0.145"
 serde = { version = "1.0.228", features = ["derive"] }
 specta = "2.0.0-rc.22"
@@ -26,11 +26,11 @@ sysinfo = "0.35.2"
 tauri-plugin-dialog = "2.4.2"
 tauri-plugin-log = "2.7.1"
 tauri-plugin-store = "2.4.1"
-uuid = { version = "1.18.1", features = ["v4", "fast-rng"] }
+uuid = { version = "1.19.0", features = ["v4", "fast-rng"] }
 window-vibrancy = "0.6.0"
 
 [dependencies.tauri]
-version = "2.9.3"
+version = "2.9.5"
 features = ["isolation", "macos-private-api"]
 
 [dependencies.tauri-specta]
