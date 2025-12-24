@@ -1,8 +1,10 @@
-import Page from "#layouts/page";
+import { Page } from "#layouts/page";
 
-import ThemeSwitch from "./theme-switch";
+import { ThemeSwitch } from "./theme-switch";
 
-export default function Settings() {
+import type { JSX } from "solid-js";
+
+export function Settings(): JSX.Element {
 	return (
 		<>
 			<Page.Header>Settings</Page.Header>

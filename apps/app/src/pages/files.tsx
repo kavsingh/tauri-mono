@@ -1,16 +1,17 @@
+import { Button } from "#components/button";
+import { Card } from "#components/card";
+import { useFileDrop, useFileSelectDialog } from "#hooks/files";
+import { Page } from "#layouts/page";
+import { tv } from "#lib/style";
 import { createEffect, createSignal, For } from "solid-js";
 
-import Button from "#components/button";
-import Card from "#components/card";
-import { useFileDrop, useFileSelectDialog } from "#hooks/files";
-import Page from "#layouts/page";
-import { tv } from "#lib/style";
+import type { JSX } from "solid-js";
 
-export default function Files() {
+export function Files(): JSX.Element {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
 
 	function handleFileSelect(selected: string[]) {
-		setSelectedFiles((current) => current.concat(selected));
+		setSelectedFiles((current) => [...current, ...selected]);
 	}
 
 	return (
@@ -68,7 +69,7 @@ function DragFileSelect(props: { onSelect: (selected: string[]) => void }) {
 }
 
 const dragFileSelectVariants = tv({
-	base: "my-3 grid h-[200px] place-items-center rounded-md border border-border text-muted-foreground transition-colors",
+	base: "my-3 grid h-50 place-items-center rounded-md border border-border text-muted-foreground transition-colors",
 	variants: {
 		isActive: {
 			true: "border-foreground bg-accent/20 text-foreground",

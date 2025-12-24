@@ -1,12 +1,12 @@
-import { For, Match, Switch } from "solid-js";
-
-import Card from "#components/card";
+import { Card } from "#components/card";
 import {
 	useSetThemePreferenceMutation,
 	useThemePreferenceQuery,
 } from "#hooks/theme";
+import { For, Match, Switch } from "solid-js";
 
 import type { ThemePreference } from "#__generated__/bindings";
+import type { JSX } from "solid-js";
 
 export const OPTIONS = [
 	"System",
@@ -14,7 +14,7 @@ export const OPTIONS = [
 	"Light",
 ] as const satisfies ThemePreference[];
 
-export default function ThemeSwitch() {
+export function ThemeSwitch(): JSX.Element {
 	const prefQuery = useThemePreferenceQuery();
 	const setPrefMutation = useSetThemePreferenceMutation();
 
@@ -48,6 +48,8 @@ export default function ThemeSwitch() {
 											class="peer cursor-pointer"
 											disabled={prefQuery.isLoading}
 										/>
+										{/* solid-js uses "for" attr */}
+										{/* oxlint-disable-next-line label-has-associated-control */}
 										<label
 											class="cursor-pointer text-muted-foreground transition-colors peer-checked:text-foreground"
 											for={option}

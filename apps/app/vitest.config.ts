@@ -2,9 +2,10 @@ import { defineConfig, mergeConfig } from "vitest/config";
 
 import baseConfig from "./vite.config.ts";
 
-export default mergeConfig(
-	baseConfig({ command: "build", mode: "production" }),
-	defineConfig({
+import type { ViteUserConfig } from "vitest/config";
+
+export default defineConfig((configEnv) => {
+	const testConfig: ViteUserConfig = {
 		resolve: { conditions: ["development", "browser"] },
 		test: {
 			include: ["src/**/*.{test,spec}.?(m|c)[tj]s?(x)"],
@@ -20,6 +21,7 @@ export default mergeConfig(
 					"!**/__test*__",
 					"!**/*.{test,spec}.*",
 				],
+				reportsDirectory: "./reports/coverage",
 			},
 			server: {
 				deps: {
@@ -27,5 +29,7 @@ export default mergeConfig(
 				},
 			},
 		},
-	}),
-);
+	};
+
+	return mergeConfig(baseConfig(configEnv), testConfig);
+});

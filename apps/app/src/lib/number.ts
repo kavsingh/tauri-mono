@@ -2,11 +2,11 @@
 export function divBigint(
 	dividend: bigint,
 	divisor: bigint,
-	precision = BigInt(100),
-) {
+	precision = 100n,
+): number {
 	return Number((dividend * precision) / divisor) / Number(precision);
 }
 
-export function normalizeBigint(val: bigint, min: bigint, max: bigint) {
+export function normalizeBigint(val: bigint, min: bigint, max: bigint): number {
 	return divBigint(val - min, max - min);
 }

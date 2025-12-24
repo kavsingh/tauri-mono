@@ -1,11 +1,10 @@
+import { commands, events } from "#__generated__/bindings";
 import { useQuery, useQueryClient } from "@tanstack/solid-query";
 
-import { commands, events } from "#__generated__/bindings";
-
 import type { SystemStats } from "#__generated__/bindings";
-import type { QueryClient } from "@tanstack/solid-query";
+import type { QueryClient, UseQueryResult } from "@tanstack/solid-query";
 
-export function useSystemStats() {
+export function useSystemStats(): UseQueryResult<SystemStats> {
 	const queryClient = useQueryClient();
 	const query = useQuery(() => ({
 		queryKey,
@@ -13,9 +12,9 @@ export function useSystemStats() {
 		async queryFn() {
 			const result = await commands.getSystemStats();
 
-			return result.status === "ok"
-				? result.data
-				: Promise.reject(new Error(result.error));
+			if (result.status !== "ok") throw new Error(result.error);
+
+			return result.data;
 		},
 	}));
 
@@ -27,7 +26,7 @@ export function useSystemStats() {
 const queryKey = ["systemStats"];
 
 const startSubscription = (() => {
-	let cachedClient: QueryClient;
+	let cachedClient: QueryClient | undefined = undefined;
 	let unlisten:
 		| Awaited<ReturnType<typeof events.systemStatsEvent.listen>>
 		| undefined = undefined;
@@ -39,6 +38,8 @@ const startSubscription = (() => {
 		cachedClient = queryClient;
 
 		unlisten = await events.systemStatsEvent.listen((event) => {
+			if (!cachedClient) return;
+
 			const current = cachedClient.getQueryData<SystemStats>(queryKey);
 			const next = reconcile(current, event.payload);
 

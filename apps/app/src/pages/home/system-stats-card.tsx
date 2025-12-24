@@ -1,17 +1,17 @@
-import { Show, createMemo } from "solid-js";
-
-import Card from "#components/card";
-import ChronoGraph from "#components/chrono-graph";
+import { Card } from "#components/card";
+import { ChronoGraph } from "#components/chrono-graph";
 import { useSystemStats } from "#hooks/system-stats";
 import { tryOr } from "#lib/error";
 import { formatMem } from "#lib/format";
+import { Show, createMemo } from "solid-js";
 
-import InfoList from "../../components/info-list";
+import { InfoList } from "../../components/info-list";
 
 import type { SystemStats } from "#__generated__/bindings";
 import type { Sample } from "#components/chrono-graph";
+import type { JSX } from "solid-js";
 
-export default function SystemStatsCard() {
+export function SystemStatsCard(): JSX.Element {
 	const statsQuery = useSystemStats();
 
 	return (
@@ -50,19 +50,19 @@ function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {
 		const value = props.systemStats?.memUsed;
 
-		return value ? { value: tryOr(() => BigInt(value), BigInt(0)) } : undefined;
+		return value ? { value: tryOr(() => BigInt(value), 0n) } : undefined;
 	});
 
 	const maxValue = createMemo<bigint>(() => {
 		const value = props.systemStats?.memTotal;
 
-		return value ? tryOr(() => BigInt(value), BigInt(0)) : BigInt(0);
+		return value ? tryOr(() => BigInt(value), 0n) : 0n;
 	});
 
 	return (
 		<ChronoGraph
 			sampleSource={sample}
-			minValue={BigInt(0)}
+			minValue={0n}
 			maxValue={maxValue()}
 			class="h-24 w-full rounded-lg"
 		/>

@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-restricted-imports */
-
-export { twMerge as tm, twJoin as tj } from "tailwind-merge";
-export { tv } from "tailwind-variants";
-
+// oxlint-disable-next-line no-restricted-imports
 import type { VariantProps as BaseVariantProps } from "tailwind-variants";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line no-restricted-imports
+export { twMerge as tm, twJoin as tj } from "tailwind-merge";
+// oxlint-disable-next-line no-restricted-imports
+export { tv } from "tailwind-variants";
+
+// oxlint-disable-next-line no-explicit-any, explicit-module-boundary-types
 export type VariantProps<TComponent extends (...args: any) => any> =
 	ExactOptional<BaseVariantProps<TComponent>>;
 
@@ -26,6 +27,6 @@ export function getStylePropertyValues<TMap extends StyleProperyValueMap>(
 
 export type StyleProperyValueMap = Record<string, string>;
 
-type StylePropertyValues<T> = { [K in keyof T]?: string };
+export type StylePropertyValues<T> = { [K in keyof T]?: string };
 
 type ExactOptional<T> = { [K in keyof T]?: T[K] | undefined };

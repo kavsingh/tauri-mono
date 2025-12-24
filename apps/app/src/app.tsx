@@ -3,12 +3,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { createEffect } from "solid-js";
 
 import { usePrefersDark } from "./hooks/theme";
-import AppLayout from "./layouts/app";
-import Files from "./pages/files";
-import Home from "./pages/home";
-import Settings from "./pages/settings";
+import { AppLayout } from "./layouts/app";
+import { Files } from "./pages/files";
+import { Home } from "./pages/home";
+import { Settings } from "./pages/settings";
 
-export default function App() {
+import type { JSX } from "solid-js";
+
+export function App(): JSX.Element {
 	const prefersDark = usePrefersDark();
 
 	createEffect(() => {

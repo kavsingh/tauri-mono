@@ -1,11 +1,10 @@
-import { vi } from "vitest";
-
 import { events } from "#__generated__/bindings";
+import { vi } from "vitest";
 
 import type { SystemStats } from "#__generated__/bindings";
 import type { Mock } from "vitest";
 
-export function publishSystemStatsEvent(payload: SystemStats) {
+export function publishSystemStatsEvent(payload: SystemStats): void {
 	publishListenerEvent(vi.mocked(events.systemStatsEvent.listen), payload);
 }
 
@@ -17,6 +16,7 @@ function publishListenerEvent(listen: Mock, payload: unknown) {
 
 		const maybeListener: unknown = call[0];
 
+		// oxlint-disable-next-line no-unsafe-call
 		if (typeof maybeListener === "function") maybeListener({ payload });
 	}
 }
