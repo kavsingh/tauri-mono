@@ -3,9 +3,16 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { createSignal, onCleanup } from "solid-js";
 
 import type { OpenDialogOptions } from "@tauri-apps/plugin-dialog";
-import type { JSX } from "solid-js";
+import type { Accessor, JSX } from "solid-js";
 
-export function useFileDrop() {
+export function useFileDrop(): [
+	{ isActive: Accessor<boolean>; files: Accessor<string[]> },
+	{
+		onDragEnter: DragEventHandler;
+		onDragLeave: DragEventHandler;
+		onDrop: DragEventHandler;
+	},
+] {
 	const [droppedFiles, setDroppedFiles] = createSignal<string[]>([]);
 	const [isActive, setIsActive] = createSignal(false);
 	// Not ideal to track this twice. TODO: File drop handler react to
@@ -31,6 +38,7 @@ export function useFileDrop() {
 	};
 
 	onCleanup(() => {
+		// oxlint-disable-next-line prefer-await-to-then, always-return
 		void unlistenPromise.then((unlisten) => {
 			unlisten();
 		});
@@ -39,10 +47,13 @@ export function useFileDrop() {
 	return [
 		{ isActive, files: droppedFiles },
 		{ onDragEnter, onDragLeave, onDrop: onDragLeave },
-	] as const;
+	];
 }
 
-export function useFileSelectDialog() {
+export function useFileSelectDialog(): [
+	Accessor<string[]>,
+	(options?: OpenDialogOptions) => Promise<void>,
+] {
 	const [files, setFiles] = createSignal<string[]>([]);
 
 	async function showDialog(options?: OpenDialogOptions) {
@@ -61,7 +72,7 @@ export function useFileSelectDialog() {
 		setFiles(Array.isArray(response) ? response : [response]);
 	}
 
-	return [files, showDialog] as const;
+	return [files, showDialog];
 }
 
 type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;

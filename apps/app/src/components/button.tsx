@@ -1,13 +1,12 @@
 // https://ui.shadcn.com/docs/components/button
 
+import { tv } from "#lib/style";
 import { splitProps } from "solid-js";
 
-import { tv } from "#lib/style";
-
 import type { VariantProps } from "#lib/style";
-import type { ComponentProps } from "solid-js";
+import type { ComponentProps, JSX } from "solid-js";
 
-export default function Button(props: ButtonProps) {
+export function Button(props: ButtonProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, [
 		"class",
 		"type",

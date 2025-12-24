@@ -1,3 +1,5 @@
+// oxlint-disable no-unassigned-import
+
 import "@testing-library/jest-dom/vitest";
 import "vitest-canvas-mock";
 import { vi } from "vitest";

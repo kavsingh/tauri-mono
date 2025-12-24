@@ -1,19 +1,19 @@
-import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
-
 import { useResizeObserver } from "#hooks/dom";
 import { tryOr } from "#lib/error";
 import { normalizeBigint } from "#lib/number";
 import { tm } from "#lib/style";
+import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
 
-import type { Accessor } from "solid-js";
+import type { Accessor, JSX } from "solid-js";
 
-export default function ChronoGraph(props: ChronoGraphProps) {
-	const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+// oxlint-disable-next-line max-statements
+export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
+	const schemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 	const observeResize = useResizeObserver();
-	let unobserveResize: ReturnType<typeof observeResize> | undefined;
-	let canvasEl: HTMLCanvasElement | undefined;
-	let rollingMin = BigInt(0);
-	let rollingMax = BigInt(0);
+	let unobserveResize: ReturnType<typeof observeResize> | undefined = undefined;
+	let canvasEl: HTMLCanvasElement | undefined = undefined;
+	let rollingMin = 0n;
+	let rollingMax = 0n;
 
 	const [samples, setSamples] = createSignal<Sample[]>([]);
 	const normalizedValues = createMemo(() => {
@@ -35,9 +35,10 @@ export default function ChronoGraph(props: ChronoGraphProps) {
 		const maxSamples = props.maxSamples ?? 20;
 
 		setSamples((current) => {
-			return current
-				.slice(Math.max(current.length - (maxSamples - 1), 0))
-				.concat(sample);
+			return [
+				...current.slice(Math.max(current.length - (maxSamples - 1), 0)),
+				sample,
+			];
 		});
 	});
 
@@ -61,7 +62,7 @@ export default function ChronoGraph(props: ChronoGraphProps) {
 			)}
 			ref={(el) => {
 				canvasEl = el;
-				observeResize(canvasEl, redraw);
+				unobserveResize = observeResize(canvasEl, redraw);
 			}}
 		/>
 	);
@@ -79,6 +80,7 @@ export interface Sample {
 	value: bigint;
 }
 
+// oxlint-disable-next-line max-statements
 function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	const ctx = canvas.getContext("2d");
 
@@ -89,8 +91,11 @@ function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	const scale = devicePixelRatio;
 	const canvasStyles = getComputedStyle(canvas);
 	const step = width / Math.max(normalized.length - 1, 1);
-	const getY = (val: number) => (1 - val) * height;
 	const gutter = 2;
+
+	function getY(val: number) {
+		return (1 - val) * height;
+	}
 
 	canvas.width = width * scale;
 	canvas.height = height * scale;

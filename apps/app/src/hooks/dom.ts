@@ -6,12 +6,8 @@ const resizeObserver = new ResizeObserver((entries) => {
 	}
 });
 
-export function useResizeObserver() {
-	function observe(
-		el: Element,
-		callback: UseResizeObserverEntryCallback,
-		options?: ResizeObserverOptions,
-	): UseResizeObserverUnobserveFn {
+export function useResizeObserver(): UseResizeObserverObserveFn {
+	const observe: UseResizeObserverObserveFn = (el, callback, options) => {
 		elementCallbacks.set(el, callback);
 		resizeObserver.observe(el, options);
 
@@ -19,7 +15,7 @@ export function useResizeObserver() {
 			resizeObserver.unobserve(el);
 			elementCallbacks.delete(el);
 		};
-	}
+	};
 
 	return observe;
 }
@@ -27,5 +23,11 @@ export function useResizeObserver() {
 export type UseResizeObserverEntryCallback = (
 	entry: ResizeObserverEntry,
 ) => void;
+
+export type UseResizeObserverObserveFn = (
+	el: Element,
+	callback: UseResizeObserverEntryCallback,
+	options?: ResizeObserverOptions,
+) => UseResizeObserverUnobserveFn;
 
 export type UseResizeObserverUnobserveFn = () => void;

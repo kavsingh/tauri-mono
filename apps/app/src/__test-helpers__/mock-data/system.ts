@@ -1,4 +1,4 @@
-import mockCreator from "./mock-creator";
+import { mockCreator } from "./mock-creator";
 
 import type { SystemInfo, SystemStats } from "#__generated__/bindings";
 

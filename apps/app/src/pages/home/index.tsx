@@ -1,9 +1,11 @@
-import Page from "#layouts/page";
+import { Page } from "#layouts/page";
 
-import SystemInfoCard from "./system-info-card";
-import SystemStatsCard from "./system-stats-card";
+import { SystemInfoCard } from "./system-info-card";
+import { SystemStatsCard } from "./system-stats-card";
 
-export default function Home() {
+import type { JSX } from "solid-js";
+
+export function Home(): JSX.Element {
 	return (
 		<>
 			<Page.Header>Home</Page.Header>

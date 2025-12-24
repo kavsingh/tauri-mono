@@ -1,10 +1,11 @@
-import { vi } from "vitest";
+// oxlint-disable prefer-await-to-then, catch-or-return
 
 import {
 	createMockSystemInfo,
 	createMockSystemStats,
 } from "#__test-helpers__/mock-data/system";
 import { createMockOkResult } from "#__test-helpers__/tauri/commands";
+import { vi } from "vitest";
 
 import type {
 	commands as bindingsCommands,

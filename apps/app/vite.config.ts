@@ -29,10 +29,5 @@ function createChecker(mode: string) {
 	return checker({
 		overlay: { initialIsOpen: false },
 		typescript: true,
-		eslint: {
-			useFlatConfig: true,
-			lintCommand: 'eslint "./src"',
-			dev: { logLevel: ["error"] },
-		},
 	});
 }

@@ -2,9 +2,14 @@ import { Route, Router } from "@solidjs/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { userEvent } from "@testing-library/user-event";
 
-import type { ParentProps } from "solid-js";
+import type { UserEvent } from "@testing-library/user-event";
+import type { JSX, ParentProps } from "solid-js";
 
-export function setupRenderWrapper() {
+export function setupRenderWrapper(): {
+	user: UserEvent;
+	queryClient: QueryClient;
+	Wrapper: (props: ParentProps) => JSX.Element;
+} {
 	const queryClient = new QueryClient();
 	const user = userEvent.setup();
 
@@ -18,5 +23,5 @@ export function setupRenderWrapper() {
 		);
 	}
 
-	return { user, queryClient, Wrapper } as const;
+	return { user, queryClient, Wrapper };
 }
