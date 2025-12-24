@@ -4,6 +4,9 @@ pre-commit:
     - run: pnpm tsc
       root: "apps/app"
       glob: "**/*.{js,ts,jsx,tsx}"
+    - run: pnpm tsc -p src/tsconfig.json
+      root: "apps/app"
+      glob: "**/*.{js,ts,jsx,tsx}"
     - run: pnpm oxlint --type-aware {staged_files}
       root: "apps/app"
       glob: "**/*.{js,ts,jsx,tsx}"
