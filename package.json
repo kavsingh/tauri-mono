@@ -7,7 +7,7 @@
 	},
 	"type": "module",
 	"license": "MIT",
-	"packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
+	"packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6",
 	"scripts": {
 		"dev": "nx dev app",
 		"test": "nx run-many -t test --verbose",
@@ -20,22 +20,22 @@
 		"clean:types": "pnpm -r exec rm -f tsconfig.tsbuildinfo && pnpm -r exec rm -f tsconfig.ci.tsbuildinfo"
 	},
 	"devDependencies": {
-		"@eslint/js": "9.39.1",
+		"@eslint/js": "9.39.2",
 		"@kavsingh/eslint-plugin-filenames": "2.0.0-rc.3",
 		"@tsconfig/node24": "24.0.3",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/eslint": "9.6.1",
-		"@types/node": "24.10.2",
-		"eslint": "9.39.1",
+		"@types/node": "24.10.4",
+		"eslint": "9.39.2",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-import-resolver-typescript": "4.4.4",
 		"eslint-plugin-import-x": "4.16.1",
 		"eslint-plugin-prettier": "5.5.4",
 		"globals": "16.5.0",
-		"nx": "22.2.0",
+		"nx": "22.3.3",
 		"prettier": "3.7.4",
 		"rimraf": "6.1.2",
 		"typescript": "5.9.3",
-		"typescript-eslint": "8.49.0"
+		"typescript-eslint": "8.50.1"
 	}
 }
