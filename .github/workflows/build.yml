@@ -22,19 +22,15 @@ jobs:
         os: [macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         id: setup
-
       - uses: ./.github/actions/get-app-properties
         id: properties
         with:
           app_path: apps/app
-
       - name: Build
         run: pnpm build:${{ matrix.os == 'windows-latest' && 'win' || 'mac' }}
-
       - name: Upload artifact
         if: ${{ success() }}
         uses: actions/upload-artifact@v4
