@@ -12,7 +12,7 @@ export default defineConfig(
 			"src-tauri/*",
 			"dist/*",
 			"dist-isolation/*",
-			"coverage/*",
+			"reports/*",
 			"**/__generated__/*",
 			"!**/__generated__/__mocks__/",
 		],
