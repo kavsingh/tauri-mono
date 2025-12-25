@@ -5,8 +5,19 @@
 	"windows": ["main"],
 	"permissions": [
 		"core:default",
+
+		"core:window:default",
 		"core:window:allow-show",
 		"core:window:allow-start-dragging",
+
+		"core:webview:default",
+		"core:webview:allow-create-webview",
+		"core:webview:allow-create-webview-window",
+		"core:webview:allow-set-webview-auto-resize",
+		"core:webview:allow-set-webview-background-color",
+		"core:webview:allow-set-webview-position",
+		"core:webview:allow-set-webview-size",
+
 		"dialog:default",
 		"log:default",
 		"store:default"

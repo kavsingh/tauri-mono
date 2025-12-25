@@ -1,0 +1,10 @@
+{
+	"name": "shared",
+	"version": "1.0.0-dev.0",
+	"description": "shared js",
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"lint": "conc 'tsc --build --noEmit' 'oxlint --type-aware' 'oxfmt --check'"
+	}
+}

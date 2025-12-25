@@ -8,7 +8,7 @@
 	},
 	"type": "module",
 	"scripts": {
-		"dev": "nx dev app --outputStyle stream",
+		"dev": "nx run-many -t dev -p app,app-ui --outputStyle stream",
 		"test": "nx run-many -t test --outputStyle stream",
 		"test:ci": "nx run-many -t test:ci --outputStyle stream",
 		"lint": "nx run-many -t lint",

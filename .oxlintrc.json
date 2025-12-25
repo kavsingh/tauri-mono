@@ -61,6 +61,7 @@
 		],
 		"eslint/no-void": ["error", { "allowAsStatement": true }],
 		"eslint/no-warning-comments": ["warn", { "terms": ["fixme", "revert"] }],
+		"eslint/prefer-destructuring": "off",
 		"eslint/sort-imports": "off",
 		"eslint/sort-keys": "off",
 		"import/group-exports": "off",

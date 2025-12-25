@@ -30,7 +30,7 @@ uuid = { version = "1.19.0", features = ["v4", "fast-rng"] }
 
 [dependencies.tauri]
 version = "2.9.5"
-features = ["isolation", "macos-private-api"]
+features = ["isolation", "macos-private-api", "unstable"]
 
 [dependencies.tauri-specta]
 version = "2.0.0-rc.21"
