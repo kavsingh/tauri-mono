@@ -16,12 +16,36 @@ export function createScopedLogger(scope: string, baseLogger: Logger): Logger {
 	};
 }
 
-export function formatUnknown(value: unknown): string {
+export function formatUnknownArgs(...args: unknown[]): string {
+	return args.map((item) => formatUnknown(item)).join(" ");
+}
+
+function formatUnknown(value: unknown): string {
 	if (typeof value === "string") return value;
 
 	try {
-		return JSON.stringify(value);
+		return JSON.stringify(value, unknownValReplacer);
 	} catch {
 		return String(value);
+	}
+}
+
+function unknownValReplacer(_: string, val: unknown) {
+	switch (typeof val) {
+		case "bigint": {
+			return `${val.toString()}n`;
+		}
+
+		case "function": {
+			return `Function(${val.name ?? "anonymous"})`;
+		}
+
+		case "symbol": {
+			return val.toString();
+		}
+
+		default: {
+			return val;
+		}
 	}
 }

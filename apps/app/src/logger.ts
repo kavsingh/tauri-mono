@@ -1,20 +1,16 @@
 import { debug, info, warn, error } from "@tauri-apps/plugin-log";
 import {
 	createScopedLogger as baseCreateScopedLogger,
-	formatUnknown,
+	formatUnknownArgs as format,
 } from "shared/logger";
 
 import type { Logger } from "shared/logger";
 
-function formatArgs(...args: unknown[]) {
-	return args.map((item) => formatUnknown(item)).join(" ");
-}
-
 export const logger: Logger = {
-	debug: (...args) => void debug(formatArgs(args)),
-	info: (...args) => void info(formatArgs(args)),
-	warn: (...args) => void warn(formatArgs(args)),
-	error: (...args) => void error(formatArgs(args)),
+	debug: (...args) => void debug(format(args)),
+	info: (...args) => void info(format(args)),
+	warn: (...args) => void warn(format(args)),
+	error: (...args) => void error(format(args)),
 };
 
 export function createScopedLogger(scope: string, baseLogger = logger): Logger {

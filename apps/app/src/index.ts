@@ -24,15 +24,11 @@ async function renderAndShow() {
 	// see: https://github.com/tauri-apps/tauri/issues/5170
 	await appWindow.show();
 
-	void attachRemoteWebview(appWindow);
+	attachRemoteWebview(appWindow);
 }
 
-async function attachRemoteWebview(parentWindow: Window) {
+function attachRemoteWebview(parentWindow: Window) {
 	logger.info("creating and attaching remote web view");
-
-	const parentSize = await parentWindow.innerSize();
-
-	logger.debug("initial size", parentSize);
 
 	// `new Webview` Should be called after the window is successfully created,
 	// or webview may not be attached to the window since window is not created yet.
@@ -41,18 +37,19 @@ async function attachRemoteWebview(parentWindow: Window) {
 		// create a webview with specific logical position and size
 		x: 0,
 		y: 0,
-		width: parentSize.width,
-		height: parentSize.height,
+		// parentWindow.innerSize returns some wild numbers
+		width: document.documentElement.clientWidth,
+		height: document.documentElement.clientHeight,
 	});
 
 	void webview.once("tauri://created", (event) => {
-		logger.info(`created: ${String(event.payload)}`);
+		logger.info("created:", event.payload);
 
 		void webview.setAutoResize(true);
 	});
 
 	void webview.once("tauri://error", (event) => {
-		logger.info(`error: ${String(event.payload)}`);
+		logger.error("error:", event.payload);
 	});
 
 	// emit an event to the backend
