@@ -1,7 +1,7 @@
-import { events } from "#__generated__/bindings";
+import { events } from "shared/__generated__/tauri/bindings";
 import { vi } from "vitest";
 
-import type { SystemStats } from "#__generated__/bindings";
+import type { SystemStats } from "shared/__generated__/tauri/bindings";
 import type { Mock } from "vitest";
 
 export function publishSystemStatsEvent(payload: SystemStats): void {

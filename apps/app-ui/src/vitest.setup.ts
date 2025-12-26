@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/vitest";
 import "vitest-canvas-mock";
 import { vi } from "vitest";
 
-vi.mock("#__generated__/bindings");
+vi.mock("shared/__generated__/tauri/bindings");
 
 vi.stubGlobal(
 	"ResizeObserver",

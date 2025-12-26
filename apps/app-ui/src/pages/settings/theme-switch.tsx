@@ -1,11 +1,10 @@
 import { Card } from "#components/card";
-import {
-	useSetThemePreferenceMutation,
-	useThemePreferenceQuery,
-} from "#hooks/theme";
+import { useSetThemePreferenceMutation } from "#hooks/theme";
+import { themePreferenceQuery } from "#lib/queries";
+import { useQuery } from "@tanstack/solid-query";
 import { For, Match, Switch } from "solid-js";
 
-import type { ThemePreference } from "#__generated__/bindings";
+import type { ThemePreference } from "shared/__generated__/tauri/bindings";
 import type { JSX } from "solid-js";
 
 export const OPTIONS = [
@@ -15,7 +14,7 @@ export const OPTIONS = [
 ] as const satisfies ThemePreference[];
 
 export function ThemeSwitch(): JSX.Element {
-	const prefQuery = useThemePreferenceQuery();
+	const prefQuery = useQuery(themePreferenceQuery);
 	const setPrefMutation = useSetThemePreferenceMutation();
 
 	return (

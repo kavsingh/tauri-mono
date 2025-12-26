@@ -1,6 +1,9 @@
 import { mockCreator } from "./mock-creator";
 
-import type { SystemInfo, SystemStats } from "#__generated__/bindings";
+import type {
+	SystemInfo,
+	SystemStats,
+} from "shared/__generated__/tauri/bindings";
 
 export const createMockSystemInfo = mockCreator<SystemInfo>({
 	osFullname: "OS Fullname",

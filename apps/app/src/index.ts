@@ -56,5 +56,7 @@ function attachRemoteWebview(parentWindow: Window) {
 	// void webview.emit("some-event", "data");
 
 	// listen to an event from the backend
-	// void webview.listen("event-name", (e) => {});
+	void webview.listen("system-stats-event", () => {
+		// logger.info("stats event", event);
+	});
 }

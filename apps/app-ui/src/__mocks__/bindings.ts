@@ -7,11 +7,11 @@ import {
 import { createMockOkResult } from "#__test-helpers__/tauri/commands";
 import { vi } from "vitest";
 
+import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import type {
 	commands as bindingsCommands,
 	events as bindingsEvents,
-} from "#__generated__/bindings";
-import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
+} from "shared/__generated__/tauri/bindings";
 
 export const commands: typeof bindingsCommands = {
 	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),

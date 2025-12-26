@@ -7,8 +7,8 @@ import { Show, createMemo } from "solid-js";
 
 import { InfoList } from "../../components/info-list";
 
-import type { SystemStats } from "#__generated__/bindings";
 import type { Sample } from "#components/chrono-graph";
+import type { SystemStats } from "shared/__generated__/tauri/bindings";
 import type { JSX } from "solid-js";
 
 export function SystemStatsCard(): JSX.Element {

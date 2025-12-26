@@ -1,31 +1,21 @@
-import { commands, events } from "#__generated__/bindings";
+import { systemStatsQuery } from "#lib/queries";
 import { useQuery, useQueryClient } from "@tanstack/solid-query";
+import { events } from "shared/__generated__/tauri/bindings";
 
-import type { SystemStats } from "#__generated__/bindings";
 import type { QueryClient, UseQueryResult } from "@tanstack/solid-query";
+import type { SystemStats } from "shared/__generated__/tauri/bindings";
 
 export function useSystemStats(): UseQueryResult<SystemStats> {
 	const queryClient = useQueryClient();
-	const query = useQuery(() => ({
-		queryKey,
-		reconcile,
-		async queryFn() {
-			const result = await commands.getSystemStats();
-
-			if (result.status !== "ok") throw new Error(result.error);
-
-			return result.data;
-		},
-	}));
+	const query = useQuery(() => ({ ...systemStatsQuery(), reconcile }));
 
 	void startSubscription(queryClient);
 
 	return query;
 }
 
-const queryKey = ["systemStats"];
-
 const startSubscription = (() => {
+	const queryKey = systemStatsQuery().queryKey;
 	let cachedClient: QueryClient | undefined = undefined;
 	let unlisten:
 		| Awaited<ReturnType<typeof events.systemStatsEvent.listen>>

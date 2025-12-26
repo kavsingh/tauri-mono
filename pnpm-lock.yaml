@@ -90,6 +90,9 @@ importers:
       '@tauri-apps/plugin-store':
         specifier: 2.4.1
         version: 2.4.1
+      shared:
+        specifier: workspace:*
+        version: link:../../packages/shared
       solid-js:
         specifier: 1.9.10
         version: 1.9.10
@@ -185,7 +188,11 @@ importers:
         specifier: 1.1.3
         version: 1.1.3(vitest@4.0.16(@types/node@24.10.4)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))
 
-  packages/shared: {}
+  packages/shared:
+    devDependencies:
+      '@tauri-apps/api':
+        specifier: 2.9.1
+        version: 2.9.1
 
 packages:
 

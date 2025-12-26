@@ -1,3 +1,4 @@
+import { createScopedLogger } from "#logger";
 import { Route, HashRouter } from "@solidjs/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { createEffect } from "solid-js";
@@ -10,8 +11,12 @@ import { Settings } from "./pages/settings";
 
 import type { JSX } from "solid-js";
 
+const logger = createScopedLogger("<App />");
+
 export function App(): JSX.Element {
 	const prefersDark = usePrefersDark();
+
+	logger.info("init");
 
 	createEffect(() => {
 		document.documentElement.classList.toggle("dark", prefersDark());

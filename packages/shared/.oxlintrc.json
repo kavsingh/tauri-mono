@@ -4,15 +4,8 @@
 	"env": { "node": true, "browser": false },
 	"ignorePatterns": [
 		"dist/**",
-		"dist-isolation/**",
 		"reports/**",
 		"**/__generated__/**",
 		"!**/__generated__/__mocks__/**"
-	],
-	"overrides": [
-		{
-			"files": ["src/**", "src-isolation/**"],
-			"env": { "browser": true, "node": false }
-		}
 	]
 }
