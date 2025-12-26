@@ -23,7 +23,7 @@
 		"@tsconfig/strictest": "2.0.8",
 		"@types/node": "24.10.4",
 		"concurrently": "9.2.1",
-		"lefthook": "2.0.12",
+		"lefthook": "2.0.13",
 		"nx": "22.3.3",
 		"oxfmt": "0.20.0",
 		"oxlint": "1.35.0",

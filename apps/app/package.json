@@ -50,7 +50,7 @@
 		"eslint-plugin-jest-dom": "5.5.0",
 		"eslint-plugin-solid": "0.14.5",
 		"eslint-plugin-testing-library": "7.15.3",
-		"jsdom": "27.3.0",
+		"jsdom": "27.4.0",
 		"rolldown-vite": "7.3.0",
 		"tailwindcss": "4.1.18",
 		"terser": "5.44.1",
