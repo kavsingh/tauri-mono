@@ -8,15 +8,14 @@
 	},
 	"type": "module",
 	"scripts": {
-		"dev": "nx dev app",
-		"test": "nx run-many -t test --verbose",
-		"test:ci": "nx run-many -t test:ci --verbose",
-		"lint": "nx run-many -t lint --verbose",
+		"dev": "nx dev app --outputStyle stream",
+		"test": "nx run-many -t test --outputStyle stream",
+		"test:ci": "nx run-many -t test:ci --outputStyle stream",
+		"lint": "nx run-many -t lint",
 		"build:mac": "nx build:mac app",
 		"build:win": "nx build:win app",
 		"clean:nx": "rm -rf .nx && pnpm -r exec rm -rf .nx",
-		"clean:modules": "rm -rf node_modules && pnpm -r exec rm -rf node_modules",
-		"clean:types": "pnpm -r exec rm -f tsconfig.tsbuildinfo && pnpm -r exec rm -f tsconfig.ci.tsbuildinfo"
+		"clean:modules": "rm -rf node_modules && pnpm -r exec rm -rf node_modules"
 	},
 	"devDependencies": {
 		"@tsconfig/node24": "24.0.3",

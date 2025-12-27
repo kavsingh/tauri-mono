@@ -1,6 +1,5 @@
 {
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
-	"tui": { "enabled": false },
 	"targetDefaults": {
 		"build": {
 			"dependsOn": ["^build"],
