@@ -14,7 +14,7 @@
 }
 
 body {
-	@apply bg-background/80;
+	@apply bg-background;
 }
 
 #app-root {

@@ -6,14 +6,14 @@ export function AppLayout(props: ParentProps): JSX.Element {
 	return (
 		<>
 			<div class="grid size-full grid-cols-[max-content_1fr]">
-				<div class="min-h-full bg-linear-to-l from-background p-4 pe-8 pt-10 text-sm">
+				<div class="min-h-full p-4 pe-8 pt-10 text-sm">
 					<nav class="flex flex-col gap-2">
 						<NavLink href="/">Home</NavLink>
 						<NavLink href="/files">Files</NavLink>
 						<NavLink href="/settings">Settings</NavLink>
 					</nav>
 				</div>
-				<div class="h-full overflow-x-hidden overflow-y-auto bg-background">
+				<div class="h-full overflow-x-hidden overflow-y-auto">
 					{props.children}
 				</div>
 			</div>
