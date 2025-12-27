@@ -51,11 +51,4 @@ function attachRemoteWebview(parentWindow: Window) {
 	void webview.once("tauri://error", (event) => {
 		logger.error("error:", event.payload);
 	});
-
-	// emit an event to the backend
-	// void webview.emit("some-event", "data");
-
-	// listen to an event from the backend
-	// void webview.listen("system-stats-event", () => {
-	// });
 }
