@@ -108,11 +108,14 @@
 					{ "allowNumber": true }
 				],
 				"typescript/strict-boolean-expressions": "off",
-				"typescript/switch-exhaustiveness-check": ["warn", {
-					"allowDefaultCaseForExhaustiveSwitch": true,
-					"considerDefaultExhaustiveForUnions": true,
-					"requireDefaultForNonUnion": true
-				}]
+				"typescript/switch-exhaustiveness-check": [
+					"warn",
+					{
+						"allowDefaultCaseForExhaustiveSwitch": true,
+						"considerDefaultExhaustiveForUnions": true,
+						"requireDefaultForNonUnion": true
+					}
+				]
 			}
 		}
 	]

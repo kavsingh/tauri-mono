@@ -4,6 +4,7 @@
 **/target
 **/*.log
 **/*.log.*
+**/*.tsbuildinfo
 
 .nx/cache
 .nx/workspace-data

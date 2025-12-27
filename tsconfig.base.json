@@ -6,8 +6,8 @@
 		"allowJs": true,
 		"checkJs": true,
 		"erasableSyntaxOnly": true,
-		"noEmit": true,
 		"verbatimModuleSyntax": true,
+
 		// leave the following to linter / formatter
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,

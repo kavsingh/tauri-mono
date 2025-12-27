@@ -10,11 +10,6 @@ export default defineConfig(
 	{
 		linterOptions: { reportUnusedDisableDirectives: true },
 		languageOptions: { parserOptions: { projectService: true } },
-	},
-
-	tsEslint.base,
-
-	{
 		ignores: [
 			"src-tauri/*",
 			"dist/*",
@@ -28,6 +23,7 @@ export default defineConfig(
 	{
 		files: ["src/**/*.?(m|c)[tj]s?(x)"],
 		extends: [
+			tsEslint.base,
 			// @ts-expect-error upstream types
 			solid.configs["flat/recommended"],
 		],

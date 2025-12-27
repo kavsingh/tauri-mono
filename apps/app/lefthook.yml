@@ -1,10 +1,7 @@
 pre-commit:
   parallel: true
   jobs:
-    - run: pnpm tsc
-      root: "apps/app"
-      glob: "**/*.{js,ts,jsx,tsx}"
-    - run: pnpm tsc -p src/tsconfig.json
+    - run: pnpm tsc --build --noEmit
       root: "apps/app"
       glob: "**/*.{js,ts,jsx,tsx}"
     - run: pnpm oxlint --type-aware {staged_files}
