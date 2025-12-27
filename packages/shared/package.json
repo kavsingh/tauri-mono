@@ -8,13 +8,18 @@
 		"lint": "conc 'tsc --build --noEmit' 'oxlint --type-aware' 'oxfmt --check'"
 	},
 	"devDependencies": {
-		"@tauri-apps/api": "2.9.1"
+		"@tauri-apps/api": "2.9.1",
+		"@tauri-apps/plugin-log": "2.7.1"
 	},
 	"peerDependencies": {
-		"@tauri-apps/api": "2.x.x"
+		"@tauri-apps/api": "2.x.x",
+		"@tauri-apps/plugin-log": "2.x.x"
 	},
 	"peerDependenciesMeta": {
 		"@tauri-apps/api": {
+			"optional": true
+		},
+		"@tauri-apps/plugin-log": {
 			"optional": true
 		}
 	}

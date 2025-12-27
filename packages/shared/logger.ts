@@ -1,4 +1,5 @@
 export interface Logger {
+	trace: (...args: unknown[]) => void;
 	debug: (...args: unknown[]) => void;
 	info: (...args: unknown[]) => void;
 	warn: (...args: unknown[]) => void;
@@ -9,6 +10,7 @@ export function createScopedLogger(scope: string, baseLogger: Logger): Logger {
 	const formattedScope = `[${scope}]`;
 
 	return {
+		trace: baseLogger.trace.bind(baseLogger, formattedScope),
 		debug: baseLogger.debug.bind(baseLogger, formattedScope),
 		info: baseLogger.info.bind(baseLogger, formattedScope),
 		warn: baseLogger.warn.bind(baseLogger, formattedScope),

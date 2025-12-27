@@ -3,6 +3,7 @@
 	"identifier": "default",
 	"description": "Capability for the main window",
 	"windows": ["main"],
+	"remote": { "urls": ["http://localhost:*"] },
 	"permissions": [
 		"core:default",
 
@@ -19,7 +20,7 @@
 		"core:webview:allow-set-webview-size",
 
 		"dialog:default",
-		"log:default",
-		"store:default"
+		"store:default",
+		"log:default"
 	]
 }
