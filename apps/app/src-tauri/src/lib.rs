@@ -32,8 +32,9 @@ pub fn run() {
 
 	Builder::default()
 		.plugin(get_log_builder().build())
-		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_store::Builder::default().build())
+		.plugin(tauri_plugin_dialog::init())
+		.plugin(tauri_plugin_opener::init())
 		.manage(ManagedSystemStatsState::default())
 		.invoke_handler(specta_builder.invoke_handler())
 		.setup(move |app| {

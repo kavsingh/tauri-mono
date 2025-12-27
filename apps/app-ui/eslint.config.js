@@ -11,9 +11,7 @@ export default defineConfig(
 		linterOptions: { reportUnusedDisableDirectives: true },
 		languageOptions: { parserOptions: { projectService: true } },
 		ignores: [
-			"src-tauri/*",
 			"dist/*",
-			"dist-isolation/*",
 			"reports/*",
 			"**/__generated__/*",
 			"!**/__generated__/__mocks__/",
