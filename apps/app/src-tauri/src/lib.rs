@@ -1,3 +1,4 @@
+mod files;
 mod preferences;
 mod system_info;
 mod system_stats;
@@ -5,6 +6,7 @@ mod theme;
 
 use std::thread::spawn;
 
+use files::open_user_dir;
 use system_info::get_system_info;
 use system_stats::{ManagedSystemStatsState, SystemStatsEvent, get_system_stats};
 use tauri::{Builder, Manager};
@@ -19,7 +21,8 @@ pub fn run() {
 			get_system_info,
 			get_system_stats,
 			get_theme_preference,
-			set_theme_preference
+			set_theme_preference,
+			open_user_dir
 		]);
 
 	#[cfg(debug_assertions)]
