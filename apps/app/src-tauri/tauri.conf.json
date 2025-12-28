@@ -6,6 +6,7 @@
 	"app": {
 		"macOSPrivateApi": true,
 		"security": {
+			"capabilities": ["main", "main-remote"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,

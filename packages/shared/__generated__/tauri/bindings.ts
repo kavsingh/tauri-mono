@@ -21,6 +21,14 @@ async getThemePreference() : Promise<ThemePreference> {
 },
 async setThemePreference(preference: ThemePreference) : Promise<void> {
     await TAURI_INVOKE("set_theme_preference", { preference });
+},
+async openUserDir() : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("open_user_dir") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
 }
 }
 

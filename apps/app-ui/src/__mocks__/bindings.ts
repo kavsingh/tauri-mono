@@ -1,4 +1,4 @@
-// oxlint-disable prefer-await-to-then, catch-or-return
+// oxlint-disable no-null, prefer-await-to-then, catch-or-return
 
 import {
 	createMockSystemInfo,
@@ -20,6 +20,7 @@ export const commands: typeof bindingsCommands = {
 	}),
 	getThemePreference: vi.fn(() => Promise.resolve("System" as const)),
 	setThemePreference: vi.fn(() => Promise.resolve()),
+	openUserDir: vi.fn(() => Promise.resolve(createMockOkResult(null))),
 };
 
 export const events: Record<

@@ -1,27 +1,17 @@
 {
 	"$schema": "../gen/schemas/desktop-schema.json",
-	"identifier": "default",
+	"identifier": "main",
 	"description": "Capability for the main window",
 	"windows": ["main"],
-	"remote": { "urls": ["http://localhost:*"] },
 	"permissions": [
-		"core:default",
-
-		"core:window:default",
 		"core:window:allow-show",
-		"core:window:allow-start-dragging",
 
-		"core:webview:default",
 		"core:webview:allow-create-webview",
-		"core:webview:allow-create-webview-window",
 		"core:webview:allow-set-webview-auto-resize",
 		"core:webview:allow-set-webview-background-color",
 		"core:webview:allow-set-webview-position",
 		"core:webview:allow-set-webview-size",
 
-		"opener:default",
-		"dialog:default",
-		"store:default",
-		"log:default"
+		"log:allow-log"
 	]
 }
