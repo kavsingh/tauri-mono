@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { defineConfig } from "rolldown-vite";
+import { defineConfig } from "vite";
 
 const dirname = fileURLToPath(new URL(".", import.meta.url));
 
