@@ -2,10 +2,8 @@ packages:
   - apps/*
   - packages/*
 
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - core-js
-  - esbuild
-  - lefthook
-  - nx
-  - unrs-resolver
+allowBuilds:
+  core-js: true
+  esbuild: true
+  lefthook: true
+  nx: true
