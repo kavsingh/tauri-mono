@@ -1,7 +1,6 @@
-.DS_Store
-
 **/node_modules
 **/target
+**/.DS_Store
 **/*.log
 **/*.log.*
 **/*.tsbuildinfo
@@ -15,3 +14,6 @@
 !/.vscode/settings.json
 !/.vscode/launch.json
 !/.vscode/tasks.json
+
+/.zed/**/*
+!/.zed/settings.json
