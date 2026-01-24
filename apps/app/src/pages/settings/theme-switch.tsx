@@ -1,9 +1,10 @@
+import { For, Match, Switch } from "solid-js";
+
 import { Card } from "#components/card";
 import {
 	useSetThemePreferenceMutation,
 	useThemePreferenceQuery,
 } from "#hooks/theme";
-import { For, Match, Switch } from "solid-js";
 
 import type { ThemePreference } from "#__generated__/bindings";
 import type { JSX } from "solid-js";

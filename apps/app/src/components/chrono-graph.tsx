@@ -1,8 +1,9 @@
+import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
+
 import { useResizeObserver } from "#hooks/dom";
 import { tryOr } from "#lib/error";
 import { normalizeBigint } from "#lib/number";
 import { tm } from "#lib/style";
-import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
 
 import type { Accessor, JSX } from "solid-js";
 

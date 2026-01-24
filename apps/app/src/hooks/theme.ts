@@ -1,7 +1,8 @@
-import { commands } from "#__generated__/bindings";
-import { getStylePropertyValues } from "#lib/style";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/solid-query";
 import { createEffect, createSignal, onCleanup } from "solid-js";
+
+import { commands } from "#__generated__/bindings";
+import { getStylePropertyValues } from "#lib/style";
 
 import type { ThemePreference } from "#__generated__/bindings";
 import type { StyleProperyValueMap, StylePropertyValues } from "#lib/style";

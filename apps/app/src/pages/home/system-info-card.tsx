@@ -1,8 +1,9 @@
+import { useQuery } from "@tanstack/solid-query";
+import { Show } from "solid-js";
+
 import { commands } from "#__generated__/bindings";
 import { Card } from "#components/card";
 import { InfoList } from "#components/info-list";
-import { useQuery } from "@tanstack/solid-query";
-import { Show } from "solid-js";
 
 import type { JSX } from "solid-js";
 

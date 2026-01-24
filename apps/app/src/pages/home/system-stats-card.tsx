@@ -1,9 +1,10 @@
+import { Show, createMemo } from "solid-js";
+
 import { Card } from "#components/card";
 import { ChronoGraph } from "#components/chrono-graph";
 import { useSystemStats } from "#hooks/system-stats";
 import { tryOr } from "#lib/error";
 import { formatMem } from "#lib/format";
-import { Show, createMemo } from "solid-js";
 
 import { InfoList } from "../../components/info-list";
 

@@ -1,5 +1,6 @@
-import { tm } from "#lib/style";
 import { splitProps } from "solid-js";
+
+import { tm } from "#lib/style";
 
 import type { ComponentProps, JSX } from "solid-js";
 

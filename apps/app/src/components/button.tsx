@@ -1,7 +1,8 @@
 // https://ui.shadcn.com/docs/components/button
 
-import { tv } from "#lib/style";
 import { splitProps } from "solid-js";
+
+import { tv } from "#lib/style";
 
 import type { VariantProps } from "#lib/style";
 import type { ComponentProps, JSX } from "solid-js";

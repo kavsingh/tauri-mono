@@ -1,5 +1,6 @@
-import { commands, events } from "#__generated__/bindings";
 import { useQuery, useQueryClient } from "@tanstack/solid-query";
+
+import { commands, events } from "#__generated__/bindings";
 
 import type { SystemStats } from "#__generated__/bindings";
 import type { QueryClient, UseQueryResult } from "@tanstack/solid-query";

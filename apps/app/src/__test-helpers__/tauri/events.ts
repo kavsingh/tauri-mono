@@ -1,5 +1,6 @@
-import { events } from "#__generated__/bindings";
 import { vi } from "vitest";
+
+import { events } from "#__generated__/bindings";
 
 import type { SystemStats } from "#__generated__/bindings";
 import type { Mock } from "vitest";
