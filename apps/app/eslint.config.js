@@ -1,5 +1,9 @@
 import tailwindcss from "eslint-plugin-better-tailwindcss";
-import { getDefaultCallees } from "eslint-plugin-better-tailwindcss/api/defaults";
+import {
+	getDefaultAttributes,
+	getDefaultCallees,
+	getDefaultVariables,
+} from "eslint-plugin-better-tailwindcss/api/defaults";
 import jestDom from "eslint-plugin-jest-dom";
 import solid from "eslint-plugin-solid";
 import testingLibrary from "eslint-plugin-testing-library";
@@ -10,35 +14,40 @@ export default defineConfig(
 	{
 		linterOptions: { reportUnusedDisableDirectives: true },
 		languageOptions: { parserOptions: { projectService: true } },
-		ignores: [
-			"src-tauri/*",
-			"dist/*",
-			"dist-isolation/*",
-			"reports/*",
-			"**/__generated__/*",
-			"!**/__generated__/__mocks__/",
-		],
+		ignores: ["**/*", "!src/**/*.?(m|c)[tj]s?(x)"],
 	},
 
 	{
 		files: ["src/**/*.?(m|c)[tj]s?(x)"],
+		ignores: ["src/**/__generated__/*"],
 		extends: [
 			tsEslint.base,
 			// @ts-expect-error upstream types
 			solid.configs["flat/recommended"],
+			// @ts-expect-error upstream types
+			tailwindcss.configs.recommended,
 		],
 		settings: {
 			"better-tailwindcss": {
 				entryPoint: "src/index.css",
 				callees: [...getDefaultCallees(), "tj", "tm"],
+				variables: [
+					...getDefaultVariables(),
+					[".+ClassName", [{ match: "strings" }]],
+					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
+				],
+				attributes: [
+					...getDefaultAttributes(),
+					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
+					["classNames", [{ match: "strings" }, { match: "objectValues" }]],
+					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
+				],
 			},
 		},
-		plugins: { "better-tailwindcss": tailwindcss },
 		rules: {
-			...tailwindcss.configs["recommended"]?.rules,
 			"better-tailwindcss/enforce-consistent-line-wrapping": "off",
+			"better-tailwindcss/enforce-consistent-important-position": "warn",
 			"better-tailwindcss/enforce-shorthand-classes": "warn",
-			"better-tailwindcss/no-conflicting-classes": "error",
 		},
 	},
 

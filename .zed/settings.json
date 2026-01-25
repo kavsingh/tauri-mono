@@ -41,7 +41,14 @@
 		"tailwindcss-language-server": {
 			"settings": {
 				"validate": true,
-				"classAttributes": ["class", "classList", "className", ".*ClassNames"],
+				"classAttributes": [
+					"class",
+					"classList",
+					"className",
+					".+ClassName",
+					".+ClassNames"
+				],
+				"classFunctions": ["tj", "tm", "tv"],
 				"experimental": {
 					"configFile": {
 						"apps/app/src/index.css": "apps/app/src/**/*"
@@ -61,32 +68,39 @@
 		},
 
 		"TypeScript": {
-			"language_servers": ["tsgo", "vtsls", "oxlint", "oxfmt"],
+			"language_servers": ["tsgo", "vtsls", "oxlint", "eslint", "oxfmt"],
 			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }],
 			"code_actions_on_format": {
-				"source.fixAll.eslint": true,
-				"source.fixAll.oxc": true
+				"source.fixAll.oxc": true,
+				"source.fixAll.eslint": true
 			}
 		},
 
 		"TSX": {
-			"language_servers": ["tsgo", "vtsls", "oxlint", "oxfmt"],
+			"language_servers": [
+				"tsgo",
+				"vtsls",
+				"oxlint",
+				"eslint",
+				"tailwindcss-language-server",
+				"oxfmt"
+			],
 			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }],
 			"code_actions_on_format": {
-				"source.fixAll.eslint": true,
-				"source.fixAll.oxc": true
+				"source.fixAll.oxc": true,
+				"source.fixAll.eslint": true
 			}
 		},
 
 		"JavaScript": {
-			"language_servers": ["tsgo", "vtsls", "oxlint", "oxfmt"],
+			"language_servers": ["tsgo", "vtsls", "oxlint", "eslint", "oxfmt"],
 			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }],
 			"code_actions_on_format": {
-				"source.fixAll.eslint": true,
-				"source.fixAll.oxc": true
+				"source.fixAll.oxc": true,
+				"source.fixAll.eslint": true
 			}
 		},
 

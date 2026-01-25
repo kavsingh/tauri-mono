@@ -38,7 +38,13 @@
 
 	"files.associations": { "*.css": "tailwindcss" },
 	"tailwindCSS.validate": true,
-	"tailwindCSS.classAttributes": ["class", "classList"],
+	"tailwindCSS.classAttributes": [
+		"class",
+		"classList",
+		"className",
+		".+ClassName",
+		".+ClassNames"
+	],
 	"tailwindCSS.classFunctions": ["tj", "tm", "tv"],
 	"tailwindCSS.experimental.configFile": {
 		"apps/app/src/index.css": "apps/app/src/**/*"
