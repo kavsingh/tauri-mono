@@ -11,7 +11,7 @@
 		"dev": "nx dev app --outputStyle stream",
 		"test": "nx run-many -t test --outputStyle stream",
 		"test:ci": "nx run-many -t test:ci --outputStyle stream",
-		"lint": "nx run-many -t lint",
+		"lint": "nx run-many -t lint --outputStyle stream",
 		"build:mac": "nx build:mac app",
 		"build:win": "nx build:win app",
 		"clean:nx": "pnpm -r exec rm -rf .nx && rm -rf .nx",

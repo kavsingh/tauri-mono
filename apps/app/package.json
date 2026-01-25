@@ -11,7 +11,7 @@
 		"test:ui": "vitest run",
 		"test:tauri": "cd src-tauri && cargo test",
 		"lint": "pnpm lint:ui",
-		"lint:ui": "conc 'oxlint --type-aware --type-check' 'eslint .' 'oxfmt --check'",
+		"lint:ui": "conc 'oxlint --type-aware --type-check --max-warnings=0' 'eslint . --max-warnings=0' 'oxfmt --check'",
 		"lint:tauri": "cargo clippy --all-targets --all-features",
 		"before:dev": "pnpm build:isolation && vite dev",
 		"before:build": "pnpm build:isolation && rimraf ./dist && vite build",

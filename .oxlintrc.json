@@ -74,7 +74,7 @@
 		"oxc/no-async-await": "off",
 		"oxc/no-optional-chaining": "off",
 		"oxc/no-rest-spread-properties": "off",
-		"unicorn/catch-error-name": ["error", { "name": "cause" }],
+		"unicorn/catch-error-name": ["warn", { "name": "cause" }],
 		"unicorn/no-array-reduce": "off",
 		"unicorn/no-useless-undefined": "off"
 	},
