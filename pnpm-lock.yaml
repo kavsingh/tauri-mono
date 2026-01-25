@@ -17,6 +17,9 @@ importers:
       '@types/node':
         specifier: 24.10.9
         version: 24.10.9
+      '@typescript/native-preview':
+        specifier: 7.0.0-dev.20260124.1
+        version: 7.0.0-dev.20260124.1
       concurrently:
         specifier: 9.2.1
         version: 9.2.1
@@ -38,6 +41,9 @@ importers:
       rimraf:
         specifier: 6.1.2
         version: 6.1.2
+      tombi:
+        specifier: 0.7.24
+        version: 0.7.24
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1494,6 +1500,54 @@ packages:
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
 
+  '@tombi-toml/cli-darwin-arm64@0.7.24':
+    resolution: {integrity: sha512-rB4/iN3FfKPuTKfjLgFQpulWvNz478UpOyUD5G2P2Ah8sBIZdk88ob1oTmaGivqaJldAgjLh7+RD21QbGSfwhQ==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@tombi-toml/cli-darwin-x64@0.7.24':
+    resolution: {integrity: sha512-IcZhSX6QW632tU5QpFMZVExplNmSBoRaDugX2f+/57G66gPL7nhNR0O5gxsl4wRulQRzjqGQzCvQGmp/VFiE2w==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@tombi-toml/cli-linux-arm64-musl@0.7.24':
+    resolution: {integrity: sha512-3pTHr5BzSsuf8ilNd5D5ufoynIkaexqayeZ1wMKUMWJLeT0Gvmp2k5QhsW7SA9ryAU9w9zXbXBZy4pOzVrd0CA==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@tombi-toml/cli-linux-arm64@0.7.24':
+    resolution: {integrity: sha512-xZ3mC79AjWEFVm7xREf16baW93rQJVNH+PCy8FPPOm43Uadc2MLTYSFx+bkMK83clZ8VusujHI1SCmXV0Vz7SA==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@tombi-toml/cli-linux-x64-musl@0.7.24':
+    resolution: {integrity: sha512-z5IgipZiC2yERZkEsk7PJ0nfdNZ2AZ4WEr1cjcMIqfNKfAhlo8uoayxwcEUp3VLOPFQaxykqDXFPsdebken8NA==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@tombi-toml/cli-linux-x64@0.7.24':
+    resolution: {integrity: sha512-TkT9NL0HET6zpahi4p9kYrZVJ857I7KwAx3UsXMscrW1VogFIdw6nARs2UxgdT8ALuXL7Pw4cM1Cl0xWcXum2w==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@tombi-toml/cli-win32-arm64@0.7.24':
+    resolution: {integrity: sha512-/CFr0s7SNVRo0Ig5okQNCKB5i06V6RhBR7SLqMDmkSesW0bZdDen6ROPd3azoMhhakFOFN6yIcyx5IzWi8nLUg==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@tombi-toml/cli-win32-x64@0.7.24':
+    resolution: {integrity: sha512-7iGKNiXan041evjzFMA+Jcj/hHqX5SN5byhEDimeXCNCKvqU5OgpHBUt4j/wVrqOc0RHKuebKslHQp2S/4zqWA==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [win32]
+
   '@tsconfig/node24@24.0.4':
     resolution: {integrity: sha512-2A933l5P5oCbv6qSxHs7ckKwobs8BDAe9SJ/Xr2Hy+nDlwmLE1GhFh/g/vXGRZWgxBg9nX/5piDtHR9Dkw/XuA==}
 
@@ -1597,6 +1651,45 @@ packages:
   '@typescript-eslint/visitor-keys@8.53.1':
     resolution: {integrity: sha512-oy+wV7xDKFPRyNggmXuZQSBzvoLnpmJs+GhzRhPjrxl2b/jIlyjVokzm47CZCDUdXKr2zd7ZLodPfOBpOPyPlg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-hFA0vQyyrmTwRLfZnC03QtCCwg/6kyM5qfOjEoIqKlAi7TllP4eLFSJz38X9fh/3Geh0krkZHeIh6h6QP0Jjfw==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-WvhTJ0YucAQpTQwy54tj8c8rzsPFXJeXAk04vYQSBBq7gv3k8CoLuVzghAYG2zGzAFEHA9FW/rT9NACqNJ8Iww==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-YjhWXiQdCOMbWhZgOy4eYs5l6i6lKxtI8rsmzLiGyM7sgD7Uzq8hh9z1DCSpGwvDR7Bky9sjkjGHJ2r+KGaU2Q==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-fJGwwQYldfeSO/rzXJMgRR+YhfBdGZgQN+n3vBX5/lCUWS1dtXI/8yWpBs/mc0UtYm0w2oY912eG4Xd0kJMElw==}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-ReEuzIqgwydFCsRUmlPERfgt38m7Z+Lyw3MddOCT6mJFArZ4J+XxOFlPL3PLI1pSXJHeHc3oTSQGToODLR1bnw==}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-4jwjoKlsapGj0wFTxI/d9TLBK+kVHwn+qSdPIcuE2t8OsjpEXSvjvjHMX64ysyf6VGVKd9m/qJs8708qo4RYmg==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-dtUucoRDMi0bUbM2GkSF3qMbNRwE+K9udc6lTUj6+akXLqatuXm7PHVcqjrdXCyarc3CSNJE5Uq6GDHWzjDxyw==}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/native-preview@7.0.0-dev.20260124.1':
+    resolution: {integrity: sha512-VRIKr9caNPE8zZqQKyPaRB+3HZQVy5AECW2B8GMRqp2LQvE5eDKXsilXAcLc0LaaHDwXIKxMlvIVC1sWkJOYhw==}
+    hasBin: true
 
   '@valibot/to-json-schema@1.5.0':
     resolution: {integrity: sha512-GE7DmSr1C2UCWPiV0upRH6mv0cCPsqYGs819fb6srCS1tWhyXrkGGe+zxUiwzn/L1BOfADH4sNjY/YHCuP8phQ==}
@@ -3027,6 +3120,11 @@ packages:
   tmp@0.2.5:
     resolution: {integrity: sha512-voyz6MApa1rQGUxT3E+BK7/ROe8itEx7vD8/HEvt4xwXucvQ5G5oeEiHkmHZJuBO21RpOf+YYm9MOivj709jow==}
     engines: {node: '>=14.14'}
+
+  tombi@0.7.24:
+    resolution: {integrity: sha512-HoKI+4d4fBHsCWreBlQttyHVQNjwE5QYBmgT98b67kM+TvP53v2At3Tn2OiBKh3DRf5JbiDp6anSVWdduq8jgA==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   tough-cookie@6.0.0:
     resolution: {integrity: sha512-kXuRi1mtaKMrsLUxz3sQYvVl37B0Ns6MzfrtV5DvJceE9bPyspOqk9xxv7XbZWcfLWbFmm997vl83qUWVJA64w==}
@@ -4616,6 +4714,30 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.1
 
+  '@tombi-toml/cli-darwin-arm64@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-darwin-x64@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-linux-arm64-musl@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-linux-arm64@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-linux-x64-musl@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-linux-x64@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-win32-arm64@0.7.24':
+    optional: true
+
+  '@tombi-toml/cli-win32-x64@0.7.24':
+    optional: true
+
   '@tsconfig/node24@24.0.4': {}
 
   '@tsconfig/strictest@2.0.8': {}
@@ -4759,6 +4881,37 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.53.1
       eslint-visitor-keys: 4.2.1
+
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260124.1':
+    optional: true
+
+  '@typescript/native-preview@7.0.0-dev.20260124.1':
+    optionalDependencies:
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260124.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260124.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260124.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260124.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260124.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260124.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260124.1
 
   '@valibot/to-json-schema@1.5.0(valibot@1.2.0(typescript@5.9.3))':
     dependencies:
@@ -6222,6 +6375,17 @@ snapshots:
       tldts-core: 7.0.19
 
   tmp@0.2.5: {}
+
+  tombi@0.7.24:
+    optionalDependencies:
+      '@tombi-toml/cli-darwin-arm64': 0.7.24
+      '@tombi-toml/cli-darwin-x64': 0.7.24
+      '@tombi-toml/cli-linux-arm64': 0.7.24
+      '@tombi-toml/cli-linux-arm64-musl': 0.7.24
+      '@tombi-toml/cli-linux-x64': 0.7.24
+      '@tombi-toml/cli-linux-x64-musl': 0.7.24
+      '@tombi-toml/cli-win32-arm64': 0.7.24
+      '@tombi-toml/cli-win32-x64': 0.7.24
 
   tough-cookie@6.0.0:
     dependencies:

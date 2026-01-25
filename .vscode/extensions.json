@@ -1,9 +1,10 @@
 {
 	"recommendations": [
-		"bradlc.vscode-tailwindcss",
+		"typescriptteam.native-preview",
 		"dbaeumer.vscode-eslint",
 		"oxc.oxc-vscode",
 		"rust-lang.rust-analyzer",
-		"tamasfe.even-better-toml"
+		"bradlc.vscode-tailwindcss",
+		"tombi-toml.tombi"
 	]
 }

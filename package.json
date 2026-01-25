@@ -11,7 +11,7 @@
 		"dev": "nx dev app --outputStyle stream",
 		"test": "nx run-many -t test --outputStyle stream",
 		"test:ci": "nx run-many -t test:ci --outputStyle stream",
-		"lint": "nx run-many -t lint --outputStyle stream",
+		"lint": "conc 'nx run-many -t lint --outputStyle stream' 'tombi lint --error-on-warnings'",
 		"build:mac": "nx build:mac app",
 		"build:win": "nx build:win app",
 		"clean:nx": "pnpm -r exec rm -rf .nx && rm -rf .nx",
@@ -22,6 +22,7 @@
 		"@tsconfig/node24": "24.0.4",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/node": "24.10.9",
+		"@typescript/native-preview": "7.0.0-dev.20260124.1",
 		"concurrently": "9.2.1",
 		"lefthook": "2.0.15",
 		"nx": "22.4.1",
@@ -29,6 +30,7 @@
 		"oxlint": "1.41.0",
 		"oxlint-tsgolint": "0.11.1",
 		"rimraf": "6.1.2",
+		"tombi": "0.7.24",
 		"typescript": "5.9.3"
 	},
 	"packageManager": "pnpm@10.28.1+sha512.7d7dbbca9e99447b7c3bf7a73286afaaf6be99251eb9498baefa7d406892f67b879adb3a1d7e687fc4ccc1a388c7175fbaae567a26ab44d1067b54fcb0d6a316"

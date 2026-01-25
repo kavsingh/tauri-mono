@@ -26,6 +26,7 @@
 	"rust-analyzer.diagnostics.disabled": ["macro-error"],
 
 	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.experimental.useTsgo": true,
 
 	"oxc.enable": true,
 	"oxc.typeAware": true,
@@ -74,6 +75,6 @@
 		"editor.defaultFormatter": "oxc.oxc-vscode"
 	},
 	"[toml]": {
-		"editor.defaultFormatter": "oxc.oxc-vscode"
+		"editor.defaultFormatter": "tombi-toml.tombi"
 	}
 }
