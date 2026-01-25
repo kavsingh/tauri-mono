@@ -38,7 +38,6 @@ export default defineConfig(
 				],
 				attributes: [
 					...getDefaultAttributes(),
-					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
 					["classNames", [{ match: "strings" }, { match: "objectValues" }]],
 					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
 				],
