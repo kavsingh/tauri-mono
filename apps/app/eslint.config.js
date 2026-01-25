@@ -11,11 +11,7 @@ import { defineConfig } from "eslint/config";
 import { configs as tsEslint } from "typescript-eslint";
 
 export default defineConfig(
-	{
-		linterOptions: { reportUnusedDisableDirectives: true },
-		languageOptions: { parserOptions: { projectService: true } },
-		ignores: ["**/*", "!src/**/*.?(m|c)[tj]s?(x)"],
-	},
+	{ linterOptions: { reportUnusedDisableDirectives: true } },
 
 	{
 		files: ["src/**/*.?(m|c)[tj]s?(x)"],
