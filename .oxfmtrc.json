@@ -1,7 +1,6 @@
 {
 	"$schema": "./node_modules/oxfmt/configuration_schema.json",
 	"ignorePatterns": [
-		"pnpm-*.yaml",
 		"**/.nx/**",
 		"**/dist/**",
 		"**/gen/**",
@@ -9,7 +8,8 @@
 		"**/reports/**",
 		"**/target/**",
 		"**/__generated__/**",
-		"!**/__generated__/mocks/**"
+		"!**/__generated__/mocks/**",
+		"**/*.lock"
 	],
 	"printWidth": 80,
 	"useTabs": true,
