@@ -6,9 +6,6 @@ runs:
   steps:
     - run: rustup toolchain install stable --profile minimal --no-self-update
       shell: bash
-    - uses: actions/setup-node@v6
-      with:
-        node-version-file: .node-version
-    - uses: pnpm/action-setup@v4
-    - run: pnpm install --frozen-lockfile
+    - uses: oven-sh/setup-bun@v2
+    - run: bun install --frozen-lockfile
       shell: bash

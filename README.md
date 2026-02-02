@@ -1,14 +1,6 @@
 `apps/app`: Tauri, SolidJS + TailwindCSS
 
 ```
-corepack enable pnpm
-pnpm i
+bun i
+bun run dev
 ```
-
----
-
-todo:
-
-- [ ] ~~bun when windows support~~
-
-- [ ] bun when windows arm64 support

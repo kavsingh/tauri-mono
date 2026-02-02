@@ -7,7 +7,7 @@
 		"emitDeclarationOnly": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"lib": ["esnext", "dom"],
+		"lib": ["esnext", "dom", "dom.iterable", "dom.asynciterable"],
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"paths": { "#*": ["./src/*"] },

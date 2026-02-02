@@ -11,7 +11,7 @@ import { defineConfig } from "eslint/config";
 import { configs as tsEslint } from "typescript-eslint";
 
 export default defineConfig(
-	{ linterOptions: { reportUnusedDisableDirectives: true } },
+	{ ignores: ["dist/*", "dist-isolation/*", "reports/*", ".tanstack/*"] },
 
 	{
 		files: ["src/**/*.?(m|c)[tj]s?(x)"],
