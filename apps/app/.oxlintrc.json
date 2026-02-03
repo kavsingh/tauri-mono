@@ -13,6 +13,7 @@
 		{
 			"files": ["src/**"],
 			"env": { "browser": true, "node": false },
+			"plugins": ["eslint", "import"],
 			"rules": {
 				"eslint/no-console": "error",
 				"eslint/no-restricted-imports": [
@@ -30,8 +31,8 @@
 						]
 					}
 				],
-				"eslint/prefer-destructuring": "off",
-				"import/no-nodejs-modules": "off"
+				"import/extensions": "off",
+				"import/no-nodejs-modules": "error"
 			}
 		},
 		{
