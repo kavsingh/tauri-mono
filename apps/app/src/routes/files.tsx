@@ -1,3 +1,4 @@
+import { createFileRoute } from "@tanstack/solid-router";
 import { createEffect, createSignal, For } from "solid-js";
 
 import { Button } from "#components/button";
@@ -8,7 +9,7 @@ import { tv } from "#lib/style";
 
 import type { JSX } from "solid-js";
 
-export function Files(): JSX.Element {
+function Files(): JSX.Element {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
 
 	function handleFileSelect(selected: string[]) {
@@ -41,6 +42,8 @@ export function Files(): JSX.Element {
 		</>
 	);
 }
+
+export const Route = createFileRoute("/files")({ component: Files });
 
 function DialogFileSelect(props: { onSelect: (selected: string[]) => void }) {
 	const [files, selectFiles] = useFileSelectDialog();

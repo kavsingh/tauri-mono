@@ -7,6 +7,7 @@
 		"**/dist-*/**",
 		"**/reports/**",
 		"**/target/**",
+		"**/*.gen.*",
 		"**/__generated__/**",
 		"!**/__generated__/mocks/**",
 		"**/*.lock"

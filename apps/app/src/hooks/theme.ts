@@ -1,24 +1,14 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/solid-query";
+import { useMutation, useQueryClient } from "@tanstack/solid-query";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 
 import { commands } from "#__generated__/bindings";
+import { themePreferenceQuery } from "#lib/queries";
 import { getStylePropertyValues } from "#lib/style";
 
 import type { ThemePreference } from "#__generated__/bindings";
 import type { StyleProperyValueMap, StylePropertyValues } from "#lib/style";
-import type {
-	MutationOptions,
-	UseMutationResult,
-	UseQueryResult,
-} from "@tanstack/solid-query";
+import type { MutationOptions, UseMutationResult } from "@tanstack/solid-query";
 import type { Accessor } from "solid-js";
-
-export function useThemePreferenceQuery(): UseQueryResult<ThemePreference> {
-	return useQuery(() => ({
-		queryKey: ["themePreference"],
-		queryFn: () => commands.getThemePreference(),
-	}));
-}
 
 export function useSetThemePreferenceMutation(
 	options?: Omit<
@@ -30,6 +20,7 @@ export function useSetThemePreferenceMutation(
 		"mutationFn"
 	>,
 ): UseMutationResult<void, Error, ThemePreference> {
+	const queryKey = themePreferenceQuery().queryKey;
 	const queryClient = useQueryClient();
 	const { onSuccess, ...opts } = options ?? {};
 
@@ -37,7 +28,7 @@ export function useSetThemePreferenceMutation(
 		mutationFn: setThemePreference,
 		onSuccess(...args) {
 			onSuccess?.(...args);
-			void queryClient.invalidateQueries({ queryKey: ["themePreference"] });
+			void queryClient.invalidateQueries({ queryKey });
 		},
 		...opts,
 	}));

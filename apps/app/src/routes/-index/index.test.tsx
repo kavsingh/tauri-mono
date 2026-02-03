@@ -1,13 +1,14 @@
 import { render, waitFor, screen, cleanup } from "@solidjs/testing-library";
+import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { describe, it, expect, vi, afterEach } from "vitest";
 
 import { createMockSystemStats } from "#__test-helpers__/mock-data/system";
-import { setupRenderWrapper } from "#__test-helpers__/render-wrapper";
 import { publishSystemStatsEvent } from "#__test-helpers__/tauri/events";
+import { Index } from "#routes/index";
 
-import { Home } from "./index";
+import type { ParentProps } from "solid-js";
 
-describe("<Home />", () => {
+describe("<Index />", () => {
 	afterEach(() => {
 		vi.clearAllMocks();
 		cleanup();
@@ -16,9 +17,7 @@ describe("<Home />", () => {
 	it("should load and render home page", async () => {
 		expect.assertions(4);
 
-		const { Wrapper } = setupRenderWrapper();
-
-		render(() => <Home />, { wrapper: Wrapper });
+		render(() => <Index />, { wrapper: setup().Wrapper });
 
 		expect(
 			screen.getByRole("heading", { name: "Home", level: 2 }),
@@ -35,9 +34,7 @@ describe("<Home />", () => {
 	it("should update system stats from events", async () => {
 		expect.assertions(4);
 
-		const { Wrapper } = setupRenderWrapper();
-
-		render(() => <Home />, { wrapper: Wrapper });
+		render(() => <Index />, { wrapper: setup().Wrapper });
 
 		await waitFor(() => {
 			expect(screen.getByText("600.00 MB")).toBeInTheDocument();
@@ -59,3 +56,17 @@ describe("<Home />", () => {
 		expect(screen.queryByText("600.00 MB")).not.toBeInTheDocument();
 	});
 });
+
+function setup() {
+	const client = new QueryClient();
+
+	function Wrapper(props: ParentProps) {
+		return (
+			<QueryClientProvider client={client}>
+				{props.children}
+			</QueryClientProvider>
+		);
+	}
+
+	return { Wrapper, client };
+}

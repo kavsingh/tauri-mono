@@ -6,6 +6,7 @@
 		"dist/**",
 		"dist-isolation/**",
 		"reports/**",
+		"**/*.gen.*",
 		"**/__generated__/**",
 		"!**/__generated__/__mocks__/**"
 	],

@@ -23,11 +23,7 @@ export default defineConfig((configEnv) => {
 				],
 				reportsDirectory: "./reports/coverage",
 			},
-			server: {
-				deps: {
-					inline: ["@solidjs/testing-library", "@solidjs/router"],
-				},
-			},
+			server: { deps: { inline: ["@tanstack/solid-router"] } },
 		},
 	};
 
