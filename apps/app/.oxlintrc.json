@@ -30,7 +30,8 @@
 						]
 					}
 				],
-				"eslint/prefer-destructuring": "off"
+				"eslint/prefer-destructuring": "off",
+				"import/no-nodejs-modules": "off"
 			}
 		},
 		{

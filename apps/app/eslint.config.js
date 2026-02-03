@@ -19,8 +19,7 @@ export default defineConfig(
 		extends: [
 			tsEslint.base,
 			// @ts-expect-error upstream types
-			solid.configs["flat/recommended"],
-			// @ts-expect-error upstream types
+			solid.configs["flat/typescript"],
 			tailwindcss.configs.recommended,
 		],
 		settings: {
