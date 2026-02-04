@@ -47,7 +47,7 @@
 	],
 	"tailwindCSS.classFunctions": ["tj", "tm", "tv"],
 	"tailwindCSS.experimental.configFile": {
-		"apps/app/src/index.css": "apps/app/src/**/*"
+		"apps/app-ui/src/index.css": "apps/app-ui/src/**/*"
 	},
 
 	"[rust]": {
