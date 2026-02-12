@@ -24,7 +24,7 @@ tauri-plugin-store = "2.4.2"
 uuid = { version = "1.20.0", features = ["fast-rng", "v4"] }
 
 [dependencies.tauri]
-version = "2.10.1"
+version = "2.10.2"
 features = ["isolation", "macos-private-api"]
 
 [dependencies.tauri-specta]
@@ -32,7 +32,7 @@ version = "2.0.0-rc.21"
 features = ["derive", "typescript"]
 
 [build-dependencies.tauri-build]
-version = "2.5.4"
+version = "2.5.5"
 features = ["isolation"]
 
 [features]
