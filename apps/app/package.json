@@ -19,7 +19,7 @@
 		"build:mac": "tauri build --target universal-apple-darwin",
 		"build:win": "tauri build --target x86_64-pc-windows-msvc",
 		"build:isolation": "cross-env rimraf ./dist-isolation && vite -c vite.isolation.config.ts build",
-		"testscript": "node scripts/testscript.ts"
+		"testscript": "bun scripts/testscript.ts"
 	},
 	"dependencies": {
 		"@tanstack/solid-query": "5.90.23",
