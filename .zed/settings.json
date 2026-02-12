@@ -4,15 +4,6 @@
 	// for some reason auto-indentation does not respect formatter configs
 	"hard_tabs": true,
 
-	"auto_install_extensions": {
-		"tsgo": true,
-		"oxc": true,
-		"html": true,
-		"tombi": true
-	},
-
-	"terminal": { "env": { "GIT_EDITOR": "zed --wait" } },
-
 	"lsp": {
 		"rust-analyzer": {
 			"initialization_options": {
