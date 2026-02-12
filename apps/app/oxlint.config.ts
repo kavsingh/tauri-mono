@@ -3,8 +3,6 @@ import { defineConfig } from "oxlint";
 // oxlint-disable-next-line import/no-relative-parent-imports
 import baseConfig from "../../oxlint.config.ts";
 
-import type { OxlintConfig } from "oxlint";
-
 export default defineConfig({
 	extends: [baseConfig],
 	env: { node: true, browser: false },
@@ -71,4 +69,4 @@ export default defineConfig({
 	settings: {
 		vitest: { typecheck: true },
 	},
-} satisfies OxlintConfig);
+});

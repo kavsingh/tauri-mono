@@ -1,5 +1,6 @@
 **/node_modules
 **/target
+**/reports
 **/.DS_Store
 **/*.log
 **/*.log.*
