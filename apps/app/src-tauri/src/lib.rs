@@ -1,3 +1,4 @@
+mod files;
 mod preferences;
 mod system_info;
 mod system_stats;
@@ -5,6 +6,7 @@ mod theme;
 
 use std::thread::spawn;
 
+use files::open_user_dir;
 use system_info::get_system_info;
 use system_stats::{ManagedSystemStatsState, SystemStatsEvent, get_system_stats};
 use tauri::{Builder, Manager};
@@ -19,21 +21,23 @@ pub fn run() {
 			get_system_info,
 			get_system_stats,
 			get_theme_preference,
-			set_theme_preference
+			set_theme_preference,
+			open_user_dir
 		]);
 
 	#[cfg(debug_assertions)]
 	specta_builder
 		.export(
 			specta_typescript::Typescript::default(),
-			"../src/__generated__/bindings.ts",
+			"../../../packages/shared/__generated__/tauri/bindings.ts",
 		)
 		.expect("Failed to export typescript bindings");
 
 	Builder::default()
 		.plugin(get_log_builder().build())
-		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_store::Builder::default().build())
+		.plugin(tauri_plugin_dialog::init())
+		.plugin(tauri_plugin_opener::init())
 		.manage(ManagedSystemStatsState::default())
 		.invoke_handler(specta_builder.invoke_handler())
 		.setup(move |app| {

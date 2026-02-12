@@ -4,6 +4,10 @@
 	// for some reason auto-indentation does not respect formatter configs
 	"hard_tabs": true,
 
+	"file_types": {
+		"Dockerfile": ["dockerfile", "dockerfile.*"]
+	},
+
 	"lsp": {
 		"rust-analyzer": {
 			"initialization_options": {
@@ -42,7 +46,7 @@
 				"classFunctions": ["tj", "tm", "tv"],
 				"experimental": {
 					"configFile": {
-						"apps/app/src/index.css": "apps/app/src/**/*"
+						"apps/app/src/index.css": "apps/app-ui/src/**/*"
 					}
 				},
 				// @TODO: disable once figured out why eslint plugin

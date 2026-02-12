@@ -1,0 +1,5 @@
+pre-commit:
+  jobs:
+    - run: bun oxlint --type-aware --type-check --max-warnings=0 {staged_files}
+      root: "packages/shared"
+      glob: "**/*.{js,ts,jsx,tsx}"

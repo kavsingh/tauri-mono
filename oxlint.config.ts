@@ -109,6 +109,10 @@ export default defineConfig({
 					{ fixStyle: "separate-type-imports", prefer: "type-imports" },
 				],
 				"typescript/explicit-function-return-type": "off",
+				"typescript/no-confusing-void-expression": [
+					"warn",
+					{ ignoreArrowShorthand: true },
+				],
 				"typescript/no-non-null-assertion": "error",
 				"typescript/promise-function-async": "off",
 				"typescript/restrict-template-expressions": [

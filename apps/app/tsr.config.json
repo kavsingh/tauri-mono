@@ -1,9 +1,0 @@
-{
-	"target": "solid",
-	"autoCodeSplitting": true,
-	"spa": { "enabled": true },
-	"appDirectory": "src",
-	"rootDirectory": ".",
-	"routesDirectory": "./src/routes",
-	"generatedRouteTree": "./src/route-tree.gen.ts"
-}

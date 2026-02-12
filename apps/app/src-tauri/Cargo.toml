@@ -20,12 +20,13 @@ specta-typescript = "0.0.9"
 sysinfo = "0.35.2"
 tauri-plugin-dialog = "2.6.0"
 tauri-plugin-log = "2.8.0"
+tauri-plugin-opener = "2.5.3"
 tauri-plugin-store = "2.4.2"
 uuid = { version = "1.20.0", features = ["fast-rng", "v4"] }
 
 [dependencies.tauri]
 version = "2.10.2"
-features = ["isolation", "macos-private-api"]
+features = ["isolation", "macos-private-api", "unstable"]
 
 [dependencies.tauri-specta]
 version = "2.0.0-rc.21"

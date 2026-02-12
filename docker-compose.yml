@@ -1,0 +1,39 @@
+services:
+  app-ui:
+    build:
+      context: .
+      target: ui-dev
+    command: bun nx dev app-ui
+    ports:
+      - "5321:5321"
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/app-ui/src
+          target: /monorepo/apps/app-ui/src
+        - action: sync
+          path: ./apps/app-ui/public
+          target: /monorepo/apps/app-ui/public
+        - action: rebuild
+          path: ./apps/app-ui/package.json
+          target: /monorepo/apps/app-ui/package.json
+
+        - action: sync
+          path: ./packages/shared
+          target: /monorepo/packages/shared
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./packages/shared/package.json
+          target: /monorepo/packages/shared/package.json
+    profiles:
+      - dev
+
+  app-ui-prod:
+    build:
+      context: .
+      target: ui-prod
+    ports:
+      - "5321:80"
+    profiles:
+      - prod

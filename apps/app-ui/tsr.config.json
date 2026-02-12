@@ -1,0 +1,8 @@
+{
+	"target": "solid",
+	"autoCodeSplitting": true,
+	"appDirectory": "src",
+	"rootDirectory": ".",
+	"routesDirectory": "./src/routes",
+	"generatedRouteTree": "./src/route-tree.gen.ts"
+}
