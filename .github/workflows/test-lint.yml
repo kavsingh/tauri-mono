@@ -12,5 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
+      # for oxlint config resolution
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
       - run: bun test:ci
       - run: bun lint
