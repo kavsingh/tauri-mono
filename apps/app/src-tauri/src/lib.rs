@@ -6,11 +6,15 @@ mod theme;
 use std::thread::spawn;
 
 use system_info::get_system_info;
-use system_stats::{ManagedSystemStatsState, SystemStatsEvent, get_system_stats};
+use system_stats::{
+	ManagedSystemStatsState, SystemStatsEvent, get_system_stats,
+};
 use tauri::{Builder, Manager};
 use tauri_specta::Event;
 
-use crate::preferences::{get_stored_theme_preference, get_theme_preference, set_theme_preference};
+use crate::preferences::{
+	get_stored_theme_preference, get_theme_preference, set_theme_preference,
+};
 
 pub fn run() {
 	let specta_builder = tauri_specta::Builder::<tauri::Wry>::new()
@@ -55,7 +59,9 @@ pub fn run() {
 
 			log::info!("subscribing to stats events");
 
-			if let Some(stats_state) = app.try_state::<ManagedSystemStatsState>() {
+			if let Some(stats_state) =
+				app.try_state::<ManagedSystemStatsState>()
+			{
 				let handle = app.handle().clone();
 
 				if let Ok((_, receiver)) = stats_state.subscribe() {
@@ -63,7 +69,9 @@ pub fn run() {
 						while let Ok(event) = receiver.recv() {
 							match event.emit(&handle) {
 								Ok(_) => (),
-								Err(e) => log::error!("could not emit stats event: {e}"),
+								Err(e) => log::error!(
+									"could not emit stats event: {e}"
+								),
 							}
 						}
 					});
@@ -82,16 +90,16 @@ fn get_log_builder() -> tauri_plugin_log::Builder {
 	let builder = tauri_plugin_log::Builder::default();
 
 	if cfg!(debug_assertions) {
-		builder
-			.level(::log::LevelFilter::Trace)
-			.targets([tauri_plugin_log::Target::new(
+		builder.level(::log::LevelFilter::Trace).targets([
+			tauri_plugin_log::Target::new(
 				tauri_plugin_log::TargetKind::Webview,
-			)])
+			),
+		])
 	} else {
-		builder
-			.level(::log::LevelFilter::Debug)
-			.targets([tauri_plugin_log::Target::new(
+		builder.level(::log::LevelFilter::Debug).targets([
+			tauri_plugin_log::Target::new(
 				tauri_plugin_log::TargetKind::LogDir { file_name: None },
-			)])
+			),
+		])
 	}
 }

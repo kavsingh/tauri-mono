@@ -14,7 +14,9 @@ pub struct SystemStats {
 	sampled_at: String,
 }
 
-#[derive(Debug, Clone, Default, serde::Serialize, specta::Type, tauri_specta::Event)]
+#[derive(
+	Debug, Clone, Default, serde::Serialize, specta::Type, tauri_specta::Event,
+)]
 pub struct SystemStatsEvent(SystemStats);
 
 struct CurrentStats {
@@ -27,7 +29,10 @@ type EventSubscribersMap = HashMap<String, Sender<SystemStatsEvent>>;
 struct EventSubscribers(Arc<Mutex<EventSubscribersMap>>);
 
 impl EventSubscribers {
-	pub fn subscribe(&self, subscriber: Sender<SystemStatsEvent>) -> Result<String, String> {
+	pub fn subscribe(
+		&self,
+		subscriber: Sender<SystemStatsEvent>,
+	) -> Result<String, String> {
 		let id = uuid::Uuid::new_v4().to_string();
 		let mut subs = self.get_subscribers()?;
 
@@ -56,7 +61,9 @@ impl EventSubscribers {
 		Ok(())
 	}
 
-	fn get_subscribers(&self) -> Result<MutexGuard<'_, EventSubscribersMap>, String> {
+	fn get_subscribers(
+		&self,
+	) -> Result<MutexGuard<'_, EventSubscribersMap>, String> {
 		match self.0.lock() {
 			Ok(subs) => Ok(subs),
 			Err(_) => Err("could not get lock on subscribers".into()),
@@ -86,9 +93,13 @@ impl SystemStatsState {
 
 					current.stats = next_stats.clone();
 
-					match subscribers_handle.publish(SystemStatsEvent(next_stats)) {
+					match subscribers_handle
+						.publish(SystemStatsEvent(next_stats))
+					{
 						Ok(_) => (),
-						Err(e) => log::error!("could not publish stats event: {e}"),
+						Err(e) => {
+							log::error!("could not publish stats event: {e}")
+						}
 					};
 				} else {
 					log::error!("could not get write lock for current stats");
@@ -111,7 +122,9 @@ impl SystemStatsState {
 		}
 	}
 
-	pub fn subscribe(&self) -> Result<(String, Receiver<SystemStatsEvent>), String> {
+	pub fn subscribe(
+		&self,
+	) -> Result<(String, Receiver<SystemStatsEvent>), String> {
 		let (tx, rx) = channel();
 
 		match self.event_subscribers.subscribe(tx) {
@@ -135,7 +148,9 @@ impl ManagedSystemStatsState {
 		self.get_state()?.get_current()
 	}
 
-	pub fn subscribe(&self) -> Result<(String, Receiver<SystemStatsEvent>), String> {
+	pub fn subscribe(
+		&self,
+	) -> Result<(String, Receiver<SystemStatsEvent>), String> {
 		self.get_state()?.subscribe()
 	}
 
@@ -164,6 +179,7 @@ fn sample_system_stats() -> SystemStats {
 		mem_total: Some(sys.total_memory().to_string()),
 		mem_used: Some(sys.used_memory().to_string()),
 		mem_available: Some(sys.available_memory().to_string()),
-		sampled_at: chrono::Local::now().to_rfc3339_opts(chrono::SecondsFormat::Millis, true),
+		sampled_at: chrono::Local::now()
+			.to_rfc3339_opts(chrono::SecondsFormat::Millis, true),
 	}
 }

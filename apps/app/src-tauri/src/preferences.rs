@@ -13,17 +13,16 @@ pub fn get_stored_theme_preference(app: &AppHandle) -> ThemePreference {
 		.and_then(|store| store.get(THEME_KEY));
 
 	if let Some(serde_json::Value::String(value)) = stored {
-		match value {
-			_ if value == ThemePreference::Dark.value() => ThemePreference::Dark,
-			_ if value == ThemePreference::Light.value() => ThemePreference::Light,
-			_ => ThemePreference::System,
-		}
+		ThemePreference::try_from(&value).unwrap_or(ThemePreference::System)
 	} else {
 		ThemePreference::System
 	}
 }
 
-fn store_theme_preference(preference: &ThemePreference, app: &tauri::AppHandle) {
+fn store_theme_preference(
+	preference: &ThemePreference,
+	app: &tauri::AppHandle,
+) {
 	if let Ok(store) = app.store(PREFERENCES_STORE) {
 		store.set(
 			THEME_KEY,

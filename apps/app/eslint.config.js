@@ -1,10 +1,10 @@
 import router from "@tanstack/eslint-plugin-router";
 import tailwindcss from "eslint-plugin-better-tailwindcss";
+import { getDefaultSelectors } from "eslint-plugin-better-tailwindcss/defaults";
 import {
-	getDefaultAttributes,
-	getDefaultCallees,
-	getDefaultVariables,
-} from "eslint-plugin-better-tailwindcss/api/defaults";
+	MatcherType,
+	SelectorKind,
+} from "eslint-plugin-better-tailwindcss/types";
 import jestDom from "eslint-plugin-jest-dom";
 import solid from "eslint-plugin-solid";
 import testingLibrary from "eslint-plugin-testing-library";
@@ -32,16 +32,34 @@ export default defineConfig(
 		settings: {
 			"better-tailwindcss": {
 				entryPoint: "src/index.css",
-				callees: [...getDefaultCallees(), "tj", "tm"],
-				variables: [
-					...getDefaultVariables(),
-					[".+ClassName", [{ match: "strings" }]],
-					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
-				],
-				attributes: [
-					...getDefaultAttributes(),
-					["classNames", [{ match: "strings" }, { match: "objectValues" }]],
-					[".+ClassNames", [{ match: "strings" }, { match: "objectValues" }]],
+				selectors: [
+					...getDefaultSelectors(),
+					...["tj", "tm"].map((name) => ({
+						name,
+						kind: SelectorKind.Callee,
+						match: [{ type: MatcherType.String }],
+					})),
+					...["^classNames$", "^.+ClassNames$"].map((name) => ({
+						name,
+						kind: SelectorKind.Attribute,
+						match: [
+							{ type: MatcherType.String },
+							{ type: MatcherType.ObjectValue },
+						],
+					})),
+					{
+						name: "^.+ClassName$",
+						kind: SelectorKind.Variable,
+						match: [{ type: MatcherType.String }],
+					},
+					{
+						name: "^.+ClassNames$",
+						kind: SelectorKind.Variable,
+						match: [
+							{ type: MatcherType.String },
+							{ type: MatcherType.ObjectValue },
+						],
+					},
 				],
 			},
 		},

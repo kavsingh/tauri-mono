@@ -65,6 +65,7 @@ export default defineConfig({
 		"eslint/prefer-destructuring": "off",
 		"eslint/sort-imports": "off",
 		"eslint/sort-keys": "off",
+		"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
 		"import/group-exports": "off",
 		"import/exports-last": "off",
 		"import/extensions": [
@@ -104,10 +105,6 @@ export default defineConfig({
 			files: ["**/*.{ts,tsx}"],
 			plugins: ["typescript"],
 			rules: {
-				"typescript/consistent-type-imports": [
-					"error",
-					{ fixStyle: "separate-type-imports", prefer: "type-imports" },
-				],
 				"typescript/explicit-function-return-type": "off",
 				"typescript/no-non-null-assertion": "error",
 				"typescript/promise-function-async": "off",

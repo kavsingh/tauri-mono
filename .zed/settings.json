@@ -1,8 +1,8 @@
 {
 	"format_on_save": "on",
-	"code_actions_on_format": { "source.fixAll": true },
-	// for some reason auto-indentation does not respect formatter configs
 	"hard_tabs": true,
+	"preferred_line_length": 80,
+	"prettier": { "allowed": false },
 
 	"lsp": {
 		"rust-analyzer": {
@@ -44,23 +44,24 @@
 					"configFile": {
 						"apps/app/src/index.css": "apps/app/src/**/*"
 					}
-				},
-				// @TODO: disable once figured out why eslint plugin
-				// doesn't catch some cases
-				"lint": { "suggestCanonicalClasses": "warn" }
+				}
 			}
 		}
 	},
 
 	"languages": {
 		"Rust": {
-			"formatter": [{ "language_server": { "name": "rust-analyzer" } }],
-			"preferred_line_length": 100
+			"formatter": [{ "language_server": { "name": "rust-analyzer" } }]
 		},
 
 		"TypeScript": {
-			"language_servers": ["tsgo", "vtsls", "oxlint", "eslint", "oxfmt"],
-			"prettier": { "allowed": false },
+			"language_servers": [
+				"tsgo",
+				"oxlint",
+				"eslint",
+				"tailwindcss-language-server",
+				"oxfmt"
+			],
 			"formatter": [{ "language_server": { "name": "oxfmt" } }],
 			"code_actions_on_format": {
 				"source.fixAll.oxc": true,
@@ -71,23 +72,11 @@
 		"TSX": {
 			"language_servers": [
 				"tsgo",
-				"vtsls",
 				"oxlint",
 				"eslint",
 				"tailwindcss-language-server",
 				"oxfmt"
 			],
-			"prettier": { "allowed": false },
-			"formatter": [{ "language_server": { "name": "oxfmt" } }],
-			"code_actions_on_format": {
-				"source.fixAll.oxc": true,
-				"source.fixAll.eslint": true
-			}
-		},
-
-		"JavaScript": {
-			"language_servers": ["tsgo", "vtsls", "oxlint", "eslint", "oxfmt"],
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }],
 			"code_actions_on_format": {
 				"source.fixAll.oxc": true,
@@ -100,37 +89,30 @@
 				"tailwindcss-intellisense-css",
 				"!vscode-css-language-server"
 			],
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
 		},
 
 		"HTML": {
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
 		},
 
 		"Markdown": {
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
 		},
 
 		"JSON": {
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
 		},
 
 		"JSONC": {
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
 		},
 
 		"YAML": {
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
 		},
 
 		"TOML": {
-			"prettier": { "allowed": false },
 			"formatter": [{ "language_server": { "name": "tombi" } }]
 		}
 	}

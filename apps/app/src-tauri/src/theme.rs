@@ -1,4 +1,6 @@
-#[derive(Clone, PartialEq, serde::Serialize, serde::Deserialize, specta::Type)]
+#[derive(
+	Clone, PartialEq, serde::Serialize, serde::Deserialize, specta::Type,
+)]
 pub enum ThemePreference {
 	System,
 	Dark,
@@ -32,6 +34,19 @@ impl From<Option<tauri::Theme>> for ThemePreference {
 			Some(tauri::Theme::Dark) => Self::Dark,
 			Some(tauri::Theme::Light) => Self::Light,
 			_ => Self::System,
+		}
+	}
+}
+
+impl TryFrom<&String> for ThemePreference {
+	type Error = Box<dyn std::error::Error>;
+
+	fn try_from(val: &String) -> Result<Self, Self::Error> {
+		match val.as_str() {
+			"system" => Ok(Self::System),
+			"dark" => Ok(Self::Dark),
+			"light" => Ok(Self::Light),
+			_ => Err(Self::Error::from("invalid theme")),
 		}
 	}
 }
