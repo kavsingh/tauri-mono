@@ -60,6 +60,7 @@ export default defineConfig({
 				"import/no-namespace": "off",
 				"unicorn/consistent-function-scoping": "off",
 				"vitest/no-disabled-tests": "error",
+				"vitest/no-importing-vitest-globals": "off",
 				"vitest/no-focused-tests": "error",
 				"vitest/prefer-to-be-falsy": "off",
 				"vitest/prefer-to-be-truthy": "off",

@@ -60,6 +60,7 @@ export default defineConfig({
 				ignoreRestSiblings: true,
 			},
 		],
+		"eslint/no-use-before-define": "off",
 		"eslint/no-void": ["error", { allowAsStatement: true }],
 		"eslint/no-warning-comments": ["error", { terms: ["fixme", "revert"] }],
 		"eslint/prefer-destructuring": "off",
@@ -107,6 +108,7 @@ export default defineConfig({
 			rules: {
 				"typescript/explicit-function-return-type": "off",
 				"typescript/no-non-null-assertion": "error",
+				"typescript/prefer-readonly-parameter-types": "off",
 				"typescript/promise-function-async": "off",
 				"typescript/restrict-template-expressions": [
 					"error",
