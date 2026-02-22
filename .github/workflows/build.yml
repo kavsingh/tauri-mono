@@ -33,7 +33,7 @@ jobs:
         run: bun build:${{ matrix.os == 'windows-latest' && 'win' || 'mac' }}
       - name: Upload artifact
         if: ${{ success() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ steps.properties.outputs.product_name }}_${{ steps.properties.outputs.version }}-${{ matrix.os == 'windows-latest' && 'windows' || 'macos' }}
           path: ${{ matrix.os == 'windows-latest' && 'target\x86_64-pc-windows-msvc\release\bundle\nsis\*.exe' || 'target/universal-apple-darwin/release/bundle/dmg/*.dmg' }}

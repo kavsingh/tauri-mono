@@ -1,7 +1,20 @@
+import path from "node:path";
+
+import router from "@tanstack/eslint-plugin-router";
+import tailwindcss from "eslint-plugin-better-tailwindcss";
+import { getDefaultSelectors } from "eslint-plugin-better-tailwindcss/defaults";
+import {
+	MatcherType,
+	SelectorKind,
+} from "eslint-plugin-better-tailwindcss/types";
+import jestDom from "eslint-plugin-jest-dom";
+import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "oxlint";
 
 // oxlint-disable-next-line import/no-relative-parent-imports
 import baseConfig from "../../oxlint.config.ts";
+
+import type { DummyRuleMap } from "oxlint";
 
 export default defineConfig({
 	extends: [baseConfig],
@@ -10,15 +23,54 @@ export default defineConfig({
 		"dist/**",
 		"dist-isolation/**",
 		"reports/**",
+		".tanstack/**",
 		"**/*.gen.*",
 		"**/__generated__/**",
 		"!**/__generated__/__mocks__/**",
 	],
+	settings: {
+		vitest: { typecheck: true },
+		"better-tailwindcss": {
+			entryPoint: path.resolve(import.meta.dirname, "./src/index.css"),
+			selectors: [
+				...getDefaultSelectors(),
+				...["tj", "tm"].map((name) => ({
+					name,
+					kind: SelectorKind.Callee,
+					match: [{ type: MatcherType.String }],
+				})),
+				...["^classNames$", "^.+ClassNames$"].map((name) => ({
+					name,
+					kind: SelectorKind.Attribute,
+					match: [
+						{ type: MatcherType.String },
+						{ type: MatcherType.ObjectValue },
+					],
+				})),
+				{
+					name: "^.+ClassName$",
+					kind: SelectorKind.Variable,
+					match: [{ type: MatcherType.String }],
+				},
+				{
+					name: "^.+ClassNames$",
+					kind: SelectorKind.Variable,
+					match: [
+						{ type: MatcherType.String },
+						{ type: MatcherType.ObjectValue },
+					],
+				},
+			],
+		},
+	},
 	overrides: [
 		{
-			files: ["src/**"],
-			env: { browser: true, node: false },
-			plugins: ["eslint", "import"],
+			files: ["./src/**/*.{ts,tsx}"],
+			plugins: ["import"],
+			jsPlugins: [
+				"@tanstack/eslint-plugin-router",
+				"eslint-plugin-better-tailwindcss",
+			],
 			rules: {
 				"eslint/no-console": "error",
 				"eslint/no-restricted-imports": [
@@ -27,47 +79,59 @@ export default defineConfig({
 						paths: [
 							{
 								name: "tailwind-merge",
-								message: "please import helpers from #lib/style",
+								message: "please import helpers from #src/style",
 							},
 							{
 								name: "tailwind-variants",
-								message: "please import helpers from #lib/style",
+								message: "please import helpers from #src/style",
 							},
 						],
 					},
 				],
+
+				// https://tanstack.com/router/latest/docs/eslint/eslint-plugin-router#typescript-eslint
+				"typescript/only-throw-error": [
+					"error",
+					{
+						allow: [
+							{
+								from: "package",
+								package: "@tanstack/router-core",
+								name: "Redirect",
+							},
+						],
+					},
+				],
+
 				"import/extensions": "off",
 				"import/no-nodejs-modules": "error",
+				"import/no-unassigned-import": ["error", { allow: ["**/*.css"] }],
+
+				...router.configs["flat/recommended"].reduce<DummyRuleMap>(
+					(acc, item) => Object.assign(acc, item.rules),
+					{},
+				),
+
+				...tailwindcss.configs["recommended-error"].rules,
+				"better-tailwindcss/enforce-consistent-line-wrapping": "off",
+				"better-tailwindcss/enforce-shorthand-classes": "error",
 			},
 		},
+
 		{
-			files: ["src/**/*.tsx"],
-			plugins: ["jsx-a11y", "promise"],
-			rules: {
-				"eslint/max-lines-per-function": [
-					"warn",
-					{ max: 100, skipBlankLines: true, skipComments: true },
-				],
-			},
-		},
-		{
-			files: ["src/**/*.test.{ts,tsx}"],
-			env: { browser: true, node: true },
+			files: ["./src/**/*.test.{ts,tsx}"],
 			plugins: ["vitest"],
+			jsPlugins: ["eslint-plugin-jest-dom", "eslint-plugin-testing-library"],
 			rules: {
-				"eslint/max-lines-per-function": "off",
 				"eslint/no-console": "off",
-				"import/no-namespace": "off",
-				"unicorn/consistent-function-scoping": "off",
+
 				"vitest/no-disabled-tests": "error",
-				"vitest/no-importing-vitest-globals": "off",
 				"vitest/no-focused-tests": "error",
-				"vitest/prefer-to-be-falsy": "off",
-				"vitest/prefer-to-be-truthy": "off",
+				"vitest/no-import-node-test": "error",
+
+				...jestDom.configs["flat/recommended"].rules,
+				...testingLibrary.configs["flat/dom"].rules,
 			},
 		},
 	],
-	settings: {
-		vitest: { typecheck: true },
-	},
 });

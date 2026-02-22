@@ -1,6 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import legacy from "@vitejs/plugin-legacy";
-import { defineConfig } from "vite";
+import { defineConfig } from "rolldown-vite";
 import { checker } from "vite-plugin-checker";
 import solid from "vite-plugin-solid";
 import tsconfigPaths from "vite-tsconfig-paths";

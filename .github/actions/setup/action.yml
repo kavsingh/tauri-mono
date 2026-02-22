@@ -4,8 +4,7 @@ description: Setup and install dependencies
 runs:
   using: composite
   steps:
-    - run: rustup toolchain install stable --profile minimal --no-self-update
-      shell: bash
+    - uses: dtolnay/rust-toolchain@stable
     - uses: oven-sh/setup-bun@v2
     - run: bun install --frozen-lockfile
       shell: bash

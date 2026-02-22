@@ -1,53 +1,15 @@
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
-	ignorePatterns: [
-		".vscode/*",
-		".nx/*",
-		".temp/*",
-		"target/*",
-		"apps/*",
-		"packages/*",
-	],
-	plugins: ["oxc", "eslint", "import", "unicorn", "promise"],
-	categories: {
-		correctness: "error",
-		suspicious: "error",
-		pedantic: "error",
-		restriction: "error",
-		perf: "error",
-		style: "error",
-		nursery: "error",
-	},
-	env: { node: true },
+	ignorePatterns: [".nx/*", ".temp/*", "target/*", "apps/*", "packages/*"],
+	categories: { correctness: "error", suspicious: "error", perf: "error" },
+	plugins: ["oxc", "eslint", "import", "promise", "unicorn"],
 	rules: {
-		"eslint/arrow-body-style": "off",
-		"eslint/capitalized-comments": "off",
 		"eslint/curly": ["error", "multi-line", "consistent"],
 		"eslint/eqeqeq": "error",
-		"eslint/id-length": "off",
-		"eslint/func-style": [
-			"error",
-			"declaration",
-			{ allowTypeAnnotation: true },
-		],
-		"eslint/max-classes-per-file": "off",
-		"eslint/max-lines-per-function": [
-			"error",
-			{ skipBlankLines: true, skipComments: true },
-		],
-		"eslint/no-console": "off",
-		"eslint/no-continue": "off",
-		"eslint/no-duplicate-imports": [
-			"error",
-			{ allowSeparateTypeImports: true },
-		],
-		"eslint/no-implicit-coercion": ["error", { allow: ["!!"] }],
-		"eslint/no-inline-comments": ["error", { ignorePattern: "@type" }],
-		"eslint/no-magic-numbers": "off",
 		"eslint/no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
-		"eslint/no-ternary": "off",
-		"eslint/no-undefined": "off",
+		"eslint/no-shadow": ["error", { ignoreTypeValueShadow: false }],
+		"eslint/no-unreachable": "error",
 		"eslint/no-unused-vars": [
 			"error",
 			{
@@ -60,61 +22,42 @@ export default defineConfig({
 				ignoreRestSiblings: true,
 			},
 		],
-		"eslint/no-use-before-define": "off",
-		"eslint/no-void": ["error", { allowAsStatement: true }],
-		"eslint/no-warning-comments": ["error", { terms: ["fixme", "revert"] }],
-		"eslint/prefer-destructuring": "off",
-		"eslint/sort-imports": "off",
-		"eslint/sort-keys": "off",
+
 		"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-		"import/group-exports": "off",
-		"import/exports-last": "off",
 		"import/extensions": [
 			"error",
 			"always",
 			{ checkTypeImports: true, ignorePackages: true },
 		],
-		"import/max-dependencies": "off",
+		"import/no-cycle": "error",
 		"import/no-default-export": "error",
-		"import/no-named-export": "off",
-		"import/no-nodejs-modules": "off",
-		"import/no-unassigned-import": ["error", { allow: ["**/*.css"] }],
-		"import/prefer-default-export": "off",
-		"oxc/no-async-await": "off",
-		"oxc/no-optional-chaining": "off",
-		"oxc/no-rest-spread-properties": "off",
+
 		"unicorn/catch-error-name": ["error", { name: "cause" }],
-		"unicorn/no-array-reduce": "off",
-		"unicorn/no-useless-undefined": "off",
+		"unicorn/filename-case": ["error", { cases: { kebabCase: true } }],
 		"unicorn/prefer-node-protocol": "error",
+		"unicorn/prefer-type-error": "error",
 	},
 	overrides: [
 		{
-			files: ["**/typings/*.d.ts"],
-			rules: {
-				"import/unambiguous": "off",
-			},
-		},
-		{
-			files: ["*.config.{js,ts}"],
+			files: ["./*.config.{ts,js}"],
+			plugins: ["import"],
 			rules: {
 				"import/no-default-export": "off",
-				"import/no-anonymous-default-export": "off",
 			},
 		},
+
 		{
-			files: ["**/*.{ts,tsx}"],
+			files: ["*.{ts,tsx}"],
 			plugins: ["typescript"],
 			rules: {
-				"typescript/explicit-function-return-type": "off",
+				"typescript/consistent-type-definitions": ["error", "interface"],
 				"typescript/no-non-null-assertion": "error",
-				"typescript/prefer-readonly-parameter-types": "off",
-				"typescript/promise-function-async": "off",
+				"typescript/only-throw-error": "error",
+				"typescript/prefer-ts-expect-error": "error",
 				"typescript/restrict-template-expressions": [
 					"error",
 					{ allowNumber: true },
 				],
-				"typescript/strict-boolean-expressions": "off",
 				"typescript/switch-exhaustiveness-check": [
 					"error",
 					{
