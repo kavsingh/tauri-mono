@@ -1,6 +1,6 @@
 // https://github.com/microsoft/TypeScript/issues/13923#issuecomment-653675557
 declare type Immutable<T> =
-	// oxlint-disable-next-line no-unsafe-function-type, ban-types
+	// oxlint-disable-next-line typescript/no-unsafe-function-type
 	T extends Function | boolean | number | string | null | undefined
 		? T
 		: T extends Map<infer K, infer V>
@@ -10,7 +10,7 @@ declare type Immutable<T> =
 				: { readonly [P in keyof T]: Immutable<T[P]> };
 
 declare type Mutable<T> =
-	// oxlint-disable-next-line no-unsafe-function-type, ban-types
+	// oxlint-disable-next-line no-unsafe-function-type
 	T extends Function | boolean | number | string | null | undefined
 		? T
 		: T extends ReadonlyMap<infer K, infer V>

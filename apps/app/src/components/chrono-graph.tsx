@@ -72,7 +72,6 @@ function normalizeValues(
 	});
 }
 
-// oxlint-disable-next-line max-statements
 export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	const schemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 	const observeResize = useResizeObserver();

@@ -40,7 +40,6 @@ function renderAndShow() {
 }
 
 if (import.meta.env.DEV) {
-	// oxlint-disable-next-line prefer-top-level-await, prefer-await-to-then
 	void attachConsole().then(renderAndShow);
 } else {
 	renderAndShow();

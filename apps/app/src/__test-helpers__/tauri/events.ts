@@ -13,7 +13,7 @@ function publishListenerEvent(listen: Mock, payload: unknown) {
 
 		const maybeListener: unknown = call[0];
 
-		// oxlint-disable-next-line no-unsafe-call
+		// oxlint-disable-next-line typescript/no-unsafe-call
 		if (typeof maybeListener === "function") maybeListener({ payload });
 	}
 }

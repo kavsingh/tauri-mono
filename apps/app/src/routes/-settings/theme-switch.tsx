@@ -65,7 +65,7 @@ export function ThemeSwitch(): JSX.Element {
 											disabled={prefQuery.isLoading}
 										/>
 										{/* solid-js uses "for" attr */}
-										{/* oxlint-disable-next-line label-has-associated-control */}
+										{/* oxlint-disable-next-line jsx-a11y/label-has-associated-control */}
 										<label
 											class="cursor-pointer text-muted-foreground transition-colors peer-checked:text-foreground"
 											for={option}

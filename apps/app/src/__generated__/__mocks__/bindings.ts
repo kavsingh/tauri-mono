@@ -1,5 +1,3 @@
-// oxlint-disable prefer-await-to-then, catch-or-return
-
 import {
 	createMockSystemInfo,
 	createMockSystemStats,

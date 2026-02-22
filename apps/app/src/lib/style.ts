@@ -6,7 +6,7 @@ export { twMerge as tm, twJoin as tj } from "tailwind-merge";
 // oxlint-disable-next-line no-restricted-imports
 export { tv } from "tailwind-variants";
 
-// oxlint-disable-next-line no-explicit-any, explicit-module-boundary-types
+// oxlint-disable-next-line typescript/no-explicit-any
 export type VariantProps<TComponent extends (...args: any) => any> =
 	ExactOptional<BaseVariantProps<TComponent>>;
 

@@ -11,7 +11,6 @@ import jestDom from "eslint-plugin-jest-dom";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "oxlint";
 
-// oxlint-disable-next-line import/no-relative-parent-imports
 import baseConfig from "../../oxlint.config.ts";
 
 import type { DummyRuleMap } from "oxlint";
@@ -66,7 +65,7 @@ export default defineConfig({
 	overrides: [
 		{
 			files: ["./src/**/*.{ts,tsx}"],
-			plugins: ["import"],
+			plugins: ["import", "jsx-a11y"],
 			jsPlugins: [
 				"@tanstack/eslint-plugin-router",
 				"eslint-plugin-better-tailwindcss",

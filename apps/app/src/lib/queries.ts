@@ -1,5 +1,4 @@
 // will need excessive typing unless we rely on inference from helpers
-// oxlint-disable explicit-module-boundary-types
 
 import { queryOptions } from "@tanstack/solid-query";
 
