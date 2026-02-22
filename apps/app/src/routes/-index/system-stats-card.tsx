@@ -11,6 +11,29 @@ import type { SystemStats } from "#__generated__/bindings";
 import type { Sample } from "#components/chrono-graph";
 import type { JSX } from "solid-js";
 
+function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
+	const sample = createMemo<Sample | undefined>(() => {
+		const value = props.systemStats?.memUsed;
+
+		return value ? { value: tryOr(() => BigInt(value), 0n) } : undefined;
+	});
+
+	const maxValue = createMemo<bigint>(() => {
+		const value = props.systemStats?.memTotal;
+
+		return value ? tryOr(() => BigInt(value), 0n) : 0n;
+	});
+
+	return (
+		<ChronoGraph
+			sampleSource={sample}
+			minValue={0n}
+			maxValue={maxValue()}
+			class="h-24 w-full rounded-lg"
+		/>
+	);
+}
+
 export function SystemStatsCard(): JSX.Element {
 	const statsQuery = useSystemStats();
 
@@ -43,28 +66,5 @@ export function SystemStatsCard(): JSX.Element {
 				</div>
 			</Card.Content>
 		</Card.Root>
-	);
-}
-
-function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
-	const sample = createMemo<Sample | undefined>(() => {
-		const value = props.systemStats?.memUsed;
-
-		return value ? { value: tryOr(() => BigInt(value), 0n) } : undefined;
-	});
-
-	const maxValue = createMemo<bigint>(() => {
-		const value = props.systemStats?.memTotal;
-
-		return value ? tryOr(() => BigInt(value), 0n) : 0n;
-	});
-
-	return (
-		<ChronoGraph
-			sampleSource={sample}
-			minValue={0n}
-			maxValue={maxValue()}
-			class="h-24 w-full rounded-lg"
-		/>
 	);
 }

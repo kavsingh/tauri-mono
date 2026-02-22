@@ -22,6 +22,7 @@ export default defineConfig({
 				ignoreRestSiblings: true,
 			},
 		],
+		"eslint/no-use-before-define": "error",
 
 		"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
 		"import/extensions": [

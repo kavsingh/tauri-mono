@@ -5,6 +5,16 @@ import { queryOptions } from "@tanstack/solid-query";
 
 import { commands } from "#__generated__/bindings";
 
+async function getSystemStats() {
+	const result = await commands.getSystemStats();
+
+	if (result.status === "error") {
+		throw new Error(result.error, { cause: result });
+	}
+
+	return result.data;
+}
+
 export function systemInfoQuery() {
 	return queryOptions({
 		queryKey: ["systemInfo"],
@@ -21,14 +31,4 @@ export function themePreferenceQuery() {
 		queryKey: ["themePreference"],
 		queryFn: () => commands.getThemePreference(),
 	});
-}
-
-async function getSystemStats() {
-	const result = await commands.getSystemStats();
-
-	if (result.status === "error") {
-		throw new Error(result.error, { cause: result });
-	}
-
-	return result.data;
 }

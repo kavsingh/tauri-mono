@@ -7,32 +7,6 @@ import { tv } from "#lib/style";
 import type { VariantProps } from "#lib/style";
 import type { ComponentProps, JSX } from "solid-js";
 
-export function Button(props: ButtonProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, [
-		"class",
-		"type",
-		"variant",
-		"size",
-	]);
-
-	return (
-		<button
-			{...passProps}
-			type={localProps.type ?? "button"}
-			class={buttonVariants({
-				variant: localProps.variant,
-				size: localProps.size,
-				class: localProps.class,
-			})}
-		/>
-	);
-}
-
-export interface ButtonProps
-	extends Omit<ComponentProps<"button">, "classList">, ButtonVariantProps {}
-
-export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
-
 const buttonVariants = tv({
 	base: "inline-flex items-center justify-center rounded-md text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
 	variants: {
@@ -60,3 +34,29 @@ const buttonVariants = tv({
 		size: "default",
 	},
 });
+
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
+
+export interface ButtonProps
+	extends Omit<ComponentProps<"button">, "classList">, ButtonVariantProps {}
+
+export function Button(props: ButtonProps): JSX.Element {
+	const [localProps, passProps] = splitProps(props, [
+		"class",
+		"type",
+		"variant",
+		"size",
+	]);
+
+	return (
+		<button
+			{...passProps}
+			type={localProps.type ?? "button"}
+			class={buttonVariants({
+				variant: localProps.variant,
+				size: localProps.size,
+				class: localProps.class,
+			})}
+		/>
+	);
+}

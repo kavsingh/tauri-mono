@@ -9,6 +9,42 @@ import { tv } from "#lib/style";
 
 import type { JSX } from "solid-js";
 
+const dragFileSelectVariants = tv({
+	base: "my-3 grid h-50 place-items-center rounded-md border border-border text-muted-foreground transition-colors",
+	variants: {
+		isActive: {
+			true: "border-foreground bg-accent/20 text-foreground",
+		},
+	},
+});
+
+function DialogFileSelect(props: { onSelect: (selected: string[]) => void }) {
+	const [files, selectFiles] = useFileSelectDialog();
+
+	createEffect(() => {
+		props.onSelect(files());
+	});
+
+	return <Button onClick={() => void selectFiles()}>Select files</Button>;
+}
+
+function DragFileSelect(props: { onSelect: (selected: string[]) => void }) {
+	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
+
+	createEffect(() => {
+		props.onSelect(files());
+	});
+
+	return (
+		<div
+			class={dragFileSelectVariants({ isActive: isActive() })}
+			{...dragDropHandlers}
+		>
+			Drop files
+		</div>
+	);
+}
+
 function Files(): JSX.Element {
 	const [selectedFiles, setSelectedFiles] = createSignal<string[]>([]);
 
@@ -44,39 +80,3 @@ function Files(): JSX.Element {
 }
 
 export const Route = createFileRoute("/files")({ component: Files });
-
-function DialogFileSelect(props: { onSelect: (selected: string[]) => void }) {
-	const [files, selectFiles] = useFileSelectDialog();
-
-	createEffect(() => {
-		props.onSelect(files());
-	});
-
-	return <Button onClick={() => void selectFiles()}>Select files</Button>;
-}
-
-function DragFileSelect(props: { onSelect: (selected: string[]) => void }) {
-	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
-
-	createEffect(() => {
-		props.onSelect(files());
-	});
-
-	return (
-		<div
-			class={dragFileSelectVariants({ isActive: isActive() })}
-			{...dragDropHandlers}
-		>
-			Drop files
-		</div>
-	);
-}
-
-const dragFileSelectVariants = tv({
-	base: "my-3 grid h-50 place-items-center rounded-md border border-border text-muted-foreground transition-colors",
-	variants: {
-		isActive: {
-			true: "border-foreground bg-accent/20 text-foreground",
-		},
-	},
-});

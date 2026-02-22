@@ -7,6 +7,71 @@ import { tm } from "#lib/style";
 
 import type { Accessor, JSX } from "solid-js";
 
+export interface ChronoGraphProps {
+	sampleSource: Accessor<Sample | undefined>;
+	minValue?: bigint | undefined;
+	maxValue?: bigint | undefined;
+	maxSamples?: number | undefined;
+	class?: string | undefined;
+}
+
+export interface Sample {
+	value: bigint;
+}
+
+function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
+	const ctx = canvas.getContext("2d");
+
+	if (!ctx) return;
+
+	const width = canvas.clientWidth;
+	const height = canvas.clientHeight;
+	const scale = devicePixelRatio;
+	const canvasStyles = getComputedStyle(canvas);
+	const step = width / Math.max(normalized.length - 1, 1);
+	const gutter = 2;
+
+	function getY(val: number) {
+		return (1 - val) * height;
+	}
+
+	canvas.width = width * scale;
+	canvas.height = height * scale;
+
+	ctx.scale(scale, scale);
+	ctx.clearRect(0, 0, width, height);
+
+	ctx.fillStyle = canvasStyles.color;
+	ctx.strokeStyle = canvasStyles.borderColor;
+
+	ctx.beginPath();
+	ctx.moveTo(-gutter, height + gutter);
+	ctx.lineTo(-gutter, getY(normalized[0] ?? 1));
+
+	for (let i = 0; i < normalized.length; i++) {
+		ctx.lineTo(i * step, getY(normalized[i] ?? 0.5));
+	}
+
+	ctx.lineTo(width + gutter, getY(normalized.at(-1) ?? 0.5));
+	ctx.lineTo(width + gutter, height + gutter);
+	ctx.lineTo(width + gutter, height + gutter);
+	ctx.moveTo(-gutter, height + gutter);
+	ctx.closePath();
+
+	ctx.stroke();
+	ctx.fill();
+}
+
+function normalizeValues(
+	samples: Sample[],
+	min: bigint,
+	max: bigint,
+): number[] {
+	return samples.map(({ value }) => {
+		return tryOr(() => normalizeBigint(value, min, max), 0.5);
+	});
+}
+
 // oxlint-disable-next-line max-statements
 export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	const schemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
@@ -67,70 +132,4 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 			}}
 		/>
 	);
-}
-
-export interface ChronoGraphProps {
-	sampleSource: Accessor<Sample | undefined>;
-	minValue?: bigint | undefined;
-	maxValue?: bigint | undefined;
-	maxSamples?: number | undefined;
-	class?: string | undefined;
-}
-
-export interface Sample {
-	value: bigint;
-}
-
-// oxlint-disable-next-line max-statements
-function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
-	const ctx = canvas.getContext("2d");
-
-	if (!ctx) return;
-
-	const width = canvas.clientWidth;
-	const height = canvas.clientHeight;
-	const scale = devicePixelRatio;
-	const canvasStyles = getComputedStyle(canvas);
-	const step = width / Math.max(normalized.length - 1, 1);
-	const gutter = 2;
-
-	function getY(val: number) {
-		return (1 - val) * height;
-	}
-
-	canvas.width = width * scale;
-	canvas.height = height * scale;
-
-	ctx.scale(scale, scale);
-	ctx.clearRect(0, 0, width, height);
-
-	ctx.fillStyle = canvasStyles.color;
-	ctx.strokeStyle = canvasStyles.borderColor;
-
-	ctx.beginPath();
-	ctx.moveTo(-gutter, height + gutter);
-	ctx.lineTo(-gutter, getY(normalized[0] ?? 1));
-
-	for (let i = 0; i < normalized.length; i++) {
-		ctx.lineTo(i * step, getY(normalized[i] ?? 0.5));
-	}
-
-	ctx.lineTo(width + gutter, getY(normalized.at(-1) ?? 0.5));
-	ctx.lineTo(width + gutter, height + gutter);
-	ctx.lineTo(width + gutter, height + gutter);
-	ctx.moveTo(-gutter, height + gutter);
-	ctx.closePath();
-
-	ctx.stroke();
-	ctx.fill();
-}
-
-function normalizeValues(
-	samples: Sample[],
-	min: bigint,
-	max: bigint,
-): number[] {
-	return samples.map(({ value }) => {
-		return tryOr(() => normalizeBigint(value, min, max), 0.5);
-	});
 }

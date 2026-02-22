@@ -22,21 +22,21 @@ export const commands: typeof bindingsCommands = {
 	setThemePreference: vi.fn(() => Promise.resolve()),
 };
 
-export const events: Record<
-	keyof typeof bindingsEvents,
-	ReturnType<typeof mockEventHandles>
-> = {
-	systemStatsEvent: mockEventHandles(),
-};
-
-function mockEventHandles(): {
+interface MockEventHandles {
 	listen(arg: unknown): ReturnType<WebviewWindow["listen"]>;
 	once(arg: unknown): ReturnType<WebviewWindow["once"]>;
 	emit(arg: unknown): ReturnType<WebviewWindow["emit"]>;
-} {
+}
+
+function mockEventHandles(): MockEventHandles {
 	return {
 		listen: vi.fn(() => Promise.resolve(() => undefined)),
 		once: vi.fn(() => Promise.resolve(() => undefined)),
 		emit: vi.fn(() => Promise.resolve()),
 	};
 }
+
+
+export const events: Record<keyof typeof bindingsEvents, MockEventHandles> = {
+	systemStatsEvent: mockEventHandles(),
+};

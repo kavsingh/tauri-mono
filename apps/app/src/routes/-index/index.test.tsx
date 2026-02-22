@@ -8,6 +8,20 @@ import { Index } from "#routes/index";
 
 import type { ParentProps } from "solid-js";
 
+function setup() {
+	const client = new QueryClient();
+
+	function Wrapper(props: ParentProps) {
+		return (
+			<QueryClientProvider client={client}>
+				{props.children}
+			</QueryClientProvider>
+		);
+	}
+
+	return { Wrapper, client };
+}
+
 describe("<Index />", () => {
 	afterEach(() => {
 		vi.clearAllMocks();
@@ -56,17 +70,3 @@ describe("<Index />", () => {
 		expect(screen.queryByText("600.00 MB")).not.toBeInTheDocument();
 	});
 });
-
-function setup() {
-	const client = new QueryClient();
-
-	function Wrapper(props: ParentProps) {
-		return (
-			<QueryClientProvider client={client}>
-				{props.children}
-			</QueryClientProvider>
-		);
-	}
-
-	return { Wrapper, client };
-}

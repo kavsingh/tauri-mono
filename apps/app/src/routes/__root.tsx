@@ -7,6 +7,17 @@ import { usePrefersDark } from "#hooks/theme";
 
 import type { ComponentProps, JSX } from "solid-js";
 
+function NavLink(
+	props: Omit<ComponentProps<typeof Link>, "class" | "classList">,
+) {
+	return (
+		<Link
+			{...props}
+			class="text-muted-foreground transition-colors hover:underline aria-[current=page]:text-foreground aria-[current=page]:hover:no-underline"
+		/>
+	);
+}
+
 function RootLayout(): JSX.Element {
 	const prefersDark = usePrefersDark();
 
@@ -38,14 +49,3 @@ function RootLayout(): JSX.Element {
 }
 
 export const Route = createRootRoute({ component: RootLayout });
-
-function NavLink(
-	props: Omit<ComponentProps<typeof Link>, "class" | "classList">,
-) {
-	return (
-		<Link
-			{...props}
-			class="text-muted-foreground transition-colors hover:underline aria-[current=page]:text-foreground aria-[current=page]:hover:no-underline"
-		/>
-	);
-}

@@ -6,13 +6,23 @@ import { systemStatsQuery } from "#lib/queries";
 import type { SystemStats } from "#__generated__/bindings";
 import type { QueryClient, UseQueryResult } from "@tanstack/solid-query";
 
-export function useSystemStats(): UseQueryResult<SystemStats> {
-	const queryClient = useQueryClient();
-	const query = useQuery(() => ({ ...systemStatsQuery(), reconcile }));
+function isValidDate(date: Date) {
+	return !Number.isNaN(date.getTime());
+}
 
-	void startSubscription(queryClient);
+function reconcile(current: SystemStats | undefined, incoming: SystemStats) {
+	if (!current) {
+		return incoming;
+	}
 
-	return query;
+	const currentDate = new Date(current.sampledAt);
+	const incomingDate = new Date(incoming.sampledAt);
+
+	if (!(isValidDate(currentDate) && isValidDate(incomingDate))) {
+		return incoming;
+	}
+
+	return incomingDate >= currentDate ? incoming : current;
 }
 
 const startSubscription = (() => {
@@ -41,21 +51,11 @@ const startSubscription = (() => {
 	};
 })();
 
-function reconcile(current: SystemStats | undefined, incoming: SystemStats) {
-	if (!current) {
-		return incoming;
-	}
+export function useSystemStats(): UseQueryResult<SystemStats> {
+	const queryClient = useQueryClient();
+	const query = useQuery(() => ({ ...systemStatsQuery(), reconcile }));
 
-	const currentDate = new Date(current.sampledAt);
-	const incomingDate = new Date(incoming.sampledAt);
+	void startSubscription(queryClient);
 
-	if (!(isValidDate(currentDate) && isValidDate(incomingDate))) {
-		return incoming;
-	}
-
-	return incomingDate >= currentDate ? incoming : current;
-}
-
-function isValidDate(date: Date) {
-	return !Number.isNaN(date.getTime());
+	return query;
 }

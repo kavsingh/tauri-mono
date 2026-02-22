@@ -14,6 +14,22 @@ export const OPTIONS = [
 	"Light",
 ] as const satisfies ThemePreference[];
 
+function LabelText(props: { theme: ThemePreference }) {
+	return (
+		<Switch>
+			<Match when={props.theme === "System"}>
+				<>System</>
+			</Match>
+			<Match when={props.theme === "Light"}>
+				<>Light</>
+			</Match>
+			<Match when={props.theme === "Dark"}>
+				<>Dark</>
+			</Match>
+		</Switch>
+	);
+}
+
 export function ThemeSwitch(): JSX.Element {
 	const prefQuery = useQuery(themePreferenceQuery);
 	const setPrefMutation = useSetThemePreferenceMutation();
@@ -64,21 +80,5 @@ export function ThemeSwitch(): JSX.Element {
 				</fieldset>
 			</form>
 		</Card.Root>
-	);
-}
-
-function LabelText(props: { theme: ThemePreference }) {
-	return (
-		<Switch>
-			<Match when={props.theme === "System"}>
-				<>System</>
-			</Match>
-			<Match when={props.theme === "Light"}>
-				<>Light</>
-			</Match>
-			<Match when={props.theme === "Dark"}>
-				<>Dark</>
-			</Match>
-		</Switch>
 	);
 }

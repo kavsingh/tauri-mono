@@ -10,6 +10,10 @@ import type { StyleProperyValueMap, StylePropertyValues } from "#lib/style";
 import type { MutationOptions, UseMutationResult } from "@tanstack/solid-query";
 import type { Accessor } from "solid-js";
 
+function setThemePreference(theme: ThemePreference) {
+	return commands.setThemePreference(theme);
+}
+
 export function useSetThemePreferenceMutation(
 	options?: Omit<
 		MutationOptions<
@@ -66,8 +70,4 @@ export function useThemePropertyValues<TMap extends StyleProperyValueMap>(
 	});
 
 	return values;
-}
-
-function setThemePreference(theme: ThemePreference) {
-	return commands.setThemePreference(theme);
 }

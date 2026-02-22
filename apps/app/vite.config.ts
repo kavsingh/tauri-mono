@@ -5,6 +5,15 @@ import { checker } from "vite-plugin-checker";
 import solid from "vite-plugin-solid";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+function createChecker(mode: string) {
+	if (mode !== "development") return undefined;
+
+	return checker({
+		overlay: { initialIsOpen: false },
+		typescript: true,
+	});
+}
+
 export default defineConfig(({ mode }) => {
 	return {
 		server: { port: 3000 },
@@ -22,12 +31,3 @@ export default defineConfig(({ mode }) => {
 		],
 	};
 });
-
-function createChecker(mode: string) {
-	if (mode !== "development") return undefined;
-
-	return checker({
-		overlay: { initialIsOpen: false },
-		typescript: true,
-	});
-}

@@ -7,15 +7,14 @@ import { render } from "solid-js/web";
 import "./index.css";
 import { routeTree } from "./route-tree.gen";
 
-if (import.meta.env.DEV) {
-	// oxlint-disable-next-line prefer-top-level-await, prefer-await-to-then
-	void attachConsole().then(renderAndShow);
-} else {
-	renderAndShow();
-}
-
 function createTanstackRouter() {
 	return createRouter({ routeTree });
+}
+
+declare module "@tanstack/solid-router" {
+	interface Register {
+		router: ReturnType<typeof createTanstackRouter>;
+	}
 }
 
 function renderAndShow() {
@@ -40,8 +39,9 @@ function renderAndShow() {
 	void getCurrentWindow().show();
 }
 
-declare module "@tanstack/solid-router" {
-	interface Register {
-		router: ReturnType<typeof createTanstackRouter>;
-	}
+if (import.meta.env.DEV) {
+	// oxlint-disable-next-line prefer-top-level-await, prefer-await-to-then
+	void attachConsole().then(renderAndShow);
+} else {
+	renderAndShow();
 }
