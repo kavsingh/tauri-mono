@@ -20,7 +20,7 @@ export default defineConfig((configEnv) => {
 							include: ["src/**/*.test.{ts,tsx}"],
 							environment: "jsdom",
 							setupFiles: ["./src/vitest.setup.ts"],
-							server: { deps: { inline: true } },
+							server: { deps: { inline: [/^(?!.*vitest).*$/] } },
 						},
 					}),
 				),
