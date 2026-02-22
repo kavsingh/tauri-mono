@@ -5,7 +5,7 @@ import { attachConsole } from "@tauri-apps/plugin-log";
 import { render } from "solid-js/web";
 
 import "./index.css";
-import { routeTree } from "./route-tree.gen";
+import { routeTree } from "./route-tree.gen.ts";
 
 function createTanstackRouter() {
 	return createRouter({ routeTree });

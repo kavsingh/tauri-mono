@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/solid-router";
 
 import { Page } from "#layouts/page";
 
-import { ThemeSwitch } from "./-settings/theme-switch";
+import { ThemeSwitch } from "./-settings/theme-switch.tsx";
 
 import type { JSX } from "solid-js";
 

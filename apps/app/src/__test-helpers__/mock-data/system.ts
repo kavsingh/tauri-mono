@@ -1,4 +1,4 @@
-import { mockCreator } from "./mock-creator";
+import { mockCreator } from "./mock-creator.ts";
 
 import type { SystemInfo, SystemStats } from "#__generated__/bindings";
 

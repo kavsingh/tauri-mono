@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/solid-router";
 
 import { Page } from "#layouts/page";
 
-import { SystemInfoCard } from "./-index/system-info-card";
-import { SystemStatsCard } from "./-index/system-stats-card";
+import { SystemInfoCard } from "./-index/system-info-card.tsx";
+import { SystemStatsCard } from "./-index/system-stats-card.tsx";
 
 import type { JSX } from "solid-js";
 

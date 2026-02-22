@@ -103,7 +103,6 @@ export default defineConfig({
 					},
 				],
 
-				"import/extensions": "off",
 				"import/no-nodejs-modules": "error",
 				"import/no-unassigned-import": ["error", { allow: ["**/*.css"] }],
 
