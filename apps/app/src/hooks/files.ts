@@ -38,7 +38,6 @@ export function useFileDrop(): [
 	};
 
 	onCleanup(() => {
-		// oxlint-disable-next-line always-return
 		void unlistenPromise.then((unlisten) => {
 			unlisten();
 		});

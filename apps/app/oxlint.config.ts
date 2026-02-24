@@ -29,6 +29,12 @@ export default defineConfig({
 	],
 	settings: {
 		vitest: { typecheck: true },
+
+		"jsx-a11y": {
+			attributes: { for: ["for"] },
+			components: { Link: "a" },
+		},
+
 		"better-tailwindcss": {
 			entryPoint: path.resolve(import.meta.dirname, "./src/index.css"),
 			selectors: [

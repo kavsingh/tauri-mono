@@ -1,20 +1,24 @@
 import { SolidQueryDevtools } from "@tanstack/solid-query-devtools";
 import { createRootRoute, Link, Outlet } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
-import { createEffect, Show } from "solid-js";
+import { createEffect, Show, splitProps } from "solid-js";
 
 import { usePrefersDark } from "#hooks/theme";
 
 import type { ComponentProps, JSX } from "solid-js";
 
 function NavLink(
-	props: Omit<ComponentProps<typeof Link>, "class" | "classList">,
+	_props: Omit<ComponentProps<typeof Link>, "class" | "classList">,
 ) {
+	const [props, passProps] = splitProps(_props, ["children"]);
+
 	return (
 		<Link
-			{...props}
+			{...passProps}
 			class="text-muted-foreground transition-colors hover:underline aria-[current=page]:text-foreground aria-[current=page]:hover:no-underline"
-		/>
+		>
+			{props.children}
+		</Link>
 	);
 }
 

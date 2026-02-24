@@ -33,6 +33,8 @@ export default defineConfig({
 		"import/no-cycle": "error",
 		"import/no-default-export": "error",
 
+		"promise/always-return": ["error", { ignoreLastCallback: true }],
+
 		"unicorn/catch-error-name": ["error", { name: "cause" }],
 		"unicorn/filename-case": ["error", { cases: { kebabCase: true } }],
 		"unicorn/prefer-node-protocol": "error",
