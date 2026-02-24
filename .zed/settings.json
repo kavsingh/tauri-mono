@@ -4,6 +4,10 @@
 	"preferred_line_length": 84,
 	"prettier": { "allowed": false },
 
+	"file_types": {
+		"Dockerfile": ["dockerfile", "dockerfile.*"]
+	},
+
 	"lsp": {
 		"rust-analyzer": {
 			"initialization_options": {
@@ -35,7 +39,7 @@
 				"classFunctions": ["tj", "tm", "tv"],
 				"experimental": {
 					"configFile": {
-						"apps/app/src/index.css": "apps/app/src/**/*"
+						"apps/app-ui/src/index.css": "apps/app-ui/src/**/*"
 					}
 				}
 			}

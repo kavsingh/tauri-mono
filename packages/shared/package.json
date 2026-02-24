@@ -1,0 +1,26 @@
+{
+	"name": "shared",
+	"version": "1.0.0-dev.0",
+	"description": "shared js",
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"lint": "conc 'oxlint --type-aware --type-check --max-warnings=0' 'oxfmt --check'"
+	},
+	"devDependencies": {
+		"@tauri-apps/api": "2.10.1",
+		"@tauri-apps/plugin-log": "2.8.0"
+	},
+	"peerDependencies": {
+		"@tauri-apps/api": "2.x.x",
+		"@tauri-apps/plugin-log": "2.x.x"
+	},
+	"peerDependenciesMeta": {
+		"@tauri-apps/api": {
+			"optional": true
+		},
+		"@tauri-apps/plugin-log": {
+			"optional": true
+		}
+	}
+}
