@@ -6,6 +6,7 @@
 	"app": {
 		"macOSPrivateApi": true,
 		"security": {
+			"capabilities": ["main", "main-remote"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,
@@ -32,7 +33,7 @@
 	},
 	"build": {
 		"frontendDist": "../dist",
-		"devUrl": "http://localhost:3000",
+		"devUrl": "http://localhost:4321",
 		"beforeDevCommand": "bun before:dev",
 		"beforeBuildCommand": "bun before:build"
 	},
