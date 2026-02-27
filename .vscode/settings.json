@@ -31,9 +31,6 @@
 	"oxc.enable": true,
 	"oxc.typeAware": true,
 
-	"eslint.enable": true,
-	"eslint.workingDirectories": [{ "mode": "auto" }],
-
 	"prettier.enable": false,
 
 	"files.associations": { "*.css": "tailwindcss" },

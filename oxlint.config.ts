@@ -116,7 +116,6 @@ export default defineConfig({
 	overrides: [
 		{
 			files: ["./*.config.{ts,js}"],
-			plugins: ["import"],
 			rules: { "import/no-default-export": "off" },
 		},
 	],

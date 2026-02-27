@@ -8,6 +8,7 @@ import {
 	SelectorKind,
 } from "eslint-plugin-better-tailwindcss/types";
 import jestDom from "eslint-plugin-jest-dom";
+import solid from "eslint-plugin-solid";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "oxlint";
 
@@ -73,6 +74,7 @@ export default defineConfig({
 			files: ["./src/**/*.{ts,tsx}"],
 			plugins: ["import", "jsx-a11y"],
 			jsPlugins: [
+				"eslint-plugin-solid",
 				"@tanstack/eslint-plugin-router",
 				"eslint-plugin-better-tailwindcss",
 			],
@@ -110,6 +112,11 @@ export default defineConfig({
 
 				"import/no-nodejs-modules": "error",
 				"import/no-unassigned-import": ["error", { allow: ["**/*.css"] }],
+
+				...solid.configs["flat/typescript"].rules,
+				// @TODO: rule uses unimplemented markVariableAsUsed. remove this
+				// override when possible
+				"solid/jsx-uses-vars": "off",
 
 				...router.configs["flat/recommended"].reduce<DummyRuleMap>(
 					(acc, item) => Object.assign(acc, item.rules),
