@@ -22,6 +22,7 @@
 		"testscript": "bun scripts/testscript.ts"
 	},
 	"dependencies": {
+		"@tanstack/solid-devtools": "0.7.26",
 		"@tanstack/solid-query": "5.90.23",
 		"@tanstack/solid-query-devtools": "5.91.3",
 		"@tanstack/solid-router": "1.163.3",
@@ -41,7 +42,6 @@
 		"@tanstack/eslint-plugin-router": "1.161.4",
 		"@tanstack/router-cli": "1.164.0",
 		"@tanstack/router-plugin": "1.164.0",
-		"@tanstack/solid-devtools": "0.7.26",
 		"@tauri-apps/cli": "2.10.0",
 		"@testing-library/dom": "10.4.1",
 		"@testing-library/jest-dom": "6.9.1",
