@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
+import { devtools } from "@tanstack/devtools-vite";
 import legacy from "@vitejs/plugin-legacy";
 import { defineConfig } from "vite";
 import { checker } from "vite-plugin-checker";
@@ -17,12 +18,9 @@ function createChecker(mode: string) {
 export default defineConfig(({ mode }) => {
 	return {
 		server: { port: 3000 },
-		build:
-			mode === "production"
-				? { sourcemap: true, minify: "terser" }
-				: { sourcemap: false, minify: false },
 		oxc: { jsx: { importSource: "solid-js" } },
 		plugins: [
+			devtools(),
 			tsconfigPaths(),
 			solid(),
 			tailwindcss(),
