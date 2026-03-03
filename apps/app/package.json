@@ -50,7 +50,7 @@
 		"@vitejs/plugin-legacy": "7.2.1",
 		"@vitest/coverage-v8": "4.0.18",
 		"@vitest/eslint-plugin": "1.6.9",
-		"caniuse-lite": "1.0.30001775",
+		"caniuse-lite": "1.0.30001776",
 		"eslint-plugin-better-tailwindcss": "4.3.1",
 		"eslint-plugin-jest-dom": "5.5.0",
 		"eslint-plugin-solid": "0.14.5",

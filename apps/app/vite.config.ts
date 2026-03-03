@@ -1,5 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import legacy from "@vitejs/plugin-legacy";
 import { defineConfig } from "vite";
 import { checker } from "vite-plugin-checker";
@@ -22,6 +23,7 @@ export default defineConfig(({ mode }) => {
 		plugins: [
 			devtools(),
 			tsconfigPaths(),
+			tanstackRouter(),
 			solid(),
 			tailwindcss(),
 			legacy(),
