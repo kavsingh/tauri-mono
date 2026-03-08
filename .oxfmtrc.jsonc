@@ -10,11 +10,11 @@
 		"**/*.gen.*",
 		"**/__generated__/**",
 		"!**/__generated__/mocks/**",
-		"**/*.lock"
+		"**/*.lock",
 	],
 	"printWidth": 80,
 	"useTabs": true,
-	"experimentalSortImports": {
+	"sortImports": {
 		"order": "asc",
 		"groups": [
 			["builtin"],
@@ -22,7 +22,9 @@
 			["subpath", "internal"],
 			["parent"],
 			["sibling", "index"],
-			["type"]
-		]
-	}
+			["type"],
+		],
+	},
+	// handled by linter
+	"sortTailwindcss": null,
 }

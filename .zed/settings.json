@@ -18,10 +18,6 @@
 			"initialization_options": { "settings": { "typeAware": true } }
 		},
 
-		"oxfmt": {
-			"initialization_options": { "settings": { "run": "onSave" } }
-		},
-
 		"tailwindcss-language-server": {
 			"settings": {
 				"validate": true,
@@ -78,6 +74,7 @@
 		"CSS": {
 			"language_servers": [
 				"tailwindcss-intellisense-css",
+				"oxfmt",
 				"!vscode-css-language-server"
 			],
 			"formatter": [{ "language_server": { "name": "oxfmt" } }]
