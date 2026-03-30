@@ -2,9 +2,9 @@ import { render, waitFor, screen, cleanup } from "@solidjs/testing-library";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { describe, it, expect, vi, afterEach } from "vitest";
 
-import { createMockSystemStats } from "#__test-helpers__/mock-data/system";
-import { publishSystemStatsEvent } from "#__test-helpers__/tauri/events";
-import { Index } from "#routes/index";
+import { createMockSystemStats } from "~/__test-helpers__/mock-data/system";
+import { publishSystemStatsEvent } from "~/__test-helpers__/tauri/events";
+import { Index } from "~/routes/index";
 
 import type { ParentProps } from "solid-js";
 

@@ -1,4 +1,4 @@
-import type { Result } from "#__generated__/bindings";
+import type { Result } from "~/__generated__/bindings";
 
 type Ok<TData> = Extract<Result<TData, unknown>, { status: "ok" }>;
 type Err<TError> = Extract<Result<unknown, TError>, { status: "error" }>;

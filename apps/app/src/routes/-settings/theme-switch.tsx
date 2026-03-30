@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/solid-query";
 import { For, Match, Switch } from "solid-js";
 
-import { Card } from "#components/card";
-import { useSetThemePreferenceMutation } from "#hooks/theme";
-import { themePreferenceQuery } from "#lib/queries";
+import { Card } from "~/components/card";
+import { useSetThemePreferenceMutation } from "~/hooks/theme";
+import { themePreferenceQuery } from "~/lib/queries";
 
-import type { ThemePreference } from "#__generated__/bindings";
 import type { JSX } from "solid-js";
+import type { ThemePreference } from "~/__generated__/bindings";
 
 export const OPTIONS = [
 	"System",

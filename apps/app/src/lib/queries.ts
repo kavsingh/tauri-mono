@@ -2,7 +2,7 @@
 
 import { queryOptions } from "@tanstack/solid-query";
 
-import { commands } from "#__generated__/bindings";
+import { commands } from "~/__generated__/bindings";
 
 async function getSystemStats() {
 	const result = await commands.getSystemStats();

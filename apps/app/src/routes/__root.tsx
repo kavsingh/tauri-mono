@@ -4,7 +4,7 @@ import { createRootRoute, Link, Outlet } from "@tanstack/solid-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools";
 import { createEffect, Show, splitProps } from "solid-js";
 
-import { usePrefersDark } from "#hooks/theme";
+import { usePrefersDark } from "~/hooks/theme";
 
 import type { ComponentProps, JSX } from "solid-js";
 

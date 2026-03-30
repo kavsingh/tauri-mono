@@ -1,6 +1,6 @@
 import { mockCreator } from "./mock-creator.ts";
 
-import type { SystemInfo, SystemStats } from "#__generated__/bindings";
+import type { SystemInfo, SystemStats } from "~/__generated__/bindings";
 
 export const createMockSystemInfo = mockCreator<SystemInfo>({
 	osFullname: "OS Fullname",

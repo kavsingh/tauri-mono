@@ -1,15 +1,15 @@
 import { Show, createMemo } from "solid-js";
 
-import { Card } from "#components/card";
-import { ChronoGraph } from "#components/chrono-graph";
-import { InfoList } from "#components/info-list";
-import { useSystemStats } from "#hooks/system-stats";
-import { tryOr } from "#lib/error";
-import { formatMem } from "#lib/format";
+import { Card } from "~/components/card";
+import { ChronoGraph } from "~/components/chrono-graph";
+import { InfoList } from "~/components/info-list";
+import { useSystemStats } from "~/hooks/system-stats";
+import { tryOr } from "~/lib/error";
+import { formatMem } from "~/lib/format";
 
-import type { SystemStats } from "#__generated__/bindings";
-import type { Sample } from "#components/chrono-graph";
 import type { JSX } from "solid-js";
+import type { SystemStats } from "~/__generated__/bindings";
+import type { Sample } from "~/components/chrono-graph";
 
 function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {

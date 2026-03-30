@@ -25,11 +25,6 @@ export default defineConfig({
 		"eslint/no-use-before-define": "error",
 
 		"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-		"import/extensions": [
-			"error",
-			"always",
-			{ checkTypeImports: true, ignorePackages: true },
-		],
 		"import/no-cycle": "error",
 		"import/no-default-export": "error",
 

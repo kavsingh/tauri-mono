@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/solid-router";
 import { createEffect, createSignal, For } from "solid-js";
 
-import { Button } from "#components/button";
-import { Card } from "#components/card";
-import { useFileDrop, useFileSelectDialog } from "#hooks/files";
-import { Page } from "#layouts/page";
-import { tv } from "#lib/style";
+import { Button } from "~/components/button";
+import { Card } from "~/components/card";
+import { useFileDrop, useFileSelectDialog } from "~/hooks/files";
+import { Page } from "~/layouts/page";
+import { tv } from "~/lib/style";
 
 import type { JSX } from "solid-js";
 

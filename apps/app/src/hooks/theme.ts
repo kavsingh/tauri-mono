@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/solid-query";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 
-import { commands } from "#__generated__/bindings";
-import { themePreferenceQuery } from "#lib/queries";
-import { getStylePropertyValues } from "#lib/style";
+import { commands } from "~/__generated__/bindings";
+import { themePreferenceQuery } from "~/lib/queries";
+import { getStylePropertyValues } from "~/lib/style";
 
-import type { ThemePreference } from "#__generated__/bindings";
-import type { StyleProperyValueMap, StylePropertyValues } from "#lib/style";
 import type { MutationOptions, UseMutationResult } from "@tanstack/solid-query";
 import type { Accessor } from "solid-js";
+import type { ThemePreference } from "~/__generated__/bindings";
+import type { StyleProperyValueMap, StylePropertyValues } from "~/lib/style";
 
 function setThemePreference(theme: ThemePreference) {
 	return commands.setThemePreference(theme);

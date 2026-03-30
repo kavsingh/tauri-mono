@@ -1,14 +1,14 @@
 import {
 	createMockSystemInfo,
 	createMockSystemStats,
-} from "#__test-helpers__/mock-data/system";
-import { createMockOkResult } from "#__test-helpers__/tauri/commands";
+} from "~/__test-helpers__/mock-data/system";
+import { createMockOkResult } from "~/__test-helpers__/tauri/commands";
 import { vi } from "vitest";
 
 import type {
 	commands as bindingsCommands,
 	events as bindingsEvents,
-} from "#__generated__/bindings";
+} from "~/__generated__/bindings";
 import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 export const commands: typeof bindingsCommands = {

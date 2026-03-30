@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/solid-query";
 
-import { events } from "#__generated__/bindings";
-import { systemStatsQuery } from "#lib/queries";
+import { events } from "~/__generated__/bindings";
+import { systemStatsQuery } from "~/lib/queries";
 
-import type { SystemStats } from "#__generated__/bindings";
 import type { QueryClient, UseQueryResult } from "@tanstack/solid-query";
+import type { SystemStats } from "~/__generated__/bindings";
 
 function isValidDate(date: Date) {
 	return !Number.isNaN(date.getTime());
