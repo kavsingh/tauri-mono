@@ -1,9 +1,0 @@
-{
-	"recommendations": [
-		"typescriptteam.native-preview",
-		"oxc.oxc-vscode",
-		"rust-lang.rust-analyzer",
-		"bradlc.vscode-tailwindcss",
-		"tombi-toml.tombi"
-	]
-}
