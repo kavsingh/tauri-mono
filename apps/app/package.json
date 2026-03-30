@@ -47,7 +47,6 @@
 		"@testing-library/jest-dom": "6.9.1",
 		"@testing-library/user-event": "14.6.1",
 		"@tsconfig/vite-react": "7.0.2",
-		"@vitejs/plugin-legacy": "8.0.1",
 		"@vitest/coverage-v8": "4.1.2",
 		"caniuse-lite": "1.0.30001782",
 		"eslint-plugin-better-tailwindcss": "4.3.2",
