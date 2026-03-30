@@ -4,7 +4,6 @@
 	"version": "../package.json",
 	"identifier": "com.app.dev",
 	"app": {
-		"macOSPrivateApi": true,
 		"security": {
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,

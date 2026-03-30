@@ -2,3 +2,7 @@ toml-version = "v1.0.0"
 
 [format.rules]
 indent-style = "tab"
+
+[lsp]
+# https://github.com/tombi-toml/tombi/issues/1463
+goto-type-definition.enabled = false
