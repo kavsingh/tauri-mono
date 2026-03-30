@@ -1,12 +1,19 @@
-import type { Result } from "~/__generated__/bindings";
+interface Ok<TData> {
+	status: "ok";
+	data: TData;
+}
 
-type Ok<TData> = Extract<Result<TData, unknown>, { status: "ok" }>;
-type Err<TError> = Extract<Result<unknown, TError>, { status: "error" }>;
+interface Err<TError> {
+	status: "error";
+	error: TError;
+}
 
-export function createMockOkResult<TData>(data: TData): Ok<TData> {
+function createMockOkResult<TData>(data: TData): Ok<TData> {
 	return { status: "ok", data };
 }
 
-export function createMockErrorResult<TError>(error: TError): Err<TError> {
+function createMockErrorResult<TError>(error: TError): Err<TError> {
 	return { status: "error", error };
 }
+
+export { createMockOkResult, createMockErrorResult };
