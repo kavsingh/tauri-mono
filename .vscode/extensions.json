@@ -1,0 +1,8 @@
+{
+	"recommendations": [
+		"rust-lang.rust-analyzer",
+		"oxc.oxc-vscode",
+		"bradlc.vscode-tailwindcss",
+		"tombi-toml.tombi"
+	]
+}

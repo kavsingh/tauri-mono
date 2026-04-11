@@ -21,6 +21,7 @@
 		"tailwindcss-language-server": {
 			"settings": {
 				"validate": true,
+				"classFunctions": ["tj", "tm", "tv"],
 				"classAttributes": [
 					"class",
 					"classList",
@@ -28,7 +29,6 @@
 					".+ClassName",
 					".+ClassNames"
 				],
-				"classFunctions": ["tj", "tm", "tv"],
 				"experimental": {
 					"configFile": {
 						"apps/app/src/index.css": "apps/app/src/**/*"

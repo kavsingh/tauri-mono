@@ -1,0 +1,43 @@
+{
+	"files.watcherExclude": {
+		"**/node_modules": true,
+		"**/dist": true,
+		"**/target": true
+	},
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/dist": true,
+		"**/target": true
+	},
+
+	"rust-analyzer.check.command": "clippy",
+	"rust-analyzer.diagnostics.styleLints.enable": true,
+	"rust-analyzer.rustfmt.extraArgs": ["+nightly"],
+
+	"js/ts.experimental.useTsgo": true,
+
+	"oxc.enable": true,
+	"oxc.typeAware": true,
+
+	"files.associations": { "*.css": "tailwindcss" },
+	"tailwindCSS.validate": true,
+	"tailwindCSS.classFunctions": ["tj", "tm", "tv"],
+	"tailwindCSS.classAttributes": [
+		"class",
+		"classList",
+		"className",
+		".+ClassName",
+		".+ClassNames"
+	],
+	"tailwindCSS.experimental.configFile": {
+		"configFile": { "apps/app/src/index.css": "apps/app/src/**/*" }
+	},
+
+	"editor.formatOnSave": true,
+	"editor.quickSuggestions": { "strings": true },
+	"editor.codeActionsOnSave": { "source.fixAll.oxc": "always" },
+	"editor.defaultFormatter": "oxc.oxc-vscode",
+
+	"[rust]": { "editor.defaultFormatter": "rust-lang.rust-analyzer" },
+	"[toml]": { "editor.defaultFormatter": "tombi-toml.tombi" }
+}
