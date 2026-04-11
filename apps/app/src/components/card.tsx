@@ -74,7 +74,7 @@ export type CardDescriptionProps = Omit<ComponentProps<"p">, "classList">;
 export function CardContent(props: CardContentProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
-	return <div {...passProps} class={tm("p-6 pt-0", localProps.class)} />;
+	return <div {...passProps} class={tm("p-6 pbs-0", localProps.class)} />;
 }
 
 export type CardContentProps = Omit<ComponentProps<"div">, "classList">;
@@ -87,7 +87,7 @@ export function CardFooter(props: CardFooterProps): JSX.Element {
 	return (
 		<div
 			{...passProps}
-			class={tm("flex items-center p-6 pt-0", localProps.class)}
+			class={tm("flex items-center p-6 pbs-0", localProps.class)}
 		/>
 	);
 }

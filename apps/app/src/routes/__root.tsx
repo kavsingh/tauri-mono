@@ -33,7 +33,7 @@ function RootLayout(): JSX.Element {
 	return (
 		<>
 			<div class="grid size-full grid-cols-[max-content_1fr]">
-				<div class="min-h-full p-4 pe-8 pt-10 text-sm">
+				<div class="min-h-full p-4 pe-8 pbs-10 text-sm">
 					<nav class="flex flex-col gap-2">
 						<NavLink to="/">Home</NavLink>
 						<NavLink to="/files">Files</NavLink>
@@ -60,7 +60,7 @@ function RootLayout(): JSX.Element {
 					</Show>
 				</div>
 			</div>
-			<div class="fixed inset-x-0 top-0 z-10 h-8" data-tauri-drag-region />
+			<div class="fixed inset-x-0 inset-bs-0 z-10 h-8" data-tauri-drag-region />
 		</>
 	);
 }

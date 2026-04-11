@@ -23,7 +23,7 @@ export function InfoListEntry(props: InfoListEntryProps): JSX.Element {
 		<li
 			{...passProps}
 			class={tm(
-				"flex gap-2 border-b border-b-border py-2 last:border-b-0",
+				"flex gap-2 border-be border-be-border py-2 last:border-be-0",
 				localProps.class,
 			)}
 		/>

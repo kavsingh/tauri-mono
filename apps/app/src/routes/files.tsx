@@ -66,7 +66,7 @@ function Files(): JSX.Element {
 						<ul class="flex flex-col gap-1">
 							<For each={selectedFiles()}>
 								{(file) => (
-									<li class="flex gap-2 border-b border-border pb-2 text-sm text-muted-foreground last:border-b-0 last:pb-0">
+									<li class="flex gap-2 border-be border-border pbe-2 text-sm text-muted-foreground last:border-be-0 last:pbe-0">
 										{file}
 									</li>
 								)}
