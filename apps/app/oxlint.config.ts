@@ -125,7 +125,7 @@ export default defineConfig({
 
 				...tailwindcss.configs["recommended-error"].rules,
 				"better-tailwindcss/enforce-consistent-line-wrapping": "off",
-				"better-tailwindcss/enforce-shorthand-classes": "error",
+				"better-tailwindcss/enforce-consistent-variant-order": "error",
 			},
 		},
 

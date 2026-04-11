@@ -30,7 +30,7 @@
 		".+ClassNames"
 	],
 	"tailwindCSS.experimental.configFile": {
-		"configFile": { "apps/app/src/index.css": "apps/app/src/**/*" }
+		"apps/app/src/index.css": "apps/app/src/**/*"
 	},
 
 	"editor.formatOnSave": true,
