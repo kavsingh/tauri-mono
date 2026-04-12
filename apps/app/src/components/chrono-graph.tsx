@@ -1,4 +1,10 @@
-import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
+import {
+	createEffect,
+	createMemo,
+	createSignal,
+	onCleanup,
+	onMount,
+} from "solid-js";
 
 import { useResizeObserver } from "~/hooks/dom";
 import { tryOr } from "~/lib/error";
@@ -75,8 +81,8 @@ function normalizeValues(
 export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	const schemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 	const observeResize = useResizeObserver();
-	let unobserveResize: ReturnType<typeof observeResize> | undefined = undefined;
-	let canvasEl: HTMLCanvasElement | undefined = undefined;
+	let unobserveResize: ReturnType<typeof observeResize> | undefined;
+	let canvasRef: HTMLCanvasElement | undefined;
 	let rollingMin = 0n;
 	let rollingMax = 0n;
 
@@ -108,11 +114,18 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	});
 
 	function redraw() {
-		if (canvasEl) drawGraph(canvasEl, normalizedValues());
+		if (canvasRef) drawGraph(canvasRef, normalizedValues());
 	}
 
 	createEffect(redraw);
 	schemeQuery.addEventListener("change", redraw);
+
+	onMount(() => {
+		if (!canvasRef) return;
+
+		unobserveResize = observeResize(canvasRef, redraw);
+		redraw();
+	});
 
 	onCleanup(() => {
 		unobserveResize?.();
@@ -125,10 +138,7 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 				"size-full border-accent-foreground bg-muted/30 text-muted/60",
 				props.class,
 			)}
-			ref={(el) => {
-				canvasEl = el;
-				unobserveResize = observeResize(canvasEl, redraw);
-			}}
+			ref={(el) => void (canvasRef = el)}
 		/>
 	);
 }

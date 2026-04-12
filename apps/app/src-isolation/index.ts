@@ -7,9 +7,6 @@ globalThis.window.__TAURI_ISOLATION_HOOK__ = function tauriIsolationHook(
 	return payload;
 };
 
-// oxlint-disable-next-line require-module-specifiers
-export {};
-
 // TODO: find official typings if available
 type IsolationPayload = unknown;
 
@@ -18,3 +15,6 @@ declare global {
 		__TAURI_ISOLATION_HOOK__: (payload: IsolationPayload) => IsolationPayload;
 	}
 }
+
+// oxlint-disable-next-line require-module-specifiers
+export {};

@@ -8,7 +8,7 @@ import { themePreferenceQuery } from "~/lib/queries";
 import type { JSX } from "solid-js";
 import type { ThemePreference } from "~/__generated__/bindings";
 
-export const OPTIONS = [
+const OPTIONS = [
 	"System",
 	"Dark",
 	"Light",
