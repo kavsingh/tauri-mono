@@ -1,6 +1,8 @@
 // oxlint-disable-next-line no-restricted-imports
 import type { VariantProps as BaseVariantProps } from "tailwind-variants";
 
+type ExactOptional<T> = { [K in keyof T]?: T[K] | undefined };
+
 // oxlint-disable-next-line no-restricted-imports
 export { twMerge as tm, twJoin as tj } from "tailwind-merge";
 // oxlint-disable-next-line no-restricted-imports
@@ -28,5 +30,3 @@ export function getStylePropertyValues<TMap extends StyleProperyValueMap>(
 export type StyleProperyValueMap = Record<string, string>;
 
 export type StylePropertyValues<T> = { [K in keyof T]?: string };
-
-type ExactOptional<T> = { [K in keyof T]?: T[K] | undefined };

@@ -5,6 +5,8 @@ import { createSignal, onCleanup } from "solid-js";
 import type { OpenDialogOptions } from "@tauri-apps/plugin-dialog";
 import type { Accessor, JSX } from "solid-js";
 
+type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;
+
 export function useFileDrop(): [
 	{ isActive: Accessor<boolean>; files: Accessor<string[]> },
 	{
@@ -73,5 +75,3 @@ export function useFileSelectDialog(): [
 
 	return [files, showDialog];
 }
-
-type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;

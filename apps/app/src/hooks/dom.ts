@@ -1,15 +1,3 @@
-export type UseResizeObserverEntryCallback = (
-	entry: ResizeObserverEntry,
-) => void;
-
-export type UseResizeObserverObserveFn = (
-	el: Element,
-	callback: UseResizeObserverEntryCallback,
-	options?: ResizeObserverOptions,
-) => UseResizeObserverUnobserveFn;
-
-export type UseResizeObserverUnobserveFn = () => void;
-
 const elementCallbacks = new WeakMap<
 	Element,
 	Set<UseResizeObserverEntryCallback>
@@ -24,6 +12,18 @@ const resizeObserver = new ResizeObserver((entries) => {
 		for (const callback of callbacks) callback(entry);
 	}
 });
+
+export type UseResizeObserverEntryCallback = (
+	entry: ResizeObserverEntry,
+) => void;
+
+export type UseResizeObserverObserveFn = (
+	el: Element,
+	callback: UseResizeObserverEntryCallback,
+	options?: ResizeObserverOptions,
+) => UseResizeObserverUnobserveFn;
+
+export type UseResizeObserverUnobserveFn = () => void;
 
 export function useResizeObserver(): UseResizeObserverObserveFn {
 	const observe: UseResizeObserverObserveFn = (el, callback, options) => {

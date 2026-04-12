@@ -11,15 +11,6 @@ import type {
 } from "~/__generated__/bindings";
 import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
-export const commands: typeof bindingsCommands = {
-	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
-	getSystemStats: vi.fn(() => {
-		return Promise.resolve(createMockOkResult(createMockSystemStats()));
-	}),
-	getThemePreference: vi.fn(() => Promise.resolve("System" as const)),
-	setThemePreference: vi.fn(() => Promise.resolve()),
-};
-
 interface MockEventHandles {
 	listen(arg: unknown): ReturnType<WebviewWindow["listen"]>;
 	once(arg: unknown): ReturnType<WebviewWindow["once"]>;
@@ -34,6 +25,14 @@ function mockEventHandles(): MockEventHandles {
 	};
 }
 
+export const commands: typeof bindingsCommands = {
+	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
+	getSystemStats: vi.fn(() => {
+		return Promise.resolve(createMockOkResult(createMockSystemStats()));
+	}),
+	getThemePreference: vi.fn(() => Promise.resolve("System" as const)),
+	setThemePreference: vi.fn(() => Promise.resolve()),
+};
 
 export const events: Record<keyof typeof bindingsEvents, MockEventHandles> = {
 	systemStatsEvent: mockEventHandles(),

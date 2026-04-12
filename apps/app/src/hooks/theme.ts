@@ -10,6 +10,8 @@ import type { Accessor } from "solid-js";
 import type { ThemePreference } from "~/__generated__/bindings";
 import type { StyleProperyValueMap, StylePropertyValues } from "~/lib/style";
 
+const darkSchemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
+
 function setThemePreference(theme: ThemePreference) {
 	return commands.setThemePreference(theme);
 }
@@ -37,8 +39,6 @@ export function useSetThemePreferenceMutation(
 		...opts,
 	}));
 }
-
-const darkSchemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 
 export function usePrefersDark(): Accessor<boolean> {
 	const [prefersDarkScheme, setPrefersDarkScheme] = createSignal(

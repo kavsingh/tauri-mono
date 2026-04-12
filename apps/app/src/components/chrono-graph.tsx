@@ -13,18 +13,6 @@ import { tm } from "~/lib/style";
 
 import type { Accessor, JSX } from "solid-js";
 
-export interface ChronoGraphProps {
-	sampleSource: Accessor<Sample | undefined>;
-	minValue?: bigint | undefined;
-	maxValue?: bigint | undefined;
-	maxSamples?: number | undefined;
-	class?: string | undefined;
-}
-
-export interface Sample {
-	value: bigint;
-}
-
 function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	const ctx = canvas.getContext("2d");
 
@@ -76,6 +64,18 @@ function normalizeValues(
 	return samples.map(({ value }) => {
 		return tryOr(() => normalizeBigint(value, min, max), 0.5);
 	});
+}
+
+export interface ChronoGraphProps {
+	sampleSource: Accessor<Sample | undefined>;
+	minValue?: bigint | undefined;
+	maxValue?: bigint | undefined;
+	maxSamples?: number | undefined;
+	class?: string | undefined;
+}
+
+export interface Sample {
+	value: bigint;
 }
 
 export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
