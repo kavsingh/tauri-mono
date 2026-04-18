@@ -6,15 +6,6 @@ import { checker } from "vite-plugin-checker";
 import solid from "vite-plugin-solid";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-function createChecker(mode: string) {
-	if (mode !== "development") return undefined;
-
-	return checker({
-		overlay: { initialIsOpen: false },
-		oxlint: { lintCommand: "oxlint --type-aware --type-check" },
-	});
-}
-
 export default defineConfig(({ mode }) => {
 	return {
 		server: { port: 3000 },
@@ -25,7 +16,9 @@ export default defineConfig(({ mode }) => {
 			tanstackRouter(),
 			solid(),
 			tailwindcss(),
-			createChecker(mode),
+			mode === "development"
+				? checker({ oxlint: true, overlay: { initialIsOpen: false } })
+				: undefined,
 		],
 	};
 });

@@ -1,9 +1,14 @@
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
-	ignorePatterns: [".nx/*", ".temp/*", "target/*", "apps/*", "packages/*"],
+	options: {
+		typeAware: true,
+		typeCheck: true,
+		reportUnusedDisableDirectives: "deny",
+	},
 	categories: { correctness: "error", suspicious: "error", perf: "error" },
 	plugins: ["oxc", "eslint", "typescript", "import", "promise", "unicorn"],
+	ignorePatterns: [".nx/*", ".temp/*", "target/*", "apps/*", "packages/*"],
 	rules: {
 		"eslint/curly": ["error", "multi-line", "consistent"],
 		"eslint/eqeqeq": "error",

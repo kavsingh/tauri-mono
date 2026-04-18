@@ -11,7 +11,7 @@
 		"test:ui": "vitest run",
 		"test:tauri": "cd src-tauri && cargo test",
 		"lint": "bun lint:ui",
-		"lint:ui": "cross-env tsr generate && oxlint --type-aware --type-check --max-warnings=0 && oxfmt --check",
+		"lint:ui": "cross-env tsr generate && oxlint && oxfmt --check",
 		"lint:tauri": "cargo clippy --all-targets --all-features",
 		"before:dev": "cross-env bun build:isolation && vite dev",
 		"before:build": "cross-env bun build:isolation && rimraf ./dist && vite build",

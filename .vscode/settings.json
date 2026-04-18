@@ -17,7 +17,6 @@
 	"js/ts.experimental.useTsgo": true,
 
 	"oxc.enable": true,
-	"oxc.typeAware": true,
 
 	"files.associations": { "*.css": "tailwindcss" },
 	"tailwindCSS.validate": false,
