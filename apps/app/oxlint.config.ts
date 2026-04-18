@@ -29,14 +29,13 @@ export default defineConfig({
 		"!**/__generated__/__mocks__/**",
 	],
 	settings: {
-		vitest: { typecheck: true },
-
 		"jsx-a11y": {
 			attributes: { for: ["for"] },
 			components: { Link: "a" },
 		},
 
 		"better-tailwindcss": {
+			cwd: import.meta.dirname,
 			entryPoint: path.resolve(import.meta.dirname, "./src/index.css"),
 			selectors: [
 				...getDefaultSelectors(),
@@ -68,6 +67,8 @@ export default defineConfig({
 				},
 			],
 		},
+
+		vitest: { typecheck: true },
 	},
 	overrides: [
 		{
