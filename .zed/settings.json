@@ -3,11 +3,12 @@
 	"hard_tabs": true,
 	"preferred_line_length": 84,
 	"prettier": { "allowed": false },
+	"formatter": [{ "language_server": { "name": "oxfmt" } }],
+	"code_actions_on_format": { "source.fixAll.oxc": true },
 
 	"lsp": {
 		"rust-analyzer": {
 			"initialization_options": {
-				"binary": { "path": "~/.cargo/bin/rust-analyzer" },
 				"check": { "command": "clippy" },
 				"diagnostics": { "styleLints": { "enable": true } },
 				"rustfmt": { "extraArgs": ["+nightly"] }
@@ -45,9 +46,7 @@
 				"oxlint",
 				"tailwindcss-language-server",
 				"oxfmt"
-			],
-			"formatter": [{ "language_server": { "name": "oxfmt" } }],
-			"code_actions_on_format": { "source.fixAll.oxc": true }
+			]
 		},
 
 		"TSX": {
@@ -56,48 +55,18 @@
 				"oxlint",
 				"tailwindcss-language-server",
 				"oxfmt"
-			],
-			"formatter": [{ "language_server": { "name": "oxfmt" } }],
-			"code_actions_on_format": { "source.fixAll.oxc": true }
+			]
 		},
 
-		"JavaScript": {
-			"language_servers": ["tsgo", "oxlint", "oxfmt"],
-			"formatter": [{ "language_server": { "name": "oxfmt" } }],
-			"code_actions_on_format": { "source.fixAll.oxc": true }
-		},
+		"JavaScript": { "language_servers": ["tsgo", "oxlint", "oxfmt"] },
 
 		"CSS": {
 			"language_servers": [
 				"tailwindcss-intellisense-css",
+				"tailwindcss-language-server",
 				"oxfmt",
 				"!vscode-css-language-server"
-			],
-			"formatter": [{ "language_server": { "name": "oxfmt" } }]
-		},
-
-		"HTML": {
-			"formatter": [{ "language_server": { "name": "oxfmt" } }]
-		},
-
-		"Markdown": {
-			"formatter": [{ "language_server": { "name": "oxfmt" } }]
-		},
-
-		"JSON": {
-			"formatter": [{ "language_server": { "name": "oxfmt" } }]
-		},
-
-		"JSONC": {
-			"formatter": [{ "language_server": { "name": "oxfmt" } }]
-		},
-
-		"YAML": {
-			"formatter": [{ "language_server": { "name": "oxfmt" } }]
-		},
-
-		"TOML": {
-			"formatter": [{ "language_server": { "name": "tombi" } }]
+			]
 		}
 	}
 }
