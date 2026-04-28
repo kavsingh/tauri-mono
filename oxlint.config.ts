@@ -15,6 +15,7 @@ export default defineConfig({
 		"eslint/eqeqeq": "error",
 		"eslint/no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
 		"eslint/no-shadow": ["error", { ignoreTypeValueShadow: false }],
+		"eslint/no-underscore-dangle": "off",
 		"eslint/no-unreachable": "error",
 		"eslint/no-unused-vars": [
 			"error",

@@ -32,15 +32,15 @@ function RootLayout(): JSX.Element {
 
 	return (
 		<>
-			<div class="grid size-full grid-cols-[max-content_1fr]">
-				<div class="min-h-full p-4 pe-8 pbs-10 text-sm">
+			<div class="grid grid-cols-[max-content_1fr] block-full inline-full">
+				<div class="p-4 pe-8 pbs-10 text-sm min-block-full">
 					<nav class="flex flex-col gap-2">
 						<NavLink to="/">Home</NavLink>
 						<NavLink to="/files">Files</NavLink>
 						<NavLink to="/settings">Settings</NavLink>
 					</nav>
 				</div>
-				<div class="h-full overflow-x-hidden overflow-y-auto">
+				<div class="overflow-x-hidden overflow-y-auto block-full">
 					<Outlet />
 					<Show when={import.meta.env.DEV}>
 						<TanStackDevtools
@@ -60,7 +60,10 @@ function RootLayout(): JSX.Element {
 					</Show>
 				</div>
 			</div>
-			<div class="fixed inset-x-0 inset-bs-0 z-10 h-8" data-tauri-drag-region />
+			<div
+				class="fixed inset-x-0 inset-bs-0 z-10 block-8"
+				data-tauri-drag-region
+			/>
 		</>
 	);
 }

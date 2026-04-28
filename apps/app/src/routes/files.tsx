@@ -10,7 +10,7 @@ import { tv } from "~/lib/style";
 import type { JSX } from "solid-js";
 
 const dragFileSelectVariants = tv({
-	base: "my-3 grid h-50 place-items-center rounded-md border border-border text-muted-foreground transition-colors",
+	base: "my-3 grid place-items-center rounded-md border border-border text-muted-foreground transition-colors block-50",
 	variants: {
 		isActive: {
 			true: "border-foreground bg-accent/20 text-foreground",

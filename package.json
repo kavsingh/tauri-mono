@@ -26,15 +26,15 @@
 		"@tsconfig/bun": "1.0.10",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/bun": "1.3.13",
-		"@typescript/native-preview": "7.0.0-dev.20260426.1",
+		"@typescript/native-preview": "7.0.0-dev.20260428.1",
 		"cross-env": "10.1.0",
 		"lefthook": "2.1.6",
 		"nx": "22.7.0",
-		"oxfmt": "0.46.0",
-		"oxlint": "1.61.0",
-		"oxlint-tsgolint": "0.22.0",
+		"oxfmt": "0.47.0",
+		"oxlint": "1.62.0",
+		"oxlint-tsgolint": "0.22.1",
 		"rimraf": "6.1.3",
-		"tombi": "0.9.24"
+		"tombi": "0.9.25"
 	},
 	"packageManager": "bun@1.3.13",
 	"trustedDependencies": [

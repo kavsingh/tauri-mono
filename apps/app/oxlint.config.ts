@@ -87,11 +87,11 @@ export default defineConfig({
 						paths: [
 							{
 								name: "tailwind-merge",
-								message: "please import helpers from #src/style",
+								message: "please import helpers from ~/src/style",
 							},
 							{
 								name: "tailwind-variants",
-								message: "please import helpers from #src/style",
+								message: "please import helpers from ~/src/style",
 							},
 						],
 					},

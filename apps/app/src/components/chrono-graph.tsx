@@ -135,7 +135,7 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	return (
 		<canvas
 			class={tm(
-				"size-full border-accent-foreground bg-muted/30 text-muted/60",
+				"border-accent-foreground bg-muted/30 text-muted/60 block-full inline-full",
 				props.class,
 			)}
 			ref={(el) => void (canvasRef = el)}
