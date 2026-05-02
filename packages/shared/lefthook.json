@@ -1,0 +1,12 @@
+{
+	"$schema": "../../node_modules/lefthook/schema.json",
+	"pre-commit": {
+		"jobs": [
+			{
+				"root": "packages/shared",
+				"glob": "*.{ts,tsx,js,jsx}",
+				"run": "bun oxlint {staged_files}"
+			}
+		]
+	}
+}

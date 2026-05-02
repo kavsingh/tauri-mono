@@ -1,0 +1,11 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"include": [],
+	"references": [
+		{ "path": "./tsconfig.bun.json" },
+		{ "path": "./tsconfig.app.json" }
+	],
+	// @TODO: temp workaround until https://github.com/vitejs/vite/issues/21889
+	// is resolved
+	"compilerOptions": { "paths": { "~/*": ["./src/*"] } }
+}
