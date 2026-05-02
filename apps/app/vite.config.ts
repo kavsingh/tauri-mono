@@ -4,15 +4,14 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import { defineConfig } from "vite";
 import { checker } from "vite-plugin-checker";
 import solid from "vite-plugin-solid";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => {
 	return {
 		server: { port: 3000 },
+		resolve: { conditions: ["browser", mode], tsconfigPaths: true },
 		oxc: { jsx: { importSource: "solid-js" } },
 		plugins: [
 			devtools(),
-			tsconfigPaths(),
 			tanstackRouter(),
 			solid(),
 			tailwindcss(),
