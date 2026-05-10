@@ -4,8 +4,8 @@
 	"pre-commit": {
 		"jobs": [
 			{
-				"glob": "*.{ts,tsx,js,tsx,json,jsonc,yml,yaml,toml,md}",
-				"run": "bun oxfmt {staged_files}",
+				"glob": "*.{ts,tsx,js,tsx,html,css,json,jsonc,yml,yaml,toml,md}",
+				"run": "bun oxfmt --no-error-on-unmatched-pattern {staged_files}",
 				"stage_fixed": true
 			}
 		]

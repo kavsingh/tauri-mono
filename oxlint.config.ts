@@ -43,7 +43,8 @@ export default defineConfig({
 		"unicorn/prefer-node-protocol": "error",
 		"unicorn/prefer-type-error": "error",
 
-		// enable rules from "pedantic", "style" and "nursery" for typescript
+		// enable rules from "restriction", "pedantic", "style" and "nursery"
+		// for typescript
 		// @TODO: refactor using https://github.com/oxc-project/oxc/issues/19486
 		// if-and-when it lands
 		"typescript/adjacent-overload-signatures": "error",
