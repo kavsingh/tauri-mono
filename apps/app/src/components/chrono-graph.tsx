@@ -139,6 +139,7 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 				props.class,
 			)}
 			ref={(el) => void (canvasRef = el)}
+			aria-label="value over time"
 		/>
 	);
 }

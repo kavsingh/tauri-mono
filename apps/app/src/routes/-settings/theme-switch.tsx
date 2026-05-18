@@ -63,10 +63,12 @@ export function ThemeSwitch(): JSX.Element {
 											}}
 											class="peer cursor-pointer"
 											disabled={prefQuery.isLoading}
+											aria-labelledby={`${option}-label`}
 										/>
 										<label
 											class="cursor-pointer text-muted-foreground transition-colors peer-checked:text-foreground"
 											for={option}
+											id={`${option}-label`}
 										>
 											<LabelText theme={option} />
 										</label>
