@@ -3,7 +3,7 @@ import { Show } from "solid-js";
 
 import { Card } from "~/components/card";
 import { InfoList } from "~/components/info-list";
-import { systemInfoQuery } from "~/lib/queries";
+import { systemInfoQuery } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
 

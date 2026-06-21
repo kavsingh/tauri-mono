@@ -6,6 +6,7 @@ import { render } from "solid-js/web";
 
 import "./index.css";
 import { routeTree } from "./route-tree.gen.ts";
+import { startEventListeners } from "./services/tauri";
 
 function createTanstackRouter() {
 	return createRouter({ routeTree });
@@ -25,22 +26,19 @@ function renderAndShow() {
 	const client = new QueryClient();
 	const router = createTanstackRouter();
 
-	render(
-		() => (
+	startEventListeners(client);
+	render(() => {
+		return (
 			<QueryClientProvider client={client}>
 				<RouterProvider router={router} />
 			</QueryClientProvider>
-		),
-		appRoot,
-	);
+		);
+	}, appRoot);
 
 	// workaround white flash on start.
 	// see: https://github.com/tauri-apps/tauri/issues/5170
 	void getCurrentWindow().show();
 }
 
-if (import.meta.env.DEV) {
-	void attachConsole().then(renderAndShow);
-} else {
-	renderAndShow();
-}
+if (import.meta.env.DEV) void attachConsole().then(renderAndShow);
+else renderAndShow();

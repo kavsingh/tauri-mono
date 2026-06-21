@@ -1,11 +1,12 @@
+import { useQuery } from "@tanstack/solid-query";
 import { Show, createMemo } from "solid-js";
 
 import { Card } from "~/components/card";
 import { ChronoGraph } from "~/components/chrono-graph";
 import { InfoList } from "~/components/info-list";
-import { useSystemStats } from "~/hooks/system-stats";
 import { tryOr } from "~/lib/error";
 import { formatMem } from "~/lib/format";
+import { systemStatsQuery } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
 import type { SystemStats } from "~/__generated__/bindings";
@@ -35,7 +36,7 @@ function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 }
 
 export function SystemStatsCard(): JSX.Element {
-	const statsQuery = useSystemStats();
+	const statsQuery = useQuery(systemStatsQuery);
 
 	return (
 		<Card.Root>
@@ -46,18 +47,18 @@ export function SystemStatsCard(): JSX.Element {
 				<div class="grid grid-cols-[1fr_26ch] gap-4">
 					<MemoryGraph systemStats={statsQuery.data} />
 					<Show when={statsQuery.data} fallback={<>loading...</>} keyed>
-						{(info) => (
+						{(stats) => (
 							<InfoList.Root>
 								<InfoList.Entry>
 									<InfoList.Label>total memory</InfoList.Label>
 									<InfoList.Value>
-										{formatMem(info.memTotal ?? "")}
+										{formatMem(stats.memTotal ?? "")}
 									</InfoList.Value>
 								</InfoList.Entry>
 								<InfoList.Entry>
 									<InfoList.Label>used memory</InfoList.Label>
 									<InfoList.Value>
-										{formatMem(info.memUsed ?? "")}
+										{formatMem(stats.memUsed ?? "")}
 									</InfoList.Value>
 								</InfoList.Entry>
 							</InfoList.Root>

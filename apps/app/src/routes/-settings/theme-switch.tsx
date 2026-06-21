@@ -1,9 +1,11 @@
-import { useQuery } from "@tanstack/solid-query";
+import { useMutation, useQuery } from "@tanstack/solid-query";
 import { For, Match, Switch } from "solid-js";
 
 import { Card } from "~/components/card";
-import { useSetThemePreferenceMutation } from "~/hooks/theme";
-import { themePreferenceQuery } from "~/lib/queries";
+import {
+	setThemePreferenceMutation,
+	themePreferenceQuery,
+} from "~/services/tauri";
 
 import type { JSX } from "solid-js";
 import type { ThemePreference } from "~/__generated__/bindings";
@@ -32,7 +34,7 @@ function LabelText(props: { theme: ThemePreference }) {
 
 export function ThemeSwitch(): JSX.Element {
 	const prefQuery = useQuery(themePreferenceQuery);
-	const setPrefMutation = useSetThemePreferenceMutation();
+	const setPrefMutation = useMutation(setThemePreferenceMutation);
 
 	return (
 		<Card.Root>
