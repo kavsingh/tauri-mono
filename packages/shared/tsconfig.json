@@ -1,17 +1,11 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"include": ["src", "src-isolation"],
 	"extends": "code-config/tsconfig.base.json",
 	"compilerOptions": {
-		"composite": true,
-		"declaration": true,
-		"emitDeclarationOnly": true,
 		"lib": ["esnext", "dom", "dom.iterable", "dom.asynciterable"],
 		"module": "esnext",
 		"moduleResolution": "bundler",
-		"paths": { "~/*": ["./src/*"] },
-		"sourceMap": true,
-		"target": "esnext",
-		"types": ["vite/client"]
+		"noEmit": true,
+		"target": "esnext"
 	}
 }

@@ -1,9 +1,8 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "vite";
 
-const dirname = fileURLToPath(new URL(".", import.meta.url));
+const dirname = import.meta.dirname;
 
 export default defineConfig({
 	root: path.resolve(dirname, "src-isolation"),

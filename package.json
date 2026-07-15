@@ -8,12 +8,13 @@
 	},
 	"type": "module",
 	"scripts": {
-		"dev": "nx dev app --outputStyle stream",
+		"dev": "conc 'docker compose up --watch app-ui' 'wait-on tcp:5321 && nx dev app --outputStyle stream'",
 		"test": "nx run-many -t test --outputStyle stream",
 		"test:ci": "nx run-many -t test:ci --outputStyle stream",
 		"lint": "nx run-many -t lint --outputStyle stream && tombi lint --error-on-warnings",
 		"build:mac": "nx build:mac app",
 		"build:win": "nx build:win app",
+		"serve:ui-prod": "docker compose up app-ui-prod",
 		"clean:nx": "rimraf ./**/.nx --glob --interactive",
 		"clean:targets": "rimraf ./**/target --glob --interactive"
 	},
@@ -23,6 +24,7 @@
 		"@types/node": "26.1.1",
 		"@typescript/native-preview": "npm:typescript@7.0.2",
 		"code-config": "workspace:*",
+		"concurrently": "10.0.3",
 		"cross-env": "10.1.0",
 		"lefthook": "2.1.10",
 		"nx": "23.0.2",
@@ -31,7 +33,8 @@
 		"oxlint-tsgolint": "0.24.0",
 		"rimraf": "6.1.3",
 		"tombi": "1.2.0",
-		"typescript": "npm:@typescript/typescript6@6.0.2"
+		"typescript": "npm:@typescript/typescript6@6.0.2",
+		"wait-on": "9.0.10"
 	},
 	"packageManager": "pnpm@11.13.0+sha512.88d94724d8f2e6c186744a5584c6e59ecac869ec7ba15e9cb4cd628e8dc7066820b2481d8ee3b51ea8da323a7378068aa58c556a3720d32b7c20a051d088363a"
 }
