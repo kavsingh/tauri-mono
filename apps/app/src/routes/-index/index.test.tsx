@@ -5,10 +5,11 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { createMockSystemStats } from "~/__test-helpers__/mock-data/system";
 import { publishSystemStatsEvent } from "~/__test-helpers__/tauri/events";
 import { Index } from "~/routes/index";
+import { startEventListeners } from "~/services/tauri";
 
 import type { ParentProps } from "solid-js";
 
-function setup() {
+async function setup() {
 	const client = new QueryClient();
 
 	function Wrapper(props: ParentProps) {
@@ -19,7 +20,9 @@ function setup() {
 		);
 	}
 
-	return { Wrapper, client };
+	const dispose = await startEventListeners(client);
+
+	return { Wrapper, client, dispose };
 }
 
 describe("<Index />", () => {
@@ -29,9 +32,9 @@ describe("<Index />", () => {
 	});
 
 	it("should load and render home page", async () => {
-		expect.assertions(4);
+		const { Wrapper, dispose } = await setup();
 
-		render(() => <Index />, { wrapper: setup().Wrapper });
+		render(() => <Index />, { wrapper: Wrapper });
 
 		expect(
 			screen.getByRole("heading", { name: "Home", level: 2 }),
@@ -43,12 +46,14 @@ describe("<Index />", () => {
 		});
 
 		expect(screen.queryByText("loading...")).not.toBeInTheDocument();
+
+		dispose();
 	});
 
 	it("should update system stats from events", async () => {
-		expect.assertions(4);
+		const { Wrapper, dispose } = await setup();
 
-		render(() => <Index />, { wrapper: setup().Wrapper });
+		render(() => <Index />, { wrapper: Wrapper });
 
 		await waitFor(() => {
 			expect(screen.getByText("600.00 MB")).toBeInTheDocument();
@@ -68,5 +73,7 @@ describe("<Index />", () => {
 		});
 
 		expect(screen.queryByText("600.00 MB")).not.toBeInTheDocument();
+
+		dispose();
 	});
 });

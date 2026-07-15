@@ -42,15 +42,17 @@ function setThemePreferenceMutation() {
 	});
 }
 
-function startEventListeners(client: QueryClient) {
+async function startEventListeners(client: QueryClient) {
 	const statsKey = systemStatsQuery().queryKey;
 
-	void events.systemStatsEvent.listen((event) => {
+	const unsubStats = await events.systemStatsEvent.listen((event) => {
 		const current = client.getQueryData<SystemStats>(statsKey);
 		const next = reconcileSampledAt(current, event.payload);
 
 		if (next !== current) client.setQueryData(statsKey, () => next);
 	});
+
+	return unsubStats;
 }
 
 export {

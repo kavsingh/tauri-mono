@@ -26,7 +26,8 @@ function renderAndShow() {
 	const client = new QueryClient();
 	const router = createTanstackRouter();
 
-	startEventListeners(client);
+	void startEventListeners(client);
+
 	render(() => {
 		return (
 			<QueryClientProvider client={client}>
