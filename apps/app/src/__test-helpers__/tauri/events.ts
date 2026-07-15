@@ -1,9 +1,9 @@
 import { vi } from "vitest";
 
-import { events } from "~/__generated__/bindings";
+import { events } from "~/tauri-bindings.gen";
 
 import type { Mock } from "vitest";
-import type { SystemStats } from "~/__generated__/bindings";
+import type { SystemStats } from "~/tauri-bindings.gen";
 
 function publishListenerEvent(listen: Mock, payload: unknown) {
 	const calls: unknown[] = listen.mock.calls;

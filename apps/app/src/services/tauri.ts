@@ -4,10 +4,10 @@ import {
 	queryOptions,
 } from "@tanstack/solid-query";
 
-import { commands, events } from "~/__generated__/bindings";
 import { handleResult, reconcileSampledAt } from "~/lib/query";
+import { commands, events } from "~/tauri-bindings.gen";
 
-import type { SystemStats } from "~/__generated__/bindings";
+import type { SystemStats } from "~/tauri-bindings.gen";
 
 function systemInfoQuery() {
 	return queryOptions({

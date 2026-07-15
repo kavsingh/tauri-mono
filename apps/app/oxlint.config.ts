@@ -24,8 +24,7 @@ const config: OxlintConfig = defineConfig({
 		"reports/**",
 		".tanstack/**",
 		"**/*.gen.*",
-		"**/__generated__/**",
-		"!**/__generated__/__mocks__/**",
+		"!**/__mocks__/*.gen.*",
 	],
 	settings: {
 		"jsx-a11y": {

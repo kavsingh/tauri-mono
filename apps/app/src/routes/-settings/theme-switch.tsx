@@ -8,7 +8,7 @@ import {
 } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
-import type { ThemePreference } from "~/__generated__/bindings";
+import type { ThemePreference } from "~/tauri-bindings.gen";
 
 const OPTIONS = [
 	"System",

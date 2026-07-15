@@ -9,8 +9,8 @@ import { formatMem } from "~/lib/format";
 import { systemStatsQuery } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
-import type { SystemStats } from "~/__generated__/bindings";
 import type { Sample } from "~/components/chrono-graph";
+import type { SystemStats } from "~/tauri-bindings.gen";
 
 function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {
