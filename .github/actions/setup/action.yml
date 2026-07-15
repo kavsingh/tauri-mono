@@ -5,6 +5,8 @@ runs:
   using: composite
   steps:
     - uses: dtolnay/rust-toolchain@stable
-    - uses: oven-sh/setup-bun@v2
-    - run: bun install --frozen-lockfile
+    - uses: pnpm/action-setup@v6
+    - uses: actions/setup-node@v6
+      with: { cache: "pnpm" }
+    - run: pnpm install --frozen-lockfile
       shell: bash

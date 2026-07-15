@@ -1,0 +1,10 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"include": ["scripts", "./*.ts", "./*.js"],
+	"extends": "code-config/tsconfig.node.json",
+	"compilerOptions": {
+		"composite": true,
+		"declaration": true,
+		"emitDeclarationOnly": true
+	}
+}

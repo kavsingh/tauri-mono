@@ -8,10 +8,9 @@
 		"erasableSyntaxOnly": true,
 		"verbatimModuleSyntax": true,
 
-		// leave the following to linter / formatter
+		// leave the following to linters
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"allowUnreachableCode": true
-	},
-	"exclude": ["**/node_modules"]
+	}
 }

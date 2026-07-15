@@ -1,6 +1,7 @@
 import path from "node:path";
 
 import router from "@tanstack/eslint-plugin-router";
+import { baseConfig } from "code-config/oxlint";
 import tailwindcss from "eslint-plugin-better-tailwindcss";
 import { getDefaultSelectors } from "eslint-plugin-better-tailwindcss/defaults";
 import {
@@ -12,11 +13,9 @@ import solid from "eslint-plugin-solid";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "oxlint";
 
-import baseConfig from "../../oxlint.config.ts";
+import type { DummyRuleMap, OxlintConfig } from "oxlint";
 
-import type { DummyRuleMap } from "oxlint";
-
-export default defineConfig({
+const config: OxlintConfig = defineConfig({
 	extends: [baseConfig],
 	env: { node: true, browser: false },
 	ignorePatterns: [
@@ -148,3 +147,5 @@ export default defineConfig({
 		},
 	],
 });
+
+export default config;

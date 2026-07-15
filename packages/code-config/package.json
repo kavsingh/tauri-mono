@@ -1,0 +1,15 @@
+{
+	"name": "code-config",
+	"version": "0.0.0",
+	"description": "shared code configs",
+	"license": "MIT",
+	"type": "module",
+	"exports": {
+		"./*.json": "./*.json",
+		"./*": "./*.ts"
+	},
+	"peerDependencies": {
+		"@tsconfig/node26": "catalog:",
+		"oxlint": "catalog:"
+	}
+}

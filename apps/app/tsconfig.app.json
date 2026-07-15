@@ -1,9 +1,10 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"include": ["src", "src-isolation"],
-	"extends": "../../tsconfig.base.json",
+	"extends": "code-config/tsconfig.base.json",
 	"compilerOptions": {
 		"composite": true,
+		"declaration": true,
 		"emitDeclarationOnly": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",

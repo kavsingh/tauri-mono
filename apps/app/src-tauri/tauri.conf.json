@@ -31,8 +31,8 @@
 	"build": {
 		"frontendDist": "../dist",
 		"devUrl": "http://localhost:3000",
-		"beforeDevCommand": "bun before:dev",
-		"beforeBuildCommand": "bun before:build"
+		"beforeDevCommand": "pnpm before:dev",
+		"beforeBuildCommand": "pnpm before:build"
 	},
 	"bundle": {
 		"active": true,
