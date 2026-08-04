@@ -37,8 +37,13 @@ pub fn run() {
 		)
 		.expect("Failed to export typescript bindings");
 
+	let builder = Builder::default();
+
+	#[cfg(feature = "webdriver")]
+	let builder = builder.plugin(tauri_plugin_wdio_webdriver::init());
+
 	#[allow(clippy::expect_used, clippy::exit)]
-	Builder::default()
+	builder
 		.plugin(get_log_builder().build())
 		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_store::Builder::default().build())

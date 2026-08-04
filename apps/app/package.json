@@ -19,7 +19,8 @@
 		"build:mac": "tauri build --target universal-apple-darwin",
 		"build:win": "tauri build --target x86_64-pc-windows-msvc",
 		"build:isolation": "cross-env rimraf ./dist-isolation && vite -c vite.isolation.config.ts build",
-		"testscript": "pnpm scripts/testscript.ts"
+		"build:e2e:mac": "tauri build --debug --no-bundle --target universal-apple-darwin -- --features webdriver",
+		"build:e2e:win": "tauri build --debug --no-bundle --target x86_64-pc-windows-msvc -- --features webdriver"
 	},
 	"dependencies": {
 		"@tanstack/solid-devtools": "0.8.9",
