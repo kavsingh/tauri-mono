@@ -1,6 +1,7 @@
 {
 	"$schema": "./node_modules/lefthook/schema.json",
 	"extends": ["apps/*/lefthook.json", "packages/*/lefthook.json"],
+	"lefthook": "pnpm lefthook",
 	"pre-commit": {
 		"jobs": [
 			{

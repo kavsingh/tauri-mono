@@ -13,8 +13,8 @@ verifyDepsBeforeRun: prompt
 catalog:
   '@tsconfig/node26': 26.0.0
   '@tsconfig/strictest': 2.0.8
-  '@types/node': 26.1.1
-  oxlint: 1.74.0
+  '@types/node': 26.1.2
+  oxlint: 1.76.0
 
 allowBuilds:
   lefthook: true

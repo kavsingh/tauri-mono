@@ -6,6 +6,23 @@ members = ["apps/app/src-tauri"]
 edition = "2024"
 repository = "https://your/repo/"
 
+[workspace.lints.clippy]
+arithmetic_side_effects = "deny"
+as_conversions = "deny"
+exit = "deny"
+expect_used = "deny"
+indexing_slicing = "deny"
+nursery = { level = "deny", priority = -1 }
+panic = "deny"
+panic_in_result_fn = "deny"
+pedantic = { level = "deny", priority = -1 }
+string_slice = "deny"
+todo = "deny"
+unchecked_time_subtraction = "deny"
+unimplemented = "deny"
+unreachable = "deny"
+unwrap_used = "deny"
+
 [profile.release]
 opt-level = "s"
 lto = "fat"

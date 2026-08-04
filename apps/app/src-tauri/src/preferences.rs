@@ -13,7 +13,7 @@ pub fn get_stored_theme_preference(app: &AppHandle) -> ThemePreference {
 		.and_then(|store| store.get(THEME_KEY));
 
 	if let Some(serde_json::Value::String(value)) = stored {
-		ThemePreference::try_from(&value).unwrap_or(ThemePreference::System)
+		value.parse().unwrap_or(ThemePreference::System)
 	} else {
 		ThemePreference::System
 	}
@@ -28,17 +28,19 @@ fn store_theme_preference(
 			THEME_KEY,
 			serde_json::Value::String(preference.value().to_string()),
 		);
-	};
+	}
 }
 
 #[tauri::command]
 #[specta::specta]
+#[allow(clippy::needless_pass_by_value)]
 pub fn get_theme_preference(app_handle: tauri::AppHandle) -> ThemePreference {
 	get_stored_theme_preference(&app_handle)
 }
 
 #[tauri::command]
 #[specta::specta]
+#[allow(clippy::needless_pass_by_value)]
 pub fn set_theme_preference(
 	preference: ThemePreference,
 	app_handle: tauri::AppHandle,
@@ -49,6 +51,6 @@ pub fn set_theme_preference(
 	app_handle.set_theme(preference.clone().into());
 
 	if preference.ne(&window.theme().ok()) {
-		window.set_theme(preference.clone().into()).unwrap_or(())
+		window.set_theme(preference.into()).unwrap_or(());
 	}
 }

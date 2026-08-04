@@ -36,6 +36,8 @@
 	},
 
 	"languages": {
+		"TOML": { "formatter": [{ "language_server": { "name": "tombi" } }] },
+
 		"Rust": {
 			"formatter": [{ "language_server": { "name": "rust-analyzer" } }]
 		},

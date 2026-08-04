@@ -16,6 +16,8 @@ use crate::preferences::{
 	get_stored_theme_preference, get_theme_preference, set_theme_preference,
 };
 
+/// # Panics
+/// This function will panic if the Tauri application fails to run.
 pub fn run() {
 	let specta_builder = tauri_specta::Builder::<tauri::Wry>::new()
 		.events(tauri_specta::collect_events![SystemStatsEvent])
@@ -27,6 +29,7 @@ pub fn run() {
 		]);
 
 	#[cfg(debug_assertions)]
+	#[allow(clippy::expect_used)]
 	specta_builder
 		.export(
 			specta_typescript::Typescript::default(),
@@ -34,6 +37,7 @@ pub fn run() {
 		)
 		.expect("Failed to export typescript bindings");
 
+	#[allow(clippy::expect_used, clippy::exit)]
 	Builder::default()
 		.plugin(get_log_builder().build())
 		.plugin(tauri_plugin_dialog::init())
@@ -43,13 +47,15 @@ pub fn run() {
 		.setup(move |app| {
 			specta_builder.mount_events(app);
 
-			let main_window = app.get_webview_window("main").unwrap();
+			let main_window = app
+				.get_webview_window("main")
+				.expect("no main window available");
 			let theme = get_stored_theme_preference(app.handle());
 
 			app.set_theme(theme.clone().into());
 
 			if theme.ne(&main_window.theme().ok()) {
-				main_window.set_theme(theme.clone().into()).unwrap_or(())
+				main_window.set_theme(theme.into()).unwrap_or(());
 			}
 
 			#[cfg(debug_assertions)]
@@ -67,11 +73,10 @@ pub fn run() {
 				if let Ok((_, receiver)) = stats_state.subscribe() {
 					spawn(move || {
 						while let Ok(event) = receiver.recv() {
-							match event.emit(&handle) {
-								Ok(_) => (),
-								Err(e) => log::error!(
-									"could not emit stats event: {e}"
-								),
+							if let Err(message) = event.emit(&handle) {
+								log::error!(
+									"could not emit stats event: {message}"
+								);
 							}
 						}
 					});

@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::ops::Deref;
 use std::sync::mpsc::{Receiver, Sender, channel};
 use std::sync::{Arc, Mutex, MutexGuard, RwLock};
 use std::time::Duration;
@@ -12,6 +13,20 @@ pub struct SystemStats {
 	mem_used: Option<String>,
 	mem_available: Option<String>,
 	sampled_at: String,
+}
+
+fn sample_system_stats() -> SystemStats {
+	let mut sys = System::new();
+
+	sys.refresh_memory();
+
+	SystemStats {
+		mem_total: Some(sys.total_memory().to_string()),
+		mem_used: Some(sys.used_memory().to_string()),
+		mem_available: Some(sys.available_memory().to_string()),
+		sampled_at: chrono::Local::now()
+			.to_rfc3339_opts(chrono::SecondsFormat::Millis, true),
+	}
 }
 
 #[derive(
@@ -34,29 +49,28 @@ impl EventSubscribers {
 		subscriber: Sender<SystemStatsEvent>,
 	) -> Result<String, String> {
 		let id = uuid::Uuid::new_v4().to_string();
-		let mut subs = self.get_subscribers()?;
 
-		subs.insert(id.clone(), subscriber);
+		self.get_subscribers()?.insert(id.clone(), subscriber);
 
 		Ok(id)
 	}
 
-	pub fn publish(&self, stats: SystemStatsEvent) -> Result<(), String> {
-		let subs = self.get_subscribers()?;
+	pub fn publish(&self, stats: &SystemStatsEvent) -> Result<(), String> {
+		{
+			let subs = self.get_subscribers()?;
 
-		subs.iter()
-			.for_each(|(id, sub)| match sub.send(stats.clone()) {
-				Ok(_) => (),
-				Err(_) => log::error!("could not publish event to {id}"),
-			});
+			for (id, sub) in subs.iter() {
+				if let Err(err) = sub.send(stats.clone()) {
+					log::error!("could not publish event to {id}: {err}");
+				}
+			}
+		}
 
 		Ok(())
 	}
 
 	pub fn _unsubscribe(&self, id: &str) -> Result<(), String> {
-		let mut subs = self.get_subscribers()?;
-
-		subs.remove(id);
+		self.get_subscribers()?.remove(id);
 
 		Ok(())
 	}
@@ -64,10 +78,18 @@ impl EventSubscribers {
 	fn get_subscribers(
 		&self,
 	) -> Result<MutexGuard<'_, EventSubscribersMap>, String> {
-		match self.0.lock() {
-			Ok(subs) => Ok(subs),
-			Err(_) => Err("could not get lock on subscribers".into()),
-		}
+		self.lock().map_or_else(
+			|e| Err(format!("could not get lock on subscribers {e}")),
+			Ok,
+		)
+	}
+}
+
+impl Deref for EventSubscribers {
+	type Target = Arc<Mutex<EventSubscribersMap>>;
+
+	fn deref(&self) -> &Self::Target {
+		&self.0
 	}
 }
 
@@ -93,33 +115,30 @@ impl SystemStatsState {
 
 					current.stats = next_stats.clone();
 
-					match subscribers_handle
-						.publish(SystemStatsEvent(next_stats))
+					if let Err(err) = subscribers_handle
+						.publish(&SystemStatsEvent(next_stats))
 					{
-						Ok(_) => (),
-						Err(e) => {
-							log::error!("could not publish stats event: {e}")
-						}
-					};
+						log::error!("could not publish stats event: {err}");
+					}
 				} else {
 					log::error!("could not get write lock for current stats");
 				}
 
-				std::thread::sleep(Duration::from_millis(1000));
+				std::thread::sleep(Duration::from_secs(1));
 			}
 		});
 
-		SystemStatsState {
+		Self {
 			current_stats,
 			event_subscribers,
 		}
 	}
 
 	pub fn get_current(&self) -> Result<SystemStats, String> {
-		match self.current_stats.read() {
-			Ok(current) => Ok(current.stats.clone()),
-			Err(_) => Err("could not read stats".into()),
-		}
+		self.current_stats.read().map_or_else(
+			|e| Err(format!("could not read stats: {e}")),
+			|current| Ok(current.stats.clone()),
+		)
 	}
 
 	pub fn subscribe(
@@ -136,7 +155,7 @@ impl SystemStatsState {
 
 impl Default for SystemStatsState {
 	fn default() -> Self {
-		SystemStatsState::new()
+		Self::new()
 	}
 }
 
@@ -155,31 +174,26 @@ impl ManagedSystemStatsState {
 	}
 
 	fn get_state(&self) -> Result<MutexGuard<'_, SystemStatsState>, String> {
-		match self.0.lock() {
-			Ok(state) => Ok(state),
-			Err(_) => Err("could get lock on stats state".into()),
-		}
+		self.lock().map_or_else(
+			|e| Err(format!("could not get lock on stats state: {e}")),
+			Ok,
+		)
+	}
+}
+
+impl Deref for ManagedSystemStatsState {
+	type Target = Mutex<SystemStatsState>;
+
+	fn deref(&self) -> &Self::Target {
+		&self.0
 	}
 }
 
 #[tauri::command]
 #[specta::specta]
+#[allow(clippy::needless_pass_by_value)]
 pub fn get_system_stats(
 	state: tauri::State<ManagedSystemStatsState>,
 ) -> Result<SystemStats, String> {
 	state.get_current()
-}
-
-fn sample_system_stats() -> SystemStats {
-	let mut sys = System::new();
-
-	sys.refresh_memory();
-
-	SystemStats {
-		mem_total: Some(sys.total_memory().to_string()),
-		mem_used: Some(sys.used_memory().to_string()),
-		mem_available: Some(sys.available_memory().to_string()),
-		sampled_at: chrono::Local::now()
-			.to_rfc3339_opts(chrono::SecondsFormat::Millis, true),
-	}
 }
