@@ -1,4 +1,5 @@
-import { tryOr } from "./error.ts";
+import { Result } from "neverthrow";
+
 import { divBigint } from "./number.ts";
 
 const memoryThresholds = [
@@ -9,12 +10,14 @@ const memoryThresholds = [
 ] as const;
 
 export function formatMem(value: string | number | bigint): string {
-	const mem = tryOr(() => BigInt(value), 0n);
+	const mem = Result.fromThrowable(BigInt)(value).unwrapOr(0n);
 
 	for (const [threshold, unit] of memoryThresholds) {
 		if (mem < threshold) continue;
 
-		return `${divBigint(mem, threshold).toFixed(2)} ${unit}`;
+		return divBigint(mem, threshold)
+			.map((result) => `${result.toFixed(2)} ${unit}`)
+			.unwrapOr("-");
 	}
 
 	return "-";

@@ -10,6 +10,7 @@
 	},
 	"peerDependencies": {
 		"@tsconfig/node26": "catalog:",
-		"oxlint": "catalog:"
+		"oxlint": "catalog:",
+		"oxlint-plugin-eslint": "catalog:"
 	}
 }

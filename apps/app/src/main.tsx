@@ -21,6 +21,8 @@ declare module "@tanstack/solid-router" {
 function renderAndShow() {
 	const appRoot = document.querySelector("#app-root");
 
+	// makes sense to panic if no app mount available
+	// oxlint-disable-next-line eslint-js/no-restricted-syntax
 	if (!appRoot) throw new Error("#app-root not found");
 
 	const client = new QueryClient();

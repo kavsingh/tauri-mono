@@ -7,7 +7,6 @@ import {
 } from "solid-js";
 
 import { useResizeObserver } from "~/hooks/dom";
-import { tryOr } from "~/lib/error";
 import { normalizeBigint } from "~/lib/number";
 import { tm } from "~/lib/style";
 
@@ -62,7 +61,7 @@ function normalizeValues(
 	max: bigint,
 ): number[] {
 	return samples.map(({ value }) => {
-		return tryOr(() => normalizeBigint(value, min, max), 0.5);
+		return normalizeBigint(value, min, max).unwrapOr(0.5);
 	});
 }
 

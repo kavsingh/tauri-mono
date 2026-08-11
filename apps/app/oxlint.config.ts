@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import router from "@tanstack/eslint-plugin-router";
-import { baseConfig } from "code-config/oxlint";
+import { baseConfig, neverthrow } from "code-config/oxlint";
 import tailwindcss from "eslint-plugin-better-tailwindcss";
 import { getDefaultSelectors } from "eslint-plugin-better-tailwindcss/defaults";
 import {
@@ -16,7 +16,7 @@ import { defineConfig } from "oxlint";
 import type { DummyRuleMap, OxlintConfig } from "oxlint";
 
 const config: OxlintConfig = defineConfig({
-	extends: [baseConfig],
+	extends: [baseConfig, neverthrow],
 	env: { node: true, browser: false },
 	ignorePatterns: [
 		"dist/**",

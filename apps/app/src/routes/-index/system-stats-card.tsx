@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/solid-query";
+import { Result } from "neverthrow";
 import { Show, createMemo } from "solid-js";
 
 import { Card } from "~/components/card";
 import { ChronoGraph } from "~/components/chrono-graph";
 import { InfoList } from "~/components/info-list";
-import { tryOr } from "~/lib/error";
 import { formatMem } from "~/lib/format";
 import { systemStatsQuery } from "~/services/tauri";
 
@@ -16,13 +16,15 @@ function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {
 		const value = props.systemStats?.memUsed;
 
-		return value ? { value: tryOr(() => BigInt(value), 0n) } : undefined;
+		return value
+			? { value: Result.fromThrowable(BigInt)(value).unwrapOr(0n) }
+			: undefined;
 	});
 
 	const maxValue = createMemo<bigint>(() => {
 		const value = props.systemStats?.memTotal;
 
-		return value ? tryOr(() => BigInt(value), 0n) : 0n;
+		return value ? Result.fromThrowable(BigInt)(value).unwrapOr(0n) : 0n;
 	});
 
 	return (

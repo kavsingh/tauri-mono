@@ -1,15 +1,17 @@
-type Result<TData, TError> =
+type QueryResult<TData, TError> =
 	| { status: "ok"; data: TData }
 	| { status: "error"; error: TError };
 
 // oxlint-disable-next-line typescript/no-explicit-any
 function handleResult<TData, TError, TArgs extends any[]>(
-	fn: (...args: TArgs) => Promise<Result<TData, TError>>,
+	fn: (...args: TArgs) => Promise<QueryResult<TData, TError>>,
 ) {
 	return async function (...args: TArgs) {
 		const result = await fn(...args);
 
 		if (result.status === "error") {
+			// for compat with @tanstack/query
+			// oxlint-disable-next-line eslint-js/no-restricted-syntax
 			throw result.error instanceof Error
 				? result.error
 				: new Error(String(result.error), { cause: result });
@@ -53,4 +55,4 @@ function reconcileSampledAt<TData extends { sampledAt: string }>(
 }
 
 export { handleResult, reconcileSampledAt };
-export type { Result };
+export type { QueryResult as Result };

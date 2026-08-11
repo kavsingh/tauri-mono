@@ -127,4 +127,17 @@ const baseConfig: OxlintConfig = defineConfig({
 	],
 });
 
-export { baseConfig };
+const neverthrow: OxlintConfig = defineConfig({
+	jsPlugins: [{ name: "eslint-js", specifier: "oxlint-plugin-eslint" }],
+	rules: {
+		"eslint-js/no-restricted-syntax": [
+			"error",
+			{
+				selector: "ThrowStatement",
+				message: "Use neverthrow result types instead of throwing errors",
+			},
+		],
+	},
+});
+
+export { baseConfig, neverthrow };
