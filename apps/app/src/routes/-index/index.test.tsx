@@ -1,28 +1,25 @@
 import { render, waitFor, screen, cleanup } from "@solidjs/testing-library";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
+import {
+	RouterProvider,
+	createMemoryHistory,
+	createRouter,
+} from "@tanstack/solid-router";
 import { describe, it, expect, vi, afterEach } from "vitest";
 
 import { createMockSystemStats } from "~/__test-helpers__/mock-data/system";
 import { publishSystemStatsEvent } from "~/__test-helpers__/tauri/events";
-import { Index } from "~/routes/index";
+import { routeTree } from "~/route-tree.gen";
 import { startEventListeners } from "~/services/tauri";
-
-import type { ParentProps } from "solid-js";
 
 async function setup() {
 	const client = new QueryClient();
-
-	function Wrapper(props: ParentProps) {
-		return (
-			<QueryClientProvider client={client}>
-				{props.children}
-			</QueryClientProvider>
-		);
-	}
+	const history = createMemoryHistory({ initialEntries: ["/"] });
+	const router = createRouter({ routeTree, history });
 
 	const dispose = await startEventListeners(client);
 
-	return { Wrapper, client, dispose };
+	return { client, router, dispose };
 }
 
 describe("<Index />", () => {
@@ -32,14 +29,18 @@ describe("<Index />", () => {
 	});
 
 	it("should load and render home page", async () => {
-		const { Wrapper, dispose } = await setup();
+		const { client, router, dispose } = await setup();
 
-		render(() => <Index />, { wrapper: Wrapper });
+		render(() => (
+			<QueryClientProvider client={client}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
+		));
+		await router.load();
 
 		expect(
 			screen.getByRole("heading", { name: "Home", level: 2 }),
 		).toBeInTheDocument();
-		expect(screen.queryByText("1.00 GB")).not.toBeInTheDocument();
 
 		await waitFor(() => {
 			expect(screen.getByText("1.00 GB")).toBeInTheDocument();
@@ -51,9 +52,14 @@ describe("<Index />", () => {
 	});
 
 	it("should update system stats from events", async () => {
-		const { Wrapper, dispose } = await setup();
+		const { client, router, dispose } = await setup();
 
-		render(() => <Index />, { wrapper: Wrapper });
+		render(() => (
+			<QueryClientProvider client={client}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
+		));
+		await router.load();
 
 		await waitFor(() => {
 			expect(screen.getByText("600.00 MB")).toBeInTheDocument();

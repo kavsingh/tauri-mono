@@ -42,7 +42,7 @@ function RootLayout(): JSX.Element {
 				</div>
 				<div class="overflow-x-hidden overflow-y-auto block-full">
 					<Outlet />
-					<Show when={import.meta.env.DEV}>
+					<Show when={import.meta.env.DEV && !import.meta.env["VITEST"]}>
 						<TanStackDevtools
 							plugins={[
 								{

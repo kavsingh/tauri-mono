@@ -23,4 +23,4 @@ function Index(): JSX.Element {
 
 const Route = createFileRoute("/")({ component: Index });
 
-export { Route, Index };
+export { Route };
