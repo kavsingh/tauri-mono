@@ -21,7 +21,7 @@ sysinfo = "0.39.6"
 tauri-plugin-dialog = "2.7.2"
 tauri-plugin-log = "2.9.0"
 tauri-plugin-store = "2.4.4"
-uuid = { version = "1.24.0", features = ["fast-rng", "v4"] }
+uuid = { version = "1.24.1", features = ["fast-rng", "v4"] }
 
 [dependencies.tauri]
 version = "2.11.5"
