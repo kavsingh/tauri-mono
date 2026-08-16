@@ -1,8 +1,7 @@
-import { For, Match, Switch } from "solid-js";
+import { Cause, Effect, Exit } from "effect";
+import { For, Match, Switch, createResource, createSignal } from "solid-js";
 
 import { Card } from "~/components/card";
-import { useEffectMutation } from "~/hooks/effect-mutation";
-import { useEffectQuery } from "~/hooks/effect-query";
 import {
 	setThemePreferenceEffect,
 	themePreferenceEffect,
@@ -33,12 +32,31 @@ function LabelText(props: { theme: ThemePreference }) {
 	);
 }
 
+interface MutationState<TData> {
+	status: "idle" | "pending" | "success" | "error";
+	data?: TData;
+	error?: unknown;
+}
+
 export function ThemeSwitch(): JSX.Element {
-	const [preference, { refetch }] = useEffectQuery(themePreferenceEffect);
-	const [mutation, setPreference] = useEffectMutation(setThemePreferenceEffect);
+	const [preference, { refetch }] = createResource(() =>
+		Effect.runPromise(themePreferenceEffect()),
+	);
+	const [mutation, setMutation] = createSignal<MutationState<void>>({
+		status: "idle",
+	});
 
 	async function handleChange(option: ThemePreference) {
-		await setPreference(option);
+		setMutation({ status: "pending" });
+
+		const exit = await Effect.runPromiseExit(setThemePreferenceEffect(option));
+
+		setMutation(
+			Exit.isSuccess(exit)
+				? { status: "success", data: exit.value }
+				: { status: "error", error: Cause.squash(exit.cause) },
+		);
+
 		await refetch();
 	}
 
