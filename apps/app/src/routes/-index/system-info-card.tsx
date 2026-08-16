@@ -1,14 +1,14 @@
-import { useQuery } from "@tanstack/solid-query";
 import { Show } from "solid-js";
 
 import { Card } from "~/components/card";
 import { InfoList } from "~/components/info-list";
-import { systemInfoQuery } from "~/services/tauri";
+import { useEffectQuery } from "~/hooks/effect-query";
+import { systemInfoEffect } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
 
 export function SystemInfoCard(): JSX.Element {
-	const infoQuery = useQuery(systemInfoQuery);
+	const [info] = useEffectQuery(systemInfoEffect);
 
 	return (
 		<Card.Root>
@@ -16,16 +16,16 @@ export function SystemInfoCard(): JSX.Element {
 				<Card.Title>System info</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<Show when={infoQuery.data} fallback={<>loading...</>} keyed>
-					{(info) => (
+				<Show when={info()} fallback={<>loading...</>} keyed>
+					{(currentInfo) => (
 						<InfoList.Root>
 							<InfoList.Entry>
 								<InfoList.Label>os</InfoList.Label>
-								<InfoList.Value>{info.osFullname}</InfoList.Value>
+								<InfoList.Value>{currentInfo.osFullname}</InfoList.Value>
 							</InfoList.Entry>
 							<InfoList.Entry>
 								<InfoList.Label>arch</InfoList.Label>
-								<InfoList.Value>{info.osArch}</InfoList.Value>
+								<InfoList.Value>{currentInfo.osArch}</InfoList.Value>
 							</InfoList.Entry>
 						</InfoList.Root>
 					)}

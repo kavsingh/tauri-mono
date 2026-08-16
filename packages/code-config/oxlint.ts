@@ -11,6 +11,7 @@ const baseConfig: OxlintConfig = defineConfig({
 	},
 	categories: { correctness: "error", suspicious: "error", perf: "error" },
 	plugins: ["oxc", "eslint", "typescript", "import", "promise", "unicorn"],
+	jsPlugins: [{ name: "eslint-js", specifier: "oxlint-plugin-eslint" }],
 	ignorePatterns: [".nx/*", ".temp/*", "target/*"],
 	rules: {
 		"eslint/curly": ["error", "multi-line", "consistent"],
@@ -119,6 +120,14 @@ const baseConfig: OxlintConfig = defineConfig({
 			},
 		],
 		"typescript/unified-signatures": "error",
+
+		"eslint-js/no-restricted-syntax": [
+			"error",
+			{
+				selector: "ThrowStatement",
+				message: "Use neverthrow result types instead of throwing errors",
+			},
+		],
 	},
 	overrides: [
 		{
@@ -128,17 +137,4 @@ const baseConfig: OxlintConfig = defineConfig({
 	],
 });
 
-const neverthrow: OxlintConfig = defineConfig({
-	jsPlugins: [{ name: "eslint-js", specifier: "oxlint-plugin-eslint" }],
-	rules: {
-		"eslint-js/no-restricted-syntax": [
-			"error",
-			{
-				selector: "ThrowStatement",
-				message: "Use neverthrow result types instead of throwing errors",
-			},
-		],
-	},
-});
-
-export { baseConfig, neverthrow };
+export { baseConfig };

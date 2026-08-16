@@ -1,3 +1,4 @@
+import { Either } from "effect";
 import {
 	createEffect,
 	createMemo,
@@ -61,7 +62,7 @@ function normalizeValues(
 	max: bigint,
 ): number[] {
 	return samples.map(({ value }) => {
-		return normalizeBigint(value, min, max).unwrapOr(0.5);
+		return normalizeBigint(value, min, max).pipe(Either.getOrElse(() => 0.5));
 	});
 }
 
