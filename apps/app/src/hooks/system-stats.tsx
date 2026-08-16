@@ -2,8 +2,7 @@ import { Effect, Exit } from "effect";
 import { createContext, createSignal, useContext } from "solid-js";
 
 import { reconcileSampledAt } from "~/lib/query";
-import { systemStatsEffect } from "~/services/tauri";
-import { events } from "~/tauri-bindings.gen";
+import { runTauri } from "~/services/tauri";
 
 import type { Accessor, ParentProps, Setter } from "solid-js";
 import type { SystemStats } from "~/tauri-bindings.gen";
@@ -20,17 +19,27 @@ function createSystemStatsStore(): SystemStatsStore {
 }
 
 async function startEventListeners(store: SystemStatsStore) {
-	const initial = await Effect.runPromiseExit(systemStatsEffect());
+	const initial = await Effect.runPromiseExit(
+		runTauri((service) => service.getSystemStats()),
+	);
 
 	if (Exit.isSuccess(initial)) {
 		store.setStats((current) => reconcileSampledAt(current, initial.value));
 	}
 
-	const unlisten = await events.systemStatsEvent.listen((event) => {
-		store.setStats((current) => reconcileSampledAt(current, event.payload));
-	});
+	const unlisten = await Effect.runPromiseExit(
+		runTauri((service) =>
+			service.subscribeSystemStats((event) => {
+				store.setStats((current) => reconcileSampledAt(current, event));
+			}),
+		),
+	);
 
-	return unlisten;
+	if (Exit.isFailure(unlisten)) {
+		return () => undefined;
+	}
+
+	return unlisten.value;
 }
 
 const SystemStatsContext = createContext<SystemStatsStore>();

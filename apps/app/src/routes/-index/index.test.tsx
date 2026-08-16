@@ -45,9 +45,11 @@ describe("<Index />", () => {
 		render(() => <RouterProvider router={router} />, { wrapper: Wrapper });
 		await router.load();
 
-		expect(
-			screen.getByRole("heading", { name: "Home", level: 2 }),
-		).toBeInTheDocument();
+		await waitFor(() => {
+			expect(
+				screen.getByRole("heading", { name: "Home", level: 2 }),
+			).toBeInTheDocument();
+		});
 
 		await waitFor(() => {
 			expect(screen.getByText("1.00 GB")).toBeInTheDocument();
