@@ -14,7 +14,7 @@ catalog:
   '@tsconfig/node26': 26.0.1
   '@tsconfig/strictest': 2.0.8
   '@types/node': 26.6.4
-  neverthrow: 8.2.0
+  effect: 3.22.2
   oxlint: 1.86.0
   oxlint-plugin-eslint: 1.86.0
 
