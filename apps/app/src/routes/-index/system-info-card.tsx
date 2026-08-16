@@ -1,14 +1,14 @@
-import { Show } from "solid-js";
+import { Effect } from "effect";
+import { Show, createResource } from "solid-js";
 
 import { Card } from "~/components/card";
 import { InfoList } from "~/components/info-list";
-import { useEffectQuery } from "~/hooks/effect-query";
 import { systemInfoEffect } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
 
 export function SystemInfoCard(): JSX.Element {
-	const [info] = useEffectQuery(systemInfoEffect);
+	const [info] = createResource(() => Effect.runPromise(systemInfoEffect()));
 
 	return (
 		<Card.Root>
