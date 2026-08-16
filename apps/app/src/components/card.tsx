@@ -6,9 +6,9 @@ import { tm } from "~/lib/style";
 
 import type { ComponentProps, JSX } from "solid-js";
 
-export type CardRootProps = Omit<ComponentProps<"div">, "classList">;
+type CardRootProps = Omit<ComponentProps<"div">, "classList">;
 
-export function CardRoot(props: CardRootProps): JSX.Element {
+function CardRoot(props: CardRootProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -24,9 +24,9 @@ export function CardRoot(props: CardRootProps): JSX.Element {
 
 //
 
-export type CardHeaderProps = Omit<ComponentProps<"div">, "classList">;
+type CardHeaderProps = Omit<ComponentProps<"div">, "classList">;
 
-export function CardHeader(props: CardHeaderProps): JSX.Element {
+function CardHeader(props: CardHeaderProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -39,9 +39,9 @@ export function CardHeader(props: CardHeaderProps): JSX.Element {
 
 //
 
-export type CardTitleProps = Omit<ComponentProps<"h3">, "classList">;
+type CardTitleProps = Omit<ComponentProps<"h3">, "classList">;
 
-export function CardTitle(props: CardTitleProps): JSX.Element {
+function CardTitle(props: CardTitleProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class", "children"]);
 
 	return (
@@ -56,9 +56,9 @@ export function CardTitle(props: CardTitleProps): JSX.Element {
 
 //
 
-export type CardDescriptionProps = Omit<ComponentProps<"p">, "classList">;
+type CardDescriptionProps = Omit<ComponentProps<"p">, "classList">;
 
-export function CardDescription(props: CardDescriptionProps): JSX.Element {
+function CardDescription(props: CardDescriptionProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -71,9 +71,9 @@ export function CardDescription(props: CardDescriptionProps): JSX.Element {
 
 //
 
-export type CardContentProps = Omit<ComponentProps<"div">, "classList">;
+type CardContentProps = Omit<ComponentProps<"div">, "classList">;
 
-export function CardContent(props: CardContentProps): JSX.Element {
+function CardContent(props: CardContentProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return <div {...passProps} class={tm("p-6 pbs-0", localProps.class)} />;
@@ -81,9 +81,9 @@ export function CardContent(props: CardContentProps): JSX.Element {
 
 //
 
-export type CardFooterProps = Omit<ComponentProps<"div">, "classList">;
+type CardFooterProps = Omit<ComponentProps<"div">, "classList">;
 
-export function CardFooter(props: CardFooterProps): JSX.Element {
+function CardFooter(props: CardFooterProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -96,11 +96,29 @@ export function CardFooter(props: CardFooterProps): JSX.Element {
 
 //
 
-export const Card = {
+const Card = {
 	Root: CardRoot,
 	Header: CardHeader,
 	Title: CardTitle,
 	Description: CardDescription,
 	Content: CardContent,
 	Footer: CardFooter,
+};
+
+export {
+	Card,
+	CardRoot,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+	CardFooter,
+};
+export type {
+	CardRootProps,
+	CardHeaderProps,
+	CardTitleProps,
+	CardDescriptionProps,
+	CardContentProps,
+	CardFooterProps,
 };

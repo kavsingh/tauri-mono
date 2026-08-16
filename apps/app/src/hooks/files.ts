@@ -7,7 +7,7 @@ import type { Accessor, JSX } from "solid-js";
 
 type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;
 
-export function useFileDrop(): [
+function useFileDrop(): [
 	{ isActive: Accessor<boolean>; files: Accessor<string[]> },
 	{
 		onDragEnter: DragEventHandler;
@@ -51,7 +51,7 @@ export function useFileDrop(): [
 	];
 }
 
-export function useFileSelectDialog(): [
+function useFileSelectDialog(): [
 	Accessor<string[]>,
 	(options?: OpenDialogOptions) => Promise<void>,
 ] {
@@ -75,3 +75,5 @@ export function useFileSelectDialog(): [
 
 	return [files, showDialog];
 }
+
+export { useFileDrop, useFileSelectDialog };

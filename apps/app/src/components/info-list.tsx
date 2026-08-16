@@ -4,9 +4,9 @@ import { tm } from "~/lib/style";
 
 import type { ComponentProps, JSX } from "solid-js";
 
-export type InfoListRootProps = Omit<ComponentProps<"ul">, "classList">;
+type InfoListRootProps = Omit<ComponentProps<"ul">, "classList">;
 
-export function InfoListRoot(props: InfoListRootProps): JSX.Element {
+function InfoListRoot(props: InfoListRootProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -16,9 +16,9 @@ export function InfoListRoot(props: InfoListRootProps): JSX.Element {
 
 //
 
-export type InfoListEntryProps = Omit<ComponentProps<"li">, "classList">;
+type InfoListEntryProps = Omit<ComponentProps<"li">, "classList">;
 
-export function InfoListEntry(props: InfoListEntryProps): JSX.Element {
+function InfoListEntry(props: InfoListEntryProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -34,9 +34,9 @@ export function InfoListEntry(props: InfoListEntryProps): JSX.Element {
 
 //
 
-export type InfoListLabelProps = Omit<ComponentProps<"span">, "classList">;
+type InfoListLabelProps = Omit<ComponentProps<"span">, "classList">;
 
-export function InfoListLabel(props: InfoListLabelProps): JSX.Element {
+function InfoListLabel(props: InfoListLabelProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
@@ -49,17 +49,25 @@ export function InfoListLabel(props: InfoListLabelProps): JSX.Element {
 
 //
 
-export type InfoListValueProps = Omit<ComponentProps<"span">, "classList">;
+type InfoListValueProps = Omit<ComponentProps<"span">, "classList">;
 
-export function InfoListValue(props: InfoListValueProps): JSX.Element {
+function InfoListValue(props: InfoListValueProps): JSX.Element {
 	return <span {...props} />;
 }
 
 //
 
-export const InfoList = {
+const InfoList = {
 	Root: InfoListRoot,
 	Entry: InfoListEntry,
 	Label: InfoListLabel,
 	Value: InfoListValue,
+};
+
+export { InfoList, InfoListRoot, InfoListEntry, InfoListLabel, InfoListValue };
+export type {
+	InfoListRootProps,
+	InfoListEntryProps,
+	InfoListLabelProps,
+	InfoListValueProps,
 };

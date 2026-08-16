@@ -65,7 +65,7 @@ function normalizeValues(
 	});
 }
 
-export interface ChronoGraphProps {
+interface ChronoGraphProps {
 	sampleSource: Accessor<Sample | undefined>;
 	minValue?: bigint | undefined;
 	maxValue?: bigint | undefined;
@@ -73,7 +73,7 @@ export interface ChronoGraphProps {
 	class?: string | undefined;
 }
 
-export interface Sample {
+interface Sample {
 	value: bigint;
 }
 
@@ -142,3 +142,5 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 		/>
 	);
 }
+
+export type { ChronoGraphProps, Sample };

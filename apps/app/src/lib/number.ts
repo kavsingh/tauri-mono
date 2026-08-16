@@ -3,7 +3,7 @@ import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
 
 // https://stackoverflow.com/a/54409977
-export function divBigint(
+function divBigint(
 	dividend: bigint,
 	divisor: bigint,
 	precision = 100n,
@@ -17,10 +17,12 @@ export function divBigint(
 		: err(new Error("Result is not finite"));
 }
 
-export function normalizeBigint(
+function normalizeBigint(
 	val: bigint,
 	min: bigint,
 	max: bigint,
 ): Result<number, Error> {
 	return divBigint(val - min, max - min);
 }
+
+export { divBigint, normalizeBigint };

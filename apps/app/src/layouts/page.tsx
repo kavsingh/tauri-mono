@@ -1,6 +1,6 @@
 import type { JSX, ParentProps } from "solid-js";
 
-export function PageHeader(props: ParentProps): JSX.Element {
+function PageHeader(props: ParentProps): JSX.Element {
 	return (
 		<header class="sticky inset-bs-0 bg-background/50 p-4 pbs-8 backdrop-blur-md">
 			<h2 class="text-3xl leading-none font-semibold">{props.children}</h2>
@@ -8,11 +8,13 @@ export function PageHeader(props: ParentProps): JSX.Element {
 	);
 }
 
-export function PageContent(props: ParentProps): JSX.Element {
+function PageContent(props: ParentProps): JSX.Element {
 	return <main class="p-4">{props.children}</main>;
 }
 
-export const Page = {
+const Page = {
 	Header: PageHeader,
 	Content: PageContent,
 };
+
+export { Page, PageHeader, PageContent };

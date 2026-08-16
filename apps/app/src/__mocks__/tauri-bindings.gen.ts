@@ -26,7 +26,7 @@ function mockEventHandles(): MockEventHandles {
 	};
 }
 
-export const commands: typeof bindingsCommands = {
+const commands: typeof bindingsCommands = {
 	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
 	getSystemStats: vi.fn(() => {
 		return Promise.resolve(createMockOkResult(createMockSystemStats()));
@@ -35,6 +35,8 @@ export const commands: typeof bindingsCommands = {
 	setThemePreference: vi.fn(() => Promise.resolve()),
 };
 
-export const events: Record<keyof typeof bindingsEvents, MockEventHandles> = {
+const events: Record<keyof typeof bindingsEvents, MockEventHandles> = {
 	systemStatsEvent: mockEventHandles(),
 };
+
+export { commands, events };

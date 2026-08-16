@@ -7,7 +7,7 @@ import { SystemStatsCard } from "./-index/system-stats-card.tsx";
 
 import type { JSX } from "solid-js";
 
-export function Index(): JSX.Element {
+function Index(): JSX.Element {
 	return (
 		<>
 			<Page.Header>Home</Page.Header>
@@ -21,4 +21,6 @@ export function Index(): JSX.Element {
 	);
 }
 
-export const Route = createFileRoute("/")({ component: Index });
+const Route = createFileRoute("/")({ component: Index });
+
+export { Route, Index };

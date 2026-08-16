@@ -35,6 +35,7 @@ const baseConfig: OxlintConfig = defineConfig({
 
 		"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
 		"import/exports-last": "error",
+		"import/group-exports": "error",
 		"import/no-cycle": "error",
 		"import/no-default-export": "error",
 
