@@ -21,7 +21,3 @@ catalog:
 allowBuilds:
   lefthook: true
   nx: true
-
-minimumReleaseAgeExclude:
-  - '@oxlint/*'
-  - oxlint
