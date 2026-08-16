@@ -1,27 +1,25 @@
-import { err, ok } from "neverthrow";
-
-import type { Result } from "neverthrow";
+import { Either } from "effect";
 
 // https://stackoverflow.com/a/54409977
 function divBigint(
 	dividend: bigint,
 	divisor: bigint,
 	precision = 100n,
-): Result<number, Error> {
-	if (divisor === 0n) return err(new Error("Division by zero"));
+): Either.Either<number, Error> {
+	if (divisor === 0n) return Either.left(new Error("Division by zero"));
 
 	const result = Number((dividend * precision) / divisor) / Number(precision);
 
 	return Number.isFinite(result)
-		? ok(result)
-		: err(new Error("Result is not finite"));
+		? Either.right(result)
+		: Either.left(new Error("Result is not finite"));
 }
 
 function normalizeBigint(
 	val: bigint,
 	min: bigint,
 	max: bigint,
-): Result<number, Error> {
+): Either.Either<number, Error> {
 	return divBigint(val - min, max - min);
 }
 

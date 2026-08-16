@@ -1,4 +1,4 @@
-import { Result } from "neverthrow";
+import { Either } from "effect";
 
 import { divBigint } from "./number.ts";
 
@@ -10,14 +10,15 @@ const memoryThresholds = [
 ] as const;
 
 export function formatMem(value: string | number | bigint): string {
-	const mem = Result.fromThrowable(BigInt)(value).unwrapOr(0n);
+	const mem = Either.try(() => BigInt(value)).pipe(Either.getOrElse(() => 0n));
 
 	for (const [threshold, unit] of memoryThresholds) {
 		if (mem < threshold) continue;
 
-		return divBigint(mem, threshold)
-			.map((result) => `${result.toFixed(2)} ${unit}`)
-			.unwrapOr("-");
+		return divBigint(mem, threshold).pipe(
+			Either.map((result) => `${result.toFixed(2)} ${unit}`),
+			Either.getOrElse(() => "-"),
+		);
 	}
 
 	return "-";

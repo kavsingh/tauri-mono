@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from "@tanstack/solid-query";
 import { For, Match, Switch } from "solid-js";
 
 import { Card } from "~/components/card";
+import { useEffectMutation } from "~/hooks/effect-mutation";
+import { useEffectQuery } from "~/hooks/effect-query";
 import {
-	setThemePreferenceMutation,
-	themePreferenceQuery,
+	setThemePreferenceEffect,
+	themePreferenceEffect,
 } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
@@ -33,8 +34,13 @@ function LabelText(props: { theme: ThemePreference }) {
 }
 
 export function ThemeSwitch(): JSX.Element {
-	const prefQuery = useQuery(themePreferenceQuery);
-	const setPrefMutation = useMutation(setThemePreferenceMutation);
+	const [preference, { refetch }] = useEffectQuery(themePreferenceEffect);
+	const [mutation, setPreference] = useEffectMutation(setThemePreferenceEffect);
+
+	async function handleChange(option: ThemePreference) {
+		await setPreference(option);
+		await refetch();
+	}
 
 	return (
 		<Card.Root>
@@ -59,12 +65,14 @@ export function ThemeSwitch(): JSX.Element {
 											id={option}
 											name="theme-preference"
 											value={option}
-											checked={prefQuery.data === option}
+											checked={preference() === option}
 											onChange={() => {
-												setPrefMutation.mutate(option);
+												void handleChange(option);
 											}}
 											class="peer cursor-pointer"
-											disabled={prefQuery.isLoading}
+											disabled={
+												preference.loading || mutation().status === "pending"
+											}
 											aria-labelledby={`${option}-label`}
 										/>
 										<label

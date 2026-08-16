@@ -1,5 +1,4 @@
 import { render, waitFor, screen, cleanup } from "@solidjs/testing-library";
-import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import {
 	RouterProvider,
 	createMemoryHistory,
@@ -9,17 +8,29 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 
 import { createMockSystemStats } from "~/__test-helpers__/mock-data/system";
 import { publishSystemStatsEvent } from "~/__test-helpers__/tauri/events";
+import {
+	SystemStatsProvider,
+	createSystemStatsStore,
+	startEventListeners,
+} from "~/hooks/system-stats";
 import { routeTree } from "~/route-tree.gen";
-import { startEventListeners } from "~/services/tauri";
+
+import type { ParentProps } from "solid-js";
 
 async function setup() {
-	const client = new QueryClient();
+	const store = createSystemStatsStore();
 	const history = createMemoryHistory({ initialEntries: ["/"] });
 	const router = createRouter({ routeTree, history });
 
-	const dispose = await startEventListeners(client);
+	function Wrapper(props: ParentProps) {
+		return (
+			<SystemStatsProvider store={store}>{props.children}</SystemStatsProvider>
+		);
+	}
 
-	return { client, router, dispose };
+	const dispose = await startEventListeners(store);
+
+	return { router, Wrapper, dispose };
 }
 
 describe("<Index />", () => {
@@ -29,13 +40,9 @@ describe("<Index />", () => {
 	});
 
 	it("should load and render home page", async () => {
-		const { client, router, dispose } = await setup();
+		const { router, Wrapper, dispose } = await setup();
 
-		render(() => (
-			<QueryClientProvider client={client}>
-				<RouterProvider router={router} />
-			</QueryClientProvider>
-		));
+		render(() => <RouterProvider router={router} />, { wrapper: Wrapper });
 		await router.load();
 
 		expect(
@@ -52,13 +59,9 @@ describe("<Index />", () => {
 	});
 
 	it("should update system stats from events", async () => {
-		const { client, router, dispose } = await setup();
+		const { router, Wrapper, dispose } = await setup();
 
-		render(() => (
-			<QueryClientProvider client={client}>
-				<RouterProvider router={router} />
-			</QueryClientProvider>
-		));
+		render(() => <RouterProvider router={router} />, { wrapper: Wrapper });
 		await router.load();
 
 		await waitFor(() => {
