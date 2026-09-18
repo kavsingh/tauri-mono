@@ -11,25 +11,19 @@ import type { JSX } from "solid-js";
 import type { Sample } from "~/components/chrono-graph";
 import type { SystemStats } from "~/tauri-bindings.gen";
 
+function toBigInt(value?: string | null) {
+	return Either.try(() => BigInt(value ?? "0")).pipe(
+		Either.getOrElse(() => 0n),
+	);
+}
+
 function MemoryGraph(props: { systemStats: SystemStats | undefined }) {
 	const sample = createMemo<Sample | undefined>(() => {
-		const value = props.systemStats?.memUsed;
-
-		return value
-			? {
-					value: Either.try(() => BigInt(value)).pipe(
-						Either.getOrElse(() => 0n),
-					),
-				}
-			: undefined;
+		return { value: toBigInt(props.systemStats?.memUsed) };
 	});
 
 	const maxValue = createMemo<bigint>(() => {
-		const value = props.systemStats?.memTotal;
-
-		return value
-			? Either.try(() => BigInt(value)).pipe(Either.getOrElse(() => 0n))
-			: 0n;
+		return toBigInt(props.systemStats?.memTotal);
 	});
 
 	return (
