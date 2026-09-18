@@ -125,7 +125,7 @@ const baseConfig: OxlintConfig = defineConfig({
 			"error",
 			{
 				selector: "ThrowStatement",
-				message: "Use neverthrow result types instead of throwing errors",
+				message: "Use result types instead of throwing errors",
 			},
 		],
 	},
