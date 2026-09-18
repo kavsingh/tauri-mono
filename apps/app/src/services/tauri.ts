@@ -1,6 +1,6 @@
 import { Effect } from "effect";
 
-import { fromCommandResult, fromPromise } from "~/lib/effect";
+import { cachedQuery, fromCommandResult, fromPromise } from "~/lib/effect";
 import { commands, events } from "~/tauri-bindings.gen";
 
 import type {
@@ -52,20 +52,32 @@ const runTauri = <T>(
 	f: (service: TauriServiceShape) => Effect.Effect<T, unknown>,
 ) => TauriService.use((service) => f(service)).pipe(Effect.provide(AppRuntime));
 
+const themePreferenceCache = cachedQuery(
+	() => runTauri((service) => service.getThemePreference()),
+	"1 hour",
+);
+
 function systemInfoEffect() {
-	return runTauri((service) => service.getSystemInfo());
+	return Effect.cached(runTauri((service) => service.getSystemInfo())).pipe(
+		Effect.flatten,
+	);
 }
 
 function systemStatsEffect() {
-	return runTauri((service) => service.getSystemStats());
+	return Effect.cached(runTauri((service) => service.getSystemStats())).pipe(
+		Effect.flatten,
+	);
 }
 
 function themePreferenceEffect() {
-	return runTauri((service) => service.getThemePreference());
+	return themePreferenceCache.read();
 }
 
 function setThemePreferenceEffect(preference: ThemePreference) {
-	return runTauri((service) => service.setThemePreference(preference));
+	return Effect.gen(function* () {
+		yield* runTauri((service) => service.setThemePreference(preference));
+		yield* themePreferenceCache.refresh();
+	});
 }
 
 export {

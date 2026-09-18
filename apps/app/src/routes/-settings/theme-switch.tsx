@@ -1,5 +1,5 @@
-import { Cause, Effect, Exit } from "effect";
-import { For, Match, Switch, createResource, createSignal } from "solid-js";
+import { Effect } from "effect";
+import { For, Match, Switch, createResource } from "solid-js";
 
 import { Card } from "~/components/card";
 import {
@@ -32,31 +32,13 @@ function LabelText(props: { theme: ThemePreference }) {
 	);
 }
 
-interface MutationState<TData> {
-	status: "idle" | "pending" | "success" | "error";
-	data?: TData;
-	error?: unknown;
-}
-
 export function ThemeSwitch(): JSX.Element {
 	const [preference, { refetch }] = createResource(() =>
 		Effect.runPromise(themePreferenceEffect()),
 	);
-	const [mutation, setMutation] = createSignal<MutationState<void>>({
-		status: "idle",
-	});
 
 	async function handleChange(option: ThemePreference) {
-		setMutation({ status: "pending" });
-
-		const exit = await Effect.runPromiseExit(setThemePreferenceEffect(option));
-
-		setMutation(
-			Exit.isSuccess(exit)
-				? { status: "success", data: exit.value }
-				: { status: "error", error: Cause.squash(exit.cause) },
-		);
-
+		await Effect.runPromise(setThemePreferenceEffect(option));
 		await refetch();
 	}
 
@@ -88,9 +70,7 @@ export function ThemeSwitch(): JSX.Element {
 												void handleChange(option);
 											}}
 											class="peer cursor-pointer"
-											disabled={
-												preference.loading || mutation().status === "pending"
-											}
+											disabled={preference.loading}
 											aria-labelledby={`${option}-label`}
 										/>
 										<label
