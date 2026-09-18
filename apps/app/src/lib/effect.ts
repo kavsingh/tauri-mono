@@ -1,4 +1,4 @@
-import { Effect } from "effect";
+import { Duration, Effect } from "effect";
 
 type CommandResult<TData, TError> =
 	| { status: "ok"; data: TData }
@@ -22,5 +22,39 @@ function fromCommandResult<TData, TError>(
 	);
 }
 
-export { fromCommandResult, fromPromise };
+function cachedQuery<A, E, R>(
+	load: () => Effect.Effect<A, E, R>,
+	ttl: Duration.DurationInput = "1 hour",
+) {
+	let current:
+		| { value: Effect.Effect<A, E, R>; invalidate: () => Effect.Effect<void> }
+		| undefined;
+
+	return {
+		read: () =>
+			Effect.gen(function* () {
+				if (!current) {
+					const [value, invalidate] = yield* Effect.cachedInvalidateWithTTL(
+						load(),
+						ttl,
+					);
+
+					current = { value, invalidate: () => invalidate };
+				}
+
+				return yield* current.value;
+			}),
+		refresh: () =>
+			Effect.gen(function* () {
+				if (current) {
+					yield* current.invalidate();
+				}
+
+				current = undefined;
+				return yield* cachedQuery(load, ttl).read();
+			}),
+	};
+}
+
+export { cachedQuery, fromCommandResult, fromPromise };
 export type { CommandResult };
