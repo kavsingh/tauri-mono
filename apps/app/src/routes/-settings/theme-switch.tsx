@@ -19,23 +19,17 @@ const OPTIONS = [
 function LabelText(props: { theme: ThemePreference }) {
 	return (
 		<Switch>
-			<Match when={props.theme === "System"}>
-				<>System</>
-			</Match>
-			<Match when={props.theme === "Light"}>
-				<>Light</>
-			</Match>
-			<Match when={props.theme === "Dark"}>
-				<>Dark</>
-			</Match>
+			<Match when={props.theme === "System"}>System</Match>
+			<Match when={props.theme === "Light"}>Light</Match>
+			<Match when={props.theme === "Dark"}>Dark</Match>
 		</Switch>
 	);
 }
 
 export function ThemeSwitch(): JSX.Element {
-	const [preference, { refetch }] = createResource(() =>
-		Effect.runPromise(themePreferenceEffect()),
-	);
+	const [preference, { refetch }] = createResource(() => {
+		return Effect.runPromise(themePreferenceEffect());
+	});
 
 	async function handleChange(option: ThemePreference) {
 		await Effect.runPromise(setThemePreferenceEffect(option));
@@ -44,11 +38,7 @@ export function ThemeSwitch(): JSX.Element {
 
 	return (
 		<Card.Root>
-			<form
-				onSubmit={(event) => {
-					event.preventDefault();
-				}}
-			>
+			<form onSubmit={(event) => event.preventDefault()}>
 				<fieldset>
 					<Card.Header>
 						<Card.Title>
