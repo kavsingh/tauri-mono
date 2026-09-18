@@ -11,12 +11,12 @@ trustPolicyIgnoreAfter: 10080
 verifyDepsBeforeRun: prompt
 
 catalog:
-  '@tsconfig/node26': 26.0.0
+  '@tsconfig/node26': 26.0.1
   '@tsconfig/strictest': 2.0.8
-  '@types/node': 26.2.0
+  '@types/node': 26.6.0
   neverthrow: 8.2.0
-  oxlint: 1.78.0
-  oxlint-plugin-eslint: 1.78.0
+  oxlint: 1.83.0
+  oxlint-plugin-eslint: 1.83.0
 
 allowBuilds:
   lefthook: true
