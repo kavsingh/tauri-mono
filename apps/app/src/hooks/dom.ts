@@ -23,31 +23,31 @@ type UseResizeObserverObserveFn = (
 
 type UseResizeObserverUnobserveFn = () => void;
 
-function useResizeObserver(): UseResizeObserverObserveFn {
-	const observe: UseResizeObserverObserveFn = (el, callback, options) => {
-		let callbacks = elementCallbacks.get(el);
+const observe: UseResizeObserverObserveFn = (el, callback, options) => {
+	let callbacks = elementCallbacks.get(el);
 
-		if (!callbacks) {
-			callbacks = new Set();
-			elementCallbacks.set(el, callbacks);
+	if (!callbacks) {
+		callbacks = new Set();
+		elementCallbacks.set(el, callbacks);
+	}
+
+	callbacks.add(callback);
+	resizeObserver.observe(el, options);
+
+	return function unobserve() {
+		resizeObserver.unobserve(el);
+
+		const current = elementCallbacks.get(el);
+
+		if (current) {
+			current.delete(callback);
+
+			if (current.size === 0) elementCallbacks.delete(el);
 		}
-
-		callbacks.add(callback);
-		resizeObserver.observe(el, options);
-
-		return function unobserve() {
-			resizeObserver.unobserve(el);
-
-			const current = elementCallbacks.get(el);
-
-			if (current) {
-				current.delete(callback);
-
-				if (current.size === 0) elementCallbacks.delete(el);
-			}
-		};
 	};
+};
 
+function useResizeObserver(): UseResizeObserverObserveFn {
 	return observe;
 }
 
