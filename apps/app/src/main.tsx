@@ -30,6 +30,10 @@ function renderAndShow() {
 
 	void startEventListeners(client);
 
+	// enables @wdio/tauri-service. throws if window.__TAURI__ is unavailable
+	// (i.e. withGlobalTauri disabled), so never import this outside e2e.
+	if (import.meta.env.VITE_E2E === "true") void import("@wdio/tauri-plugin");
+
 	render(() => {
 		return (
 			<QueryClientProvider client={client}>

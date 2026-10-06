@@ -1,0 +1,7 @@
+{
+	"$schema": "../gen/schemas/desktop-schema.json",
+	"identifier": "webdriver",
+	"description": "Capability granting the wdio plugin commands used by @wdio/tauri-service during e2e testing",
+	"windows": ["main"],
+	"permissions": ["wdio:default", "wdio-webdriver:default"]
+}
