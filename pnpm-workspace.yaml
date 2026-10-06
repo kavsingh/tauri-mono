@@ -13,10 +13,10 @@ verifyDepsBeforeRun: prompt
 catalog:
   '@tsconfig/node26': 26.0.1
   '@tsconfig/strictest': 2.0.8
-  '@types/node': 26.6.2
+  '@types/node': 26.6.4
   neverthrow: 8.2.0
-  oxlint: 1.85.0
-  oxlint-plugin-eslint: 1.85.0
+  oxlint: 1.86.0
+  oxlint-plugin-eslint: 1.86.0
 
 allowBuilds:
   lefthook: true

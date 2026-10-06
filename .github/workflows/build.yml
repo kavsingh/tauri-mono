@@ -22,9 +22,8 @@ jobs:
         os: [macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-        id: setup
       - uses: ./.github/actions/get-app-properties
         id: properties
         with:
