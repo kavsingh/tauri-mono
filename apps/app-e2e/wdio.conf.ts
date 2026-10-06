@@ -41,7 +41,9 @@ export const config: WebdriverIO.Config = {
 	],
 
 	onPrepare: () => {
-		spawnSync("pnpm nx build:e2e:mac app", {
+		const os = process.platform === "win32" ? "win" : "mac";
+
+		spawnSync(`pnpm nx build:e2e:${os} app`, {
 			cwd: projectRoot,
 			stdio: "inherit",
 			shell: true,
