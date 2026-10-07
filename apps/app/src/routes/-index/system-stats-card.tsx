@@ -1,4 +1,4 @@
-import { Either } from "effect";
+import { Result } from "effect";
 import { Show, createMemo } from "solid-js";
 
 import { Card } from "~/components/card";
@@ -12,8 +12,8 @@ import type { Sample } from "~/components/chrono-graph";
 import type { SystemStats } from "~/tauri-bindings.gen";
 
 function toBigInt(value?: string | null) {
-	return Either.try(() => BigInt(value ?? "0")).pipe(
-		Either.getOrElse(() => 0n),
+	return Result.try(() => BigInt(value ?? "0")).pipe(
+		Result.getOrElse(() => 0n),
 	);
 }
 

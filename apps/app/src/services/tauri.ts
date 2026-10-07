@@ -1,36 +1,39 @@
-import { Effect } from "effect";
+import { Context, Effect } from "effect";
 
 import { cachedQuery, fromCommandResult, fromPromise } from "~/lib/effect";
 import { commands, events } from "~/tauri-bindings.gen";
 
 import type { SystemStats, ThemePreference } from "~/tauri-bindings.gen";
 
-class TauriService extends Effect.Service<TauriService>()("TauriService", {
-	sync: () => {
-		return {
-			getSystemInfo: () => fromPromise(commands.getSystemInfo()),
-			getSystemStats: () => fromCommandResult(commands.getSystemStats()),
-			getThemePreference: () => fromPromise(commands.getThemePreference()),
-			setThemePreference: (preference: ThemePreference) => {
-				return fromPromise(commands.setThemePreference(preference));
-			},
-			subscribeSystemStats: (onValue: (stats: SystemStats) => void) => {
-				return fromPromise(
-					events.systemStatsEvent.listen((event) => {
-						onValue(event.payload);
-					}),
-				);
-			},
-		};
+const tauriService = {
+	getSystemInfo: () => fromPromise(commands.getSystemInfo()),
+	getSystemStats: () => fromCommandResult(commands.getSystemStats()),
+	getThemePreference: () => fromPromise(commands.getThemePreference()),
+	setThemePreference: (preference: ThemePreference) => {
+		return fromPromise(commands.setThemePreference(preference));
 	},
-}) {}
+	subscribeSystemStats: (onValue: (stats: SystemStats) => void) => {
+		return fromPromise(
+			events.systemStatsEvent.listen((event) => {
+				onValue(event.payload);
+			}),
+		);
+	},
+};
 
-const TauriLive = TauriService.Default;
+type TauriServiceShape = typeof tauriService;
 
-const AppRuntime = TauriLive;
+class TauriService extends Context.Service<TauriService, TauriServiceShape>()(
+	"TauriService",
+) {}
 
-const runTauri = <T>(f: (service: TauriService) => Effect.Effect<T, unknown>) =>
-	TauriService.use((service) => f(service)).pipe(Effect.provide(AppRuntime));
+function runTauri<T>(
+	f: (service: TauriServiceShape) => Effect.Effect<T, unknown>,
+) {
+	return TauriService.use((service) => f(service)).pipe(
+		Effect.provideService(TauriService, tauriService),
+	);
+}
 
 const themePreferenceCache = cachedQuery(
 	() => runTauri((service) => service.getThemePreference()),

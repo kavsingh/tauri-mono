@@ -24,7 +24,7 @@ function fromCommandResult<TData, TError>(
 
 function cachedQuery<A, E, R>(
 	load: () => Effect.Effect<A, E, R>,
-	ttl: Duration.DurationInput = "1 hour",
+	ttl: Duration.Input = "1 hour",
 ) {
 	let current:
 		| { value: Effect.Effect<A, E, R>; invalidate: () => Effect.Effect<void> }
