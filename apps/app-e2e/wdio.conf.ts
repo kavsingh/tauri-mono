@@ -6,7 +6,9 @@ import path from "node:path";
 const projectRoot = path.resolve(import.meta.dirname, "../../");
 const binaryPath = path.resolve(
 	projectRoot,
-	"target/universal-apple-darwin/debug/app",
+	process.platform === "win32"
+		? "target/x86_64-pc-windows-msvc/debug/app.exe"
+		: "target/universal-apple-darwin/debug/app",
 );
 
 export const config: WebdriverIO.Config = {
