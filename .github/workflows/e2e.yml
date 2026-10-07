@@ -11,7 +11,9 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        os: [macos-latest, windows-latest]
+        # @TODO: windows - webview / wdio dont seem to work well together
+        # and compilation fails at current versions
+        os: [macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
