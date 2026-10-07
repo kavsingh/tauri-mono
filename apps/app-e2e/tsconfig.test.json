@@ -1,0 +1,18 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"include": ["test", "wdio.conf.ts"],
+	"extends": "code-config/tsconfig.node.json",
+	"compilerOptions": {
+		"composite": true,
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"types": [
+			"node",
+			"@wdio/globals/types",
+			"expect-webdriverio",
+			"@wdio/mocha-framework",
+			"@wdio/tauri-service"
+			// "@wdio/tauri-plugin"
+		]
+	}
+}

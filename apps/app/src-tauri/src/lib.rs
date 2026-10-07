@@ -29,6 +29,7 @@ pub fn run() {
 		]);
 
 	#[cfg(debug_assertions)]
+	#[cfg(not(feature = "e2e"))]
 	#[allow(clippy::expect_used)]
 	specta_builder
 		.export(
@@ -37,9 +38,17 @@ pub fn run() {
 		)
 		.expect("Failed to export typescript bindings");
 
+	// register the log plugin first so it claims the global `log` crate
+	// logger before the webdriver plugins get a chance to install their own
+	let builder = Builder::default().plugin(get_log_builder().build());
+
+	#[cfg(feature = "e2e")]
+	let builder = builder
+		.plugin(tauri_plugin_wdio::init())
+		.plugin(tauri_plugin_wdio_webdriver::init());
+
 	#[allow(clippy::expect_used, clippy::exit)]
-	Builder::default()
-		.plugin(get_log_builder().build())
+	builder
 		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_store::Builder::default().build())
 		.manage(ManagedSystemStatsState::default())
@@ -59,6 +68,7 @@ pub fn run() {
 			}
 
 			#[cfg(debug_assertions)]
+			#[cfg(not(feature = "e2e"))]
 			{
 				main_window.open_devtools();
 			}

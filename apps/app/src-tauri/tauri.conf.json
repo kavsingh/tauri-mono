@@ -5,6 +5,7 @@
 	"identifier": "com.app.dev",
 	"app": {
 		"security": {
+			"capabilities": ["default"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,

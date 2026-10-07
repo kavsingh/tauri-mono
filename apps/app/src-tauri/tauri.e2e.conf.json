@@ -1,0 +1,29 @@
+{
+	"app": {
+		"withGlobalTauri": true,
+		"security": {
+			"capabilities": ["default", "webdriver"],
+			"assetProtocol": { "enable": false, "scope": [] },
+			"dangerousDisableAssetCspModification": false,
+			"freezePrototype": true,
+			"pattern": {
+				"use": "isolation",
+				"options": { "dir": "../dist-isolation" }
+			},
+			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+		},
+		"windows": [
+			{
+				"label": "main",
+				"title": "App",
+				"width": 800,
+				"height": 600,
+				"resizable": true,
+				"fullscreen": false,
+				"titleBarStyle": "Overlay",
+				"hiddenTitle": true,
+				"visible": false
+			}
+		]
+	}
+}

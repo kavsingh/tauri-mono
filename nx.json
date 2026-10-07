@@ -8,12 +8,23 @@
 		},
 		"build:mac": {
 			"dependsOn": ["^build"],
-			"outputs": ["{projectRoot}/dist/**"],
+			"outputs": [
+				"{projectRoot}/dist/**",
+				"{workspaceRoot}/target/universal-apple-darwin/**"
+			],
 			"cache": true
 		},
 		"build:win": {
 			"dependsOn": ["^build"],
 			"outputs": ["{projectRoot}/dist/**"],
+			"cache": true
+		},
+		"build:e2e:mac": {
+			"dependsOn": ["^build"],
+			"outputs": [
+				"{projectRoot}/dist/**",
+				"{workspaceRoot}/target/universal-apple-darwin/**"
+			],
 			"cache": true
 		},
 		"dev": {

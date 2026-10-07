@@ -5,7 +5,17 @@ on:
 
 jobs:
   e2e:
-    name: E2E
-    runs-on: ubuntu-latest
+    name: E2E Tests
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        # @TODO: windows - webview / wdio dont seem to work well together
+        # and compilation fails at current versions
+        os: [macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
-      - run: echo "WIP"
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm nx e2e apps/app-e2e
