@@ -14,19 +14,19 @@ name = "app_lib"
 chrono = "0.4.45"
 log = "0.4.34"
 serde = { version = "1.0.229", features = ["derive"] }
-serde_json = "1.0.151"
+serde_json = "1.0.154"
 specta = "2.0.0-rc.25"
 specta-typescript = "0.0.12"
 sysinfo = "0.39.6"
-tauri-plugin-dialog = "2.8.1"
-tauri-plugin-log = "2.10.0"
+tauri-plugin-dialog = "2.8.2"
+tauri-plugin-log = "2.10.1"
 tauri-plugin-store = "2.5.0"
-tauri-plugin-wdio = { version = "1.4.0", optional = true }
-tauri-plugin-wdio-webdriver = { version = "1.4.0", optional = true }
-uuid = { version = "1.27.0", features = ["fast-rng", "v4"] }
+tauri-plugin-wdio = { version = "1.5.0", optional = true }
+tauri-plugin-wdio-webdriver = { version = "1.5.0", optional = true }
+uuid = { version = "1.28.0", features = ["fast-rng", "v4"] }
 
 [dependencies.tauri]
-version = "2.12.1"
+version = "2.12.3"
 features = ["isolation", "specta"]
 
 [dependencies.tauri-specta]
@@ -34,7 +34,7 @@ version = "2.0.0-rc.25"
 features = ["derive", "typescript"]
 
 [build-dependencies.tauri-build]
-version = "2.7.1"
+version = "2.7.2"
 features = ["isolation"]
 
 [features]
