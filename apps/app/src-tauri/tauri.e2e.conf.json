@@ -1,8 +1,10 @@
 {
+	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+	"identifier": "com.app-remote.dev",
 	"app": {
 		"withGlobalTauri": true,
 		"security": {
-			"capabilities": ["default", "webdriver"],
+			"capabilities": ["main", "main-remote", "webdriver"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,

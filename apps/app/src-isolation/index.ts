@@ -4,6 +4,8 @@
 globalThis.window.__TAURI_ISOLATION_HOOK__ = function tauriIsolationHook(
 	payload,
 ) {
+	console.log("isolation hook", payload);
+
 	return payload;
 };
 
