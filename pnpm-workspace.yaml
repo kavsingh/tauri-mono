@@ -11,12 +11,16 @@ trustPolicyIgnoreAfter: 10080
 verifyDepsBeforeRun: prompt
 
 catalog:
+  '@tauri-apps/api': 2.12.4
+  '@tauri-apps/plugin-log': 2.10.1
   '@tsconfig/node26': 26.0.1
   '@tsconfig/strictest': 2.0.8
   '@types/node': 26.6.5
+  '@wdio/tauri-plugin': 1.5.0
   neverthrow: 8.2.0
   oxlint: 1.88.0
   oxlint-plugin-eslint: 1.88.0
+  vite: 8.3.4
 
 allowBuilds:
   edgedriver: true
