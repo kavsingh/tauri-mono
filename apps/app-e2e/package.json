@@ -11,6 +11,6 @@
 		"@wdio/mocha-framework": "10.0.1",
 		"@wdio/spec-reporter": "10.0.1",
 		"@wdio/tauri-service": "1.5.0",
-		"expect-webdriverio": "7.0.1"
+		"expect-webdriverio": "8.0.0"
 	}
 }
