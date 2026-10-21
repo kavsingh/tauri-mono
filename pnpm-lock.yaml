@@ -167,9 +167,9 @@ catalogs:
     '@tsconfig/node26':
       specifier: 26.0.1
       version: 26.0.1
-    neverthrow:
-      specifier: 8.2.0
-      version: 8.2.0
+    effect:
+      specifier: 4.1.2
+      version: 4.1.2
     oxlint:
       specifier: 1.92.0
       version: 1.92.0
@@ -253,9 +253,9 @@ importers:
       '@tauri-apps/plugin-store':
         specifier: 2.5.0
         version: 2.5.0
-      neverthrow:
+      effect:
         specifier: 'catalog:'
-        version: 8.2.0
+        version: 4.1.2
       solid-js:
         specifier: 1.9.18
         version: 1.9.18
@@ -1550,12 +1550,6 @@ packages:
 
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
-
-  '@rollup/rollup-linux-x64-gnu@4.68.0':
-    resolution: {integrity: sha512-GDOmvgephpRCNyNGRQOZh0KD2gTyRVM1Bb1iOo759xeCUpCAoRCmJioOOSu2MwyWfNOocGd0V5I9vYLfteC6/A==}
-    cpu: [x64]
-    os: [linux]
-    libc: [glibc]
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
@@ -2957,6 +2951,9 @@ packages:
     peerDependencies:
       '@wdio/logger': ^9.29.1 || ^10.0.0
 
+  effect@4.1.2:
+    resolution: {integrity: sha512-d3Oah1WyKxFLFh19yWheS5IXIVaITzxZ71JkE1rkUozq/6EcJSU5nPk5bF2QrSygZ3SQoiNQB8TsxFriyMeMaQ==}
+
   ejs@5.0.1:
     resolution: {integrity: sha512-COqBPFMxuPTPspXl2DkVYaDS3HtrD1GpzOGkNTJ1IYkifq/r9h8SVEFrjA3D9/VJGOEoMQcrlhpntcSUrM8k6A==}
     engines: {node: '>=0.12.18'}
@@ -3769,10 +3766,6 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
-
-  neverthrow@8.2.0:
-    resolution: {integrity: sha512-kOCT/1MCPAxY5iUV3wytNFUMUolzuwd/VF/1KCx7kf6CutrOsTie+84zTGTpgQycjvfLdBBdvBvFLqFD2c0wkQ==}
-    engines: {node: '>=18'}
 
   node-releases@2.0.63:
     resolution: {integrity: sha512-6li2QanLsAXpIH2R6j77MzRyvOyrvdTqlKtO4CgBdHGNvN99ZZfyxszHc5o5+IZBWD5u6Hzwg83JoGXmqZNG9Q==}
@@ -5690,9 +5683,6 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@rollup/rollup-linux-x64-gnu@4.68.0':
-    optional: true
-
   '@sec-ant/readable-stream@0.4.1': {}
 
   '@sinclair/typebox@0.34.52': {}
@@ -7206,6 +7196,8 @@ snapshots:
       decamelize: 6.0.1
       undici: 8.12.4
 
+  effect@4.1.2: {}
+
   ejs@5.0.1: {}
 
   ejs@7.0.2: {}
@@ -8004,10 +7996,6 @@ snapshots:
   nanoid@3.3.20: {}
 
   natural-compare@1.4.0: {}
-
-  neverthrow@8.2.0:
-    optionalDependencies:
-      '@rollup/rollup-linux-x64-gnu': 4.68.0
 
   node-releases@2.0.63: {}
 

@@ -1,10 +1,10 @@
-import { useMutation, useQuery } from "@tanstack/solid-query";
-import { For, Match, Switch } from "solid-js";
+import { Effect } from "effect";
+import { For, Match, Switch, createResource } from "solid-js";
 
 import { Card } from "~/components/card";
 import {
-	setThemePreferenceMutation,
-	themePreferenceQuery,
+	setThemePreferenceEffect,
+	themePreferenceEffect,
 } from "~/services/tauri";
 
 import type { JSX } from "solid-js";
@@ -19,30 +19,26 @@ const OPTIONS = [
 function LabelText(props: { theme: ThemePreference }) {
 	return (
 		<Switch>
-			<Match when={props.theme === "System"}>
-				<>System</>
-			</Match>
-			<Match when={props.theme === "Light"}>
-				<>Light</>
-			</Match>
-			<Match when={props.theme === "Dark"}>
-				<>Dark</>
-			</Match>
+			<Match when={props.theme === "System"}>System</Match>
+			<Match when={props.theme === "Light"}>Light</Match>
+			<Match when={props.theme === "Dark"}>Dark</Match>
 		</Switch>
 	);
 }
 
 export function ThemeSwitch(): JSX.Element {
-	const prefQuery = useQuery(themePreferenceQuery);
-	const setPrefMutation = useMutation(setThemePreferenceMutation);
+	const [preference, { refetch }] = createResource(() => {
+		return Effect.runPromise(themePreferenceEffect());
+	});
+
+	async function handleChange(option: ThemePreference) {
+		await Effect.runPromise(setThemePreferenceEffect(option));
+		await refetch();
+	}
 
 	return (
 		<Card.Root>
-			<form
-				onSubmit={(event) => {
-					event.preventDefault();
-				}}
-			>
+			<form onSubmit={(event) => event.preventDefault()}>
 				<fieldset>
 					<Card.Header>
 						<Card.Title>
@@ -59,12 +55,12 @@ export function ThemeSwitch(): JSX.Element {
 											id={option}
 											name="theme-preference"
 											value={option}
-											checked={prefQuery.data === option}
+											checked={preference() === option}
 											onChange={() => {
-												setPrefMutation.mutate(option);
+												void handleChange(option);
 											}}
 											class="peer cursor-pointer"
-											disabled={prefQuery.isLoading}
+											disabled={preference.loading}
 											aria-labelledby={`${option}-label`}
 										/>
 										<label
