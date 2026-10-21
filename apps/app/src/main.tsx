@@ -1,12 +1,15 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { RouterProvider, createRouter } from "@tanstack/solid-router";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "@tauri-apps/plugin-log";
 import { render } from "solid-js/web";
 
 import "./index.css";
+import {
+	SystemStatsProvider,
+	createSystemStatsStore,
+	startEventListeners,
+} from "./hooks/system-stats";
 import { routeTree } from "./route-tree.gen";
-import { startEventListeners } from "./services/tauri";
 
 function createTanstackRouter() {
 	return createRouter({ routeTree });
@@ -25,10 +28,10 @@ function renderAndShow() {
 	// oxlint-disable-next-line eslint-js/no-restricted-syntax
 	if (!appRoot) throw new Error("#app-root not found");
 
-	const client = new QueryClient();
+	const systemStatsStore = createSystemStatsStore();
 	const router = createTanstackRouter();
 
-	void startEventListeners(client);
+	void startEventListeners(systemStatsStore);
 
 	// enables @wdio/tauri-service. throws if window.__TAURI__ is unavailable
 	// (i.e. withGlobalTauri disabled), so never import this outside e2e.
@@ -36,9 +39,9 @@ function renderAndShow() {
 
 	render(() => {
 		return (
-			<QueryClientProvider client={client}>
+			<SystemStatsProvider store={systemStatsStore}>
 				<RouterProvider router={router} />
-			</QueryClientProvider>
+			</SystemStatsProvider>
 		);
 	}, appRoot);
 
