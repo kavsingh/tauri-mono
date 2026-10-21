@@ -1,8 +1,8 @@
-import { baseConfig, neverthrow } from "code-config/oxlint";
+import { baseConfig } from "code-config/oxlint";
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
-	extends: [baseConfig, neverthrow],
+	extends: [baseConfig],
 	env: { node: false, browser: true },
 	ignorePatterns: [
 		"dist/**",

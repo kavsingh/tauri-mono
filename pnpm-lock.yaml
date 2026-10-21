@@ -176,6 +176,9 @@ catalogs:
     '@tsconfig/node26':
       specifier: 26.0.2
       version: 26.0.2
+    effect:
+      specifier: 4.1.4
+      version: 4.1.4
     neverthrow:
       specifier: 8.2.0
       version: 8.2.0
@@ -328,9 +331,9 @@ importers:
       '@wdio/tauri-plugin':
         specifier: catalog:wdio
         version: 1.5.1(supports-color@8.1.1)(tsx@4.23.15)
-      neverthrow:
+      effect:
         specifier: 'catalog:'
-        version: 8.2.0
+        version: 4.1.4
       shared:
         specifier: workspace:*
         version: link:../../packages/shared
@@ -2627,8 +2630,8 @@ packages:
   '@yarnpkg/lockfile@1.1.0':
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
 
-  '@zip.js/zip.js@2.24.0':
-    resolution: {integrity: sha512-WlaVKzdqBK+RF3bdiXZWbdCnvGB6PdO4IHC1mn/2Yfl3bASgqUNegnU3+PNg61iecwoPfUi5BgLUPqBukXpyWw==}
+  '@zip.js/zip.js@2.25.0':
+    resolution: {integrity: sha512-oNRqUuU1XFu6G5d7Z0jufJ9dS9WteO0xiU/PNxsUrb4itZCsSbn191jpJzU00Gmc6S680X3DPZeF5EV4zAEMAg==}
     engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=18.0.0'}
 
   '@zkochan/js-yaml@0.0.7':
@@ -3089,6 +3092,9 @@ packages:
     peerDependencies:
       '@wdio/logger': ^9.29.1 || ^10.0.0
 
+  effect@4.1.4:
+    resolution: {integrity: sha512-Tgrv/9FN+TZYyOn8XSli+fVqAfwDrDAkiX5Uu9vztINb675VTQdhD0gWI5Kzvhlh9QqzjZvw72iugqw5pwoghQ==}
+
   ejs@5.0.1:
     resolution: {integrity: sha512-COqBPFMxuPTPspXl2DkVYaDS3HtrD1GpzOGkNTJ1IYkifq/r9h8SVEFrjA3D9/VJGOEoMQcrlhpntcSUrM8k6A==}
     engines: {node: '>=0.12.18'}
@@ -3099,8 +3105,8 @@ packages:
     engines: {node: '>=0.12.18'}
     hasBin: true
 
-  electron-to-chromium@1.5.483:
-    resolution: {integrity: sha512-zkGOvf625oaZgK+mhTF4hl3aTAfIOOnR7Jey0e7fUktdJWrB/wsLnzPKvWaqZkMCJ1yzUkAh6IqDJ9GMr3pR2Q==}
+  electron-to-chromium@1.5.484:
+    resolution: {integrity: sha512-KmdOHJp6UlPUWoZ5O+X+qASnncYQm/F8wpCN7Jpbg4PJfP+l7SRhrSuFIuZlVshZvj4YUONgJAI944wmv5fIFg==}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -6983,7 +6989,7 @@ snapshots:
       decamelize: 7.0.0
       deepmerge-ts: 8.0.2
       edgedriver: 8.0.0(@wdio/logger@10.2.0)
-      electron-to-chromium: 1.5.483
+      electron-to-chromium: 1.5.484
       geckodriver: 8.0.0(@wdio/logger@10.2.0)
       get-port: 7.2.0
       import-meta-resolve: 4.2.0
@@ -6999,7 +7005,7 @@ snapshots:
 
   '@yarnpkg/lockfile@1.1.0': {}
 
-  '@zip.js/zip.js@2.24.0': {}
+  '@zip.js/zip.js@2.25.0': {}
 
   '@zkochan/js-yaml@0.0.7':
     dependencies:
@@ -7176,7 +7182,7 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.11.37
       caniuse-lite: 1.0.30001826
-      electron-to-chromium: 1.5.483
+      electron-to-chromium: 1.5.484
       node-releases: 2.0.63
       update-browserslist-db: 1.3.4(browserslist@4.29.5)
 
@@ -7437,15 +7443,17 @@ snapshots:
   edgedriver@8.0.0(@wdio/logger@10.2.0):
     dependencies:
       '@wdio/logger': 10.2.0
-      '@zip.js/zip.js': 2.24.0
+      '@zip.js/zip.js': 2.25.0
       decamelize: 6.0.1
       undici: 8.12.4
+
+  effect@4.1.4: {}
 
   ejs@5.0.1: {}
 
   ejs@7.0.2: {}
 
-  electron-to-chromium@1.5.483: {}
+  electron-to-chromium@1.5.484: {}
 
   emoji-regex@10.6.0: {}
 
@@ -7736,7 +7744,7 @@ snapshots:
   geckodriver@8.0.0(@wdio/logger@10.2.0):
     dependencies:
       '@wdio/logger': 10.2.0
-      '@zip.js/zip.js': 2.24.0
+      '@zip.js/zip.js': 2.25.0
       decamelize: 6.0.1
       modern-tar: 0.8.6
       undici: 8.12.4

@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/solid-router";
 
 import { Page } from "~/layouts/page";
 
-import { SystemInfoCard } from "./-index/system-info-card.tsx";
-import { SystemStatsCard } from "./-index/system-stats-card.tsx";
+import { SystemInfoCard } from "./-index/system-info-card";
+import { SystemStatsCard } from "./-index/system-stats-card";
 
 import type { JSX } from "solid-js";
 
@@ -21,6 +21,4 @@ function Index(): JSX.Element {
 	);
 }
 
-const Route = createFileRoute("/")({ component: Index });
-
-export { Route };
+export const Route = createFileRoute("/")({ component: Index });

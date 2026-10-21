@@ -23,7 +23,7 @@
 		"@tauri-apps/plugin-log": "catalog:tauri",
 		"@tauri-apps/plugin-store": "catalog:tauri",
 		"@wdio/tauri-plugin": "catalog:wdio",
-		"neverthrow": "catalog:",
+		"effect": "catalog:",
 		"shared": "workspace:*",
 		"solid-js": "1.9.19",
 		"tailwind-merge": "3.7.0",

@@ -1,21 +1,3 @@
-import { logger } from "~/logger";
-
-// oxlint-disable-next-line typescript/no-explicit-any
-function logError<TResponse, TArgs extends any[]>(
-	label: string,
-	fn: (...args: TArgs) => Promise<TResponse>,
-) {
-	return async function (...args: TArgs) {
-		try {
-			return await fn(...args);
-		} catch (cause) {
-			logger.error(`[${label}] error:`, cause);
-			// oxlint-disable-next-line eslint-js/no-restricted-syntax
-			throw cause;
-		}
-	};
-}
-
 function isValidDate(date: Date) {
 	return !Number.isNaN(date.getTime());
 }
@@ -49,16 +31,4 @@ function reconcileSampledAt<TData extends { sampledAt: string }>(
 	return incomingDate >= currentDate ? incoming : current;
 }
 
-function retryIfTauriAllowed(maxRetries = 3) {
-	return function retry(failureCount: number, cause: unknown) {
-		const message = String(cause);
-
-		// @TODO: brittle
-		return (
-			failureCount < maxRetries &&
-			!message.includes("not allowed. Plugin not found")
-		);
-	};
-}
-
-export { logError, reconcileSampledAt, retryIfTauriAllowed };
+export { reconcileSampledAt };
