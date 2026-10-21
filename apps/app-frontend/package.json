@@ -24,7 +24,7 @@
 		"@tauri-apps/plugin-log": "catalog:tauri",
 		"@tauri-apps/plugin-store": "catalog:tauri",
 		"@wdio/tauri-plugin": "catalog:wdio",
-		"neverthrow": "catalog:",
+		"effect": "catalog:",
 		"shared": "workspace:*",
 		"solid-js": "2.0.3",
 		"tailwind-variants": "4.0.2"

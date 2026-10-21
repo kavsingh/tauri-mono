@@ -1,5 +1,4 @@
 import { TanStackDevtools } from "@tanstack/solid-devtools";
-import { SolidQueryDevtoolsPanel } from "@tanstack/solid-query-devtools";
 import { createRootRoute, Link, Outlet } from "@tanstack/solid-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools";
 import { createEffect, Show, omit } from "solid-js";
@@ -55,11 +54,6 @@ function RootLayout(): JSX.Element {
 									name: "TanStack Router",
 									render: <TanStackRouterDevtoolsPanel />,
 									defaultOpen: true,
-								},
-								{
-									name: "TanStack Query",
-									render: <SolidQueryDevtoolsPanel />,
-									defaultOpen: false,
 								},
 							]}
 						/>

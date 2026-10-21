@@ -1,87 +1,76 @@
-import {
-	mutationOptions,
-	QueryClient,
-	queryOptions,
-} from "@tanstack/solid-query";
+import { Context, Effect } from "effect";
 import { commands, events } from "shared/tauri-bindings.gen";
 
-import { logError, reconcileSampledAt, retryIfTauriAllowed } from "~/lib/query";
+import { cachedQuery, fromPromise } from "~/lib/effect";
 
 import type {
 	SystemStats_Serialize,
 	ThemePreference,
 } from "shared/tauri-bindings.gen";
 
-const systemInfoQueryFn = logError("systemInfo", () =>
-	commands.getSystemInfo(),
-);
-const systemStatsQueryFn = logError("systemStats", () =>
-	commands.getSystemStats(),
-);
-const themePreferenceQueryFn = logError("themePreference", () =>
-	commands.getThemePreference(),
-);
-const setThemePreferenceMutationFn = logError(
-	"setThemePreference",
-	(pref: ThemePreference) => commands.setThemePreference(pref),
-);
-const retry = retryIfTauriAllowed();
+const tauriService = {
+	getSystemInfo: () => fromPromise(commands.getSystemInfo()),
+	getSystemStats: () => fromPromise(commands.getSystemStats()),
+	getThemePreference: () => fromPromise(commands.getThemePreference()),
+	setThemePreference: (preference: ThemePreference) => {
+		return fromPromise(commands.setThemePreference(preference));
+	},
+	subscribeSystemStats: (onValue: (stats: SystemStats_Serialize) => void) => {
+		return fromPromise(
+			events.systemStatsEvent.listen((event) => {
+				onValue(event.payload);
+			}),
+		);
+	},
+};
 
-function systemInfoQuery() {
-	return queryOptions({
-		queryKey: ["systemInfo"],
-		queryFn: systemInfoQueryFn,
-		retry,
-	});
+type TauriServiceShape = typeof tauriService;
+
+class TauriService extends Context.Service<TauriService, TauriServiceShape>()(
+	"TauriService",
+) {}
+
+function runTauri<T>(
+	f: (service: TauriServiceShape) => Effect.Effect<T, unknown>,
+) {
+	return TauriService.use((service) => f(service)).pipe(
+		Effect.provideService(TauriService, tauriService),
+	);
 }
 
-function systemStatsQuery() {
-	return queryOptions({
-		queryKey: ["systemStats"],
-		queryFn: systemStatsQueryFn,
-		structuralSharing: reconcileSampledAt,
-		retry,
-	});
+const themePreferenceCache = cachedQuery(
+	() => runTauri((service) => service.getThemePreference()),
+	"1 hour",
+);
+
+function systemInfoEffect() {
+	return Effect.cached(runTauri((service) => service.getSystemInfo())).pipe(
+		Effect.flatten,
+	);
 }
 
-function themePreferenceQuery() {
-	return queryOptions({
-		queryKey: ["themePreference"],
-		queryFn: themePreferenceQueryFn,
-		retry,
-	});
+function systemStatsEffect() {
+	return Effect.cached(runTauri((service) => service.getSystemStats())).pipe(
+		Effect.flatten,
+	);
 }
 
-function setThemePreferenceMutation() {
-	return mutationOptions({
-		mutationFn: setThemePreferenceMutationFn,
-		onSuccess: (_data, _vars: unknown, _result, ctx) => {
-			void ctx.client.invalidateQueries({
-				queryKey: themePreferenceQuery().queryKey,
-			});
-		},
-	});
+function themePreferenceEffect() {
+	return themePreferenceCache.read();
 }
 
-function startEventListeners(client: QueryClient) {
-	const statsKey = systemStatsQuery().queryKey;
-
-	const unsubStats = events.systemStatsEvent.listen((event) => {
-		const current = client.getQueryData<SystemStats_Serialize>(statsKey);
-		const next = reconcileSampledAt(current, event.payload);
-
-		if (next !== current) {
-			client.setQueryData<SystemStats_Serialize>(statsKey, () => next);
-		}
+function setThemePreferenceEffect(preference: ThemePreference) {
+	return Effect.gen(function* () {
+		yield* runTauri((service) => service.setThemePreference(preference));
+		yield* themePreferenceCache.refresh();
 	});
-
-	return unsubStats;
 }
 
 export {
-	systemInfoQuery,
-	systemStatsQuery,
-	themePreferenceQuery,
-	setThemePreferenceMutation,
-	startEventListeners,
+	TauriService,
+	runTauri,
+	setThemePreferenceEffect,
+	systemInfoEffect,
+	systemStatsEffect,
+	themePreferenceEffect,
 };
