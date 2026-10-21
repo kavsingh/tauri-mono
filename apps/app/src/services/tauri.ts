@@ -7,7 +7,7 @@ import {
 import { handleResult, reconcileSampledAt } from "~/lib/query";
 import { commands, events } from "~/tauri-bindings.gen";
 
-import type { SystemStats } from "~/tauri-bindings.gen";
+import type { SystemStats_Serialize } from "~/tauri-bindings.gen";
 
 function systemInfoQuery() {
 	return queryOptions({
@@ -20,7 +20,7 @@ function systemStatsQuery() {
 	return queryOptions({
 		queryKey: ["systemStats"],
 		queryFn: handleResult(commands.getSystemStats),
-		reconcile: reconcileSampledAt<SystemStats>,
+		reconcile: reconcileSampledAt<SystemStats_Serialize>,
 	});
 }
 
@@ -46,7 +46,7 @@ async function startEventListeners(client: QueryClient) {
 	const statsKey = systemStatsQuery().queryKey;
 
 	const unsubStats = await events.systemStatsEvent.listen((event) => {
-		const current = client.getQueryData<SystemStats>(statsKey);
+		const current = client.getQueryData<SystemStats_Serialize>(statsKey);
 		const next = reconcileSampledAt(current, event.payload);
 
 		if (next !== current) client.setQueryData(statsKey, () => next);

@@ -15,8 +15,8 @@ catalog:
   '@tsconfig/strictest': 2.0.8
   '@types/node': 26.6.5
   neverthrow: 8.2.0
-  oxlint: 1.87.0
-  oxlint-plugin-eslint: 1.87.0
+  oxlint: 1.88.0
+  oxlint-plugin-eslint: 1.88.0
 
 allowBuilds:
   edgedriver: true

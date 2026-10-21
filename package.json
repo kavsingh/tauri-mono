@@ -24,14 +24,14 @@
 		"@typescript/native-preview": "npm:typescript@7.0.2",
 		"code-config": "workspace:*",
 		"cross-env": "10.1.0",
-		"lefthook": "2.2.1",
+		"lefthook": "2.2.2",
 		"nx": "23.3.0",
-		"oxfmt": "0.72.0",
+		"oxfmt": "0.73.0",
 		"oxlint": "catalog:",
 		"oxlint-tsgolint": "7.0.2004",
 		"rimraf": "6.1.3",
-		"tombi": "1.8.0",
+		"tombi": "1.8.7",
 		"typescript": "npm:@typescript/typescript6@6.0.2"
 	},
-	"packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9"
+	"packageManager": "pnpm@12.14.0+sha512.c18ba6d87993d3d164cb5e8948f32b2c06ee854487e06cd8d86781342fb3e5bb4634367034711e86802baa9c37bea906ce1929ad08d70884c97d801df13389a6"
 }
