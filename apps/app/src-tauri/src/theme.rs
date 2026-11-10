@@ -31,14 +31,14 @@ impl PartialEq<Option<tauri::Theme>> for ThemePreference {
 }
 
 impl FromStr for ThemePreference {
-	type Err = Box<dyn std::error::Error>;
+	type Err = anyhow::Error;
 
-	fn from_str(val: &str) -> Result<Self, Self::Err> {
+	fn from_str(val: &str) -> anyhow::Result<Self> {
 		match val {
 			"system" => Ok(Self::System),
 			"dark" => Ok(Self::Dark),
 			"light" => Ok(Self::Light),
-			_ => Err(Self::Err::from("invalid theme")),
+			_ => Err(anyhow::anyhow!("invalid theme")),
 		}
 	}
 }

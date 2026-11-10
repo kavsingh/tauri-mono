@@ -13,10 +13,10 @@ verifyDepsBeforeRun: prompt
 catalog:
   '@tsconfig/node26': 26.0.1
   '@tsconfig/strictest': 2.0.8
-  '@types/node': 26.6.5
+  '@types/node': 26.6.6
   neverthrow: 8.2.0
-  oxlint: 1.88.0
-  oxlint-plugin-eslint: 1.88.0
+  oxlint: 1.92.0
+  oxlint-plugin-eslint: 1.92.0
 
 allowBuilds:
   edgedriver: true

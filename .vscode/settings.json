@@ -14,6 +14,7 @@
 	"rust-analyzer.diagnostics.styleLints.enable": true,
 	"rust-analyzer.rustfmt.extraArgs": ["+nightly"],
 
+	"js/ts.tsdk.path": "node_modules/@typescript/native-preview",
 	"js/ts.experimental.useTsgo": true,
 
 	"oxc.enable": true,
@@ -39,5 +40,7 @@
 
 	"[rust]": { "editor.defaultFormatter": "rust-lang.rust-analyzer" },
 	"[toml]": { "editor.defaultFormatter": "tombi-toml.tombi" },
-	"[css]": { "tailwindCSS.validate": true }
+	"[css]": {
+		"tailwindCSS.validate": true
+	}
 }
