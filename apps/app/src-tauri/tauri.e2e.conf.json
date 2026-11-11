@@ -1,8 +1,10 @@
 {
+	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+	"identifier": "com.app-remote.dev",
 	"app": {
 		"withGlobalTauri": true,
 		"security": {
-			"capabilities": ["default", "webdriver"],
+			"capabilities": ["main", "main-remote", "loading", "webdriver"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,
@@ -11,19 +13,6 @@
 				"options": { "dir": "../dist-isolation" }
 			},
 			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
-		},
-		"windows": [
-			{
-				"label": "main",
-				"title": "App",
-				"width": 800,
-				"height": 600,
-				"resizable": true,
-				"fullscreen": false,
-				"titleBarStyle": "Overlay",
-				"hiddenTitle": true,
-				"visible": false
-			}
-		]
+		}
 	}
 }

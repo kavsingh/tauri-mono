@@ -1,0 +1,41 @@
+services:
+  app-frontend:
+    build:
+      dockerfile: ./apps/app-frontend/Dockerfile
+      context: .
+      target: ui-dev
+    command: pnpm nx dev app-frontend
+    ports:
+      - "5321:5321"
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/app-frontend/src
+          target: /monorepo/apps/app-frontend/src
+        - action: sync
+          path: ./apps/app-frontend/public
+          target: /monorepo/apps/app-frontend/public
+        - action: rebuild
+          path: ./apps/app-frontend/package.json
+          target: /monorepo/apps/app-frontend/package.json
+
+        - action: sync
+          path: ./packages/shared
+          target: /monorepo/packages/shared
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./packages/shared/package.json
+          target: /monorepo/packages/shared/package.json
+    profiles:
+      - dev
+
+  app-frontend-prod:
+    build:
+      dockerfile: ./apps/app-frontend/Dockerfile
+      context: .
+      target: ui-prod
+    ports:
+      - "5321:80"
+    profiles:
+      - prod

@@ -1,11 +1,11 @@
 {
 	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-	"productName": "App",
+	"productName": "AppRemote",
 	"version": "../package.json",
-	"identifier": "com.app.dev",
+	"identifier": "com.app-remote.dev",
 	"app": {
 		"security": {
-			"capabilities": ["default"],
+			"capabilities": ["main", "main-remote", "loading"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,
@@ -18,6 +18,8 @@
 		"windows": [
 			{
 				"label": "main",
+				"create": false,
+				"url": "http://localhost:5321",
 				"title": "App",
 				"width": 800,
 				"height": 600,
@@ -30,10 +32,9 @@
 		]
 	},
 	"build": {
-		"frontendDist": "../dist",
-		"devUrl": "http://localhost:3000",
-		"beforeDevCommand": "pnpm before:dev",
-		"beforeBuildCommand": "pnpm before:build"
+		"frontendDist": "../fallback",
+		"beforeDevCommand": "pnpm build:isolation",
+		"beforeBuildCommand": "pnpm build:isolation"
 	},
 	"bundle": {
 		"active": true,

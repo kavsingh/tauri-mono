@@ -1,15 +1,19 @@
+mod files;
 mod preferences;
+mod remote;
 mod system_info;
 mod system_stats;
 mod theme;
 
 use std::thread::spawn;
 
+use files::open_user_dir;
+use remote::{RemoteState, connect_remote, remote_ready};
 use system_info::get_system_info;
 use system_stats::{
 	ManagedSystemStatsState, SystemStatsEvent, get_system_stats,
 };
-use tauri::{Builder, Manager};
+use tauri::{Builder, Manager, WebviewUrl, WebviewWindowBuilder};
 use tauri_specta::Event;
 
 use crate::preferences::{
@@ -25,7 +29,10 @@ pub fn run() {
 			get_system_info,
 			get_system_stats,
 			get_theme_preference,
-			set_theme_preference
+			set_theme_preference,
+			open_user_dir,
+			connect_remote,
+			remote_ready
 		]);
 
 	#[cfg(debug_assertions)]
@@ -34,7 +41,7 @@ pub fn run() {
 	specta_builder
 		.export(
 			specta_typescript::Typescript::default(),
-			"../src/tauri-bindings.gen.ts",
+			"../../../packages/shared/tauri-bindings.gen.ts",
 		)
 		.expect("Failed to export typescript bindings");
 
@@ -51,27 +58,41 @@ pub fn run() {
 	builder
 		.plugin(tauri_plugin_dialog::init())
 		.plugin(tauri_plugin_store::Builder::default().build())
+		.plugin(tauri_plugin_dialog::init())
+		.plugin(tauri_plugin_opener::init())
 		.manage(ManagedSystemStatsState::default())
+		.manage(RemoteState::default())
 		.invoke_handler(specta_builder.invoke_handler())
 		.setup(move |app| {
 			specta_builder.mount_events(app);
 
-			let main_window = app
-				.get_webview_window("main")
-				.expect("no main window available");
 			let theme = get_stored_theme_preference(app.handle());
 
-			app.set_theme(theme.clone().into());
+			app.set_theme(theme.into());
 
-			if theme.ne(&main_window.theme().ok()) {
-				main_window.set_theme(theme.into()).unwrap_or(());
-			}
+			let main_config = app
+				.config()
+				.app
+				.windows
+				.iter()
+				.find(|window| window.label == "main")
+				.ok_or("no main window configuration available")?;
+			let mut loading_config = main_config.clone();
 
-			#[cfg(debug_assertions)]
-			#[cfg(not(feature = "e2e"))]
-			{
-				main_window.open_devtools();
-			}
+			loading_config.label = "loading".into();
+			loading_config.url = WebviewUrl::App("index.html".into());
+			loading_config.visible = true;
+
+			let loading_window =
+				WebviewWindowBuilder::from_config(app, &loading_config)?
+					.build()?;
+			let handle = app.handle().clone();
+
+			loading_window.on_window_event(move |event| {
+				if matches!(event, tauri::WindowEvent::CloseRequested { .. }) {
+					handle.exit(0);
+				}
+			});
 
 			log::info!("subscribing to stats events");
 
