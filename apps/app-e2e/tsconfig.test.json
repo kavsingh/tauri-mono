@@ -4,6 +4,7 @@
 	"extends": "code-config/tsconfig.node.json",
 	"compilerOptions": {
 		"composite": true,
+		"lib": ["dom"],
 		"types": [
 			"node",
 			"@wdio/globals/types",

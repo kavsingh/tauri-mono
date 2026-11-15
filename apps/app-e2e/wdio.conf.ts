@@ -16,7 +16,7 @@ export const config: WebdriverIO.Config = {
 	specs: ["./test/**/*.e2e.ts"],
 	exclude: [],
 	maxInstances: 1,
-	logLevel: "info",
+	logLevel: "error",
 	bail: 0,
 	waitforTimeout: 10_000,
 	connectionRetryTimeout: 0,
