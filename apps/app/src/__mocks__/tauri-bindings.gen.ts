@@ -4,7 +4,6 @@ import {
 	createMockSystemInfo,
 	createMockSystemStats,
 } from "~/__test-helpers__/mock-data/system";
-import { createMockOkResult } from "~/__test-helpers__/tauri/commands";
 
 import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import type {
@@ -28,9 +27,7 @@ function mockEventHandles(): MockEventHandles {
 
 const commands: typeof bindingsCommands = {
 	getSystemInfo: vi.fn(() => Promise.resolve(createMockSystemInfo())),
-	getSystemStats: vi.fn(() => {
-		return Promise.resolve(createMockOkResult(createMockSystemStats()));
-	}),
+	getSystemStats: vi.fn(() => Promise.resolve(createMockSystemStats())),
 	getThemePreference: vi.fn(() => Promise.resolve("System" as const)),
 	setThemePreference: vi.fn(() => Promise.resolve()),
 };

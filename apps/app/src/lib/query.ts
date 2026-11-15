@@ -1,26 +1,3 @@
-type QueryResult<TData, TError> =
-	| { status: "ok"; data: TData }
-	| { status: "error"; error: TError };
-
-// oxlint-disable-next-line typescript/no-explicit-any
-function handleResult<TData, TError, TArgs extends any[]>(
-	fn: (...args: TArgs) => Promise<QueryResult<TData, TError>>,
-) {
-	return async function (...args: TArgs) {
-		const result = await fn(...args);
-
-		if (result.status === "error") {
-			// for compat with @tanstack/query
-			// oxlint-disable-next-line eslint-js/no-restricted-syntax
-			throw result.error instanceof Error
-				? result.error
-				: new Error(String(result.error), { cause: result });
-		}
-
-		return result.data;
-	};
-}
-
 function isValidDate(date: Date) {
 	return !Number.isNaN(date.getTime());
 }
@@ -54,5 +31,4 @@ function reconcileSampledAt<TData extends { sampledAt: string }>(
 	return incomingDate >= currentDate ? incoming : current;
 }
 
-export { handleResult, reconcileSampledAt };
-export type { QueryResult as Result };
+export { reconcileSampledAt };

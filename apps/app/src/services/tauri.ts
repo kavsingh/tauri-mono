@@ -4,22 +4,25 @@ import {
 	queryOptions,
 } from "@tanstack/solid-query";
 
-import { handleResult, reconcileSampledAt } from "~/lib/query";
+import { reconcileSampledAt } from "~/lib/query";
 import { commands, events } from "~/tauri-bindings.gen";
 
-import type { SystemStats_Serialize } from "~/tauri-bindings.gen";
+import type {
+	SystemStats_Serialize,
+	ThemePreference,
+} from "~/tauri-bindings.gen";
 
 function systemInfoQuery() {
 	return queryOptions({
 		queryKey: ["systemInfo"],
-		queryFn: commands.getSystemInfo,
+		queryFn: () => commands.getSystemInfo(),
 	});
 }
 
 function systemStatsQuery() {
 	return queryOptions({
 		queryKey: ["systemStats"],
-		queryFn: handleResult(commands.getSystemStats),
+		queryFn: () => commands.getSystemStats(),
 		reconcile: reconcileSampledAt<SystemStats_Serialize>,
 	});
 }
@@ -27,13 +30,13 @@ function systemStatsQuery() {
 function themePreferenceQuery() {
 	return queryOptions({
 		queryKey: ["themePreference"],
-		queryFn: commands.getThemePreference,
+		queryFn: () => commands.getThemePreference(),
 	});
 }
 
 function setThemePreferenceMutation() {
 	return mutationOptions({
-		mutationFn: commands.setThemePreference,
+		mutationFn: (vars: ThemePreference) => commands.setThemePreference(vars),
 		onSuccess: (_data, _vars, _result, ctx) => {
 			void ctx.client.invalidateQueries({
 				queryKey: themePreferenceQuery().queryKey,

@@ -11,12 +11,12 @@ trustPolicyIgnoreAfter: 10080
 verifyDepsBeforeRun: prompt
 
 catalog:
-  '@tsconfig/node26': 26.0.1
-  '@tsconfig/strictest': 2.0.8
+  '@tsconfig/node26': 26.0.2
+  '@tsconfig/strictest': 2.0.9
   '@types/node': 26.6.6
   neverthrow: 8.2.0
-  oxlint: 1.92.0
-  oxlint-plugin-eslint: 1.92.0
+  oxlint: 1.93.0
+  oxlint-plugin-eslint: 1.93.0
 
 allowBuilds:
   edgedriver: true
