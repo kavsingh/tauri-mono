@@ -5,6 +5,17 @@ edition.workspace = true
 description = "A Tauri App"
 repository.workspace = true
 
+[features]
+# by default Tauri runs in production mode
+# when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
+default = ["custom-protocol"]
+# this feature is used used for production builds where `devPath` points to the filesystem
+# DO NOT remove this
+custom-protocol = ["tauri/custom-protocol"]
+# https://github.com/Choochmeque/tauri-plugin-webdriver#installation
+# both tauri-plugin-wdio and tauri-plugin-wdio-webdriver required for e2e testing
+e2e = ["tauri-plugin-wdio", "tauri-plugin-wdio-webdriver"]
+
 [lib]
 crate-type = ["cdylib", "rlib", "staticlib"]
 # see https://github.com/rust-lang/cargo/issues/8519
@@ -37,17 +48,6 @@ features = ["derive", "typescript"]
 [build-dependencies.tauri-build]
 version = "2.7.4"
 features = ["isolation"]
-
-[features]
-# by default Tauri runs in production mode
-# when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
-default = ["custom-protocol"]
-# this feature is used used for production builds where `devPath` points to the filesystem
-# DO NOT remove this
-custom-protocol = ["tauri/custom-protocol"]
-# https://github.com/Choochmeque/tauri-plugin-webdriver#installation
-# both tauri-plugin-wdio and tauri-plugin-wdio-webdriver required for e2e testing
-e2e = ["tauri-plugin-wdio", "tauri-plugin-wdio-webdriver"]
 
 [lints]
 workspace = true

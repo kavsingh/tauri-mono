@@ -30,8 +30,8 @@
 		]
 	},
 	"build": {
-		"frontendDist": "../dist",
-		"devUrl": "http://localhost:3000",
+		"frontendDist": "../../app-frontend/dist",
+		"devUrl": "http://localhost:5321",
 		"beforeDevCommand": "pnpm before:dev",
 		"beforeBuildCommand": "pnpm before:build"
 	},

@@ -1,4 +1,5 @@
 {
+	"identifier": "com.app.dev",
 	"app": {
 		"withGlobalTauri": true,
 		"security": {
