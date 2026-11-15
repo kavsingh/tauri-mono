@@ -20,7 +20,6 @@ const config: OxlintConfig = defineConfig({
 	env: { node: true, browser: false },
 	ignorePatterns: [
 		"dist/**",
-		"dist-isolation/**",
 		"reports/**",
 		".tanstack/**",
 		"**/*.gen.*",
