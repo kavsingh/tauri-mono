@@ -18,7 +18,7 @@
 		"tailwindcss-language-server": {
 			"settings": {
 				"validate": true,
-				"classFunctions": ["tj", "tm", "tv"],
+				"classFunctions": ["cx", "cn", "tv"],
 				"classAttributes": [
 					"class",
 					"classList",

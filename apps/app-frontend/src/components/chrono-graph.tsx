@@ -8,7 +8,7 @@ import {
 
 import { useResizeObserver } from "~/hooks/dom";
 import { normalizeBigint } from "~/lib/number";
-import { tm } from "~/lib/style";
+import { cn } from "~/lib/style";
 
 import type { Accessor, JSX } from "solid-js";
 
@@ -133,7 +133,7 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 
 	return (
 		<canvas
-			class={tm(
+			class={cn(
 				"border-accent-foreground bg-muted/30 text-muted/60 block-full inline-full",
 				props.class,
 			)}

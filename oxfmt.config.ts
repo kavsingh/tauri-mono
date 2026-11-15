@@ -14,6 +14,7 @@ export default defineConfig({
 		"!**/__mocks__/*.generated.*",
 		"!**/__generated__/__mocks__/**",
 		"**/pnpm-*.yaml",
+		"**/*.toml", // formatted via tombi
 	],
 	printWidth: 80,
 	useTabs: true,

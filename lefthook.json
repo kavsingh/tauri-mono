@@ -5,8 +5,13 @@
 	"pre-commit": {
 		"jobs": [
 			{
-				"glob": "*.{ts,tsx,js,tsx,html,css,json,jsonc,yml,yaml,toml,md}",
+				"glob": "*.{ts,tsx,js,tsx,html,css,json,jsonc,yml,yaml,md}",
 				"run": "pnpm oxfmt --no-error-on-unmatched-pattern {staged_files}",
+				"stage_fixed": true
+			},
+			{
+				"glob": "*.toml",
+				"run": "pnpm tombi format {staged_files}",
 				"stage_fixed": true
 			}
 		]

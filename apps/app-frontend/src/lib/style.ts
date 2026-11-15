@@ -28,9 +28,7 @@ function getStylePropertyValues<TMap extends StyleProperyValueMap>(
 }
 
 // oxlint-disable-next-line no-restricted-imports
-export { twMerge as tm, twJoin as tj } from "tailwind-merge";
-// oxlint-disable-next-line no-restricted-imports
-export { tv } from "tailwind-variants";
+export { cx, cn, tv } from "tailwind-variants";
 
 export { getStylePropertyValues };
 

@@ -36,11 +36,6 @@ const config: OxlintConfig = defineConfig({
 			entryPoint: path.resolve(import.meta.dirname, "./src/index.css"),
 			selectors: [
 				...getDefaultSelectors(),
-				...["tj", "tm"].map((name) => ({
-					name,
-					kind: SelectorKind.Callee,
-					match: [{ type: MatcherType.String }],
-				})),
 				...["^classNames$", "^.+ClassNames$"].map((name) => ({
 					name,
 					kind: SelectorKind.Attribute,

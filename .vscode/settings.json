@@ -21,7 +21,7 @@
 
 	"files.associations": { "*.css": "tailwindcss" },
 	"tailwindCSS.validate": false,
-	"tailwindCSS.classFunctions": ["tj", "tm", "tv"],
+	"tailwindCSS.classFunctions": ["cx", "cn", "tv"],
 	"tailwindCSS.classAttributes": [
 		"class",
 		"classList",

@@ -1,6 +1,6 @@
 import { splitProps } from "solid-js";
 
-import { tm } from "~/lib/style";
+import { cn } from "~/lib/style";
 
 import type { ComponentProps, JSX } from "solid-js";
 
@@ -10,7 +10,7 @@ function InfoListRoot(props: InfoListRootProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
 	return (
-		<ul {...passProps} class={tm("m-0 list-none p-0", localProps.class)} />
+		<ul {...passProps} class={cn("m-0 list-none p-0", localProps.class)} />
 	);
 }
 
@@ -24,7 +24,7 @@ function InfoListEntry(props: InfoListEntryProps): JSX.Element {
 	return (
 		<li
 			{...passProps}
-			class={tm(
+			class={cn(
 				"flex gap-2 border-be border-be-border py-2 last:border-be-0",
 				localProps.class,
 			)}
@@ -42,7 +42,7 @@ function InfoListLabel(props: InfoListLabelProps): JSX.Element {
 	return (
 		<span
 			{...passProps}
-			class={tm("text-muted-foreground", localProps.class)}
+			class={cn("text-muted-foreground", localProps.class)}
 		/>
 	);
 }

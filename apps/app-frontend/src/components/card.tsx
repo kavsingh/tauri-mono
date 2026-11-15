@@ -2,7 +2,7 @@
 
 import { splitProps } from "solid-js";
 
-import { tm } from "~/lib/style";
+import { cn } from "~/lib/style";
 
 import type { ComponentProps, JSX } from "solid-js";
 
@@ -14,7 +14,7 @@ function CardRoot(props: CardRootProps): JSX.Element {
 	return (
 		<div
 			{...passProps}
-			class={tm(
+			class={cn(
 				"rounded-xl border border-border bg-card text-card-foreground shadow-sm",
 				localProps.class,
 			)}
@@ -32,7 +32,7 @@ function CardHeader(props: CardHeaderProps): JSX.Element {
 	return (
 		<div
 			{...passProps}
-			class={tm("flex flex-col space-y-1.5 p-6", localProps.class)}
+			class={cn("flex flex-col space-y-1.5 p-6", localProps.class)}
 		/>
 	);
 }
@@ -47,7 +47,7 @@ function CardTitle(props: CardTitleProps): JSX.Element {
 	return (
 		<h3
 			{...passProps}
-			class={tm("leading-none font-semibold tracking-tight", localProps.class)}
+			class={cn("leading-none font-semibold tracking-tight", localProps.class)}
 		>
 			{localProps.children}
 		</h3>
@@ -64,7 +64,7 @@ function CardDescription(props: CardDescriptionProps): JSX.Element {
 	return (
 		<p
 			{...passProps}
-			class={tm("text-sm text-muted-foreground", localProps.class)}
+			class={cn("text-sm text-muted-foreground", localProps.class)}
 		/>
 	);
 }
@@ -76,7 +76,7 @@ type CardContentProps = Omit<ComponentProps<"div">, "classList">;
 function CardContent(props: CardContentProps): JSX.Element {
 	const [localProps, passProps] = splitProps(props, ["class"]);
 
-	return <div {...passProps} class={tm("p-6 pbs-0", localProps.class)} />;
+	return <div {...passProps} class={cn("p-6 pbs-0", localProps.class)} />;
 }
 
 //
@@ -89,7 +89,7 @@ function CardFooter(props: CardFooterProps): JSX.Element {
 	return (
 		<div
 			{...passProps}
-			class={tm("flex items-center p-6 pbs-0", localProps.class)}
+			class={cn("flex items-center p-6 pbs-0", localProps.class)}
 		/>
 	);
 }
