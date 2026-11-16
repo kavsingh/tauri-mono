@@ -6,24 +6,56 @@
 			"outputs": ["{projectRoot}/dist/**"],
 			"cache": true
 		},
-		"build:mac": {
-			"dependsOn": ["^build"],
+		"build:embedded": {
+			"inputs": ["default", "^default"],
 			"outputs": [
 				"{projectRoot}/dist/**",
+				"{workspaceRoot}/apps/app/fallback/ui/**"
+			],
+			"cache": true
+		},
+		"build:release": {
+			"inputs": ["default", "^default"],
+			"outputs": ["{projectRoot}/dist/**"],
+			"cache": false
+		},
+		"build:mac": {
+			"dependsOn": ["^build", "app-frontend:build:embedded"],
+			"inputs": ["default", "^default", "env:FRONTEND_RELEASE_PUBLIC_KEY"],
+			"outputs": [
+				"{projectRoot}/dist/**",
+				"{workspaceRoot}/apps/app/fallback/ui/**",
 				"{workspaceRoot}/target/universal-apple-darwin/**"
 			],
 			"cache": true
 		},
 		"build:win": {
-			"dependsOn": ["^build"],
-			"outputs": ["{projectRoot}/dist/**"],
+			"dependsOn": ["^build", "app-frontend:build:embedded"],
+			"inputs": ["default", "^default", "env:FRONTEND_RELEASE_PUBLIC_KEY"],
+			"outputs": [
+				"{projectRoot}/dist/**",
+				"{workspaceRoot}/apps/app/fallback/ui/**",
+				"{workspaceRoot}/target/x86_64-pc-windows-msvc/**"
+			],
 			"cache": true
 		},
 		"build:e2e:mac": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["^build", "app-frontend:build:embedded"],
+			"inputs": ["default", "^default"],
 			"outputs": [
 				"{projectRoot}/dist/**",
+				"{workspaceRoot}/apps/app/fallback/ui/**",
 				"{workspaceRoot}/target/universal-apple-darwin/**"
+			],
+			"cache": true
+		},
+		"build:e2e:win": {
+			"dependsOn": ["^build", "app-frontend:build:embedded"],
+			"inputs": ["default", "^default"],
+			"outputs": [
+				"{projectRoot}/dist/**",
+				"{workspaceRoot}/apps/app/fallback/ui/**",
+				"{workspaceRoot}/target/x86_64-pc-windows-msvc/**"
 			],
 			"cache": true
 		},

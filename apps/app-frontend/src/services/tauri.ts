@@ -3,6 +3,7 @@ import {
 	QueryClient,
 	queryOptions,
 } from "@tanstack/solid-query";
+import { openUrl } from "@tauri-apps/plugin-opener";
 import { commands, events } from "shared/tauri-bindings.gen";
 
 import { logError, reconcileSampledAt, retryIfTauriAllowed } from "~/lib/query";
@@ -22,9 +23,21 @@ const systemStatsQueryFn = logError("systemStats", () =>
 const themePreferenceQueryFn = logError("themePreference", () =>
 	commands.getThemePreference(),
 );
+const connectionStatusQueryFn = logError("connectionStatus", () =>
+	commands.getConnectionStatus(),
+);
 const setThemePreferenceMutationFn = logError(
 	"setThemePreference",
 	(pref: ThemePreference) => commands.setThemePreference(pref),
+);
+const openExternalUrlMutationFn = logError("openExternalUrl", (url: string) =>
+	openUrl(url),
+);
+const openUserDirMutationFn = logError("openUserDir", () =>
+	commands.openUserDir(),
+);
+const connectRemoteMutationFn = logError("connectRemote", () =>
+	commands.connectRemote(),
 );
 const retry = retryIfTauriAllowed();
 
@@ -53,6 +66,14 @@ function themePreferenceQuery() {
 	});
 }
 
+function connectionStatusQuery() {
+	return queryOptions({
+		queryKey: ["connectionStatus"],
+		queryFn: connectionStatusQueryFn,
+		retry,
+	});
+}
+
 function setThemePreferenceMutation() {
 	return mutationOptions({
 		mutationFn: setThemePreferenceMutationFn,
@@ -62,6 +83,18 @@ function setThemePreferenceMutation() {
 			});
 		},
 	});
+}
+
+function openExternalUrlMutation() {
+	return mutationOptions({ mutationFn: openExternalUrlMutationFn });
+}
+
+function openUserDirMutation() {
+	return mutationOptions({ mutationFn: openUserDirMutationFn });
+}
+
+function connectRemoteMutation() {
+	return mutationOptions({ mutationFn: connectRemoteMutationFn });
 }
 
 function startEventListeners(client: QueryClient) {
@@ -81,6 +114,10 @@ export {
 	systemInfoQuery,
 	systemStatsQuery,
 	themePreferenceQuery,
+	connectionStatusQuery,
 	setThemePreferenceMutation,
+	openExternalUrlMutation,
+	openUserDirMutation,
+	connectRemoteMutation,
 	startEventListeners,
 };

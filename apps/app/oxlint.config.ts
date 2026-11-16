@@ -12,6 +12,16 @@ const config: OxlintConfig = defineConfig({
 		"**/*.gen.*",
 		"!**/__mocks__/*.gen.*",
 	],
+	overrides: [
+		{
+			files: ["./src/**/*.ts"],
+			env: { node: false, browser: true },
+			rules: {
+				"eslint/no-console": "error",
+				"import/no-nodejs-modules": "error",
+			},
+		},
+	],
 });
 
 export default config;

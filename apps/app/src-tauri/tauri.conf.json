@@ -1,11 +1,11 @@
 {
 	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-	"productName": "App",
+	"productName": "AppRemote",
 	"version": "../package.json",
-	"identifier": "com.app.dev",
+	"identifier": "com.app-remote.dev",
 	"app": {
 		"security": {
-			"capabilities": ["default"],
+			"capabilities": ["main", "main-remote", "local", "loading"],
 			"assetProtocol": { "enable": false, "scope": [] },
 			"dangerousDisableAssetCspModification": false,
 			"freezePrototype": true,
@@ -13,11 +13,13 @@
 				"use": "isolation",
 				"options": { "dir": "../dist-isolation" }
 			},
-			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: app-local: 'unsafe-eval' 'unsafe-inline' 'self'; img-src 'self' data: blob:"
 		},
 		"windows": [
 			{
 				"label": "main",
+				"create": false,
+				"url": "http://localhost:5321",
 				"title": "App",
 				"width": 800,
 				"height": 600,
@@ -30,10 +32,9 @@
 		]
 	},
 	"build": {
-		"frontendDist": "../../app-frontend/dist",
-		"devUrl": "http://localhost:5321",
-		"beforeDevCommand": "pnpm before:dev",
-		"beforeBuildCommand": "pnpm before:build"
+		"frontendDist": "../fallback",
+		"beforeDevCommand": "pnpm exec nx run app-frontend:build:embedded && pnpm build:isolation",
+		"beforeBuildCommand": "pnpm exec nx run app-frontend:build:embedded && pnpm build:isolation"
 	},
 	"bundle": {
 		"active": true,

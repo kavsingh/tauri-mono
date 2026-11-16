@@ -1,3 +1,4 @@
+import { createMockConnectionStatus } from "shared/test-helpers/tauri/mock-data/remote";
 import {
 	createMockSystemInfo,
 	createMockSystemStats,
@@ -31,6 +32,12 @@ const commands: typeof bindingsCommands = {
 	getSystemStats: vi.fn(() => Promise.resolve(createMockSystemStats())),
 	getThemePreference: vi.fn(() => Promise.resolve("System" as const)),
 	setThemePreference: vi.fn(() => Promise.resolve()),
+	openUserDir: vi.fn(() => Promise.resolve(null)),
+	connectRemote: vi.fn(() => Promise.resolve(null)),
+	remoteReady: vi.fn(() => Promise.resolve(null)),
+	getConnectionStatus: vi.fn(() => {
+		return Promise.resolve(createMockConnectionStatus());
+	}),
 };
 
 // oxlint-disable typescript/no-unsafe-type-assertion
