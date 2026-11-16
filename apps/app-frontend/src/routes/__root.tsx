@@ -4,6 +4,7 @@ import { createRootRoute, Link, Outlet } from "@tanstack/solid-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools";
 import { createEffect, Show, omit } from "solid-js";
 
+import { ConnectionBanner } from "~/components/connection-banner";
 import { usePrefersDark } from "~/hooks/theme";
 import { createScopedLogger } from "~/logger";
 
@@ -38,7 +39,10 @@ function RootLayout(): JSX.Element {
 
 	return (
 		<>
-			<div class="grid grid-cols-[max-content_1fr] block-full inline-full min-block-0">
+			<div class="grid grid-cols-[max-content_1fr] grid-rows-[auto_1fr] block-full inline-full min-block-0">
+				<div class="col-span-2">
+					<ConnectionBanner />
+				</div>
 				<div class="p-4 pe-8 pbs-10 text-sm">
 					<nav class="flex flex-col gap-2">
 						<NavLink to="/">Home</NavLink>

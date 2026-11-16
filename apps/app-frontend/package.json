@@ -1,7 +1,7 @@
 {
 	"name": "app-frontend",
 	"version": "1.0.0-dev.0",
-	"description": "frontend for a tauri app",
+	"description": "remote frontend for a tauri app",
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
@@ -10,7 +10,9 @@
 		"test:ci": "vitest run --silent --coverage",
 		"lint": "tsr generate && oxlint && oxfmt --check",
 		"dev": "vite",
-		"build": "vite build"
+		"build": "vite build",
+		"build:release": "node ./scripts/build-frontend-release.ts release",
+		"build:embedded": "node ./scripts/build-frontend-release.ts embedded"
 	},
 	"dependencies": {
 		"@solidjs/web": "2.0.3",
@@ -22,6 +24,7 @@
 		"@tauri-apps/api": "catalog:tauri",
 		"@tauri-apps/plugin-dialog": "catalog:tauri",
 		"@tauri-apps/plugin-log": "catalog:tauri",
+		"@tauri-apps/plugin-opener": "catalog:tauri",
 		"@tauri-apps/plugin-store": "catalog:tauri",
 		"@wdio/tauri-plugin": "catalog:wdio",
 		"neverthrow": "catalog:",

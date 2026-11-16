@@ -10,6 +10,10 @@ export const commands = {
 	getSystemStats: (options?: InvokeOptions) => __TAURI_INVOKE<SystemStats_Serialize>("get_system_stats", undefined, options),
 	getThemePreference: (options?: InvokeOptions) => __TAURI_INVOKE<ThemePreference>("get_theme_preference", undefined, options),
 	setThemePreference: (preference: ThemePreference, options?: InvokeOptions) => __TAURI_INVOKE<void>("set_theme_preference", { preference }, options),
+	openUserDir: (options?: InvokeOptions) => __TAURI_INVOKE<null>("open_user_dir", undefined, options),
+	connectRemote: (options?: InvokeOptions) => __TAURI_INVOKE<null>("connect_remote", undefined, options),
+	remoteReady: (loadId: string, buildId: string, options?: InvokeOptions) => __TAURI_INVOKE<null>("remote_ready", { loadId, buildId }, options),
+	getConnectionStatus: (options?: InvokeOptions) => __TAURI_INVOKE<ConnectionStatus_Serialize>("get_connection_status", undefined, options),
 };
 
 /** Events */
@@ -18,6 +22,22 @@ export const events = {
 };
 
 /* Types */
+export type ConnectionMode = "connecting" | "local" | "remote" | "failed";
+
+export type ConnectionStatus = ConnectionStatus_Serialize | ConnectionStatus_Deserialize;
+
+export type ConnectionStatus_Deserialize = {
+	mode: ConnectionMode,
+	retrying: boolean,
+	error?: string | null,
+};
+
+export type ConnectionStatus_Serialize = {
+	mode: ConnectionMode,
+	retrying: boolean,
+	error: string | null,
+};
+
 export type SystemInfo = {
 	osFullname: string,
 	osArch: string,

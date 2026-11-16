@@ -15,7 +15,13 @@ export default defineConfig(({ mode }) => {
 	return {
 		server: { port: 5321, host: "0.0.0.0" },
 		resolve: { conditions: ["browser", mode], tsconfigPaths: true },
-		define: { "import.meta.env.VITE_E2E": JSON.stringify(isE2E) },
+		define: {
+			"import.meta.env.VITE_E2E": JSON.stringify(isE2E),
+			"import.meta.env.VITE_FRONTEND_BUILD_ID": JSON.stringify(
+				process.env["VITE_FRONTEND_BUILD_ID"] ?? "development",
+			),
+			"import.meta.env.VITE_NATIVE_API_VERSION": "1",
+		},
 		plugins: [
 			devtools(),
 			tanstackRouter(),

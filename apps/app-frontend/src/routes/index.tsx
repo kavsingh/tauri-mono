@@ -4,6 +4,7 @@ import { Page } from "~/layouts/page";
 
 import { SystemInfoCard } from "./-index/system-info-card.tsx";
 import { SystemStatsCard } from "./-index/system-stats-card.tsx";
+import { TauriCommands } from "./-index/tauri-commands.tsx";
 
 import type { JSX } from "@solidjs/web";
 
@@ -15,6 +16,7 @@ function Index(): JSX.Element {
 				<div class="space-y-6">
 					<SystemInfoCard />
 					<SystemStatsCard />
+					<TauriCommands />
 				</div>
 			</Page.Content>
 		</>

@@ -1,10 +1,11 @@
 import { render } from "@solidjs/web";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { RouterProvider, createRouter } from "@tanstack/solid-router";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "@tauri-apps/plugin-log";
 
 import "./index.css";
+import { commands } from "shared/tauri-bindings.gen";
+
 import { routeTree } from "./route-tree.gen";
 import { startEventListeners } from "./services/tauri";
 
@@ -18,7 +19,13 @@ declare module "@tanstack/solid-router" {
 	}
 }
 
-async function renderAndShow() {
+declare global {
+	interface Window {
+		__REMOTE_LOAD_ID__?: string;
+	}
+}
+
+async function renderAndNotifyReady() {
 	const appRoot = document.querySelector("#app-root");
 
 	// makes sense to panic if no app mount available
@@ -42,9 +49,17 @@ async function renderAndShow() {
 		);
 	}, appRoot);
 
-	// workaround white flash on start.
-	// see: https://github.com/tauri-apps/tauri/issues/5170
-	void getCurrentWindow().show();
+	if (window.__REMOTE_LOAD_ID__) {
+		try {
+			await commands.remoteReady(
+				window.__REMOTE_LOAD_ID__,
+				import.meta.env.VITE_FRONTEND_BUILD_ID,
+			);
+		} catch (cause) {
+			// oxlint-disable-next-line no-console
+			console.error("Could not signal frontend readiness", cause);
+		}
+	}
 }
 
 async function start() {
@@ -55,7 +70,7 @@ async function start() {
 		});
 	}
 
-	await renderAndShow();
+	await renderAndNotifyReady();
 }
 
 void start().catch((cause: unknown) => {

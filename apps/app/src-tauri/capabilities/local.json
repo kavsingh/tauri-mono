@@ -1,0 +1,30 @@
+{
+	"$schema": "../gen/schemas/desktop-schema.json",
+	"identifier": "local",
+	"description": "Native permissions for the validated local frontend",
+	"windows": ["local"],
+	"local": true,
+	"permissions": [
+		"allow-get-system-info",
+		"allow-get-system-stats",
+		"allow-get-theme-preference",
+		"allow-set-theme-preference",
+		"allow-open-user-dir",
+		"allow-connect-remote",
+		"allow-remote-ready",
+		"allow-get-connection-status",
+		"core:event:allow-emit",
+		"core:event:allow-emit-to",
+		"core:event:allow-listen",
+		"core:event:allow-unlisten",
+		"core:window:allow-start-dragging",
+		"core:window:allow-show",
+		"dialog:allow-open",
+		"log:allow-log",
+
+		{
+			"identifier": "opener:allow-open-url",
+			"allow": [{ "url": "https://*.github.io" }, { "url": "native-access:*" }]
+		}
+	]
+}
