@@ -49,12 +49,10 @@ async function renderAndShow() {
 
 async function start() {
 	if (import.meta.env.DEV) {
-		try {
-			await attachConsole();
-		} catch (cause) {
+		await attachConsole().catch((cause: unknown) => {
 			// oxlint-disable-next-line no-console
-			console.error("Could not attach the Tauri console", cause);
-		}
+			console.warn("Tauri console not available", cause);
+		});
 	}
 
 	await renderAndShow();
