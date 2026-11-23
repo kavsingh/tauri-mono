@@ -22,23 +22,23 @@ crate-type = ["cdylib", "rlib", "staticlib"]
 name = "app_lib"
 
 [dependencies]
-anyhow = "1.0.104"
+anyhow = "1.0.105"
 chrono = "0.4.45"
 log = "0.4.35"
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.154"
 specta = "2.0.0-rc.28"
 specta-typescript = "0.0.15"
-sysinfo = "0.40.3"
+sysinfo = "0.40.4"
 tauri-plugin-dialog = "2.8.4"
 tauri-plugin-log = "2.10.2"
 tauri-plugin-store = "2.5.1"
 tauri-plugin-wdio = { version = "1.5.1", optional = true }
 tauri-plugin-wdio-webdriver = { version = "1.5.1", optional = true }
-uuid = { version = "1.29.2", features = ["fast-rng", "v4"] }
+uuid = { version = "1.29.3", features = ["fast-rng", "v4"] }
 
 [dependencies.tauri]
-version = "2.12.5"
+version = "2.12.7"
 features = ["isolation", "specta"]
 
 [dependencies.tauri-specta]
@@ -46,7 +46,7 @@ version = "2.0.0-rc.29"
 features = ["derive", "typescript"]
 
 [build-dependencies.tauri-build]
-version = "2.7.4"
+version = "2.7.6"
 features = ["isolation"]
 
 [lints]

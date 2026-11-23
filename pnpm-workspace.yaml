@@ -23,7 +23,7 @@ catalog:
 catalogs:
   tauri:
     '@tauri-apps/api': 2.12.5
-    '@tauri-apps/cli': 2.12.5
+    '@tauri-apps/cli': 2.12.6
     '@tauri-apps/plugin-dialog': 2.8.4
     '@tauri-apps/plugin-log': 2.10.2
     "@tauri-apps/plugin-store": 2.5.1
