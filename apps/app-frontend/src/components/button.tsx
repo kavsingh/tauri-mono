@@ -1,10 +1,10 @@
 // https://ui.shadcn.com/docs/components/button
 
-import { splitProps } from "solid-js";
+import { omit } from "solid-js";
 
 import { tv } from "~/lib/style";
 
-import type { ComponentProps, JSX } from "solid-js";
+import type { JSX, ComponentProps } from "@solidjs/web";
 import type { VariantProps } from "~/lib/style";
 
 type ButtonVariantProps = VariantProps<typeof buttonVariants>;
@@ -38,24 +38,21 @@ const buttonVariants = tv({
 });
 
 interface ButtonProps
-	extends Omit<ComponentProps<"button">, "classList">, ButtonVariantProps {}
+	extends Omit<ComponentProps<"button">, "class">, ButtonVariantProps {
+	class?: string | undefined;
+}
 
 function Button(props: ButtonProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, [
-		"class",
-		"type",
-		"variant",
-		"size",
-	]);
+	const passProps = omit(props, "class", "type", "variant", "size");
 
 	return (
 		<button
 			{...passProps}
-			type={localProps.type ?? "button"}
+			type={props.type ?? "button"}
 			class={buttonVariants({
-				variant: localProps.variant,
-				size: localProps.size,
-				class: localProps.class,
+				variant: props.variant,
+				size: props.size,
+				class: props.class,
 			})}
 		/>
 	);

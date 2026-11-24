@@ -3,14 +3,16 @@ import {
 	createMemo,
 	createSignal,
 	onCleanup,
-	onMount,
+	onSettled,
+	untrack,
 } from "solid-js";
 
 import { useResizeObserver } from "~/hooks/dom";
 import { normalizeBigint } from "~/lib/number";
 import { cn } from "~/lib/style";
 
-import type { Accessor, JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
+import type { Accessor } from "solid-js";
 
 function drawGraph(canvas: HTMLCanvasElement, normalized: number[]) {
 	const ctx = canvas.getContext("2d");
@@ -80,6 +82,7 @@ interface Sample {
 export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	const schemeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 	const observeResize = useResizeObserver();
+	const [redrawTrigger, setRedrawTrigger] = createSignal(0);
 	let unobserveResize: ReturnType<typeof observeResize> | undefined;
 	let canvasRef: HTMLCanvasElement | undefined;
 	let rollingMin = 0n;
@@ -89,46 +92,59 @@ export function ChronoGraph(props: ChronoGraphProps): JSX.Element {
 	const normalizedValues = createMemo(() => {
 		return normalizeValues(
 			samples(),
-			props.minValue ?? rollingMin,
-			props.maxValue ?? rollingMax,
+			untrack(() => props.minValue ?? rollingMin),
+			untrack(() => props.maxValue ?? rollingMax),
 		);
 	});
 
-	createEffect(() => {
-		const sample = props.sampleSource();
+	createEffect(
+		() => props.sampleSource(),
+		(sample) => {
+			if (!sample) return;
 
-		if (!sample) return;
+			if (sample.value < rollingMin) rollingMin = sample.value;
+			else if (sample.value > rollingMax) rollingMax = sample.value;
 
-		if (sample.value < rollingMin) rollingMin = sample.value;
-		else if (sample.value > rollingMax) rollingMax = sample.value;
+			const maxSamples = props.maxSamples ?? 20;
 
-		const maxSamples = props.maxSamples ?? 20;
+			setSamples((current) => {
+				return [
+					...current.slice(Math.max(current.length - (maxSamples - 1), 0)),
+					sample,
+				];
+			});
+		},
+	);
 
-		setSamples((current) => {
-			return [
-				...current.slice(Math.max(current.length - (maxSamples - 1), 0)),
-				sample,
-			];
-		});
-	});
-
-	function redraw() {
-		if (canvasRef) drawGraph(canvasRef, normalizedValues());
+	function markNeedsRedraw() {
+		setRedrawTrigger((current) => (current ? 0 : 1));
 	}
 
-	createEffect(redraw);
-	schemeQuery.addEventListener("change", redraw);
+	createEffect(
+		() => {
+			redrawTrigger();
 
-	onMount(() => {
+			return normalizedValues();
+		},
+		(values) => {
+			if (canvasRef) drawGraph(canvasRef, values);
+		},
+	);
+
+	createEffect(samples, markNeedsRedraw);
+
+	schemeQuery.addEventListener("change", markNeedsRedraw);
+
+	onSettled(() => {
 		if (!canvasRef) return;
 
-		unobserveResize = observeResize(canvasRef, redraw);
-		redraw();
+		unobserveResize = observeResize(canvasRef, markNeedsRedraw);
+		drawGraph(canvasRef, normalizedValues());
 	});
 
 	onCleanup(() => {
 		unobserveResize?.();
-		schemeQuery.removeEventListener("change", redraw);
+		schemeQuery.removeEventListener("change", markNeedsRedraw);
 	});
 
 	return (

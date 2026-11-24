@@ -40,6 +40,8 @@ allowBuilds:
   nx: true
 
 permissions:
+  '@solidjs/web':
+    skills: true
   '@tanstack/devtools-vite':
     skills: true
   '@tanstack/router-plugin':
@@ -47,8 +49,17 @@ permissions:
   '@tanstack/solid-router':
     skills: true
 
+  solid-js:
+    skills: [reactivity-diagnostics, solid-2.0, solid-2.0-cheatsheet]
 skills:
   dirs:
     - .agent/skills
     - .claude/skills
     - .github/skills
+
+minimumReleaseAgeExclude:
+  - '*solid*'
+  - '@tanstack/virtual-core@3.19.13'
+
+trustPolicyExclude:
+  - '*solid*'

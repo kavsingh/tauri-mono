@@ -5,7 +5,7 @@
 	"compilerOptions": {
 		"composite": true,
 		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
+		"jsxImportSource": "@solidjs/web",
 		"lib": ["esnext", "dom", "dom.iterable", "dom.asynciterable"],
 		"module": "esnext",
 		"moduleResolution": "bundler",

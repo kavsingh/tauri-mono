@@ -8,8 +8,8 @@ import { InfoList } from "~/components/info-list";
 import { formatMem } from "~/lib/format";
 import { systemStatsQuery } from "~/services/tauri";
 
+import type { JSX } from "@solidjs/web";
 import type { SystemStats } from "shared/tauri-bindings.gen";
-import type { JSX } from "solid-js";
 import type { Sample } from "~/components/chrono-graph";
 
 function MemoryGraph(props: { systemStats: SystemStats | undefined }) {

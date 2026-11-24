@@ -1,5 +1,9 @@
 # pnpm
 /devtools-vite-plugin
+/reactivity-diagnostics
 /router-plugin
+/server-components
+/solid-2.0
+/solid-2.0-cheatsheet
 /solid-router
 # pnpm end

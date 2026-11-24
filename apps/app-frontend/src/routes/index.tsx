@@ -5,7 +5,7 @@ import { Page } from "~/layouts/page";
 import { SystemInfoCard } from "./-index/system-info-card.tsx";
 import { SystemStatsCard } from "./-index/system-stats-card.tsx";
 
-import type { JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 function Index(): JSX.Element {
 	return (

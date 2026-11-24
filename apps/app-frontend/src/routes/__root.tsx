@@ -2,19 +2,19 @@ import { TanStackDevtools } from "@tanstack/solid-devtools";
 import { SolidQueryDevtoolsPanel } from "@tanstack/solid-query-devtools";
 import { createRootRoute, Link, Outlet } from "@tanstack/solid-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools";
-import { createEffect, Show, splitProps } from "solid-js";
+import { createEffect, Show, omit } from "solid-js";
 
 import { usePrefersDark } from "~/hooks/theme";
 import { createScopedLogger } from "~/logger";
 
-import type { ComponentProps, JSX } from "solid-js";
+import type { ComponentProps, JSX } from "@solidjs/web";
 
 const logger = createScopedLogger("<RootLayout />");
 
 function NavLink(
-	_props: Omit<ComponentProps<typeof Link>, "class" | "classList">,
+	props: Omit<ComponentProps<typeof Link>, "class" | "classList">,
 ) {
-	const [props, passProps] = splitProps(_props, ["children"]);
+	const passProps = omit(props, "children");
 
 	return (
 		<Link
@@ -31,9 +31,10 @@ function RootLayout(): JSX.Element {
 
 	logger.info("init");
 
-	createEffect(() => {
-		document.documentElement.classList.toggle("dark", prefersDark());
-	});
+	createEffect(
+		() => prefersDark(),
+		(next) => void document.documentElement.classList.toggle("dark", next),
+	);
 
 	return (
 		<>

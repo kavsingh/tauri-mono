@@ -5,7 +5,7 @@ import { Card } from "~/components/card";
 import { InfoList } from "~/components/info-list";
 import { systemInfoQuery } from "~/services/tauri";
 
-import type { JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 export function SystemInfoCard(): JSX.Element {
 	const infoQuery = useQuery(systemInfoQuery);

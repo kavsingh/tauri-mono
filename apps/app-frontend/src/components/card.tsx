@@ -1,22 +1,24 @@
 // https://ui.shadcn.com/docs/components/card
 
-import { splitProps } from "solid-js";
+import { omit } from "solid-js";
 
 import { cn } from "~/lib/style";
 
-import type { ComponentProps, JSX } from "solid-js";
+import type { ComponentProps, JSX } from "@solidjs/web";
 
-type CardRootProps = Omit<ComponentProps<"div">, "classList">;
+interface CardRootProps extends Omit<ComponentProps<"div">, "class"> {
+	class?: string | undefined;
+}
 
 function CardRoot(props: CardRootProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
 	return (
 		<div
 			{...passProps}
 			class={cn(
 				"rounded-xl border border-border bg-card text-card-foreground shadow-sm",
-				localProps.class,
+				props.class,
 			)}
 		/>
 	);
@@ -24,72 +26,82 @@ function CardRoot(props: CardRootProps): JSX.Element {
 
 //
 
-type CardHeaderProps = Omit<ComponentProps<"div">, "classList">;
+interface CardHeaderProps extends Omit<ComponentProps<"div">, "class"> {
+	class?: string | undefined;
+}
 
 function CardHeader(props: CardHeaderProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
 	return (
 		<div
 			{...passProps}
-			class={cn("flex flex-col space-y-1.5 p-6", localProps.class)}
+			class={cn("flex flex-col space-y-1.5 p-6", props.class)}
 		/>
 	);
 }
 
 //
 
-type CardTitleProps = Omit<ComponentProps<"h3">, "classList">;
+interface CardTitleProps extends Omit<ComponentProps<"h3">, "class"> {
+	class?: string | undefined;
+}
 
 function CardTitle(props: CardTitleProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class", "children"]);
+	const passProps = omit(props, "class", "children");
 
 	return (
 		<h3
 			{...passProps}
-			class={cn("leading-none font-semibold tracking-tight", localProps.class)}
+			class={cn("leading-none font-semibold tracking-tight", props.class)}
 		>
-			{localProps.children}
+			{props.children}
 		</h3>
 	);
 }
 
 //
 
-type CardDescriptionProps = Omit<ComponentProps<"p">, "classList">;
+interface CardDescriptionProps extends Omit<ComponentProps<"p">, "class"> {
+	class?: string | undefined;
+}
 
 function CardDescription(props: CardDescriptionProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
 	return (
 		<p
 			{...passProps}
-			class={cn("text-sm text-muted-foreground", localProps.class)}
+			class={cn("text-sm text-muted-foreground", props.class)}
 		/>
 	);
 }
 
 //
 
-type CardContentProps = Omit<ComponentProps<"div">, "classList">;
+interface CardContentProps extends Omit<ComponentProps<"div">, "class"> {
+	class?: string | undefined;
+}
 
 function CardContent(props: CardContentProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
-	return <div {...passProps} class={cn("p-6 pbs-0", localProps.class)} />;
+	return <div {...passProps} class={cn("p-6 pbs-0", props.class)} />;
 }
 
 //
 
-type CardFooterProps = Omit<ComponentProps<"div">, "classList">;
+interface CardFooterProps extends Omit<ComponentProps<"div">, "class"> {
+	class?: string | undefined;
+}
 
 function CardFooter(props: CardFooterProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
 	return (
 		<div
 			{...passProps}
-			class={cn("flex items-center p-6 pbs-0", localProps.class)}
+			class={cn("flex items-center p-6 pbs-0", props.class)}
 		/>
 	);
 }

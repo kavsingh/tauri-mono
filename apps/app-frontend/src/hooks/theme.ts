@@ -29,12 +29,14 @@ function useThemePropertyValues<TMap extends StyleProperyValueMap>(
 	valueMap: TMap,
 ): Accessor<StylePropertyValues<TMap>> {
 	const prefersDark = usePrefersDark();
-	const [values, setValues] = createSignal(getStylePropertyValues(valueMap));
+	const [values, setValues] = createSignal(() =>
+		getStylePropertyValues(valueMap),
+	);
 
-	createEffect(() => {
-		prefersDark();
-		setValues(() => getStylePropertyValues(valueMap));
-	});
+	createEffect(
+		() => prefersDark(),
+		() => void setValues(() => getStylePropertyValues(valueMap)),
+	);
 
 	return values;
 }

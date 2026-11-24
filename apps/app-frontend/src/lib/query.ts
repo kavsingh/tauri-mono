@@ -35,7 +35,7 @@ function getSampledAt(result: unknown): Date | undefined {
 	return undefined;
 }
 
-function reconcileSampledAt<TData extends { sampledAt: string }>(
+function reconcileSampledAt<TData = unknown>(
 	current: TData | undefined,
 	incoming: TData,
 ) {

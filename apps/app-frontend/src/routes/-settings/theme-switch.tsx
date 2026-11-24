@@ -7,8 +7,8 @@ import {
 	themePreferenceQuery,
 } from "~/services/tauri";
 
+import type { JSX } from "@solidjs/web";
 import type { ThemePreference } from "shared/tauri-bindings.gen";
-import type { JSX } from "solid-js";
 
 const OPTIONS = [
 	"System",
@@ -61,7 +61,7 @@ export function ThemeSwitch(): JSX.Element {
 											value={option}
 											checked={prefQuery.data === option}
 											onChange={() => {
-												setPrefMutation.mutate(option);
+												void setPrefMutation.mutate(option);
 											}}
 											class="peer cursor-pointer"
 											disabled={prefQuery.isLoading}

@@ -27,7 +27,7 @@
 		"nx": "24.0.6",
 		"oxfmt": "0.79.0",
 		"oxlint": "catalog:",
-		"oxlint-tsgolint": "7.0.2007",
+		"oxlint-tsgolint": "7.0.2008",
 		"rimraf": "6.1.4",
 		"tombi": "1.11.3",
 		"typescript": "npm:@typescript/typescript6@6.0.2"

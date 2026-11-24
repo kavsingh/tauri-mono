@@ -1,32 +1,34 @@
-import { splitProps } from "solid-js";
+import { omit } from "solid-js";
 
 import { cn } from "~/lib/style";
 
-import type { ComponentProps, JSX } from "solid-js";
+import type { ComponentProps, JSX } from "@solidjs/web";
 
-type InfoListRootProps = Omit<ComponentProps<"ul">, "classList">;
+interface InfoListRootProps extends Omit<ComponentProps<"ul">, "class"> {
+	class?: string | undefined;
+}
 
 function InfoListRoot(props: InfoListRootProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
-	return (
-		<ul {...passProps} class={cn("m-0 list-none p-0", localProps.class)} />
-	);
+	return <ul {...passProps} class={cn("m-0 list-none p-0", props.class)} />;
 }
 
 //
 
-type InfoListEntryProps = Omit<ComponentProps<"li">, "classList">;
+interface InfoListEntryProps extends Omit<ComponentProps<"li">, "class"> {
+	class?: string | undefined;
+}
 
 function InfoListEntry(props: InfoListEntryProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
 	return (
 		<li
 			{...passProps}
 			class={cn(
 				"flex gap-2 border-be border-be-border py-2 last:border-be-0",
-				localProps.class,
+				props.class,
 			)}
 		/>
 	);
@@ -34,16 +36,15 @@ function InfoListEntry(props: InfoListEntryProps): JSX.Element {
 
 //
 
-type InfoListLabelProps = Omit<ComponentProps<"span">, "classList">;
+interface InfoListLabelProps extends Omit<ComponentProps<"span">, "class"> {
+	class?: string | undefined;
+}
 
 function InfoListLabel(props: InfoListLabelProps): JSX.Element {
-	const [localProps, passProps] = splitProps(props, ["class"]);
+	const passProps = omit(props, "class");
 
 	return (
-		<span
-			{...passProps}
-			class={cn("text-muted-foreground", localProps.class)}
-		/>
+		<span {...passProps} class={cn("text-muted-foreground", props.class)} />
 	);
 }
 

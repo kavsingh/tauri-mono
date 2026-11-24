@@ -8,7 +8,6 @@ import { commands, events } from "shared/tauri-bindings.gen";
 import { logError, reconcileSampledAt, retryIfTauriAllowed } from "~/lib/query";
 
 import type {
-	SystemStats,
 	SystemStats_Serialize,
 	ThemePreference,
 } from "shared/tauri-bindings.gen";
@@ -40,7 +39,7 @@ function systemStatsQuery() {
 	return queryOptions({
 		queryKey: ["systemStats"],
 		queryFn: systemStatsQueryFn,
-		reconcile: reconcileSampledAt<SystemStats>,
+		structuralSharing: reconcileSampledAt,
 		retry,
 	});
 }
@@ -71,7 +70,9 @@ function startEventListeners(client: QueryClient) {
 		const current = client.getQueryData<SystemStats_Serialize>(statsKey);
 		const next = reconcileSampledAt(current, event.payload);
 
-		if (next !== current) client.setQueryData(statsKey, () => next);
+		if (next !== current) {
+			client.setQueryData<SystemStats_Serialize>(statsKey, () => next);
+		}
 	});
 
 	return unsubStats;

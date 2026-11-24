@@ -7,7 +7,7 @@ import { useFileDrop, useFileSelectDialog } from "~/hooks/files";
 import { Page } from "~/layouts/page";
 import { tv } from "~/lib/style";
 
-import type { JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 const dragFileSelectVariants = tv({
 	base: "my-3 grid place-items-center rounded-md border border-border text-muted-foreground transition-colors block-50",
@@ -21,9 +21,10 @@ const dragFileSelectVariants = tv({
 function DialogFileSelect(props: { onSelect: (selected: string[]) => void }) {
 	const [files, selectFiles] = useFileSelectDialog();
 
-	createEffect(() => {
-		props.onSelect(files());
-	});
+	createEffect(
+		() => files(),
+		(value) => props.onSelect(value),
+	);
 
 	return <Button onClick={() => void selectFiles()}>Select files</Button>;
 }
@@ -31,9 +32,10 @@ function DialogFileSelect(props: { onSelect: (selected: string[]) => void }) {
 function DragFileSelect(props: { onSelect: (selected: string[]) => void }) {
 	const [{ files, isActive }, dragDropHandlers] = useFileDrop();
 
-	createEffect(() => {
-		props.onSelect(files());
-	});
+	createEffect(
+		() => files(),
+		(value) => props.onSelect(value),
+	);
 
 	return (
 		<div

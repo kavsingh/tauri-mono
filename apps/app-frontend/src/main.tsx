@@ -1,8 +1,8 @@
+import { render } from "@solidjs/web";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { RouterProvider, createRouter } from "@tanstack/solid-router";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "@tauri-apps/plugin-log";
-import { render } from "solid-js/web";
 
 import "./index.css";
 import { routeTree } from "./route-tree.gen";

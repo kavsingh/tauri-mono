@@ -2,8 +2,9 @@ import { getCurrentWebview } from "@tauri-apps/api/webview";
 import { open } from "@tauri-apps/plugin-dialog";
 import { createSignal, onCleanup } from "solid-js";
 
+import type { JSX } from "@solidjs/web";
 import type { OpenDialogOptions } from "@tauri-apps/plugin-dialog";
-import type { Accessor, JSX } from "solid-js";
+import type { Accessor } from "solid-js";
 
 type DragEventHandler = JSX.EventHandlerUnion<HTMLElement, DragEvent>;
 

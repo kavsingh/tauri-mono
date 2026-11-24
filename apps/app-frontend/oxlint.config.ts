@@ -9,7 +9,7 @@ import {
 	SelectorKind,
 } from "eslint-plugin-better-tailwindcss/types";
 import jestDom from "eslint-plugin-jest-dom";
-import solid from "eslint-plugin-solid";
+import solid from "eslint-plugin-solid/configs/v2-strict";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "oxlint";
 
@@ -26,6 +26,8 @@ const config: OxlintConfig = defineConfig({
 		"!**/__mocks__/*.gen.*",
 	],
 	settings: {
+		...solid.settings,
+
 		"jsx-a11y": {
 			attributes: { for: ["for"] },
 			components: { Link: "a" },
@@ -106,7 +108,7 @@ const config: OxlintConfig = defineConfig({
 				"import/no-nodejs-modules": "error",
 				"import/no-unassigned-import": ["error", { allow: ["**/*.css"] }],
 
-				...solid.configs["flat/typescript"].rules,
+				...solid.rules,
 
 				...router.configs["flat/recommended"].reduce<DummyRuleMap>(
 					(acc, item) => Object.assign(acc, item.rules),
